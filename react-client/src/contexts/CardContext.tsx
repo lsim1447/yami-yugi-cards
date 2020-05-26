@@ -36,6 +36,9 @@ export const CardProvider = (props: any) => {
                         newCartItems.push(response.data);
                         setCartItems(newCartItems);
                     })
+                    .catch(error => {
+                        console.log('Error(/api/cards/id): ', error);
+                    });
             });
         }
 

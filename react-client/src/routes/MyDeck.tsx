@@ -55,7 +55,7 @@ function MyDeck() {
     }
 
     useEffect(() => {
-        axios.get(`/users`)
+        axios.get(`/api/users`)
             .then(response => {
                 const IDS = (response.data && response.data[0].deck) ?   // IF there will be multiple user, we should find the current one;
                     response.data[0].deck :
@@ -64,13 +64,14 @@ function MyDeck() {
                 if (IDS) {
                     axios.post(`/api/cards/findAllByIds`, {
                         "ids": IDS
+                    }).then(response => {
+                        setCards([]);
+                        setCards(response.data);
+                        setAllCards([]);
+                        setAllCards(response.data);
+                    }).catch(error => {
+                        console.log('Error(/api/cards/findAllByIds): ', error);
                     })
-                        .then(response => {
-                            setCards([]);
-                            setCards(response.data);
-                            setAllCards([]);
-                            setAllCards(response.data);
-                        })
                 } else {
                     setCards([]);
                 }
@@ -80,7 +81,7 @@ function MyDeck() {
     return (
         <BackgroundContainer theme={
             {
-                backgroundImage: "my-deck-background.jpg"
+                backgroundImage: "images/my-deck-background.jpg"
             }
         }>
             <Row>

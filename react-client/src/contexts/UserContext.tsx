@@ -20,8 +20,8 @@ export const UserProvider = (props: any) => {
                 console.log('resp user = ', response.data);
                 setUser(response.data);
             })
-            .catch(err => {
-                console.log(err);
+            .catch(error => {
+                console.log('Error(/api/users/): ', error);
             })
     }, []);
     

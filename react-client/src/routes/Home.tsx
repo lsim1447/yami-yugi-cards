@@ -82,7 +82,7 @@ function Home() {
         </Description>
         <ExodiaImage
           className="lazyload"
-          data-src="exodia-background.jpg"
+          data-src="images/exodia-background.jpg"
         />
       </ExodiaWrapper>
       

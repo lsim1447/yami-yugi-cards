@@ -14,7 +14,7 @@ const CustomCol = styled(Col) `
 `;
 
 const LeftCol = styled(CustomCol) `
-    background: url(checkout-left.jpg) top center;
+    background: url(images/checkout-left.jpg) top center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -32,7 +32,7 @@ const CenterCol = styled(CustomCol) `
 `;
 
 const RightCol = styled(CustomCol) `
-    background: url(checkout-right.jpg) top center;
+    background: url(images/checkout-right.jpg) top center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -68,7 +68,7 @@ const CheckoutFooterWrapper = styled.div `
 `;
 
 const CoverWrapper = styled.div `
-    background: url(checkout_cover_image.jpg) top center;
+    background: url(images/checkout_cover_image.jpg) top center;
     margin: 0;
     padding: 12px;
     max-height: 200px;
@@ -136,11 +136,13 @@ function Checkout() {
         username: user.username,
         password: user.password,
         deck: NEW_DECK_ITEMS
-    })
-        .then(response => {
+    }).then(response => {
             localStorage.removeItem('card_ids');
             setCartItems([]);
-        })   
+       })
+       .catch(error => {
+           console.log('Error(/api/users/update/userID): ', error);
+       })   
   }
 
   return (

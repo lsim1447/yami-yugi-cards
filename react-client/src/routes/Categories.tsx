@@ -32,7 +32,7 @@ function Categories() {
   return (
     <BackgroundContainer theme={
       {
-        backgroundImage: "blue-ice-white-dragon.jpg"
+        backgroundImage: "images/blue-ice-white-dragon.jpg"
       }
     }>
       <Row>

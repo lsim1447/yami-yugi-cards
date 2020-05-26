@@ -63,13 +63,16 @@ function CardModal(props: CartModalProps) {
 
   useEffect(() => {
     if (show) {
-      axios.post(`/cards/findByTypeAndRace`, {
+      axios.post(`/api/cards/findByTypeAndRace`, {
         "type": (card ? card.type : ''),
         "race": (card ? card.race : ''),
         "limit": MAX_NUMBER_OF_SIMILAR_CARDS
       }).then(response => {
         setSimilarCards([]);
         setSimilarCards([...response.data]);
+      }).catch(error => {
+        setSimilarCards([]);
+        console.log('Error(/api/cards/findByTypeAndRace): ', error);
       })
     }
   }, [show]);

@@ -9,13 +9,12 @@ function AllCards() {
     const { allCards, setAllCards } = useContext(CardContext);
 
     return (
-        <CardDeck style={{backgroundColor: "black"}}>
+        <CardDeck style={{backgroundColor: "black", minHeight: "100vh"}}>
         {
             allCards.map(
                 (card: ICardDetails) => {
                     return (
                         <FlipCard 
-                            //id={card.id}
                             isFullDescriptionVisible={false}
                             card={card}
                             key={card.id}

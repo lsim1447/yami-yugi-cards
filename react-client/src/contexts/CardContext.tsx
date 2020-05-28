@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { 
     ICardDetails,
     getInitialCardList
-} from '../components/internal/Cards';
+} from '../components/models/Cards';
+import {
+    getAllCards,
+    getCardById
+} from '../repositories/CardRepository';
 
 const initialState = {
     cards: getInitialCardList(20),
@@ -29,11 +32,10 @@ export const CardProvider = (props: any) => {
             let cardIDs =  id_string ? id_string.split('|') : [];
 
             cardIDs.forEach(id => {
-                axios.get(`/api/cards/${id}`)
-                    .then(response => {
-                        console.log('response cards = ', response.data);
+                getCardById(id)
+                    .then(desiredCard => {
                         const newCartItems = cartItems;
-                        newCartItems.push(response.data);
+                        newCartItems.push(desiredCard);
                         setCartItems(newCartItems);
                     })
                     .catch(error => {
@@ -42,11 +44,10 @@ export const CardProvider = (props: any) => {
             });
         }
 
-        axios.get(`/api/cards`)
-            .then(response => {
-                console.log('response all cards = ', response.data);
-                setCards([...response.data]);
-                setAllCards([...response.data]);
+        getAllCards()
+            .then(data => {
+                setCards([...data]);
+                setAllCards([...data]);
             })
     }, []);
     

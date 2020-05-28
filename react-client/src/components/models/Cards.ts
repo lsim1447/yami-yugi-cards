@@ -34,12 +34,12 @@ export interface ICardDetails
     id: number,
     level?: number,
     name: string,
-    race?: string,
-    type?: string
+    race: string,
+    type: string
 }
 
 export type CardProps = {
-    id?: number;
+    id?: string;
     isAddToBagButtonDisabled?: boolean,
     isFullDescriptionVisible: boolean,
     card?: ICardDetails

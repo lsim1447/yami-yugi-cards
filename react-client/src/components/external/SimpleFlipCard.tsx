@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import axios from 'axios';
 import styled from 'styled-components';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../internal/Cards';
+import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../models/Cards';
 import CardModal from '../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../internal/FlipComponents';
+import { getCardById } from '../../repositories/CardRepository';
 
 const SimpleCardContainer = styled.div `
     @media (max-width: 420px) {
@@ -22,7 +22,10 @@ const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, isFullDescriptionVisible
 
     useEffect(() => {
         if (id) {
-            console.log('Make a get call by ID.')
+            getCardById(id)
+                .then(desiredCard => {
+                    setCardDetails(desiredCard);
+                })
         } else if (card) {
             setCardDetails(card);
         }

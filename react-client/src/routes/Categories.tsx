@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { CardDeck, Col, Row } from 'react-bootstrap';
 import { SIDE_BAR_OPTIONS_API } from '../constants';
-import { ICardDetails } from '../components/internal/Cards';
+import { ICardDetails } from '../components/models/Cards';
 import FlipCard from '../components/external/FlipCard';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';

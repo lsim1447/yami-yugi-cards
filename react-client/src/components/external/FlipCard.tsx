@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import axios from 'axios';
 import styled from 'styled-components';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../internal/Cards';
+import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../models/Cards';
 import CardModal from '../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../internal/FlipComponents';
+import { getCardById } from '../../repositories/CardRepository';
 
 const PriceContainer = styled.p `
     padding-top: 12px;
@@ -25,10 +25,10 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
 
     useEffect(() => {
         if (id) {
-            axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?id=${id}`)
-            .then(response => {
-                setCardDetails(response.data.data[0]);
-            })
+            getCardById(id)
+                .then(desiredCard => {
+                    setCardDetails(desiredCard);
+                })
         } else if (card) {
             setCardDetails(card);
         }

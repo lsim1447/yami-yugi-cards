@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { DEFAULT_USER_VALUE } from '../components/internal/User';
+import { DEFAULT_USER_VALUE } from '../components/models/User';
+import {
+    getUserById
+} from '../repositories/UserRepository';
 
 const initialState = {
     user: DEFAULT_USER_VALUE,
@@ -15,10 +17,9 @@ export const UserProvider = (props: any) => {
     const [user, setUser] = useState(DEFAULT_USER_VALUE);
 
     useEffect(() => {
-        axios.get(`/api/users/${USER_ID}`)
-            .then(response => {
-                console.log('resp user = ', response.data);
-                setUser(response.data);
+        getUserById(USER_ID)
+            .then(currentUser => {
+                setUser(currentUser);
             })
             .catch(error => {
                 console.log('Error(/api/users/): ', error);

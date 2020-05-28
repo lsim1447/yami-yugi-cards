@@ -1,21 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { UserContext } from "../contexts/UserContext";
-import axios from 'axios';
 import {  CardDeck, Col, Row } from 'react-bootstrap';
 import '../special-styles/sidebar-left.css'
-import { ICardDetails } from '../components/internal/Cards';
+import { ICardDetails } from '../components/models/Cards';
 import SimpleFlipCard from '../components/external/SimpleFlipCard';
-import { getInitialCardList } from '../components/internal/Cards';
+import { getInitialCardList } from '../components/models/Cards';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
 import { SIDE_BAR_OPTIONS_API } from '../constants';
+import { getUserById } from '../repositories/UserRepository';
+import { findAllCardsByIds } from '../repositories/CardRepository';
 
 function MyDeck() {
     const [nrOfCardsToShow, setNrOfCardsToShow] = useState(20);
     const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
-
     const { user, setUser } = useContext(UserContext);
 
     const getAccountsValue = () => {
@@ -55,20 +55,17 @@ function MyDeck() {
     }
 
     useEffect(() => {
-        axios.get(`/api/users`)
-            .then(response => {
-                const IDS = (response.data && response.data[0].deck) ?   // IF there will be multiple user, we should find the current one;
-                    response.data[0].deck :
-                    [];
+        getUserById(user._id)
+            .then(response => response[0])
+            .then(currentUser => {
+                const IDS = (currentUser && currentUser.deck) ? currentUser.deck : [];
 
                 if (IDS) {
-                    axios.post(`/api/cards/findAllByIds`, {
-                        "ids": IDS
-                    }).then(response => {
+                    findAllCardsByIds(IDS).then(currentUserCards => {
                         setCards([]);
-                        setCards(response.data);
+                        setCards(currentUserCards);
                         setAllCards([]);
-                        setAllCards(response.data);
+                        setAllCards(currentUserCards);
                     }).catch(error => {
                         console.log('Error(/api/cards/findAllByIds): ', error);
                     })

@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CardContext } from "../../contexts/CardContext";
 import { Button, Card, Carousel, Modal, Tabs, Tab } from 'react-bootstrap';
-import axios from 'axios';
 import styled from 'styled-components';
-import { ICardDetails } from '../internal/Cards';
+import { ICardDetails } from '../models/Cards';
 import YuGiOhCard from '../external/YuGiOhCard';
 import { MAX_NUMBER_OF_SIMILAR_CARDS } from '../../constants';
-import { getInitialCardList } from '../internal/Cards';
+import { getInitialCardList } from '../models/Cards';
+import { findAllCardsByTypeAndRace } from '../../repositories/CardRepository';
 
 const PriceContainer = styled.p `
   padding-top: 12px;
@@ -63,17 +63,14 @@ function CardModal(props: CartModalProps) {
 
   useEffect(() => {
     if (show) {
-      axios.post(`/api/cards/findByTypeAndRace`, {
-        "type": (card ? card.type : ''),
-        "race": (card ? card.race : ''),
-        "limit": MAX_NUMBER_OF_SIMILAR_CARDS
-      }).then(response => {
-        setSimilarCards([]);
-        setSimilarCards([...response.data]);
-      }).catch(error => {
-        setSimilarCards([]);
-        console.log('Error(/api/cards/findByTypeAndRace): ', error);
-      })
+      findAllCardsByTypeAndRace((card ? card.type : ''), (card ? card.race : ''), MAX_NUMBER_OF_SIMILAR_CARDS)
+        .then(newSimilarCards => {
+          setSimilarCards([]);
+          setSimilarCards([...newSimilarCards]);
+        }).catch(error => {
+          setSimilarCards([]);
+          console.log('Error(/api/cards/findByTypeAndRace): ', error);
+        })
     }
   }, [show]);
 

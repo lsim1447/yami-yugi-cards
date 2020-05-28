@@ -1,5 +1,25 @@
-export class CardRepository {
-    public CardRepository(props: any) {
-       
-    }
+import axios from 'axios';
+
+export const getAllCards = () => {
+    return axios.get(`/api/cards`)
+        .then(response => response.data);
+}
+
+export const getCardById = (ID: string) => {
+    return axios.get(`/api/cards/${ID}`)
+        .then(response => response.data);
+}
+
+export const findAllCardsByIds = (ids: string[]) => {
+    return axios.post(`/api/cards/findAllByIds`, {
+        "ids": ids
+    }).then(response => response.data);
+}
+
+export const findAllCardsByTypeAndRace = (type: string, race: string, limit: number) => {
+    return axios.post(`/api/cards/findByTypeAndRace`, {
+        "type": type,
+        "race": race,
+        "limit": limit
+    }).then(response => response.data);
 }

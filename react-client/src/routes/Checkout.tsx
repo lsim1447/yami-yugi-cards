@@ -2,10 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { UserContext } from "../contexts/UserContext";
 import { Button, Col, Row } from 'react-bootstrap';
-import axios from 'axios';
 import styled from 'styled-components';
 import CartItem from '../components/external/CartItem';
-import { ICardDetails } from '../components/internal/Cards';
+import { ICardDetails } from '../components/models/Cards';
+import { IUser } from '../components/models/User';
+import {
+    updateUserById
+} from '../repositories/UserRepository';
 
 const CustomCol = styled(Col) `
     border-left: 1px solid #D3D3D3;
@@ -130,16 +133,15 @@ function Checkout() {
     const ALL_CARDS_PRICE = cartItems.reduce((accumulator, cartItem) => {
         return accumulator + Number(cartItem.card_prices[0].amazon_price);
     }, 0);
+    const newUser: IUser = Object.create(user);
+    newUser.accountBalance = ALL_CARDS_PRICE;
+    newUser.deck = NEW_DECK_ITEMS;
 
-    axios.post(`/api/users/update/${user._id}`, {
-        accountBalance: ALL_CARDS_PRICE,
-        username: user.username,
-        password: user.password,
-        deck: NEW_DECK_ITEMS
-    }).then(response => {
+    updateUserById(newUser)
+        .then(response => {
             localStorage.removeItem('card_ids');
             setCartItems([]);
-       })
+        })
        .catch(error => {
            console.log('Error(/api/users/update/userID): ', error);
        })   

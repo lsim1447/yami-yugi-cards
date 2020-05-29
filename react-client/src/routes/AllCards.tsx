@@ -8,7 +8,7 @@ function AllCards() {
     const { allCards, setAllCards } = useContext(CardContext);
 
     return (
-        <CardDeck style={{backgroundColor: "black", minHeight: "100vh"}}>
+        <CardDeck style={{minHeight: "100vh"}}>
         {
             allCards.map(
                 (card: ICardDetails) => {

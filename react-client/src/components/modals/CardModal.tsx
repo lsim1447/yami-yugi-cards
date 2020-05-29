@@ -93,12 +93,15 @@ function CardModal(props: CartModalProps) {
               similarCards.map(c => {
                 return (
                   <Carousel.Item key={c.id}>
-                    <img 
-                      style={{maxHeight: "600px"}}
-                      className="d-block w-100 lazyload"
-                      data-src={(c && c.card_images) ? c.card_images[0].image_url : ''}
-                      alt="First slide"
-                    />
+                    <a href={`/card/${c._id}`}>
+                      <img 
+                        style={{maxHeight: "600px"}}
+                        className="d-block w-100 lazyload"
+                        data-src={(c && c.card_images) ? c.card_images[0].image_url : ''}
+                        alt="First slide"
+                      />
+                    </a>
+                    
                     <Card.Footer>
                       <PriceContainer>
                         Price on Amazon: {(c && c.card_prices && c.card_prices[0]) ? c.card_prices[0].amazon_price : ''} $
@@ -112,16 +115,7 @@ function CardModal(props: CartModalProps) {
         </Tab>
       </Tabs>
       </Modal.Body>
-      <Modal.Footer>
-        <Button
-          style={{width: "100%"}} 
-          disabled={isCardAlreadyAdded && !isAddToBagButtonDisabled}
-          onClick={() => addToCart(card)}
-          variant="dark"
-        >
-          {(isCardAlreadyAdded && !isAddToBagButtonDisabled) ? 'ALREADY IN YOUR DECK / BAG' : 'ADD TO BAG'} 
-        </Button>
-      </Modal.Footer>
+      <Modal.Footer></Modal.Footer>
     </Modal>
   );
 }

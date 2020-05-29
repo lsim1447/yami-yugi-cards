@@ -113,7 +113,7 @@ function Home() {
         </Description>
         <ExodiaImage
           className="lazyload"
-          data-src="images/exodia-background.jpg"
+          data-src="/images/exodia-background.jpg"
         />
         <ExodiaVideoWrapper>
           <LeftCol sm={2}></LeftCol>

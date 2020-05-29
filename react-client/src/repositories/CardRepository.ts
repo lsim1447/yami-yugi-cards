@@ -21,5 +21,5 @@ export const findAllCardsByTypeAndRace = (type: string, race: string, limit: num
         "type": type,
         "race": race,
         "limit": limit
-    }).then(response => response.data);
+    }).then(response => response.data.slice(0, limit));
 }

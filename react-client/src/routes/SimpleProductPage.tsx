@@ -4,12 +4,18 @@ import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import  { CardContext }  from "../contexts/CardContext";
 import  { UserContext }  from "../contexts/UserContext";
-import { Breadcrumb, Button, Card, Carousel, Col, Container, Form, Jumbotron, ProgressBar, Row } from 'react-bootstrap';
+import { Breadcrumb, Button, Card, Carousel, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
 import { ICardDetails } from '../components/models/Cards';
 import { getCardById } from '../repositories/CardRepository';
+import Rating from '../components/external/Rating';
 import { DEFAULT_CARD_VALUE} from '../components/models/Cards';
 import { getInitialCardList } from '../components/models/Cards';
-import { MAX_NUMBER_OF_SIMILAR_CARDS } from '../constants';
+import {
+    ADD_TO_BAG,
+    ALREADY_ADDED_TO_YOUR_BAG,
+    ALREADY_ADDED_TO_YOUR_DECK,
+    MAX_NUMBER_OF_SIMILAR_CARDS
+} from '../constants';
 import { findAllCardsByTypeAndRace } from '../repositories/CardRepository';
 
 const SPPWrapper = styled.div `
@@ -78,27 +84,6 @@ const AddToBagButton = styled(Button) `
     width: 100%;
 `;
 
-const RatingWrapper = styled(Row) `
-    border-top: 1px solid #D3D3D3;
-    border-bottom: 1px solid #D3D3D3;
-    margin-top: 36px;
-    margin-bottom: 36px;
-    padding: 36px;
-`;
-
-const RatingParagraph = styled.p `
-    font-size: 48px;
-    font-weight: 800;
-    padding-bottom: 36px;
-    text-align: center;
-    width: 100%;
-`;
-
-const BigFontWrapper = styled.p `
-    font-size: 52px;
-    font-weight: 700;
-`;
-
 function SimpleProductPage(props: any) {
     const [addToBagButtonText, setAddToBagButtonText] = useState('ADD TO BAG');
     const { allCards, setAllCards } = useContext(CardContext);
@@ -107,7 +92,6 @@ function SimpleProductPage(props: any) {
     const [cardDetails, setCardDetails] = useState(DEFAULT_CARD_VALUE);
     const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
     const cardId = (props.match.params && props.match.params.id) ? props.match.params.id : '5ebc4aad221c162fa4dcae6d';
-
 
     const handleOnDragStart = (e: any) => e.preventDefault()
     const responsive = {
@@ -132,7 +116,7 @@ function SimpleProductPage(props: any) {
           }
         }
 
-        setAddToBagButtonText('ADDED TO YOUR BAG');
+        setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_BAG);
     }
 
     const updateAddToBagButtonText = () => {
@@ -141,17 +125,16 @@ function SimpleProductPage(props: any) {
         const isCardAlreadyAddedToYourDeck = user.deck.some(id => id && id === cardDetails._id);
         
         if (isCardAlreadyAddedToBag) {
-            setAddToBagButtonText('ALREADY ADDED TO YOUR BAG');
+            setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_BAG);
             return true;
         } else if (isCardAlreadyAddedToYourDeck){
-            setAddToBagButtonText('ALREADY ADDED TO YOUR DECK');
+            setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_DECK);
             return true;
         } else {
-            setAddToBagButtonText('ADD TO BAG');
+            setAddToBagButtonText(ADD_TO_BAG);
             return false;
         }
     }
-
 
     useEffect(() => {
         updateAddToBagButtonText();
@@ -268,7 +251,7 @@ function SimpleProductPage(props: any) {
                         <Row style={{borderTop: "1px solid #D3D3D3", paddingTop: "24px"}}>
                             <Col>
                                 <AddToBagButton
-                                    disabled={addToBagButtonText === 'ALREADY ADDED TO YOUR BAG' || addToBagButtonText === 'ALREADY ADDED TO YOUR DECK'} 
+                                    disabled={addToBagButtonText === ALREADY_ADDED_TO_YOUR_BAG || addToBagButtonText === ALREADY_ADDED_TO_YOUR_DECK} 
                                     onClick={() => addToCart(cardDetails)}
                                 >
                                     {addToBagButtonText}
@@ -316,63 +299,7 @@ function SimpleProductPage(props: any) {
                 }
             </AliceCarousel>
 
-            <RatingWrapper>
-                <RatingParagraph>
-                    Ratings & Reviews
-                </RatingParagraph>
-                <Col>
-                    <Row>
-                        <Col>
-                            <BigFontWrapper> 89% </BigFontWrapper>
-                            would recommend this product.
-                        </Col>
-                        <Col>
-                            <BigFontWrapper> 4.4 </BigFontWrapper>
-                            out of <strong style={{fontSize: "24px"}}>5</strong>
-                            <p>198 Reviews</p>
-                        </Col>
-                    </Row>
-                </Col>
-                <Col style={{borderLeft: "1px solid #D3D3D3"}}>
-                    <Row>
-                        <Col sm={2}>
-                            <p>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </p>
-                            <p>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </p>
-                            <p>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </p>
-                            <p>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                            </p>
-                            <p>
-                                <i className="fa fa-star"></i>
-                            </p>
-                            
-                        </Col>
-                        <Col sm={10}>
-                            <p><ProgressBar style={{marginTop: "8px", marginBottom: "22px"}} now={18} label={`${18}%`} /></p>
-                            <p><ProgressBar style={{marginBottom: "20px"}} now={42} label={`${42}%`} /></p>
-                            <p><ProgressBar style={{marginBottom: "20px"}} now={25} label={`${25}%`} /></p>
-                            <p><ProgressBar style={{marginBottom: "20px"}} now={10} label={`${10}%`} /></p>
-                            <p><ProgressBar style={{marginBottom: "20px"}} now={5} label={`${5}%`} /></p>
-                        </Col>
-                    </Row>
-                </Col>
-            </RatingWrapper>
+            <Rating />
         </SPPWrapper>
     );
 }

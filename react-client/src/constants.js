@@ -2,6 +2,12 @@ export const MAX_NUMBER_OF_CARDS_IN_ONE_ROW = 5;
 
 export const MAX_NUMBER_OF_SIMILAR_CARDS = 20;
 
+export const ADD_TO_BAG = 'ADD TO BAG';
+
+export const ALREADY_ADDED_TO_YOUR_BAG = 'ALREADY ADDED TO YOUR BAG';
+
+export const ALREADY_ADDED_TO_YOUR_DECK = 'ALREADY ADDED TO YOUR DECK';
+
 export const SIDE_BAR_OPTIONS_API = [
     {
         eventKey: "all_card",

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Button, Card, CardDeck, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import Actors from '../components/external/Actors';
+import GifGrid from '../components/external/GifGrid';
 import styled from 'styled-components';
 
 const HomePageWrapper = styled.div `
@@ -236,6 +237,11 @@ function Home() {
           </Col>
         </Row>
       </SacredBeastsWrapper>
+
+      <GifGrid 
+          gif1_url="/gifs/show-exodia.gif"
+          gif2_url="/gifs/call-farao-2.gif"
+      />
 
       <Actors />
       

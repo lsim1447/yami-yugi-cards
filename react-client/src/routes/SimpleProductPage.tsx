@@ -19,6 +19,7 @@ import {
     MAX_NUMBER_OF_SIMILAR_CARDS
 } from '../constants';
 import { findAllCardsByTypeAndRace } from '../repositories/CardRepository';
+import GifGrid from '../components/external/GifGrid';
 
 const SPPWrapper = styled.div `
     min-height: 500px;
@@ -118,7 +119,7 @@ function SimpleProductPage(props: any) {
             setCartItems([...cartItems, card]);
           }
         }
-        
+
         setShowCartOverlay(true);
         setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_BAG);
     }
@@ -181,7 +182,7 @@ function SimpleProductPage(props: any) {
                     <Breadcrumb>
                         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                         <Breadcrumb.Item href="/all-cards">
-                            All Cards
+                            Cards
                         </Breadcrumb.Item>
                         <Breadcrumb.Item active> {cardDetails.name} </Breadcrumb.Item>
                     </Breadcrumb>
@@ -302,7 +303,10 @@ function SimpleProductPage(props: any) {
                     })
                 }
             </AliceCarousel>
-            
+            <GifGrid 
+                gif1_url="/gifs/its-time-to-duel.gif"
+                gif2_url="/gifs/call-farao.gif"
+            />
             <Actors />
             <Rating />
         </SPPWrapper>

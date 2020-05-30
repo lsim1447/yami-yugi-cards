@@ -17,7 +17,6 @@ const OverlayWrapper = styled.div `
     height: 100vh;
     overflow-y: scroll;
     -ms-overflow-style: none;
-    padding-top: 60px;
     position: fixed;
     right: 0;
     top: 0;
@@ -59,7 +58,11 @@ const CartItemImage = styled(Image) `
 `;
 
 const OverlayTitle = styled.p `
-    background-color: #D3D3D3;
+    background-image: url(/images/shopping-cart.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     font-size: 36px;
     font-weight: 800;
     padding-bottom: 12px;
@@ -100,7 +103,7 @@ const CartOverlay = () => {
                 onClick={() => setShowCartOverlay(false)}
             />
             <OverlayTitle>
-                COMPLETE YOUR CHECKOUT({cartItems.length})
+                <p> My Bag({cartItems.length})</p>
             </OverlayTitle>
             {
                 cartItems.map((cartItem: ICardDetails) => {
@@ -127,7 +130,7 @@ const CartOverlay = () => {
                 })
             }
             <TotalPriceWrapper>
-                Total Price: {getTotalPrice()}$
+                TOTAL PRICE: {getTotalPrice()}$
             </TotalPriceWrapper>
             <CheckoutButton
                 href="/checkout"

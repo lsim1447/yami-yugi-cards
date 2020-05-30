@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Card, CardDeck, Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import { Button, Card, CardDeck, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import Actors from '../components/external/Actors';
 import styled from 'styled-components';
 
@@ -86,9 +86,39 @@ const RightCol = styled(Col) `
     }
 `;
 
+const ReadMoreButton = styled(Button) `
+    float: right;
+    font-size: 18px;
+    margin-right: 54px;
+    margin-bottom: 8px;
+    padding: 12px 36px;
+`;
+
+const YuGiOhAdvWrapper = styled.div `
+  background: url(/images/yugioh-game.jpg) top center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 950px;
+`;
+
 function Home() {
   return (
     <HomePageWrapper>
+      <Jumbotron>
+        <Title>How To Play Yu-Gi-Oh!?</Title>
+        <p>
+          Yu-Gi-Oh! (or just YuGiOh) is a card game in which two players attempt to defeat each other by decreasing their opponent's Life Points (down to 0) 
+          using a collection of monster, spell, and trap cards.
+          <a href="/read-more">
+            <ReadMoreButton variant="dark">Read More</ReadMoreButton>
+          </a>
+        </p>
+      </Jumbotron>
+
+      <YuGiOhAdvWrapper />
+
       <Jumbotron fluid>
         <Container>
           <Title>Take your Card</Title>

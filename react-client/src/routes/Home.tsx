@@ -189,19 +189,26 @@ function Home() {
         </Jumbotron>
         <CardDeck style={{backgroundColor: "transparent"}}>
           <Card>
-            <Card.Img
-              src="https://storage.googleapis.com/ygoprodeck.com/pics/10000020.jpg"
-            />
+            <a href={`/card/5ebc4d66221c162fa4dccf65`}>
+              <Card.Img
+                src="https://storage.googleapis.com/ygoprodeck.com/pics/10000020.jpg"
+              />
+            </a>
+            
           </Card>
           <Card>
-            <Card.Img
-              src="https://storage.googleapis.com/ygoprodeck.com/pics/10000000.jpg"
-            />
+            <a href={`/card/5ebc4d07221c162fa4dcc88f`}>
+              <Card.Img
+                src="https://storage.googleapis.com/ygoprodeck.com/pics/10000000.jpg"
+              />
+            </a>
           </Card>
           <Card>
-            <Card.Img
-              src="https://storage.googleapis.com/ygoprodeck.com/pics/10000010.jpg"
-            />
+            <a href={`/card/5ebc4d99221c162fa4dcd337`}>
+              <Card.Img
+                src="https://storage.googleapis.com/ygoprodeck.com/pics/10000010.jpg"
+              />
+            </a>
           </Card>
         </CardDeck>
         <Row>

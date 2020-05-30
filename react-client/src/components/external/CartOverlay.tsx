@@ -7,7 +7,9 @@ import  { UserContext }  from "../../contexts/UserContext";
 import { ICardDetails } from '../../components/models/Cards';
 
 const CustomRow = styled(Row) `
-    margin-bottom: 18px;
+    border-top: 1px solid #D3D3D3;
+    padding-top: 18px;
+    padding-bottom: 18px;
 `;
 
 const OverlayWrapper = styled.div `
@@ -51,23 +53,28 @@ const CloseIcon = styled.i `
 `;
 
 const CartItemImage = styled(Image) `
+    height: 200px;
     width: 180px;
-    height: 180px;
+    padding-left: 12px;
 `;
 
 const OverlayTitle = styled.p `
-    border-bottom: 3px solid #D3D3D3;
-    border-top: 3px solid #D3D3D3;
+    background-color: #D3D3D3;
     font-size: 36px;
     font-weight: 800;
     padding-bottom: 12px;
     padding-top: 12px;
+    margin-bottom: 24px;
     text-align: center;
 `;
 
 const TotalPriceWrapper = styled.div `
-    font-size: 36px;
+    border-bottom: 2px solid #D3D3D3;
+    border-top: 2px solid #D3D3D3;
+    font-size: 24px;
     font-weight: 800;
+    padding-bottom: 18px;
+    padding-top: 18px;
     text-align: center;
     width: 100%;
 `;
@@ -99,14 +106,14 @@ const CartOverlay = () => {
                 cartItems.map((cartItem: ICardDetails) => {
                     return (
                         <CustomRow>
-                            <Col>
+                            <Col sm={5}>
                                 <CartItemImage 
                                     thumbnail
                                     src={cartItem.card_images[0].image_url}
                                     alt={cartItem.name}
                                 />
                             </Col>
-                            <Col>
+                            <Col sm={7}>
                                 <p><strong> Name: </strong> {cartItem.name} </p>
                                 <p><strong> Type: </strong>{cartItem.type} </p>
                                 <p><strong> Archetype: </strong>{cartItem.archetype ? cartItem.archetype : 'N/A'}</p>

@@ -6,7 +6,6 @@ import { CardProps, ICardDetails } from '../models/Cards';
 const RatingWrapper = styled(Row) `
     border-top: 1px solid #D3D3D3;
     border-bottom: 1px solid #D3D3D3;
-    margin-top: 36px;
     margin-bottom: 36px;
     padding: 36px;
 `;

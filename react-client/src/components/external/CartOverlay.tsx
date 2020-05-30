@@ -100,18 +100,20 @@ const CartOverlay = () => {
                 onClick={() => setShowCartOverlay(false)}
             />
             <OverlayTitle>
-                COMPLETE YOUR CHECKOUT
+                COMPLETE YOUR CHECKOUT({cartItems.length})
             </OverlayTitle>
             {
                 cartItems.map((cartItem: ICardDetails) => {
                     return (
                         <CustomRow>
                             <Col sm={5}>
-                                <CartItemImage 
-                                    thumbnail
-                                    src={cartItem.card_images[0].image_url}
-                                    alt={cartItem.name}
-                                />
+                                <a href={`/card/${cartItem._id}`}>
+                                    <CartItemImage 
+                                        thumbnail
+                                        src={cartItem.card_images[0].image_url}
+                                        alt={cartItem.name}
+                                    />
+                                </a>
                             </Col>
                             <Col sm={7}>
                                 <p><strong> Name: </strong> {cartItem.name} </p>

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Card, CardDeck, Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import Actors from '../components/external/Actors';
 import styled from 'styled-components';
 
 const HomePageWrapper = styled.div `
@@ -206,6 +207,8 @@ function Home() {
         </Row>
       </SacredBeastsWrapper>
 
+      <Actors />
+      
       <AdvertisementWrapper>
         <Jumbotron fluid>
           <Container>

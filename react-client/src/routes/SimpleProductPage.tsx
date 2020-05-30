@@ -4,9 +4,10 @@ import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import  { CardContext }  from "../contexts/CardContext";
 import  { UserContext }  from "../contexts/UserContext";
-import { Breadcrumb, Button, Card, Carousel, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
+import { Breadcrumb, Button, Card, Carousel, Col, Container, Form, Image, Jumbotron, Row } from 'react-bootstrap';
 import { ICardDetails } from '../components/models/Cards';
 import { getCardById } from '../repositories/CardRepository';
+import Actors from '../components/external/Actors';
 import Rating from '../components/external/Rating';
 import { DEFAULT_CARD_VALUE} from '../components/models/Cards';
 import { getInitialCardList } from '../components/models/Cards';
@@ -298,7 +299,8 @@ function SimpleProductPage(props: any) {
                     })
                 }
             </AliceCarousel>
-
+            
+            <Actors />
             <Rating />
         </SPPWrapper>
     );

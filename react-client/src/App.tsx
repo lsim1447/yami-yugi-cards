@@ -3,15 +3,18 @@ import Footer from './nav/Footer';
 import NavigationBar from './nav/NavigationBar';
 import MyRouter from './MyRouter';
 import { CardProvider } from './contexts/CardContext';
+import { CheckoutProvider } from './contexts/CheckoutContext';
 import { UserProvider } from './contexts/UserContext';
 
 function App() {
   return (
     <UserProvider>
       <CardProvider>
-        <NavigationBar />
-        <MyRouter />
-        <Footer />
+        <CheckoutProvider>
+          <NavigationBar />
+          <MyRouter />
+          <Footer />
+        </CheckoutProvider>
       </CardProvider>
     </UserProvider>
   );

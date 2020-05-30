@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import  { CardContext }  from "./../contexts/CardContext";
+import  { CheckoutContext }  from "./../contexts/CheckoutContext";
 import AutoComplete from './../components/internal/AutoComplete';
-import { Button, Form, FormControl, Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import styled from 'styled-components';
+import CartOverlay from '../components/external/CartOverlay';
 
 const NavBarImage = styled.img `
     max-width: 55px;
@@ -26,6 +28,7 @@ const ShoppingCartWrapper = styled.div `
 function NavigationBar(props: any) {
   const { cards, setCards } = useContext(CardContext);
   const { cartItems, setCartItems } = useContext(CardContext);
+  const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
 
   return (
     <div>
@@ -49,7 +52,7 @@ function NavigationBar(props: any) {
                   placeholder={"Search"}
               />
             </Nav>
-            <Nav.Link eventKey={5} href="/checkout">
+            <Nav.Link eventKey={5} onClick={() => setShowCartOverlay(true)}>
               <ShoppingCartWrapper>
                 <i className="fa fa-shopping-cart"></i>
                 <sup style={{fontSize: "16px"}}> {cartItems.length} </sup>
@@ -58,6 +61,8 @@ function NavigationBar(props: any) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      { showCartOverlay ? <CartOverlay /> : null}
+      
       { props.children }
     </div>
   );

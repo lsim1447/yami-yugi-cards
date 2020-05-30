@@ -21,18 +21,35 @@ const CustomImage = styled(Image) `
 `;
 
 const Actors = () => {
+  const imageUrls: string[] = [
+    "/images/profile/farao.jpg",
+    "/images/profile/joey.jpg",
+    "/images/profile/tristan.jpg",
+    "/images/profile/tea.jpg",
+    "/images/profile/yugi.jpg",
+    "/images/profile/bakura.jpg",
+    "/images/profile/pegazus.jpg",
+    "/images/profile/maya.jpg",
+    "/images/profile/tucsok.jpg",
+    "/images/profile/dartz.jpg",
+    "/images/profile/rex.jpg",
+    "/images/profile/kaiba.jpg",
+  ].sort(() => .5 - Math.random()).slice(0, 9);
 
   return (
     <ActorsWrapper>
-        <CustomImage src="/images/profile/farao.jpg" roundedCircle />
-        <CustomImage src="/images/profile/joey.jpg" roundedCircle />
-        <CustomImage src="/images/profile/tristan.jpg" roundedCircle />
-        <CustomImage src="/images/profile/tea.jpg" roundedCircle />
-        <CustomImage src="/images/profile/yugi.jpg" roundedCircle />
-        <CustomImage src="/images/profile/bakura.jpg" roundedCircle />
-        <CustomImage src="/images/profile/pegazus.jpg" roundedCircle />
-        <CustomImage src="/images/profile/maya.jpg" roundedCircle />
-        <CustomImage src="/images/profile/tucsok.jpg" roundedCircle />
+        {
+          imageUrls.map((imageUrl: string) => {
+            return (
+              <CustomImage
+                key={imageUrl}
+                src={imageUrl}
+                roundedCircle
+              />
+            )
+          })
+        }
+        
     </ActorsWrapper>
   );
 }

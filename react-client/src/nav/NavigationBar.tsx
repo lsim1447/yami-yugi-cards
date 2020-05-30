@@ -35,7 +35,7 @@ function NavigationBar(props: any) {
       <Navbar fixed="top" style={{backgroundColor: "black"}} collapseOnSelect expand="lg"  variant="dark">
         <Navbar.Brand href="/">
             <NavBarImage src="/milleniumIcon.png" alt="" />
-            <BrandText>Yu-gi-oh Cards</BrandText> 
+            <BrandText>Yami Yugi Cards</BrandText> 
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

@@ -17,6 +17,7 @@ const CustomImage = styled(Image) `
     height: 200px;
     width: 200px;
     margin-left: 12px;
+    margin-bottom: 18px;
 `;
 
 const Actors = () => {

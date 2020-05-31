@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { CardContext } from "../../contexts/CardContext";
-import { CardDeck, Col, Row, Pagination } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { CardDeck, Pagination } from 'react-bootstrap';
 import styled from 'styled-components';
 import { ICardDetails, getInitialCardList } from '../models/Cards';
 import FlipCard from './FlipCard';
@@ -217,6 +216,13 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
     
     return (
         <div>
+            <PaginationWrapper className="pagination">
+                {renderPrevBtn}
+                {pageDecrementBtn}
+                {RenderPageNumbers()}
+                {pageIncrementBtn}
+                {renderNextBtn}
+            </PaginationWrapper>
             {RenderCards()}
             <PaginationWrapper className="pagination">
                 {renderPrevBtn}

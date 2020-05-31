@@ -202,7 +202,6 @@ function Home() {
                 src="https://storage.googleapis.com/ygoprodeck.com/pics/10000020.jpg"
               />
             </a>
-            
           </Card>
           <Card>
             <a href={`/card/5ebc4d07221c162fa4dcc88f`}>
@@ -215,6 +214,13 @@ function Home() {
             <a href={`/card/5ebc4d99221c162fa4dcd337`}>
               <Card.Img
                 src="https://storage.googleapis.com/ygoprodeck.com/pics/10000010.jpg"
+              />
+            </a>
+          </Card>
+          <Card>
+            <a href={`/card/5ebc4d99221c162fa4dcd338`}>
+              <Card.Img
+                src="https://storage.googleapis.com/ygoprodeck.com/pics/10000090.jpg"
               />
             </a>
           </Card>

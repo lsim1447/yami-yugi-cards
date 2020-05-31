@@ -105,6 +105,12 @@ const CartOverlay = () => {
             <OverlayTitle>
                 <p> My Bag({cartItems.length})</p>
             </OverlayTitle>
+            <CheckoutButton
+                href="/checkout"
+                onClick={() => setShowCartOverlay(false)}
+            >
+                    CHECKOUT
+            </CheckoutButton>
             {
                 cartItems.map((cartItem: ICardDetails) => {
                     return (
@@ -132,12 +138,6 @@ const CartOverlay = () => {
             <TotalPriceWrapper>
                 TOTAL PRICE: {getTotalPrice()}$
             </TotalPriceWrapper>
-            <CheckoutButton
-                href="/checkout"
-                onClick={() => setShowCartOverlay(false)}
-            >
-                    CHECKOUT
-            </CheckoutButton>
         </OverlayWrapper>
 
     );

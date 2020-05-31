@@ -7,17 +7,6 @@ router.route('/').get((request, response) => {
         .catch(error => response.status(400).json('Error: ' + error));
 });
 
-router.route('/paginate/').post((request, response) => {
-    const page = request.body.page;
-    const limit = request.body.limit;
-
-    Card.find({}, null, {
-        skip: (page * limit), 
-        limit: limit
-    }).then(cards => response.json(cards))
-      .catch(error => response.status(400).json('Error: ' + error));
-});
-
 router.route('/add').post((request, response) => {
     const archetype = request.body.archetype;
     const atk = request.body.atk;
@@ -60,6 +49,12 @@ router.route('/:id').get((request, response) => {
         .catch(error => response.status(400).json('Error: ' + error));
 });
 
+router.route('/:id').delete((request, response) => {
+    Card.findByIdAndDelete(request.params.id)
+        .then(() => response.json('Card has been deleted!'))
+        .catch(error => response.status(400).json('Error: ' + error));
+});
+
 router.route('/findAllByIds').post((request, response) => {
     const ids = request.body.ids;
     
@@ -73,12 +68,6 @@ router.route('/findAllByIds').post((request, response) => {
             
             response.json(cards);
         });
-});
-
-router.route('/:id').delete((request, response) => {
-    Card.findByIdAndDelete(request.params.id)
-        .then(() => response.json('Card has been deleted!'))
-        .catch(error => response.status(400).json('Error: ' + error));
 });
 
 router.route('/update/:id').post((request, response) => {
@@ -143,6 +132,29 @@ router.route('/findByTypeAndRace').post((request, response) => {
         
         response.json(cards);
     }, { limit: limit });
+});
+
+router.route('/paginate/').post((request, response) => {
+    const page = request.body.page;
+    const limit = request.body.limit;
+
+    Card.find({}, null, {
+        skip: (page * limit), 
+        limit: limit
+    }).then(cards => response.json(cards))
+      .catch(error => response.status(400).json('Error: ' + error));
+});
+
+router.route('/paginate/findByType').post((request, response) => {
+    const page = request.body.page;
+    const limit = request.body.limit;
+    const cardType = request.body.type;
+
+    Card.find({type: cardType}, null, {
+        skip: (page * limit), 
+        limit: limit
+    }).then(cards => response.json(cards))
+      .catch(error => response.status(400).json('Error: ' + error));
 });
 
 module.exports = router;

@@ -4,7 +4,8 @@ import CustomFlipPagination from '../components/external/CustomFlipPagination';
 function AllCards() {
 
     return (
-        <CustomFlipPagination 
+        <CustomFlipPagination
+            backgroundColor={"black"}
             cardsPerPage={24}
             pageBound={5}
         />

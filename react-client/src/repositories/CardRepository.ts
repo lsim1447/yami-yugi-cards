@@ -24,8 +24,16 @@ export const findAllCardsByTypeAndRace = (type: string, race: string, limit: num
     }).then(response => response.data.slice(0, limit));
 }
 
-export const findCardsPaginate = (page: number, limit: number) => {
+export const findCardsPaginated = (page: number, limit: number) => {
     return axios.post(`/api/cards/paginate`, {
+        "page": page,
+        "limit": limit
+    }).then(response => response.data);
+}
+
+export const findCardsByTypePaginated = (type: string, page: number, limit: number) => {
+    return axios.post(`/api/cards/paginate/findByType`, {
+        "type": type,
         "page": page,
         "limit": limit
     }).then(response => response.data);

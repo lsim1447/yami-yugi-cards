@@ -24,10 +24,6 @@ export const SIDE_BAR_OPTIONS_API = [
         type: "Flip Effect Monster"
     },
     {
-        eventKey: "flip_tuner_effect_monster",
-        type: "Flip Tuner Effect Monster"
-    },
-    {
         eventKey: "gemini_monster",
         type: "Gemini Monster"
     },
@@ -36,32 +32,16 @@ export const SIDE_BAR_OPTIONS_API = [
         type: "Normal Monster"
     },
     {
-        eventKey: "normal_tuner_monster",
-        type: "Normal Tuner Monster"
-    },
-    {
         eventKey: "pendulum_effect_monster",
         type: "Pendulum Effect Monster"
-    },
-    {
-        eventKey: "pendulum_flip_effect_monster",
-        type: "Pendulum Flip Effect Monster"
     },
     {
         eventKey: "pendulum_normal_monster",
         type: "Pendulum Normal Monster"
     },
     {
-        eventKey: "pendulum_tuner_effect_monster",
-        type: "Pendulum Tuner Effect Monster"
-    },
-    {
         eventKey: "ritual_effect_monster",
         type: "Ritual Effect Monster"
-    },
-    {
-        eventKey: "ritual_monster",
-        type: "Ritual Monster"
     },
     {
         eventKey: "skill_card",
@@ -74,10 +54,6 @@ export const SIDE_BAR_OPTIONS_API = [
     {
         eventKey: "spirit_monster",
         type: "Spirit Monster"
-    },
-    {
-        eventKey: "toon_monster",
-        type: "Toon Monster"
     },
     {
         eventKey: "trap_card",
@@ -100,27 +76,11 @@ export const SIDE_BAR_OPTIONS_API = [
         type: "Link Monster"
     },
     {
-        eventKey: "pendulum_effect_fusion_monster",
-        type: "Pendulum Effect Fusion Monster"
-    },
-    {
         eventKey: "synchro_monster",
         type: "Synchro Monster"
     },
     {
-        eventKey: "synchro_pendulum_effect_monster",
-        type: "Synchro Pendulum Effect Monster"
-    },
-    {
-        eventKey: "synchro_tuner_monster",
-        type: "Synchro Tuner Monster"
-    },
-    {
         eventKey: "XYZ_monster",
         type: "XYZ Monster"
-    },
-    {
-        eventKey: "XYZ_pendulum_effect_monster",
-        type: "XYZ Pendulum Effect Monster"
     }
 ];

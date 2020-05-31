@@ -5,24 +5,29 @@ import styled from 'styled-components';
 import { ICardDetails, getInitialCardList } from '../models/Cards';
 import FlipCard from './FlipCard';
 import {
-    findCardsPaginate
+    findCardsPaginated,
+    findCardsByTypePaginated
 } from '../../repositories/CardRepository';
 import { ALL_NUMBER_OF_CARDS } from '../../constants';
 
 const PaginationWrapper = styled(Pagination) `
+    background-color: white;
     display: flex;
     font-size: 28px;
     justify-content: center;
+    padding-bottom: 18px;
     padding-top: 18px;
     vertical-align: middle;
 `;
 
 type CustomFlipPagination = {
+    backgroundColor: string,
     cardsPerPage: number,
     pageBound: number,
+    selectedType?: string
 }
 
-const CustomFlipPagination = ({cardsPerPage, pageBound}: CustomFlipPagination) => {
+const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selectedType}: CustomFlipPagination) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [upperPageBound, setUpperPageBound] = useState(5);
     const [lowerPageBound, setLowerPageBound] = useState(0);
@@ -42,17 +47,46 @@ const CustomFlipPagination = ({cardsPerPage, pageBound}: CustomFlipPagination) =
 
     // Update Cards
     useEffect(() => {
-        findCardsPaginate(currentPage, cardsPerPage)
-            .then(newCards => {
-                setCards([]);
-                setCards(newCards);
-            })
+        console.log('selectedType = ', selectedType);
+        if (!selectedType || selectedType === 'All') {
+            findCardsPaginated(currentPage, cardsPerPage)
+                .then(newCards => {
+                    setCards([]);
+                    setCards(newCards)
+                });
+        } else {
+            findCardsByTypePaginated(selectedType, currentPage, cardsPerPage)
+                .then(newCards => {
+                    setCards([]);
+                    setCards(newCards)
+                });
+        }
     }, [currentPage]);
+
+    // Update Cards
+    useEffect(() => {
+        setCurrentPage(1);
+
+        if (!selectedType || selectedType === 'All') {
+            findCardsPaginated(currentPage, cardsPerPage)
+                .then(newCards => {
+                    setCards([]);
+                    setCards(newCards)
+                });
+        } else {
+            findCardsByTypePaginated(selectedType, currentPage, cardsPerPage)
+                .then(newCards => {
+                    setCards([]);
+                    setCards(newCards)
+                });
+        }
+        
+    }, [selectedType]);
     
     const handleClick = (event: any) =>{
         let listid = Number(event.target.id);
-        setCurrentPage(listid);
         
+        setCurrentPage(listid);
         setPrevAndNextBtnClass(listid);
     }
 
@@ -117,7 +151,7 @@ const CustomFlipPagination = ({cardsPerPage, pageBound}: CustomFlipPagination) =
     // Logic for displaying current cards
     const RenderCards = () => {        
         return (
-            <CardDeck style={{minHeight: "100vh", backgroundColor: "black"}}>
+            <CardDeck style={{minHeight: "100vh", backgroundColor: backgroundColor}}>
             {
                 cards.map(
                     (card: ICardDetails) => {

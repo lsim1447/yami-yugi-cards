@@ -6,28 +6,10 @@ import { ICardDetails } from '../components/models/Cards';
 import FlipCard from '../components/external/FlipCard';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
+import CustomFlipPagination from '../components/external/CustomFlipPagination';
 
 function Categories() {
-  const [nrOfCardsToShow, setNrOfCardsToShow] = useState(20);
-  const [cards, setCards] = useState<ICardDetails[]>([]);
-  const { allCards, setAllCards } = useContext(CardContext);
-
-  const filterCardsByType = (type: string, deny?: boolean) => {
-    setCards([]);
-    if (type === "All") {
-        setCards(allCards);
-    } else {
-        const filteredCards: ICardDetails[] = 
-            deny ?
-                allCards.filter(card => !card.type?.includes(type)) :
-                allCards.filter(card => card.type?.includes(type));
-        setCards(filteredCards); 
-    }
-  }
-
-  useEffect(() => {
-    setCards(allCards);
-  }, [allCards]);
+  const [selectedType, setSelectedType] = useState('All');
 
   return (
     <BackgroundContainer theme={
@@ -59,7 +41,7 @@ function Categories() {
                         return (
                             <SideBarListItem 
                                 key={item.eventKey}
-                                onClick={() => filterCardsByType(item.type)}
+                                onClick={() => setSelectedType(item.type)}
                             >
                               {item.type}
                             </SideBarListItem>
@@ -71,19 +53,12 @@ function Categories() {
           </div>
         </Col>
         <Col sm={9}>
-          <CardDeck style={{backgroundColor: "transparent"}}>
-            {
-              cards.map(card => {
-                    return (
-                      <FlipCard 
-                        isFullDescriptionVisible={false}
-                        card={card}
-                        key={card.id}
-                      />
-                    );
-                })
-            }
-          </CardDeck>
+          <CustomFlipPagination
+              backgroundColor={"transparent"}
+              cardsPerPage={24}
+              pageBound={5}
+              selectedType={selectedType}
+          />
         </Col>
       </Row>
     </BackgroundContainer>

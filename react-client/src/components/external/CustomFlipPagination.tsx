@@ -10,10 +10,11 @@ import {
 import { ALL_NUMBER_OF_CARDS } from '../../constants';
 
 const PaginationWrapper = styled(Pagination) `
-    background-color: white;
+    background-image: url(/images/millennium_items_header.jpg);
     display: flex;
     font-size: 28px;
     justify-content: center;
+    margin-bottom: 0;
     padding-bottom: 18px;
     padding-top: 18px;
     vertical-align: middle;

@@ -7,6 +7,17 @@ router.route('/').get((request, response) => {
         .catch(error => response.status(400).json('Error: ' + error));
 });
 
+router.route('/paginate/').post((request, response) => {
+    const page = request.body.page;
+    const limit = request.body.limit;
+
+    Card.find({}, null, {
+        skip: (page * limit), 
+        limit: limit
+    }).then(cards => response.json(cards))
+      .catch(error => response.status(400).json('Error: ' + error));
+});
+
 router.route('/add').post((request, response) => {
     const archetype = request.body.archetype;
     const atk = request.body.atk;

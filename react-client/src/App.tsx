@@ -5,18 +5,22 @@ import MyRouter from './MyRouter';
 import { CardProvider } from './contexts/CardContext';
 import { CheckoutProvider } from './contexts/CheckoutContext';
 import { UserProvider } from './contexts/UserContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+
 
 function App() {
   return (
-    <UserProvider>
-      <CardProvider>
-        <CheckoutProvider>
-          <NavigationBar />
-          <MyRouter />
-          <Footer />
-        </CheckoutProvider>
-      </CardProvider>
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <CardProvider>
+          <CheckoutProvider>
+            <NavigationBar />
+            <MyRouter />
+            <Footer />
+          </CheckoutProvider>
+        </CardProvider>
+      </UserProvider>
+    </ThemeProvider>
   );
 }
 

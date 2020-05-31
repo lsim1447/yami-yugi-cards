@@ -5,7 +5,7 @@ function AllCards() {
 
     return (
         <CustomFlipPagination
-            backgroundColor={"black"}
+            backgroundColor={"white"}
             cardsPerPage={24}
             pageBound={5}
         />

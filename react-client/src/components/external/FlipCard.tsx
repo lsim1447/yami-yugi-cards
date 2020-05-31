@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../models/Cards';
 import CardModal from '../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../internal/FlipComponents';
 import { getCardById } from '../../repositories/CardRepository';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 const PriceContainer = styled.p `
     padding-top: 12px;
@@ -17,6 +18,7 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
     const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
     const [cardDetails, setCardDetails] = useState(initialValue);
     const [modalShow, setModalShow] = useState(false);
+    const { backgroundColor, color } = useContext(ThemeContext);
 
     const getText = (text: string, limit: number, isFullDescriptionVisible: boolean) => {
         if (isFullDescriptionVisible) return text;
@@ -37,7 +39,7 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
 
     return (
         <>
-            <Card style={{minWidth: "290px", marginBottom: "24px"}} onClick={() => setModalShow(true)}>
+            <Card style={{minWidth: "290px", marginBottom: "24px", backgroundColor: backgroundColor, color: color}} onClick={() => setModalShow(true)}>
                 <FlipCardContainer theme={
                     {
                         backgroundColor: "#eee9e5",

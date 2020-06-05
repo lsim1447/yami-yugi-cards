@@ -9,14 +9,26 @@ import { getInitialCardList } from '../components/models/Cards';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
 import { SIDE_BAR_OPTIONS_API } from '../constants';
-import { getUserById } from '../repositories/UserRepository';
-import { findAllCardsByIds } from '../repositories/CardRepository';
+import {
+    getUserById,
+} from '../repositories/UserRepository';
+import {
+    findAllCardsByIds,
+} from '../repositories/CardRepository';
+import {
+    getSignedUserId,
+    isUserSignedIn
+} from '../services/UserService';
 
 function MyDeck() {
     const [nrOfCardsToShow, setNrOfCardsToShow] = useState(20);
     const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const { user, setUser } = useContext(UserContext);
+
+    if (!isUserSignedIn()) {
+        window.location.href='/signin';
+    }
 
     const getAccountsValue = () => {
         return user ? user.accountBalance.toFixed(2) : 0;
@@ -55,7 +67,7 @@ function MyDeck() {
     }
 
     useEffect(() => {
-        const USER_ID = localStorage.getItem('user_id');
+        const USER_ID = getSignedUserId();
 
         if (USER_ID) {
             getUserById(USER_ID)

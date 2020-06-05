@@ -3,6 +3,9 @@ import { DEFAULT_USER_VALUE } from '../components/models/User';
 import {
     getUserById
 } from '../repositories/UserRepository';
+import {
+    getSignedUserId
+} from '../services/UserService';
 
 const initialState = {
     user: DEFAULT_USER_VALUE,
@@ -14,7 +17,7 @@ export const UserContext = React.createContext(initialState);
 export const UserContextConsumer = UserContext.Consumer;
 
 export const UserProvider = (props: any) => {
-    const USER_ID = localStorage.getItem('user_id');
+    const USER_ID = getSignedUserId();
     const [user, setUser] = useState(DEFAULT_USER_VALUE);
 
     useEffect(() => {

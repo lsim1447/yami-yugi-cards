@@ -5,6 +5,10 @@ import AutoComplete from './../components/internal/AutoComplete';
 import { Navbar, Nav } from 'react-bootstrap';
 import styled from 'styled-components';
 import CartOverlay from '../components/external/CartOverlay';
+import {
+  isUserSignedIn,
+  userSignOut
+} from '../services/UserService';
 
 const NavBarImage = styled.img `
     max-width: 55px;
@@ -29,10 +33,10 @@ function NavigationBar(props: any) {
   const { cards, setCards } = useContext(CardContext);
   const { cartItems, setCartItems } = useContext(CardContext);
   const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
-  const [isUserLoggedIn, setUserLoggedIn] = useState(localStorage.getItem("user_id"));
+  const [isUserLoggedIn, setUserLoggedIn] = useState(isUserSignedIn);
 
   const signOut = () => {
-    localStorage.removeItem("user_id");
+    userSignOut();
   }
 
   return (
@@ -68,7 +72,7 @@ function NavigationBar(props: any) {
                 </Nav.Link>
                 : 
                 <Nav.Link
-                  style={{fontSize: "12px"}}
+                  style={{fontSize: "14px"}}
                   eventKey={4}
                   href="/signin"
                   onClick={() => signOut()}

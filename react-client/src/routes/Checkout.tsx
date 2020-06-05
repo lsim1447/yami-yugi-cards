@@ -9,6 +9,9 @@ import { IUser } from '../components/models/User';
 import {
     updateUserById
 } from '../repositories/UserRepository';
+import {
+    isUserSignedIn
+} from '../services/UserService';
 
 const CustomCol = styled(Col) `
     border-left: 1px solid #D3D3D3;
@@ -114,6 +117,10 @@ function Checkout() {
   const { allCards, setAllCards } = useContext(CardContext);
   const { cartItems, setCartItems } = useContext(CardContext);
   const { user, setUser } = useContext(UserContext);
+
+  if (!isUserSignedIn()) {
+    window.location.href='/signin';
+  }
 
   const getTotalPrice = () => {
     if (cartItems && cartItems.length) {

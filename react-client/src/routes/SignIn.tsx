@@ -5,8 +5,11 @@ import { FacebookButton } from '../components/internal/Buttons';
 import { DEFAULT_USER_VALUE, IUser } from '../components/models/User';
 import {
     getUserByEmailAndPassword,
-    saveUser
+    saveUser,
 } from '../repositories/UserRepository';
+import {
+    setSignedUserId
+} from '../services/UserService';
 import styled from 'styled-components';
 import '../special-styles/signin.css';
 
@@ -239,9 +242,8 @@ function SignIn() {
         getUserByEmailAndPassword(email, password)
             .then((response) => {
                 const user: IUser = response[0];
-                console.log('user = ', user);
                 setUser(user);
-                localStorage.setItem('user_id', user._id);
+                setSignedUserId(user._id);
                 window.location.href='/';
             })
             .catch(error => {

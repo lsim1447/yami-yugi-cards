@@ -29,6 +29,11 @@ function NavigationBar(props: any) {
   const { cards, setCards } = useContext(CardContext);
   const { cartItems, setCartItems } = useContext(CardContext);
   const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
+  const [isUserLoggedIn, setUserLoggedIn] = useState(localStorage.getItem("user_id"));
+
+  const signOut = () => {
+    localStorage.removeItem("user_id");
+  }
 
   return (
     <div>
@@ -43,7 +48,6 @@ function NavigationBar(props: any) {
             
           </Nav>
           <Nav>
-            <Nav.Link eventKey={4} href="/signin"> Sign In </Nav.Link>
             <Nav.Link href="/all-cards"> Cards </Nav.Link>
             <Nav.Link eventKey={2} href="/categories"> Categories </Nav.Link>
             <Nav.Link eventKey={3} href="/my-deck"> My Deck </Nav.Link>
@@ -53,6 +57,26 @@ function NavigationBar(props: any) {
                   placeholder={"Search"}
               />
             </Nav>
+            {
+              !isUserLoggedIn ?
+                <Nav.Link eventKey={4} href="/signin"> 
+                  <i
+                    style={{fontSize: "24px", paddingLeft: "12px"}}
+                    className="fa fa-user"
+                    aria-hidden="true"
+                  />
+                </Nav.Link>
+                : 
+                <Nav.Link
+                  style={{fontSize: "12px"}}
+                  eventKey={4}
+                  href="/signin"
+                  onClick={() => signOut()}
+                >
+                  Sign out
+                </Nav.Link>
+            }
+            
             <Nav.Link eventKey={5} onClick={() => setShowCartOverlay(true)}>
               <ShoppingCartWrapper>
                 <i className="fa fa-shopping-cart"></i>

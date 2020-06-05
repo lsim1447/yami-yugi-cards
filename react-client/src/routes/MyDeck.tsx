@@ -55,24 +55,27 @@ function MyDeck() {
     }
 
     useEffect(() => {
-        getUserById(user._id)
-            .then(response => response[0])
-            .then(currentUser => {
-                const IDS = (currentUser && currentUser.deck) ? currentUser.deck : [];
+        const USER_ID = localStorage.getItem('user_id');
 
-                if (IDS) {
-                    findAllCardsByIds(IDS).then(currentUserCards => {
+        if (USER_ID) {
+            getUserById(USER_ID)
+                .then(currentUser => {
+                    const IDS = (currentUser && currentUser.deck) ? currentUser.deck : [];
+
+                    if (IDS) {
+                        findAllCardsByIds(IDS).then(currentUserCards => {
+                            setCards([]);
+                            setCards(currentUserCards);
+                            setAllCards([]);
+                            setAllCards(currentUserCards);
+                        }).catch(error => {
+                            console.log('Error(/api/cards/findAllByIds): ', error);
+                        })
+                    } else {
                         setCards([]);
-                        setCards(currentUserCards);
-                        setAllCards([]);
-                        setAllCards(currentUserCards);
-                    }).catch(error => {
-                        console.log('Error(/api/cards/findAllByIds): ', error);
-                    })
-                } else {
-                    setCards([]);
-                }
-            })
+                    }
+                })
+        }
     }, []);
 
     return (
@@ -134,6 +137,11 @@ function MyDeck() {
                 <Col sm={2}>
                     <SideBarMenuContainer>
                         <div className="sidebar_menu_right">
+                            <SideBarListContainer>
+                                <SideBarListItem style={{fontSize: "22px"}}>
+                                    Hi,  {user.username}
+                                </SideBarListItem>
+                            </SideBarListContainer>
                             <SideBarListContainer>
                                 <SideBarListItem style={{fontSize: "22px"}}>
                                     Account Balance: {getAccountsValue()} $

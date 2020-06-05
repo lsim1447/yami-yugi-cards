@@ -32,6 +32,31 @@ const TitleWrapper = styled.p `
     font-weight: 800;
 `;
 
+const SignInButton = styled.div `
+    border-radius: 20px;
+    border: 1px solid #B42D00;
+    background-color: #B42D00;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        background-color: #EE2D00;
+    }
+`;
+
 const Button = styled.button `
     border-radius: 20px;
     border: 1px solid #B42D00;
@@ -212,8 +237,8 @@ function SignIn() {
     
     const signIn = () => {
         getUserByEmailAndPassword(email, password)
-            .then(response => response[0])
-            .then((user: IUser) => {
+            .then((response) => {
+                const user: IUser = response[0];
                 console.log('user = ', user);
                 setUser(user);
                 localStorage.setItem('user_id', user._id);
@@ -271,7 +296,7 @@ function SignIn() {
                         <CustomInput type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                         <CustomInput type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         <CustomLink href="#">Forgot your password?</CustomLink>
-                        <Button onClick={() => signIn()}>Sign In</Button>
+                        <SignInButton onClick={() => signIn()}>Sign In</SignInButton>
                     </CustomForm>
                 </SignInFormContainer>
                 <OverlayContainer className="overlay-container">

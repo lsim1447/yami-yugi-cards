@@ -10,20 +10,23 @@ const initialState = {
 }
 
 export const UserContext = React.createContext(initialState);
+
 export const UserContextConsumer = UserContext.Consumer;
 
 export const UserProvider = (props: any) => {
-    const USER_ID = '5ecb7b7fa49d6637d033359d';
+    const USER_ID = localStorage.getItem('user_id');
     const [user, setUser] = useState(DEFAULT_USER_VALUE);
 
     useEffect(() => {
-        getUserById(USER_ID)
-            .then(currentUser => {
-                setUser(currentUser);
-            })
-            .catch(error => {
-                console.log('Error(/api/users/): ', error);
-            })
+        if (USER_ID){
+            getUserById(USER_ID)
+                .then(currentUser => {
+                    setUser(currentUser);
+                })
+                .catch(error => {
+                    console.log('Error(/api/users/): ', error);
+                })
+        }
     }, []);
     
     return (

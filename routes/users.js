@@ -10,9 +10,10 @@ router.route('/').get((request, response) => {
 router.route('/add').post((request, response) => {
     const accountBalance = request.body.accountBalance;
     const username = request.body.username;
+    const email = request.body.email;
     const password = request.body.password;
     const deck = request.body.deck;
-    const newUser = new User({accountBalance, username, password, deck});
+    const newUser = new User({accountBalance, username, email, password, deck});
     
     newUser.save()
         .then(() => response.json('User has been created successfully!'))
@@ -44,6 +45,19 @@ router.route('/update/:id').post((request, response) => {
                 .catch((error) => response.status(400).json('Error: ' + error));
         })
         .catch(error => response.status(400).json('Error: ' + error));
+});
+
+router.route('/auth').post((request, response) => {
+    const email = request.body.email;
+    const password = request.body.password;
+    
+    User.find({email: email, password: password}, function(error, user) {
+        if (error) {
+            response.send('Error: ' + error);
+        }    
+        
+        response.json(user);
+    });
 });
 
 module.exports = router;

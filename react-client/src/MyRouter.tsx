@@ -9,6 +9,7 @@ import MyDeck from './routes/MyDeck';
 import PageNotFound from './routes/PageNotFound';
 import ReadMore from './routes/ReadMore';
 import Test from './routes/Test';
+import SignIn from './routes/SignIn';
 import SimpleProductPage from './routes/SimpleProductPage';
 
 class MyRouter extends Component {
@@ -22,7 +23,7 @@ class MyRouter extends Component {
                     <Route exact path="/checkout" component={Checkout} />
                     <Route exact path="/my-deck" component={MyDeck} />
                     <Route exact path="/read-more" component={ReadMore} />
-                    <Route exact path="/test" component={Test} />
+                    <Route exact path="/signin" component={SignIn} />
                     <Route exact path="/card/:id" component={SimpleProductPage} />
                     <Route component={PageNotFound} />
                 </Switch>

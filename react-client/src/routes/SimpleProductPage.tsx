@@ -317,7 +317,7 @@ function SimpleProductPage(props: any) {
                 gif2_url="/gifs/call-farao.gif"
             />
             <Actors />
-            <Rating />
+            <Rating cardDetails={cardDetails}/>
         </SPPWrapper>
     );
 }

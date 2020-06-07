@@ -118,10 +118,6 @@ function Checkout() {
   const { cartItems, setCartItems } = useContext(CardContext);
   const { user, setUser } = useContext(UserContext);
 
-  if (!isUserSignedIn()) {
-    window.location.href='/signin';
-  }
-
   const getTotalPrice = () => {
     if (cartItems && cartItems.length) {
         return cartItems.reduce((accumulator: number, currentCard: ICardDetails) => {
@@ -154,46 +150,52 @@ function Checkout() {
        })   
   }
 
-  return (
-    <Row>
-        <LeftCol sm={3}/>
-        <CenterCol sm={6}>
-            <DescriptionWrapper>
-                Yu-Gi-Oh! is a Japanese manga series about gaming written and illustrated by Kazuki Takahashi.
-                It was serialized in Shueisha's Weekly Shōnen Jump magazine between September 30, 1996 and March 8, 2004.
-            </DescriptionWrapper>
-            <TitleWrapper>
-                COMPLETE YOUR CHECKOUT
-            </TitleWrapper>
-            <DescriptionWrapper>
-                Congratulations! Your order qualifies for FREE Standard Shipping. No offer code needed.
-            </DescriptionWrapper>
-            <CoverWrapper />
-            <BagWrapper>
-                My Bag ({cartItems.length} items)
-            </BagWrapper>
-            {
-                cartItems.map((card: ICardDetails) => {
-                    return (
-                        <CartItem
-                            cartItem={card}
-                        />
-                    )
-                })
-            }
-            <TotalPrice> TOTAL PRICE: {getTotalPrice()} $</TotalPrice>
-            <CheckoutFooterWrapper>
-                <CheckoutButton
-                    onClick={() => checkoutCartItems()}
-                    variant="dark"
-                >
-                     SUBMIT YOUR ORDER
-                </CheckoutButton>
-            </CheckoutFooterWrapper>
-        </CenterCol>
-        <RightCol sm={3}/>
-    </Row>
-  );
+  if (!isUserSignedIn()) {
+    window.location.href='/signin';
+    
+    return null;
+  } else {
+    return (
+        <Row>
+            <LeftCol sm={3}/>
+            <CenterCol sm={6}>
+                <DescriptionWrapper>
+                    Yu-Gi-Oh! is a Japanese manga series about gaming written and illustrated by Kazuki Takahashi.
+                    It was serialized in Shueisha's Weekly Shōnen Jump magazine between September 30, 1996 and March 8, 2004.
+                </DescriptionWrapper>
+                <TitleWrapper>
+                    COMPLETE YOUR CHECKOUT
+                </TitleWrapper>
+                <DescriptionWrapper>
+                    Congratulations! Your order qualifies for FREE Standard Shipping. No offer code needed.
+                </DescriptionWrapper>
+                <CoverWrapper />
+                <BagWrapper>
+                    My Bag ({cartItems.length} items)
+                </BagWrapper>
+                {
+                    cartItems.map((card: ICardDetails) => {
+                        return (
+                            <CartItem
+                                cartItem={card}
+                            />
+                        )
+                    })
+                }
+                <TotalPrice> TOTAL PRICE: {getTotalPrice()} $</TotalPrice>
+                <CheckoutFooterWrapper>
+                    <CheckoutButton
+                        onClick={() => checkoutCartItems()}
+                        variant="dark"
+                    >
+                         SUBMIT YOUR ORDER
+                    </CheckoutButton>
+                </CheckoutFooterWrapper>
+            </CenterCol>
+            <RightCol sm={3}/>
+        </Row>
+      );
+  }
 }
 
 export default Checkout;

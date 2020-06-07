@@ -87,6 +87,16 @@ const AddToBagButton = styled(Button) `
     width: 100%;
 `;
 
+const RecommandationWrapper = styled.div `
+    background: url(/images/Banner_RecommendationHub.gif) top center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin-bottom: 24px;
+    min-height: 400px;
+`;
+
 function SimpleProductPage(props: any) {
     const [addToBagButtonText, setAddToBagButtonText] = useState('ADD TO BAG');
     const { allCards, setAllCards } = useContext(CardContext);
@@ -275,11 +285,10 @@ function SimpleProductPage(props: any) {
 
             <SPPImageWrapper />
 
-            <Jumbotron fluid>
-                <Container>
-                    <SubTitle>These cards are recommended for you. Feel free to check them. You won't regret it! </SubTitle>
-                </Container>
-            </Jumbotron>
+            <RecommandationWrapper>
+                
+            </RecommandationWrapper>
+               
 
             <AliceCarousel 
                 autoPlay={true}

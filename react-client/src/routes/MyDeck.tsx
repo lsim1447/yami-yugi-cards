@@ -26,10 +26,6 @@ function MyDeck() {
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const { user, setUser } = useContext(UserContext);
 
-    if (!isUserSignedIn()) {
-        window.location.href='/signin';
-    }
-
     const getAccountsValue = () => {
         return user ? user.accountBalance.toFixed(2) : 0;
     }
@@ -90,112 +86,119 @@ function MyDeck() {
         }
     }, []);
 
-    return (
-        <BackgroundContainer theme={
-            {
-                backgroundImage: "images/my-deck-background.jpg"
-            }
-        }>
-            <Row>
-                <Col sm={3}>
-                    <div>
-                        <i className="fa fa-bars toggle_menu"></i>
-                        <div className="sidebar_menu">
-                            <i className="fa fa-times"></i>
-                            <CenterWrapper>
-                                <BoxedItem>
-                                    Check your 
-                                    <LogoBold>
-                                        Deck
-                                    </LogoBold>
-                                </BoxedItem>
-                                <LogoTitle>
-                                    Be a Professional Duel Master
-                                </LogoTitle>
-                            </CenterWrapper>
+    if (!isUserSignedIn()) {
+        window.location.href='/signin';
 
-                            <SideBarListContainer>
-                            {
-                                SIDE_BAR_OPTIONS_API.map(item => {
-                                    return (
-                                        <SideBarListItem 
-                                            onClick={() => filterCardsByType(item.type)}
-                                        >
-                                            {item.type} ({getNrOfCardsByType(item.type)})
-                                        </SideBarListItem>
-                                    )
-                                })
-                            }
-                            </SideBarListContainer>
+        return null;
+    } else {
+        return (
+            <BackgroundContainer theme={
+                {
+                    backgroundImage: "images/my-deck-background.jpg"
+                }
+            }>
+                <Row>
+                    <Col sm={3}>
+                        <div>
+                            <i className="fa fa-bars toggle_menu"></i>
+                            <div className="sidebar_menu">
+                                <i className="fa fa-times"></i>
+                                <CenterWrapper>
+                                    <BoxedItem>
+                                        Check your 
+                                        <LogoBold>
+                                            Deck
+                                        </LogoBold>
+                                    </BoxedItem>
+                                    <LogoTitle>
+                                        Be a Professional Duel Master
+                                    </LogoTitle>
+                                </CenterWrapper>
+    
+                                <SideBarListContainer>
+                                {
+                                    SIDE_BAR_OPTIONS_API.map(item => {
+                                        return (
+                                            <SideBarListItem 
+                                                onClick={() => filterCardsByType(item.type)}
+                                            >
+                                                {item.type} ({getNrOfCardsByType(item.type)})
+                                            </SideBarListItem>
+                                        )
+                                    })
+                                }
+                                </SideBarListContainer>
+                            </div>
                         </div>
-                    </div>
-                </Col>
-                <Col sm={7}>
-                    <CardDeck>
-                    {
-                        cards.map((card: ICardDetails) => {
-                            return (
-                                <SimpleFlipCard 
-                                    isAddToBagButtonDisabled={true}
-                                    isFullDescriptionVisible={false}
-                                    card={card}
-                                    key={card.id}
-                                />
-                            );
-                        })
-                    }
-                    </CardDeck>
-                </Col>
-                <Col sm={2}>
-                    <SideBarMenuContainer>
-                        <div className="sidebar_menu_right">
-                            <SideBarListContainer>
-                                <SideBarListItem style={{fontSize: "22px"}}>
-                                    Hi,  {user.username}
-                                </SideBarListItem>
-                            </SideBarListContainer>
-                            <SideBarListContainer>
-                                <SideBarListItem style={{fontSize: "22px"}}>
-                                    Account Balance: {getAccountsValue()} $
-                                </SideBarListItem>
-                            </SideBarListContainer>
-                            <SideBarListContainer>
-                                <SideBarListItem>
-                                    Your deck's value: {getDeckValue()} $
-                                </SideBarListItem>
-                            </SideBarListContainer>
-                            <SideBarListContainer>
-                                <SideBarListItem onClick={() => setCards(allCardsInYourDeck)}>
-                                    Cards: { allCardsInYourDeck.length }
-                                </SideBarListItem>
-                            </SideBarListContainer>
-                            <SideBarListContainer>
-                                <SideBarListItem onClick={() => filterCardsByType('Monster')}>
-                                    Monster cards: { getNrOfCardsByType('Monster') }
-                                </SideBarListItem>
-                            </SideBarListContainer>
-                            <SideBarListContainer>
-                                <SideBarListItem onClick={() => filterCardsByType('Monster', true)}>
-                                    Special cards: { allCardsInYourDeck.length - getNrOfCardsByType('Monster') }
-                                </SideBarListItem>
-                            </SideBarListContainer>
-                            <CenterWrapper>
-                                <BoxedItem>
-                                    Name your 
-                                    <LogoBold>
-                                        Beast
-                                    </LogoBold>
-                                </BoxedItem>
-                                <LogoTitle>
-                                    Let's Be Professional. Never Give Up!
-                                </LogoTitle>
-                            </CenterWrapper>
-                        </div>
-                    </SideBarMenuContainer>
-                </Col>
-            </Row>
-        </BackgroundContainer>
-    );
+                    </Col>
+                    <Col sm={7}>
+                        <CardDeck>
+                        {
+                            cards.map((card: ICardDetails) => {
+                                return (
+                                    <SimpleFlipCard 
+                                        isAddToBagButtonDisabled={true}
+                                        isFullDescriptionVisible={false}
+                                        card={card}
+                                        key={card.id}
+                                    />
+                                );
+                            })
+                        }
+                        </CardDeck>
+                    </Col>
+                    <Col sm={2}>
+                        <SideBarMenuContainer>
+                            <div className="sidebar_menu_right">
+                                <SideBarListContainer>
+                                    <SideBarListItem style={{fontSize: "22px"}}>
+                                        Hi,  {user.username}
+                                    </SideBarListItem>
+                                </SideBarListContainer>
+                                <SideBarListContainer>
+                                    <SideBarListItem style={{fontSize: "22px"}}>
+                                        Account Balance: {getAccountsValue()} $
+                                    </SideBarListItem>
+                                </SideBarListContainer>
+                                <SideBarListContainer>
+                                    <SideBarListItem>
+                                        Your deck's value: {getDeckValue()} $
+                                    </SideBarListItem>
+                                </SideBarListContainer>
+                                <SideBarListContainer>
+                                    <SideBarListItem onClick={() => setCards(allCardsInYourDeck)}>
+                                        Cards: { allCardsInYourDeck.length }
+                                    </SideBarListItem>
+                                </SideBarListContainer>
+                                <SideBarListContainer>
+                                    <SideBarListItem onClick={() => filterCardsByType('Monster')}>
+                                        Monster cards: { getNrOfCardsByType('Monster') }
+                                    </SideBarListItem>
+                                </SideBarListContainer>
+                                <SideBarListContainer>
+                                    <SideBarListItem onClick={() => filterCardsByType('Monster', true)}>
+                                        Special cards: { allCardsInYourDeck.length - getNrOfCardsByType('Monster') }
+                                    </SideBarListItem>
+                                </SideBarListContainer>
+                                <CenterWrapper>
+                                    <BoxedItem>
+                                        Name your 
+                                        <LogoBold>
+                                            Beast
+                                        </LogoBold>
+                                    </BoxedItem>
+                                    <LogoTitle>
+                                        Let's Be Professional. Never Give Up!
+                                    </LogoTitle>
+                                </CenterWrapper>
+                            </div>
+                        </SideBarMenuContainer>
+                    </Col>
+                </Row>
+            </BackgroundContainer>
+        );
+    }
+    
 }
 
 export default MyDeck;

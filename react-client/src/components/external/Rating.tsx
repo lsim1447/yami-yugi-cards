@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
-import { CardProps, ICardDetails } from '../models/Cards';
+import { ICardDetails } from '../models/Cards';
+import { IComment } from '../models/Comment';
 import RatingModal from '../modals/RatingModal';
+import {
+    getAllComments,
+    getCommentsByCardId
+} from '../../repositories/CommentRepository';
 
 const RatingWrapper = styled(Row) `
     border-top: 1px solid #D3D3D3;
@@ -78,69 +83,52 @@ type RatingProps = {
 
 const Rating = ({cardDetails} : RatingProps) => {
     const [modalShow, setModalShow] = useState(false);
-
-    const comments = [
-        {
-            date: 'Jun 20, 2020',
-            message: "How could I buy it? Anybody wanna trade it?",
-            stars: 5,
-            title: 'This card is awesome',
-            username: "Oana Robert",
-        }, {
-            date: 'May 3, 2020',
-            message: "I cannot say any positive about this card.",
-            stars: 4,
-            title: 'Do not buy this.',
-            username: "Heves Jack",
-        }, {
-            date: 'Jun 20, 2020',
-            message: "How could I order this without adding the corresponding trap card to my deck???",
-            stars: 4,
-            title: 'Please pay attention',
-            username: "Salamon Cech",
-        }, {
-            date: 'Oct 15, 2020',
-            message: "It's not a big deal!",
-            stars: 1,
-            title: 'Warning!!!',
-            username: "Sir Alex Ferguson",
-        }, {
-            date: 'Feb 6, 2020',
-            message: "This is awesome!",
-            stars: 5,
-            title: 'The best card I have ever had!!!',
-            username: "Pep Guardiola",
-        }, {
-            date: 'Dec 2, 2020',
-            message: "Super hero. I can beat with this card everybody!",
-            stars: 3,
-            title: 'The missing piece of my deck',
-            username: "Jack Sparrow",
-        }
-    ];
-
+    const [comments, setComments] = useState([]);
+    
     const getAvgPercentage = () => {
-        const sum = comments.reduce((accumulator, comment) => {
-            return accumulator + comment.stars;
-        }, 0);
-
-        return (sum / comments.length).toFixed(2);
+        if (comments.length === 0) {
+            return 0;
+        } else {
+            const sum = comments.reduce((accumulator: number, comment: IComment) => {
+                return accumulator + comment.stars;
+            }, 0);
+    
+            return (sum / comments.length).toFixed(2);
+        }
     }
 
     const getPercentage = (star: number) => {
-        const nr = comments.filter(comment => comment.stars === star).length;
+        if (comments.length === 0) {
+            return 0;
+        } else {
+            const nr = comments.filter((comment: IComment) => comment.stars === star).length;
 
-        return Math.round((nr / comments.length) * 100);
+            return Math.round((nr / comments.length) * 100);
+        }
     }
 
     const getWouldRecommended = () => {
-        return ((comments
-            .filter(comment => comment.stars > 2)
-            .length) / comments.length * 100).toFixed(2);
+        if (comments.length === 0) {
+            return 0;
+        } else {
+            return ((comments
+                .filter((comment: IComment) => comment.stars > 2)
+                .length) / comments.length * 100).toFixed(2);
+        }
     }
 
     useEffect(() => {
-
+        getAllComments()
+            .then(comments => {
+                setComments(comments);
+            })
+        /*
+        getCommentsByCardId(cardDetails._id)
+            .then(comments => {
+                console.log('comments = ', comments)
+                setComments(comments);
+            })
+        */
     }, []);
 
     return (
@@ -208,7 +196,7 @@ const Rating = ({cardDetails} : RatingProps) => {
                 </Col>
             </RatingWrapper>
             {
-                comments.map((comment, index) => {
+                comments.map((comment: IComment, index: number) => {
                     return (
                         <CommentItem>
                             <Col>
@@ -223,7 +211,6 @@ const Rating = ({cardDetails} : RatingProps) => {
                                 <CommentMessage>{comment.message}</CommentMessage>
                                 <WasThisHelpful>
                                     Was this review helpful to you?
-                                    
                                     <Form>
                                         <Form.Check
                                             custom
@@ -239,7 +226,6 @@ const Rating = ({cardDetails} : RatingProps) => {
                                         />
                                     </Form>
                                 </WasThisHelpful>
-
                             </Col>
                         </CommentItem>
                     )
@@ -247,6 +233,8 @@ const Rating = ({cardDetails} : RatingProps) => {
             }
             <RatingModal
                 cardDetails={cardDetails}
+                comments={comments}
+                setComments={setComments}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />

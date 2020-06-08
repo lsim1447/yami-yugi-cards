@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'react-client/build')));
 
 app.use(/^\/(?!api).*/, function(req, res) {
-  res.sendFile(path.join(__dirname + '/react-client/build/index.html'));
+    res.sendFile(path.join(__dirname + '/react-client/build/index.html'));
 });
 
 app.use(express.json());
@@ -27,9 +27,11 @@ connection.once('open', () => {
 
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
+const commentsRouter = require('./routes/comments');
 
 app.use('/api/users', usersRouter);
 app.use('/api/cards', cardsRouter);
+app.use('/api/comments', commentsRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

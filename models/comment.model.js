@@ -10,6 +10,7 @@ const commentSchema = new Schema({
     stars: { type: Number, required: true },
     title: { type: String, required: true },
     username: { type: String, required: true },
+    votes: { type: Array, required: true },
 }, {
     timestamps: true,
 });

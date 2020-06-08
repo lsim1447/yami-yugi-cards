@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
+import { UserContext } from "../../contexts/UserContext";
 import { ICardDetails } from '../models/Cards';
-import { IComment } from '../models/Comment';
+import { IComment, IVote } from '../models/Comment';
 import RatingModal from '../modals/RatingModal';
 import {
+    deleteCommentById,
     getAllComments,
-    getCommentsByCardId
+    getCommentsByCardId,
+    updateComment
 } from '../../repositories/CommentRepository';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const RatingWrapper = styled(Row) `
     border-top: 1px solid #D3D3D3;
@@ -65,6 +70,15 @@ const CommentUsername = styled.p `
     padding-top: 12px;
 `;
 
+const RemoveComment = styled.p `
+    font-weight: 400;
+    font-size: 16px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
 const CommentMessage = styled.p `
     border-bottom: 1px solid #D3D3D3;
     font-size: 16px;
@@ -77,14 +91,77 @@ const WasThisHelpful = styled.div `
     padding: 12px 24px;
 `;
 
-type RatingProps = {
+const NoCommentsWrapper = styled(Row) `
+    border-bottom: 1px solid #D3D3D3;
+    margin-bottom: 24px;
+`;
+
+const NoCommentsParagraph = styled.p `
+    font-size: 36px;
+    font-weight: 300;
+    padding-bottom: 12px;
+    text-align: center;
+    width: 100%;
+`;
+
+const ArrowTopLeft = styled.img `
+    background-color: transparent;
+    height: 40px;
+    width: 40px;
+`;
+
+const BeTheFirst = styled.span `
+    &:hover {
+        color: #007BFF;
+    }
+`;
+
+type RatingsAndReviewsProps = {
     cardDetails: ICardDetails
 }
 
-const Rating = ({cardDetails} : RatingProps) => {
+const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
     const [modalShow, setModalShow] = useState(false);
-    const [comments, setComments] = useState([]);
-    
+    let [comments, setComments] = useState<IComment[]>([]);
+    const { user, setUser } = useContext(UserContext);
+
+    const checkBoxValueChange = (comment: IComment, type: string) => {
+        let myVote = comment.votes.filter((vote: IVote) => vote.email === user.email);
+
+        if (!myVote.length) {
+            comment.votes.push({
+                email: user.email,
+                isHelpful: type === 'yes'
+            });
+        } else {
+            comment.votes = comment.votes.map((vote: IVote) => {
+                if (vote.email === user.email) {
+                    return {
+                        email: vote.email,
+                        isHelpful: type === 'yes'
+                    }
+                } else {
+                    return vote;
+                }
+            }) 
+        }
+
+        const updatedComments: IComment[] = comments.map((c: IComment) => {
+            if (c._id === comment._id) {
+                return comment;
+            } else {
+                return c;
+            }
+        });
+
+        updateComment(comment)
+            .then(response => {
+                //console.log('response = ', response);
+            })
+
+        setComments(updatedComments);
+    }
+
     const getAvgPercentage = () => {
         if (comments.length === 0) {
             return 0;
@@ -117,19 +194,60 @@ const Rating = ({cardDetails} : RatingProps) => {
         }
     }
 
+    const isCheckBoxChecked = (comment: IComment, type: string) => {
+        if (type === 'yes') {
+            return comment.votes.some((vote :IVote) => vote.email === user.email && vote.isHelpful);
+        } else {
+            return comment.votes.some((vote :IVote) => vote.email === user.email && !vote.isHelpful);
+        }
+    }
+
+    const isCheckboxDisabled = (comment: IComment, type: string) => {
+        if (type === 'yes') {
+            return comment.votes.some((vote: IVote) => vote.email === user.email && vote.isHelpful);
+        } else {
+            return comment.votes.some((vote: IVote) => vote.email === user.email && !vote.isHelpful);
+        }
+    }
+
+    const getNrOfVotes = (comment: IComment, isHelpful: boolean) => {
+        return comment.votes.filter((vote: IVote) => vote.isHelpful === isHelpful).length;
+    }
+
+    const removeComment = (comment: IComment) => {
+        confirmAlert({
+            title: 'Confirmation',
+            message: 'Are you sure you want to remove this comment?',
+            buttons: [
+              {
+                label: 'Yes, I want to remove it.',
+                onClick: () => {
+                    deleteCommentById(comment._id)
+                        .then(response => {
+                            console.log('The comment has been removed successfully.');
+                            comments = comments.filter((c: IComment) => c._id !== comment._id);
+                            setComments(comments);
+                        })
+                }
+              },
+              {
+                label: "No, I don't want to remove it.",
+                onClick: () => {
+                    
+                }
+              }
+            ]
+          });
+    }
+
     useEffect(() => {
-        getAllComments()
-            .then(comments => {
-                setComments(comments);
-            })
-        /*
-        getCommentsByCardId(cardDetails._id)
-            .then(comments => {
-                console.log('comments = ', comments)
-                setComments(comments);
-            })
-        */
-    }, []);
+        if (cardDetails && cardDetails._id) {
+            getCommentsByCardId(cardDetails._id)
+                .then(comments => {
+                    setComments(comments);
+                })
+        }
+    }, [cardDetails]);
 
     return (
         <div>
@@ -206,6 +324,11 @@ const Rating = ({cardDetails} : RatingProps) => {
                                 }
                                 <CommentDate>{comment.date}</CommentDate>
                                 <CommentUsername>{comment.username}</CommentUsername>
+                                {
+                                    (user && user.email === comment.email) ?
+                                        <RemoveComment onClick={() => removeComment(comment)}> Remove your comment</RemoveComment> :
+                                        null
+                                }
                             </Col>
                             <Col>
                                 <CommentMessage>{comment.message}</CommentMessage>
@@ -213,16 +336,22 @@ const Rating = ({cardDetails} : RatingProps) => {
                                     Was this review helpful to you?
                                     <Form>
                                         <Form.Check
+                                            checked={isCheckBoxChecked(comment, 'yes')}
                                             custom
-                                            type={'checkbox'}
-                                            label={`Yes`}
+                                            disabled={isCheckboxDisabled(comment, 'yes')}
                                             id={`${index}-yes`}
+                                            label={`Yes (${getNrOfVotes(comment, true)})`}
+                                            onClick={(event: any) => checkBoxValueChange(comment, 'yes')}
+                                            type={'checkbox'}
                                         />
                                         <Form.Check
+                                            checked={isCheckBoxChecked(comment, 'no')}
                                             custom
-                                            type={'checkbox'}
-                                            label={`No`}
+                                            disabled={isCheckboxDisabled(comment, 'no')}
                                             id={`${index}-no`}
+                                            label={`No (${getNrOfVotes(comment, false)})`}
+                                            onClick={(event: any) => checkBoxValueChange(comment, 'no')}
+                                            type={'checkbox'}
                                         />
                                     </Form>
                                 </WasThisHelpful>
@@ -230,6 +359,18 @@ const Rating = ({cardDetails} : RatingProps) => {
                         </CommentItem>
                     )
                 })
+            }
+            {
+                comments.length ?
+                    null :
+                    <NoCommentsWrapper>
+                        <NoCommentsParagraph>
+                            There are no comments yet.
+                            <BeTheFirst onClick={() => setModalShow(true)}> Be the first to comment</BeTheFirst>
+                            <ArrowTopLeft src="/images/diag-arrow-left.png" />
+                        </NoCommentsParagraph>
+                    </NoCommentsWrapper>
+
             }
             <RatingModal
                 cardDetails={cardDetails}
@@ -242,4 +383,4 @@ const Rating = ({cardDetails} : RatingProps) => {
     );
 }
 
-export default Rating;
+export default RatingsAndReviews;

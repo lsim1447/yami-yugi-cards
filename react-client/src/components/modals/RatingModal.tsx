@@ -39,11 +39,16 @@ function RatingModal(props: RatingModalProps) {
     newComment.message = commentMsg;
     newComment.stars = Number(stars);
     newComment.title = title;
+    newComment.username = userName;
 
     saveComment(newComment)
       .then(savedComment => {
         comments.push(savedComment)
         setComments(comments);
+        setEmail('');
+        setStars('5');
+        setTitle('');
+        setCommentMsg('');
         onHide(true);
       })
       .catch(error => {
@@ -69,6 +74,7 @@ function RatingModal(props: RatingModalProps) {
               onChange={(event) => setTitle(event.target.value)}
               value={title}
               placeholder="Type here the title"
+              required
             />
           </Form.Group>
           <Form.Group controlId="formEmail">
@@ -79,6 +85,7 @@ function RatingModal(props: RatingModalProps) {
               type="email"
               value={email}
               placeholder="Enter email"
+              required
             />
           </Form.Group>
 
@@ -89,6 +96,7 @@ function RatingModal(props: RatingModalProps) {
                 disabled
                 value={userName}
                 placeholder="Type here your username"
+                required
               />
             </Form.Group>
 
@@ -115,6 +123,7 @@ function RatingModal(props: RatingModalProps) {
               onChange={(event) => setCommentMsg(event.target.value)}
               value={commentMsg}
               placeholder="Type here your opinion"
+              required
             />
           </Form.Group>
 

@@ -9,7 +9,7 @@ import { Breadcrumb, Button, Card, Carousel, Col, Container, Form, Image, Jumbot
 import { ICardDetails } from '../components/models/Cards';
 import { getCardById } from '../repositories/CardRepository';
 import Actors from '../components/external/Actors';
-import Rating from '../components/external/Rating';
+import RatingsAndReviews from '../components/external/RatingsAndReviews';
 import { DEFAULT_CARD_VALUE} from '../components/models/Cards';
 import { getInitialCardList } from '../components/models/Cards';
 import {
@@ -317,7 +317,7 @@ function SimpleProductPage(props: any) {
                 gif2_url="/gifs/call-farao.gif"
             />
             <Actors />
-            <Rating cardDetails={cardDetails}/>
+            <RatingsAndReviews cardDetails={cardDetails}/>
         </SPPWrapper>
     );
 }

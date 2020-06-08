@@ -1,3 +1,9 @@
+export interface IVote
+{
+    email: string,
+    isHelpful: boolean
+} 
+
 export interface IComment
 {
     _id: string,
@@ -8,6 +14,7 @@ export interface IComment
     stars: number,
     title: string,
     username: string,
+    votes: Array<IVote>
 }
 
 export const DEFAULT_COMMENT_VALUE: IComment = {
@@ -19,4 +26,5 @@ export const DEFAULT_COMMENT_VALUE: IComment = {
     stars: 5,
     title: 'This is a title.',
     username: "Username",
+    votes: [],
 }

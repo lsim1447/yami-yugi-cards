@@ -13,8 +13,8 @@ router.route('/add').post((request, response) => {
     const email = request.body.email;
     const password = request.body.password;
     const deck = request.body.deck;
-    const newUser = new User({accountBalance, username, email, password, deck});
-    
+    const newUser = new User({ accountBalance, username, email, password, deck });
+
     newUser.save()
         .then(() => response.json('User has been created successfully!'))
         .catch((error) => response.status(400).json('Error: ' + error));
@@ -36,10 +36,10 @@ router.route('/update/:id').post((request, response) => {
     User.findById(request.params.id)
         .then((user) => {
             user.accountBalance = user.accountBalance - request.body.accountBalance,
-            user.username = request.body.username;
+                user.username = request.body.username;
             user.password = request.body.password;
             user.deck = request.body.deck;
-            
+
             user.save()
                 .then(() => response.json('User has been updated!'))
                 .catch((error) => response.status(400).json('Error: ' + error));
@@ -50,12 +50,12 @@ router.route('/update/:id').post((request, response) => {
 router.route('/auth').post((request, response) => {
     const email = request.body.email;
     const password = request.body.password;
-    
-    User.find({email: email, password: password}, function(error, user) {
+
+    User.find({ email: email, password: password }, function(error, user) {
         if (error) {
             response.send('Error: ' + error);
-        }    
-        
+        }
+
         response.json(user);
     });
 });

@@ -25,6 +25,25 @@ export const saveComment = (newComment: IComment) => {
         message: newComment.message,
         stars: newComment.stars,
         title: newComment.title,
-        username: newComment.username
+        username: newComment.username,
+        votes: newComment.votes,
     }).then(response => response.data);
+}
+
+export const updateComment = (comment: IComment) => {
+    return axios.post(`/api/comments/update/${comment._id}`, {
+        cardId: comment.cardId,
+        date: comment.date,
+        email: comment.email,
+        message: comment.message,
+        stars: comment.stars,
+        title: comment.title,
+        username: comment.username,
+        votes: comment.votes,
+    }).then(response => response.data);
+}
+
+export const deleteCommentById = (commentId: string) => {
+    return axios.delete(`/api/comments/${commentId}`)
+        .then(response => response.data);
 }

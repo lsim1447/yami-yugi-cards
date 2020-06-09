@@ -1,15 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Button, Card, Col, Carousel, Form, Modal, Tabs, Tab } from 'react-bootstrap';
+import { Button, Col, Form, Modal } from 'react-bootstrap';
 import { ICardDetails } from '../models/Cards';
 import  { UserContext }  from "../../contexts/UserContext";
 import { IComment, DEFAULT_COMMENT_VALUE } from '../models/Comment';
-import { saveComment } from '../../repositories/CommentRepository';
-import styled from 'styled-components';
-
+import {
+  saveComment,
+  updateComment
+} from '../../repositories/CommentRepository';
 
 type RatingModalProps = {
   cardDetails?: ICardDetails,
   comments: IComment[],
+  commentToModify?: IComment,
+  setCommentToModify?: any,
   setComments: any,
   onHide: any,
   show: boolean,
@@ -18,11 +21,13 @@ type RatingModalProps = {
 function RatingModal(props: RatingModalProps) {
   const {
     cardDetails,
-    comments,
+    commentToModify,
+    setCommentToModify,
     setComments,
     onHide,
     show
   } = props;
+  let { comments } = props;
   
   const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState(user.email);
@@ -33,6 +38,8 @@ function RatingModal(props: RatingModalProps) {
 
   const sendComment = () => {
     const newComment: IComment = DEFAULT_COMMENT_VALUE;
+
+    newComment._id = commentToModify ? commentToModify._id : '';
     newComment.cardId = (cardDetails && cardDetails._id) ? cardDetails._id : '5ebc4b9b221c162fa4dcaeb3';
     newComment.date = new Date();
     newComment.email = email;
@@ -40,26 +47,52 @@ function RatingModal(props: RatingModalProps) {
     newComment.stars = Number(stars);
     newComment.title = title;
     newComment.username = userName;
+    newComment.votes = commentToModify ? commentToModify.votes : [];
 
-    saveComment(newComment)
-      .then(savedComment => {
-        comments.push(savedComment)
-        setComments(comments);
-        setEmail('');
-        setStars('5');
-        setTitle('');
-        setCommentMsg('');
-        onHide(true);
-      })
-      .catch(error => {
-        console.log('Error: ', error);
-      })
+    if (commentToModify && commentToModify._id) {
+      updateComment(newComment)
+        .then(response => {
+          comments = comments.map((c: IComment) => {
+            if (newComment._id === c._id) {
+              c.message = newComment.message;
+              c.title = newComment.title;
+              c.stars = newComment.stars;  
+            }
+            return c;
+          })
+          setCommentToModify(null);
+          setComments(comments);
+          onHide(true);
+        })
+    } else {
+      saveComment(newComment)
+        .then(savedComment => {
+          comments.push(savedComment)
+          setComments(comments);
+          setEmail('');
+          setStars('5');
+          setTitle('');
+          setCommentMsg('');
+          onHide(true);
+        })
+        .catch(error => {
+          console.log('Error: ', error);
+        })
+    }
   }
 
   useEffect(() => {
     setEmail(user.email);
     setUserName(user.username);
   }, [user]);
+  
+  useEffect(() => {
+    if (commentToModify) {
+      setCommentMsg(commentToModify.message);
+      setTitle(commentToModify.title);
+      setStars(commentToModify.stars + '');
+    }
+  }, [commentToModify]);
 
   return (
     <Modal animation={true} show={show} onHide={onHide}>

@@ -7,10 +7,10 @@ import { IComment, IVote } from '../models/Comment';
 import RatingModal from '../modals/RatingModal';
 import {
     deleteCommentById,
-    getAllComments,
     getCommentsByCardId,
     updateComment
 } from '../../repositories/CommentRepository';
+import { isUserSignedIn } from '../../services/UserService';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -116,6 +116,13 @@ const BeTheFirst = styled.span `
     }
 `;
 
+const EditIcon = styled.i `
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+`;
+
 type RatingsAndReviewsProps = {
     cardDetails: ICardDetails
 }
@@ -123,43 +130,52 @@ type RatingsAndReviewsProps = {
 const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
     const [modalShow, setModalShow] = useState(false);
     let [comments, setComments] = useState<IComment[]>([]);
+    const [commentToModify, setCommentToModify] = useState<IComment>();
     const { user, setUser } = useContext(UserContext);
 
     const checkBoxValueChange = (comment: IComment, type: string) => {
-        let myVote = comment.votes.filter((vote: IVote) => vote.email === user.email);
+        if (isUserSignedIn()) {
+            let myVote = comment.votes.filter((vote: IVote) => vote.email === user.email);
 
-        if (!myVote.length) {
-            comment.votes.push({
-                email: user.email,
-                isHelpful: type === 'yes'
-            });
-        } else {
-            comment.votes = comment.votes.map((vote: IVote) => {
-                if (vote.email === user.email) {
-                    return {
-                        email: vote.email,
-                        isHelpful: type === 'yes'
-                    }
-                } else {
-                    return vote;
-                }
-            }) 
-        }
-
-        const updatedComments: IComment[] = comments.map((c: IComment) => {
-            if (c._id === comment._id) {
-                return comment;
+            if (!myVote.length) {
+                comment.votes.push({
+                    email: user.email,
+                    isHelpful: type === 'yes'
+                });
             } else {
-                return c;
+                comment.votes = comment.votes.map((vote: IVote) => {
+                    if (vote.email === user.email) {
+                        return {
+                            email: vote.email,
+                            isHelpful: type === 'yes'
+                        }
+                    } else {
+                        return vote;
+                    }
+                }) 
             }
-        });
 
-        updateComment(comment)
-            .then(response => {
-                //console.log('response = ', response);
-            })
+            const updatedComments: IComment[] = comments.map((c: IComment) => {
+                if (c._id === comment._id) {
+                    return comment;
+                } else {
+                    return c;
+                }
+            });
 
-        setComments(updatedComments);
+            updateComment(comment)
+                .then(response => {
+                    //console.log('response = ', response);
+                })
+
+            setComments(updatedComments);
+        }
+        
+    }
+
+    const editExistingComment = (comment: IComment) => {
+        setCommentToModify(comment);
+        setModalShow(true);
     }
 
     const getAvgPercentage = () => {
@@ -331,6 +347,11 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
                                 }
                             </Col>
                             <Col>
+                                {
+                                    (user && user.email === comment.email) ?
+                                        <EditIcon className="fa fa-edit" onClick={() => editExistingComment(comment)}></EditIcon> :
+                                        null
+                                }
                                 <CommentMessage>{comment.message}</CommentMessage>
                                 <WasThisHelpful>
                                     Was this review helpful to you?
@@ -375,6 +396,8 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
             <RatingModal
                 cardDetails={cardDetails}
                 comments={comments}
+                commentToModify={commentToModify}
+                setCommentToModify={setCommentToModify}
                 setComments={setComments}
                 show={modalShow}
                 onHide={() => setModalShow(false)}

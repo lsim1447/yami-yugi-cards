@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { CardContext } from "../../contexts/CardContext";
+import React, { useState } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import styled from 'styled-components';
 import AnimateHeight from 'react-animate-height';
@@ -67,8 +66,6 @@ function AutoComplete(props: any) {
     const [cardText, setCardText] = useState('');
     const [myHeight, setMyHeight] = useState<any>('');
     const [selectedCard, setSelectedCard] = useState(DEFAULT_CARD_VALUE);
-    const { allCards, setAllCards } = useContext(CardContext);
-    const { cards, setCards } = useContext(CardContext);
     const MAX_NR_OF_MATCHES_TO_SHOW = 2;
 
     const _handleEnterPress = (error: any) => {

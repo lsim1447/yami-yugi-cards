@@ -1,10 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Alert, Breadcrumb, Button, Card, CardDeck, Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import React from 'react';
+import { Alert, Breadcrumb, Col, Jumbotron, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-
-const ReadMoreWrapper = styled.div `
-    
-`;
 
 const CustomCol = styled(Col) `
     border-left: 1px solid #D3D3D3;

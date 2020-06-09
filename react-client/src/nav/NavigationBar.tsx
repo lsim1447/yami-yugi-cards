@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import  { CardContext }  from "./../contexts/CardContext";
 import  { CheckoutContext }  from "./../contexts/CheckoutContext";
 import AutoComplete from './../components/internal/AutoComplete';
@@ -30,10 +30,10 @@ const ShoppingCartWrapper = styled.div `
 `;
 
 function NavigationBar(props: any) {
-  const { cards, setCards } = useContext(CardContext);
-  const { cartItems, setCartItems } = useContext(CardContext);
+  const { cards } = useContext(CardContext);
+  const { cartItems } = useContext(CardContext);
   const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
-  const [isUserLoggedIn, setUserLoggedIn] = useState(isUserSignedIn);
+  const [ isUserLoggedIn ] = useState(isUserSignedIn);
 
   const signOut = () => {
     userSignOut();

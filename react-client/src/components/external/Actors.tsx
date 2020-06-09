@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Col, Image, ProgressBar, Row } from 'react-bootstrap';
+import { Image, Row } from 'react-bootstrap';
 
 const ActorsWrapper = styled(Row) `
     border-top: 1px solid #D3D3D3;

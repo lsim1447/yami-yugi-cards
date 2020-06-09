@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
+import { Alert, Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
 import { ICardDetails } from '../models/Cards';
 import { IComment, IVote } from '../models/Comment';
@@ -131,7 +131,7 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
     const [modalShow, setModalShow] = useState(false);
     let [comments, setComments] = useState<IComment[]>([]);
     const [commentToModify, setCommentToModify] = useState<IComment>();
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const checkBoxValueChange = (comment: IComment, type: string) => {
         if (isUserSignedIn()) {
@@ -256,6 +256,12 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
           });
     }
 
+    const writeReview = () => {
+        if (isUserSignedIn()) {
+            setModalShow(true);
+        }
+    }
+
     useEffect(() => {
         if (cardDetails && cardDetails._id) {
             getCommentsByCardId(cardDetails._id)
@@ -285,11 +291,18 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
                     </Row>
                     <Row>
                         <WriteReviewButton
-                            onClick={() => setModalShow(true)}
+                            onClick={() => writeReview()}
                             variant="outline-primary"
                         >
                             Write a Review
                         </WriteReviewButton>
+                        {
+                            isUserSignedIn() ?
+                                null :
+                                <Alert style={{width: "100%", marginRight: "24px", textAlign: "center"}} variant={'danger'}>
+                                    You must be signed in to be able to write a review.
+                                </Alert>
+                        }
                     </Row>
                 </Col>
                 <Col style={{borderLeft: "1px solid #D3D3D3"}}>

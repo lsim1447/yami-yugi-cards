@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { UserContext } from "../contexts/UserContext";
 import { Button, Col, Row } from 'react-bootstrap';
@@ -114,9 +114,8 @@ const TotalPrice = styled.div `
 `;
 
 function Checkout() {
-  const { allCards, setAllCards } = useContext(CardContext);
   const { cartItems, setCartItems } = useContext(CardContext);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const getTotalPrice = () => {
     if (cartItems && cartItems.length) {

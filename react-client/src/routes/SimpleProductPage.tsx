@@ -5,7 +5,7 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 import  { CardContext }  from "../contexts/CardContext";
 import { CheckoutContext } from "../contexts/CheckoutContext";
 import  { UserContext }  from "../contexts/UserContext";
-import { Breadcrumb, Button, Card, Carousel, Col, Container, Form, Image, Jumbotron, Row } from 'react-bootstrap';
+import { Breadcrumb, Button, Card, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
 import { ICardDetails } from '../components/models/Cards';
 import { getCardById } from '../repositories/CardRepository';
 import Actors from '../components/external/Actors';
@@ -99,10 +99,9 @@ const RecommandationWrapper = styled.div `
 
 function SimpleProductPage(props: any) {
     const [addToBagButtonText, setAddToBagButtonText] = useState('ADD TO BAG');
-    const { allCards, setAllCards } = useContext(CardContext);
     const { cartItems, setCartItems } = useContext(CardContext);
     const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [cardDetails, setCardDetails] = useState(DEFAULT_CARD_VALUE);
     const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
     const cardId = (props.match.params && props.match.params.id) ? props.match.params.id : '5ebc4aad221c162fa4dcae6d';

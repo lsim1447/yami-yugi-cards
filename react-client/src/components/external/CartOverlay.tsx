@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Button, Col, Image, Row } from 'react-bootstrap';
 import  { CardContext }  from "../../contexts/CardContext";
 import  { CheckoutContext }  from "../../contexts/CheckoutContext";
-import  { UserContext }  from "../../contexts/UserContext";
 import { ICardDetails } from '../../components/models/Cards';
 
 const CustomRow = styled(Row) `
@@ -83,9 +82,8 @@ const TotalPriceWrapper = styled.div `
 `;
 
 const CartOverlay = () => {
-    const { cartItems, setCartItems } = useContext(CardContext);
+    const { cartItems } = useContext(CardContext);
     const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
-    const { user, setUser } = useContext(UserContext);
 
     const getTotalPrice = () => {
         const totalPrice = cartItems.reduce((accumulator, cartItem) => {

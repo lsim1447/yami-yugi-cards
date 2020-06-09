@@ -1,21 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Breadcrumb, Col, Row } from 'react-bootstrap';
 import { SIDE_BAR_OPTIONS_API } from '../constants';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
 import CustomFlipPagination from '../components/external/CustomFlipPagination';
 import styled from 'styled-components';
-
-const TitleWrapper = styled.div `
-    background-color: black;
-    color: white;
-    font-family: "Courier New";
-    font-size: 64px;
-    font-weight: 600;
-    padding: 24px;
-    text-align: center;
-    width: 100%;
-`;
 
 const CustomBreadcrumb = styled(Breadcrumb) `
   ol {

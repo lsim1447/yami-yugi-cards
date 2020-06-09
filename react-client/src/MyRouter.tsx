@@ -8,7 +8,6 @@ import Home from './routes/Home';
 import MyDeck from './routes/MyDeck';
 import PageNotFound from './routes/PageNotFound';
 import ReadMore from './routes/ReadMore';
-import Test from './routes/Test';
 import SignIn from './routes/SignIn';
 import SimpleProductPage from './routes/SimpleProductPage';
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import {Col, Row } from 'react-bootstrap';
 import { UserContext } from "../contexts/UserContext";
 import { FacebookButton } from '../components/internal/Buttons';
@@ -206,19 +206,14 @@ const OverlayRight = styled(CustomOverlayPanel) `
     color: black;
     right: 0;
 	transform: translateX(0);
-`
-
-const SocialContainer = styled.div `
-    margin: 20px 0;
 `;
 
 function SignIn() {
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
 

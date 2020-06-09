@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { CardContext } from "../../contexts/CardContext";
-import { Button, Card, Carousel, Modal, Tabs, Tab } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Card, Carousel, Modal, Tabs, Tab } from 'react-bootstrap';
 import styled from 'styled-components';
 import { ICardDetails } from '../models/Cards';
 import YuGiOhCard from '../external/YuGiOhCard';
@@ -25,32 +24,12 @@ type CartModalProps = {
 function CardModal(props: CartModalProps) {
   const {
     card,
-    isAddToBagButtonDisabled,
     onHide,
     show
   } = props;
   
   const [isCardAlreadyAdded, setIsCardAlreadyAdded] = useState<boolean>(false);
-  const { cartItems, setCartItems } = useContext(CardContext);
   const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
-
-  const addToCart = (card?: ICardDetails) => {
-    let cardIDs = localStorage.getItem('card_ids');
-    const card_id = card ? card._id : '';
-
-    if (cardIDs) {
-      cardIDs = cardIDs + '|' + card_id;
-      localStorage.setItem('card_ids', cardIDs);
-      setCartItems([...cartItems, card]);
-    } else {
-      localStorage.setItem('card_ids', card_id);
-      if (card) {
-        setCartItems([...cartItems, card]);
-      }
-    }
-
-    onHide(false);
-  }
 
   useEffect(() => {
     const cardIDs = localStorage.getItem('card_ids');

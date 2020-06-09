@@ -29,7 +29,7 @@ function RatingModal(props: RatingModalProps) {
   } = props;
   let { comments } = props;
   
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [email, setEmail] = useState(user.email);
   const [stars, setStars] = useState('5');
   const [title, setTitle] = useState('');

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import { Button, Card, CardDeck, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import Actors from '../components/external/Actors';
 import GifGrid from '../components/external/GifGrid';

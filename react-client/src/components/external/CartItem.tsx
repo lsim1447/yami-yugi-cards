@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { CardContext } from "../../contexts/CardContext";
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -79,7 +79,9 @@ const CartItem = ({cartItem } : CartItemProps) => {
                     <img
                         width="100%"
                         onClick={() => setModalShow(true)}
-                        src={(cartItem.card_images && cartItem.card_images.length) ? cartItem.card_images[0].image_url : DEFAULT_CARD_VALUE.card_images[0].image_url} />
+                        src={(cartItem.card_images && cartItem.card_images.length) ? cartItem.card_images[0].image_url : DEFAULT_CARD_VALUE.card_images[0].image_url} 
+                        alt=""
+                    />
                 </Col>
                 <Col sm={3}>
                     <HeaderWrapper> {cartItem.name} </HeaderWrapper>

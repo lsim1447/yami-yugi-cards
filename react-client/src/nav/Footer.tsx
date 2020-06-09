@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import { 
     FooterDistributed,
     FooterLeft,
@@ -15,7 +15,7 @@ function Footer() {
   return (
     <FooterDistributed>
         <FooterLeft>
-            <img src="/milleniumIcon.png" />
+            <img src="/milleniumIcon.png" alt="" />
             <h3>About the <span>Yami Yu-gi-oh Cards</span></h3>
             <FooterLink>
                 <a href="/"> Home |</a>

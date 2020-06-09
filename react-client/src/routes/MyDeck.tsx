@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { CardContext } from "../contexts/CardContext";
 import { UserContext } from "../contexts/UserContext";
 import {  CardDeck, Col, Row } from 'react-bootstrap';
 import '../special-styles/sidebar-left.css'
@@ -21,10 +20,10 @@ import {
 } from '../services/UserService';
 
 function MyDeck() {
-    const [nrOfCardsToShow, setNrOfCardsToShow] = useState(20);
+    const [nrOfCardsToShow] = useState(20);
     const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const getAccountsValue = () => {
         return user ? user.accountBalance.toFixed(2) : 0;

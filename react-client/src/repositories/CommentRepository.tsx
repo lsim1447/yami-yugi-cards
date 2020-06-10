@@ -17,6 +17,12 @@ export const getCommentsByCardId = (cardId: string) => {
     }).then(response => response.data);
 }
 
+export const getCommentsByUserEmail = (email: string) => {
+    return axios.post(`/api/comments/findByUserEmail`, {
+        email: email
+    }).then(response => response.data);
+}
+
 export const saveComment = (newComment: IComment) => {
     return axios.post(`/api/comments/add`, {
         cardId: newComment.cardId,

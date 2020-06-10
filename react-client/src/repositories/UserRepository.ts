@@ -21,8 +21,10 @@ export const getUserByEmailAndPassword = (email: string, password: string) => {
 export const updateUserById = (user: IUser) => {
     return axios.post(`/api/users/update/${user._id}`, {
             accountBalance: user.accountBalance,
+            address: user.address,
             username: user.username,
             password: user.password,
+            phoneNumber: user.phoneNumber,
             deck: user.deck
         }).then(response => response.data);
 }
@@ -30,9 +32,11 @@ export const updateUserById = (user: IUser) => {
 export const saveUser = (newUser: IUser) => {
     return axios.post(`/api/users/add`, {
             accountBalance: newUser.accountBalance,
+            address: newUser.address,
             username: newUser.username,
             email: newUser.email,
             password: newUser.password,
+            phoneNumber: newUser.phoneNumber,
             deck: newUser.deck
         }).then(response => response.data);
 }

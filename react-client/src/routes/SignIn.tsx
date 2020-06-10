@@ -210,9 +210,12 @@ const OverlayRight = styled(CustomOverlayPanel) `
 
 function SignIn() {
     const { setUser } = useContext(UserContext);
+    const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
-    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [userName, setUserName] = useState('');
+    
 
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
@@ -252,15 +255,21 @@ function SignIn() {
 
     const signUp = () => {
         const newUser = DEFAULT_USER_VALUE;
+        newUser.address = address;
         newUser.email = email;
         newUser.password = password;
+        newUser.phoneNumber = phoneNumber;
         newUser.username = userName;
 
+        console.log('usr = ', newUser);
+        
         saveUser(newUser)
             .then(response => {
-                setUserName('');
+                setAddress('');
                 setEmail('');
                 setPassword('');
+                setPhoneNumber('');
+                setUserName('');
 
                 if (signInButton && container) {
                     container.classList.remove("right-panel-active");
@@ -282,7 +291,9 @@ function SignIn() {
                         <CustomInput type="text" placeholder="Name" onChange={(e) => setUserName(e.target.value)} />
                         <CustomInput type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                         <CustomInput type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                        <Button onClick={() => signUp()}>Sign Up</Button>
+                        <CustomInput type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
+                        <CustomInput type="text" placeholder="Phone Number ex. +40 755 748 574" onChange={(e) => setPhoneNumber(e.target.value)} />
+                        <div onClick={() => signUp()}>Sign Up</div>
                     </CustomForm>
                 </SignUpFormContainer>
                 <SignInFormContainer className="sign-in-container">

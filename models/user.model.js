@@ -7,6 +7,10 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
+    address: {
+        type: String,
+        required: true
+    },
     username: {
         type: String,
         required: true,
@@ -28,12 +32,14 @@ const userSchema = new Schema({
         trim: true,
         minlength: 3
     },
-    deck: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Card"
-        }
-    ]
+    phoneNumber: {
+        type: String,
+        required: true
+    },
+    deck: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Card"
+    }]
 }, {
     timestamps: true,
 });

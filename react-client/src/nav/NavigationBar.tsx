@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react';
 import  { CardContext }  from "./../contexts/CardContext";
 import  { CheckoutContext }  from "./../contexts/CheckoutContext";
 import AutoComplete from './../components/internal/AutoComplete';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
 import CartOverlay from '../components/external/CartOverlay';
 import {
   isUserSignedIn,
   userSignOut
 } from '../services/UserService';
+import { UserContext } from '../contexts/UserContext';
 
 const NavBarImage = styled.img `
     max-width: 55px;
@@ -29,9 +30,24 @@ const ShoppingCartWrapper = styled.div `
   padding-left: 12px;
 `;
 
+const CustomNavigationDropDownItem = styled(NavDropdown.Item) `
+  text-align: center;
+
+  &:hover {
+    background-color: #E0E0E0;
+    text-decoration: underline;
+  }
+`;
+
+const UserName = styled.span `
+  padding-left: 8px;
+  font-weight: 700;
+`;
+
 function NavigationBar(props: any) {
   const { cards } = useContext(CardContext);
   const { cartItems } = useContext(CardContext);
+  const { user } = useContext(UserContext);
   const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
   const [ isUserLoggedIn ] = useState(isUserSignedIn);
 
@@ -61,30 +77,35 @@ function NavigationBar(props: any) {
                   placeholder={"Search"}
               />
             </Nav>
-            {
-              !isUserLoggedIn ?
-                <Nav.Link eventKey={4} href="/signin"> 
-                  <i
-                    style={{fontSize: "24px", paddingLeft: "12px"}}
-                    className="fa fa-user"
-                    aria-hidden="true"
-                  />
-                </Nav.Link>
+            <NavDropdown style={{paddingLeft: "12px"}} title="My Account" id="basic-nav-dropdown">
+              <CustomNavigationDropDownItem>
+                <i
+                  style={{fontSize: "24px"}}
+                  className="fa fa-user"
+                  aria-hidden="true"
+                /> 
+                <UserName>
+                  {user.username}
+                </UserName>
+              </CustomNavigationDropDownItem>
+              {
+                !isUserLoggedIn ?
+                  <CustomNavigationDropDownItem eventKey={4} href="/signin"> 
+                    Sign In
+                  </CustomNavigationDropDownItem>
                 : 
-                <Nav.Link
-                  style={{fontSize: "14px"}}
-                  eventKey={4}
-                  href="/signin"
-                  onClick={() => signOut()}
-                >
-                  Sign out
-                </Nav.Link>
-            }
-            
-            <Nav.Link eventKey={5} onClick={() => setShowCartOverlay(true)}>
+                  <div>
+                    <CustomNavigationDropDownItem href="/profile"> Profile</CustomNavigationDropDownItem>
+                    <CustomNavigationDropDownItem href="/orders"> Orders</CustomNavigationDropDownItem>
+                    <NavDropdown.Divider />
+                    <CustomNavigationDropDownItem href="/signin" onClick={() => signOut()}>Sign Out</CustomNavigationDropDownItem>
+                  </div>
+              }
+            </NavDropdown>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => setShowCartOverlay(true)}>
               <ShoppingCartWrapper>
                 <i className="fa fa-shopping-cart"></i>
-                <sup style={{fontSize: "16px"}}> {cartItems.length} </sup>
+                <sup style={{fontSize: "14px"}}> {cartItems.length} </sup>
               </ShoppingCartWrapper>
             </Nav.Link>
           </Nav>

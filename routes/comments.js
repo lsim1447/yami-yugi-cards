@@ -67,4 +67,16 @@ router.route('/findByCardId').post((request, response) => {
     });
 });
 
+router.route('/findByUserEmail').post((request, response) => {
+    const email = request.body.email;
+
+    Comment.find({ email: email }, function(error, comments) {
+        if (error) {
+            response.send('Error: ' + error);
+        }
+
+        response.json(comments);
+    });
+});
+
 module.exports = router;

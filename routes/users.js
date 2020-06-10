@@ -9,11 +9,13 @@ router.route('/').get((request, response) => {
 
 router.route('/add').post((request, response) => {
     const accountBalance = request.body.accountBalance;
+    const address = request.body.address;
     const username = request.body.username;
     const email = request.body.email;
     const password = request.body.password;
+    const phoneNumber = request.body.phoneNumber;
     const deck = request.body.deck;
-    const newUser = new User({ accountBalance, username, email, password, deck });
+    const newUser = new User({ accountBalance, address, username, email, password, phoneNumber, deck });
 
     newUser.save()
         .then(() => response.json('User has been created successfully!'))
@@ -35,9 +37,11 @@ router.route('/:id').delete((request, response) => {
 router.route('/update/:id').post((request, response) => {
     User.findById(request.params.id)
         .then((user) => {
-            user.accountBalance = user.accountBalance - request.body.accountBalance,
-                user.username = request.body.username;
+            user.accountBalance = user.accountBalance - request.body.accountBalance;
+            user.address = request.body.address;
+            user.username = request.body.username;
             user.password = request.body.password;
+            user.phoneNumber = request.body.phoneNumber;
             user.deck = request.body.deck;
 
             user.save()

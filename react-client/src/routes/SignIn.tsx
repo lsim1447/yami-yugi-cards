@@ -261,8 +261,6 @@ function SignIn() {
         newUser.phoneNumber = phoneNumber;
         newUser.username = userName;
 
-        console.log('usr = ', newUser);
-        
         saveUser(newUser)
             .then(response => {
                 setAddress('');
@@ -293,7 +291,7 @@ function SignIn() {
                         <CustomInput type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         <CustomInput type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
                         <CustomInput type="text" placeholder="Phone Number ex. +40 755 748 574" onChange={(e) => setPhoneNumber(e.target.value)} />
-                        <div onClick={() => signUp()}>Sign Up</div>
+                        <Button onClick={() => signUp()}>Sign Up</Button>
                     </CustomForm>
                 </SignUpFormContainer>
                 <SignInFormContainer className="sign-in-container">

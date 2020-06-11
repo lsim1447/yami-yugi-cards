@@ -11,6 +11,13 @@ const PriceContainer = styled.p `
   font-style: italic;
 `;
 
+const ClickOntheSpp = styled.div `
+  padding-bottom: 18px;
+  padding-top: 18px;
+  text-align: center;
+  width: 100%;
+`;
+
 const YuGiOhCard = ({ id, card } : CardProps) => {
   const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
   const [cardDetails, setCardDetails] = useState(initialValue);
@@ -42,7 +49,11 @@ const YuGiOhCard = ({ id, card } : CardProps) => {
             onClick={() => navigateToSPP()}
           />
         </a>
-        
+        <ClickOntheSpp>
+          <i style={{fontSize: "18px"}} className="fa fa-arrow-up" aria-hidden="true"></i>
+          <span style={{paddingLeft: "8px", paddingRight: "8px"}}> Click on the image to navigate to the SPP </span>
+          <i style={{fontSize: "18px"}} className="fa fa-arrow-up" aria-hidden="true"></i>
+        </ClickOntheSpp>
         <Card.Footer>
           <PriceContainer>
             Price on Amazon: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $

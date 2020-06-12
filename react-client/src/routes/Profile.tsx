@@ -2,22 +2,24 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from "../contexts/UserContext";
 import { IComment, IVote } from '../components/models/Comment';
 import { ICardDetails } from '../components/models/Cards';
+import { getCommentsByUserEmail } from '../repositories/CommentRepository';
+import { findAllCardsByIds } from '../repositories/CardRepository';
 import {
-    getCommentsByUserEmail
-} from '../repositories/CommentRepository';
-import {
-    findAllCardsByIds
-} from '../repositories/CardRepository';
+    getUserByEmailAndPassword,
+    updateUserById
+} from '../repositories/UserRepository';
 import styled from 'styled-components';
-import { Col, Row } from 'react-bootstrap';
+import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
+import { IUser } from '../components/models/User';
 
 
 const ProfileWrapper = styled.div `
-    background-image: url(/images/ProfileBackground.jpg);
+    background: url(/images/ProfileBackground.jpg) fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
     font-family: "poppins", sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
@@ -298,6 +300,7 @@ const CustomButton = styled.button `
     cursor: pointer;
     font-family: "Bree Serif", serif;
     font-size: 1rem;
+    font-weight: 600;
     margin: 5px 2px;
     margin-bottom: 10px;
     outline: none;
@@ -429,12 +432,34 @@ const ReviewLikeWrapper = styled.p `
     border-top: 1px solid #D3D3D3;
     margin-top: 36px;
     padding-top: 36px;
+
+    i {
+        color: #E40046;
+        font-size: 22px;
+        margin-right: 6px;
+    }
+
+    sub {
+        font-size: 14px;
+    }
+`;
+
+const SavePasswordTitle = styled.p `
+    font-size: 24px;
+    font-weight: 600;
+    padding: 12px 18px 0px 18px;
 `;
 
 function Profile() {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [comments, setComments] = useState<IComment[]>([]);
     const [cards, setCards] = useState<ICardDetails[]>([]);
+    const [currentPassword, setCurrentPassword] = useState<string>('');
+    const [newPassword, setNewPassword] = useState<string>('');
+    const [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
+    const [isSomethingWrong, setIsSomethingWrong] = useState<boolean>(false);
+    const [isPasswordChangingWentWell, setIsPasswordChangingWentWell] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const changeTab = (panelIndex: number) => {
         const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
@@ -469,6 +494,44 @@ function Profile() {
         return  allNumberOfVotesOnUserComments ? 
             allNumberOfHelpfulVotes / allNumberOfVotesOnUserComments * 5 :
             0;
+    }
+
+    const changePassword = () => {
+        setIsSomethingWrong(false);
+        if (!currentPassword.length || !newPassword.length || !newPasswordRepeat.length) {
+            setErrorMessage('You must fill the input fields above before changing your password!')
+            setIsSomethingWrong(true);
+        } else if (newPassword !== newPasswordRepeat) {
+            setErrorMessage('The content of the new password fields must match!')
+            setIsSomethingWrong(true);
+        } else {
+            getUserByEmailAndPassword(user.email, currentPassword)
+                .then(response => {
+                    if (!response.length) {
+                        setErrorMessage('The current password is wrong!')
+                        setIsSomethingWrong(true);
+                    } else {
+                        const newUser: IUser = Object.create(user);
+                        newUser.password = newPassword;
+                        
+                        updateUserById(newUser)
+                            .then(response => {
+                                console.log(response);
+                                setCurrentPassword('');
+                                setNewPassword('');
+                                setNewPasswordRepeat('');
+
+                                setErrorMessage('Password has been updated successfully!');
+                                setIsPasswordChangingWentWell(true);
+
+                                setTimeout(() => {
+                                    setIsPasswordChangingWentWell(false);
+                                    setErrorMessage('');
+                                }, 3000);
+                            })
+                    }
+                })
+        }
     }
 
     useEffect(() => {
@@ -605,15 +668,15 @@ function Profile() {
                                                         <div>
                                                             <p>Your rated this card with:</p>
                                                             {
-                                                                [...Array(comment.stars)].map(element => <i className="fa fa-star"></i>)
+                                                                [...Array(comment.stars)].map(element => <i style={{color: "#E40046"}} className="fa fa-star"></i>)
                                                             }
                                                             <ReviewLikeWrapper>
-                                                                <i style={{fontSize: "26px", marginRight: "6px"}} className="fa fa-thumbs-up" aria-hidden="true">
+                                                                <i className="fa fa-thumbs-up" aria-hidden="true">
                                                                     <sub>
                                                                         {comment.votes.filter((vote: IVote) => vote.isHelpful).length}
                                                                     </sub>
                                                                 </i>
-                                                                <i style={{fontSize: "26px", marginLeft: "6px"}} className="fa fa-thumbs-down" aria-hidden="true">
+                                                                <i className="fa fa-thumbs-down" aria-hidden="true">
                                                                     <sub>
                                                                         {comment.votes.filter((vote: IVote) => !vote.isHelpful).length}
                                                                     </sub>
@@ -634,13 +697,40 @@ function Profile() {
                             <Tab className="tab">
                                 <h1> Account Settins </h1>
                                 <p>
-                                    The privacy policy is one of the most essential legal requirements for websites.
+                                    The <strong style={{fontSize: "16px"}}>privacy policy</strong> is one of the most essential legal requirements for websites.
                                     Even if you just have a small business or a blog with no income at all, you might be surprised to discover that you still need a privacy policy.
                                     Basically, if your website collects personal data, you need a privacy policy that informs your users about this according to privacy laws in most jurisdictions, including the EU and the US.
                                     Almost all modern websites function with the use of cookies, so chances are high that your website is collecting personal data, for example for statistical, functional or marketing purposes.
-                                    In this blogpost, we take a look at what constitutes a good privacy policy, how to make a compliant GDPR privacy policy and whether using a privacy policy generator is a good idea.
-                                    Learn what the privacy policy is and how to get one for your website below.
                                 </p>
+                                <SavePasswordTitle>Want to change you password?</SavePasswordTitle>
+                                <Form>
+                                    <Form.Group controlId="currentPassword">
+                                        <Form.Control type="password" placeholder="Current Password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)}/>
+                                    </Form.Group>
+                                    <Form.Group controlId="newPassword1">
+                                        <Form.Control type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>
+                                    </Form.Group>
+                                    <Form.Group controlId="newPassword2">
+                                        <Form.Control type="password" placeholder="Repeat your new Password" value={newPasswordRepeat} onChange={(e) => setNewPasswordRepeat(e.target.value)}/>
+                                    </Form.Group>
+                                    <CustomButton type="button" onClick={() => changePassword()}>
+                                        Change password
+                                    </CustomButton>
+                                    {
+                                        isSomethingWrong ?
+                                            <Alert variant={'danger'}>
+                                                { errorMessage }
+                                            </Alert> :
+                                            null
+                                    }
+                                    {
+                                        isPasswordChangingWentWell ?
+                                            <Alert variant={'success'}>
+                                                { errorMessage }
+                                            </Alert> :
+                                        null
+                                    }
+                                </Form>
                             </Tab>
                         </ProfileBody>
                     </RightSide>

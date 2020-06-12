@@ -4,7 +4,8 @@ import {
     getUserById
 } from '../repositories/UserRepository';
 import {
-    getSignedUserId
+    getSignedUserId,
+    userSignOut
 } from '../services/UserService';
 
 const initialState = {
@@ -25,9 +26,14 @@ export const UserProvider = (props: any) => {
             getUserById(USER_ID)
                 .then(currentUser => {
                     setUser(currentUser);
+
+                    if (!currentUser || !currentUser._id) {
+                        userSignOut();
+                    }
                 })
                 .catch(error => {
                     console.log('Error(/api/users/): ', error);
+                    userSignOut();
                 })
         }
     }, []);

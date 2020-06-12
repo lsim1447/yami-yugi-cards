@@ -609,7 +609,7 @@ function Profile() {
                                 <Rate>
                                     <div className="stars">
                                         {
-                                            [...Array(Math.round(getPercentageOfTheHelpfulComments()))].map(element => <i className="fa fa-star"></i>)
+                                            [...Array(Math.round(getPercentageOfTheHelpfulComments()))].map((element, index) => <i key={index} className="fa fa-star"></i>)
                                         }
                                     </div>
                                     <NoUser>
@@ -651,7 +651,7 @@ function Profile() {
                                     {
                                         comments.map((comment: IComment, index: number) => {
                                             return (
-                                                <ReviewItem href={`/card/${cards[index]?._id}`}>
+                                                <ReviewItem key={comment._id} href={`/card/${cards[index]?._id}`}>
                                                     <Col sm={4}>
                                                         <ReviewCardName> {cards[index]?.name} </ReviewCardName>
                                                         <a href={`/card/${cards[index]?._id}`}>
@@ -668,7 +668,7 @@ function Profile() {
                                                         <div>
                                                             <p>Your rated this card with:</p>
                                                             {
-                                                                [...Array(comment.stars)].map(element => <i style={{color: "#E40046"}} className="fa fa-star"></i>)
+                                                                [...Array(comment.stars)].map((element, index) => <i key={index} style={{color: "#E40046"}} className="fa fa-star"></i>)
                                                             }
                                                             <ReviewLikeWrapper>
                                                                 <i className="fa fa-thumbs-up" aria-hidden="true">
@@ -705,13 +705,13 @@ function Profile() {
                                 <SavePasswordTitle>Want to change you password?</SavePasswordTitle>
                                 <Form>
                                     <Form.Group controlId="currentPassword">
-                                        <Form.Control type="password" placeholder="Current Password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)}/>
+                                        <Form.Control type="password" placeholder="Current Password" value={currentPassword} required onChange={(e) => setCurrentPassword(e.target.value)}/>
                                     </Form.Group>
                                     <Form.Group controlId="newPassword1">
-                                        <Form.Control type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>
+                                        <Form.Control type="password" placeholder="New Password" value={newPassword} required onChange={(e) => setNewPassword(e.target.value)}/>
                                     </Form.Group>
                                     <Form.Group controlId="newPassword2">
-                                        <Form.Control type="password" placeholder="Repeat your new Password" value={newPasswordRepeat} onChange={(e) => setNewPasswordRepeat(e.target.value)}/>
+                                        <Form.Control type="password" placeholder="Repeat your new Password" value={newPasswordRepeat} required onChange={(e) => setNewPasswordRepeat(e.target.value)}/>
                                     </Form.Group>
                                     <CustomButton type="button" onClick={() => changePassword()}>
                                         Change password

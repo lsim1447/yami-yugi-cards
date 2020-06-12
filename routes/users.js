@@ -37,7 +37,7 @@ router.route('/:id').delete((request, response) => {
 router.route('/update/:id').post((request, response) => {
     User.findById(request.params.id)
         .then((user) => {
-            user.accountBalance = user.accountBalance - request.body.accountBalance;
+            user.accountBalance = request.body.accountBalance;
             user.address = request.body.address;
             user.username = request.body.username;
             user.password = request.body.password;

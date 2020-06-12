@@ -136,7 +136,7 @@ function Checkout() {
         return accumulator + Number(cartItem.card_prices[0].amazon_price);
     }, 0);
     const newUser: IUser = Object.create(user);
-    newUser.accountBalance = ALL_CARDS_PRICE;
+    newUser.accountBalance = user.accountBalance - ALL_CARDS_PRICE;
     newUser.deck = NEW_DECK_ITEMS;
 
     updateUserById(newUser)

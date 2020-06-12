@@ -51,7 +51,7 @@ const YuGiOhCard = ({ id, card } : CardProps) => {
         </a>
         <ClickOntheSpp>
           <i style={{fontSize: "18px"}} className="fa fa-arrow-up" aria-hidden="true"></i>
-          <span style={{paddingLeft: "8px", paddingRight: "8px"}}> Click on the image to navigate to the SPP </span>
+          <span style={{paddingLeft: "8px", paddingRight: "8px"}}> Click to the image for navigation to the SPP </span>
           <i style={{fontSize: "18px"}} className="fa fa-arrow-up" aria-hidden="true"></i>
         </ClickOntheSpp>
         <Card.Footer>

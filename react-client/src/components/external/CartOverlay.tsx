@@ -104,6 +104,7 @@ const CartOverlay = () => {
                 <p> My Bag({cartItems.length})</p>
             </OverlayTitle>
             <CheckoutButton
+                disabled={!cartItems.length}
                 href="/checkout"
                 onClick={() => setShowCartOverlay(false)}
             >

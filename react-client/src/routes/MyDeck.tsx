@@ -25,10 +25,6 @@ function MyDeck() {
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const { user } = useContext(UserContext);
 
-    const getAccountsValue = () => {
-        return user ? user.accountBalance.toFixed(2) : 0;
-    }
-
     const getDeckValue = () => {
         if (allCardsInYourDeck && allCardsInYourDeck.length) {
             return allCardsInYourDeck.reduce((accumulator: number, currentCard: ICardDetails) => {
@@ -151,12 +147,7 @@ function MyDeck() {
                             <div className="sidebar_menu_right">
                                 <SideBarListContainer>
                                     <SideBarListItem style={{fontSize: "22px"}}>
-                                        Hi,  {user.username}
-                                    </SideBarListItem>
-                                </SideBarListContainer>
-                                <SideBarListContainer>
-                                    <SideBarListItem style={{fontSize: "22px"}}>
-                                        Account Balance: {getAccountsValue()} $
+                                        Name:  <a href={"/profile"}> {user.username} </a>
                                     </SideBarListItem>
                                 </SideBarListContainer>
                                 <SideBarListContainer>

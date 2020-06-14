@@ -6,6 +6,16 @@ import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle }
 import CustomFlipPagination from '../components/external/CustomFlipPagination';
 import styled from 'styled-components';
 
+const CustomLeftCol = styled(Col) `
+  .sidebar_menu {
+    width: 25%;
+  }
+
+  @media(max-width: 576px) {
+    width: 100%;
+  }
+`;
+
 const CustomBreadcrumb = styled(Breadcrumb) `
   ol {
     margin-bottom: 0;
@@ -25,7 +35,7 @@ function Categories() {
       }
     }>
       <Row>
-        <Col>
+        <CustomLeftCol sm={3}>
           <div>
             <i className="fa fa-bars toggle_menu"></i>
             <div className="sidebar_menu">
@@ -58,7 +68,7 @@ function Categories() {
                 </SideBarListContainer>
             </div>
           </div>
-        </Col>
+        </CustomLeftCol>
         <Col sm={9}>
           <CustomBreadcrumb>
             <CustomBreadcrumb.Item href="/categories">Cards</CustomBreadcrumb.Item>

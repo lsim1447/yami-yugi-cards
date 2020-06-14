@@ -12,6 +12,8 @@ import {
 import {
     isUserSignedIn
 } from '../services/UserService';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const CustomCol = styled(Col) `
     border-left: 1px solid #D3D3D3;
@@ -143,6 +145,23 @@ function Checkout() {
         .then(response => {
             localStorage.removeItem('card_ids');
             setCartItems([]);
+
+            confirmAlert({
+                title: 'Checkout completed!',
+                message: 'The desired cards were added to your deck successfully!',
+                buttons: [
+                  {
+                    label: 'Go to the My Deck page',
+                    onClick: () => {
+                        window.location.href = '/my-deck'
+                    }
+                  },
+                  {
+                    label: 'Stay on this page.',
+                    onClick: () => {}
+                  }
+                ]
+              });
         })
        .catch(error => {
            console.log('Error(/api/users/update/userID): ', error);
@@ -184,6 +203,7 @@ function Checkout() {
                 <TotalPrice> TOTAL PRICE: {getTotalPrice()} $</TotalPrice>
                 <CheckoutFooterWrapper>
                     <CheckoutButton
+                        disabled={!cartItems.length}
                         onClick={() => checkoutCartItems()}
                         variant="dark"
                     >

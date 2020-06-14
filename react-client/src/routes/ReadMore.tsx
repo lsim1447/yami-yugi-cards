@@ -9,11 +9,8 @@ const CustomCol = styled(Col) `
 `;
 
 const LeftCol = styled(CustomCol) `
-    background: url(/images/checkout-left.jpg) top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-color: transparent;
+
     @media (max-width: 992px) {
         display: none;
     }
@@ -27,20 +24,25 @@ const CenterCol = styled(CustomCol) `
 `;
 
 const RightCol = styled(CustomCol) `
-    background: url(/images/read-more-right.jpg) top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-color: transparent;
+
     @media (max-width: 992px) {
         display: none;
     }
 `;
 
+const CustomRow = styled(Row) `
+    background: url(/images/seal-of-orichalos.jpg) right fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+`;
+
 function ReadMore() {
     return (
-        <Row>
-            <LeftCol sm={2}/>
+        <CustomRow>
+            <LeftCol sm={3}/>
             <CenterCol>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -258,8 +260,8 @@ function ReadMore() {
                     </Alert>
                 </Jumbotron>
             </CenterCol>
-            <RightCol sm={2}/>
-        </Row>
+            <RightCol sm={3}/>
+        </CustomRow>
     );
 }
 

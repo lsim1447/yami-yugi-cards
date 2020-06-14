@@ -19,7 +19,6 @@ const ProfileWrapper = styled.div `
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
     font-family: "poppins", sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
@@ -569,7 +568,7 @@ function Profile() {
                     <ProfileOption>
                         <Notification>
                             <i className="fa fa-bell"></i>
-                            <AlertMessage>1</AlertMessage>
+                            <AlertMessage>0</AlertMessage>
                         </Notification>
                     </ProfileOption>
                 </ProfileHeader>

@@ -19,6 +19,7 @@ function Footer() {
             <h3>About the <span>Yami Yu-gi-oh Cards</span></h3>
             <FooterLink>
                 <a href="/"> Home |</a>
+                <a href="/profile"> Profile |</a>
                 <a href="/all-cards"> All Cards |</a>
                 <a href="/categories"> Categries |</a>
                 <a href="/my-deck"> My Deck |</a>
@@ -30,7 +31,7 @@ function Footer() {
             <div>
                 <i className="fa fa-map-marker"></i>
                 <p>
-                    <span>NR. 746 - Lövéte, Harghita </span>
+                    <span> Lueta, Harghita </span>
                     Romania 537 140
                 </p>
             </div>

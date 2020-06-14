@@ -8,7 +8,7 @@ export const FooterDistributed = styled.div `
     position: relative;
     bottom: 0;
     text-align: center;
-    z-index: 10001;
+    z-index: 99;
     width: 100%;
 
     h3 {

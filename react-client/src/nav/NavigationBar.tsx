@@ -85,7 +85,11 @@ function NavigationBar(props: any) {
                   aria-hidden="true"
                 /> 
                 <UserName>
-                  {user.username}
+                  {user.username} 
+                  {
+                    isUserLoggedIn ?  '(' + user.accountBalance + '$)' : ''
+                  }
+                 
                 </UserName>
               </CustomNavigationDropDownItem>
               {

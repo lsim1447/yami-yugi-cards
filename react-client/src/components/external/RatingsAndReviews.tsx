@@ -219,7 +219,9 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
     }
 
     const isCheckboxDisabled = (comment: IComment, type: string) => {
-        if (type === 'yes') {
+        if (comment.email === user.email) {
+            return true;
+        } else if (type === 'yes') {
             return comment.votes.some((vote: IVote) => vote.email === user.email && vote.isHelpful);
         } else {
             return comment.votes.some((vote: IVote) => vote.email === user.email && !vote.isHelpful);

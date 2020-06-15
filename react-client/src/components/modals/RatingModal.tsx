@@ -7,6 +7,7 @@ import {
   saveComment,
   updateComment
 } from '../../repositories/CommentRepository';
+import moment from 'moment';
 
 type RatingModalProps = {
   cardDetails?: ICardDetails,
@@ -41,7 +42,7 @@ function RatingModal(props: RatingModalProps) {
 
     newComment._id = commentToModify ? commentToModify._id : '';
     newComment.cardId = (cardDetails && cardDetails._id) ? cardDetails._id : '5ebc4b9b221c162fa4dcaeb3';
-    newComment.date = new Date();
+    newComment.date = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
     newComment.email = email;
     newComment.message = commentMsg;
     newComment.stars = Number(stars);

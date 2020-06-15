@@ -4,7 +4,8 @@ import {
     getOrdersByUserId
 } from '../repositories/OrderRepository';
 import { IOrder } from '../components/models/Order';
-import { Button, Container ,Col, Jumbotron, Row } from 'react-bootstrap';
+import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
+import OrderItem from '../components/external/OrderItem';
 import styled from 'styled-components';
 
 const CustomRow = styled(Row) `
@@ -59,31 +60,6 @@ const CoverWrapper = styled.div `
     width: 100%;
 `;
 
-const ShowDetailsButton = styled.button `
-    background-color: white;
-    border-radius: 3%;
-    color: black;
-    float: right;
-    font-weight: 600;
-    padding: 8px 48px;
-
-    &:hover {
-        background-color: black;
-        color: white;
-    }
-`;
-
-const ImportantDetails = styled.p `
-    border-bottom: 1px solid black;
-    padding-bottom: 36px;
-`;
-
-const ResumeDetails = styled.p `
-    font-size: 20px;
-    font-weight: 500;
-    padding-top: 12px;
-`;
-
 const TitleWrapper = styled.div `
     background-color: #e9ecef;
     margin-bottom: 16px;
@@ -102,6 +78,7 @@ const TitleText = styled.p `
 function Orders() {
     const [orders, setOrders] = useState<IOrder[]>([]);
     const { user } = useContext(UserContext);
+    
 
     useEffect(() => {
         if (user && user._id) {
@@ -122,21 +99,11 @@ function Orders() {
                     <TitleText>MY PREVIOUS ORDERS({orders.length})</TitleText>
                 </TitleWrapper>
                 {
-                    orders.map(order => {
+                    orders.map((order: IOrder, index: number) => {
                         return (
-                            <Jumbotron key={order._id} fluid>
-                                <Container>
-                                    <h3>Order number: {order._id}</h3>
-                                    <ShowDetailsButton>Show details</ShowDetailsButton>
-                                    <p>Number of products: <span style={{fontSize: "16px", fontWeight: 600}}> {order.products.length} </span>  </p>
-                                    <ImportantDetails>
-                                        The order was created on: {order.date}
-                                    </ImportantDetails>
-                                    <ResumeDetails>
-                                        Total price: {order.totalPrice}$
-                                    </ResumeDetails>
-                                </Container>
-                            </Jumbotron>
+                            <OrderItem 
+                                order={order}
+                            />
                         )
                     })
                 }

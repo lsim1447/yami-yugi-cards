@@ -21,13 +21,7 @@ type CartModalProps = {
   show: boolean,
 }
 
-function CardModal(props: CartModalProps) {
-  const {
-    card,
-    onHide,
-    show
-  } = props;
-  
+function CardModal({card, onHide, show}: CartModalProps) {
   const [isCardAlreadyAdded, setIsCardAlreadyAdded] = useState<boolean>(false);
   const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
 

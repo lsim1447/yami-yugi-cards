@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
     cardId: { type: String, required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     email: { type: String, required: true },
     message: { type: String, required: true },
     stars: { type: Number, required: true },

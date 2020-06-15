@@ -28,10 +28,12 @@ connection.once('open', () => {
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const commentsRouter = require('./routes/comments');
+const ordersRouter = require('./routes/orders');
 
 app.use('/api/users', usersRouter);
 app.use('/api/cards', cardsRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/orders', ordersRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

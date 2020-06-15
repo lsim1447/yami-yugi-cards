@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export interface IVote
 {
     email: string,

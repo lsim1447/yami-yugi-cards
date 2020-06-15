@@ -87,7 +87,7 @@ function NavigationBar(props: any) {
                 <UserName>
                   {user.username} 
                   {
-                    isUserLoggedIn ?  '(' + user.accountBalance + '$)' : ''
+                    isUserLoggedIn ?  '(' + user.accountBalance.toFixed(2) + '$)' : ''
                   }
                  
                 </UserName>

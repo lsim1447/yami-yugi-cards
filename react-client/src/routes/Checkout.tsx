@@ -6,12 +6,10 @@ import styled from 'styled-components';
 import CartItem from '../components/external/CartItem';
 import { ICardDetails } from '../components/models/Cards';
 import { IUser } from '../components/models/User';
-import {
-    updateUserById
-} from '../repositories/UserRepository';
-import {
-    isUserSignedIn
-} from '../services/UserService';
+import { IOrder, DEFAULT_ORDER_VALUE } from '../components/models/Order';
+import { updateUserById } from '../repositories/UserRepository';
+import { isUserSignedIn } from '../services/UserService';
+import { saveOrder } from '../repositories/OrderRepository';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -22,7 +20,7 @@ const CustomCol = styled(Col) `
 `;
 
 const LeftCol = styled(CustomCol) `
-    background: url(images/checkout-left.jpg) top center;
+    background: url(/images/checkout-left.jpg) top center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -40,7 +38,7 @@ const CenterCol = styled(CustomCol) `
 `;
 
 const RightCol = styled(CustomCol) `
-    background: url(images/checkout-right.jpg) top center;
+    background: url(/images/checkout-right.jpg) top center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -76,7 +74,7 @@ const CheckoutFooterWrapper = styled.div `
 `;
 
 const CoverWrapper = styled.div `
-    background: url(images/checkout_cover_image.jpg) top center;
+    background: url(/images/checkout_cover_image.jpg) top center;
     margin: 0;
     padding: 12px;
     max-height: 200px;
@@ -142,26 +140,35 @@ function Checkout() {
     newUser.deck = NEW_DECK_ITEMS;
 
     updateUserById(newUser)
-        .then(response => {
-            localStorage.removeItem('card_ids');
-            setCartItems([]);
+        .then(userResponse => {
+            const newOrder: IOrder = DEFAULT_ORDER_VALUE;
+            
+            newOrder.products = cartItems.map(item => item._id);
+            newOrder.userId = user._id;
+            newOrder.totalPrice = getTotalPrice();
 
-            confirmAlert({
-                title: 'Checkout completed!',
-                message: 'The desired cards were added to your deck successfully!',
-                buttons: [
-                  {
-                    label: 'Go to the My Deck page',
-                    onClick: () => {
-                        window.location.href = '/my-deck'
-                    }
-                  },
-                  {
-                    label: 'Stay on this page.',
-                    onClick: () => {}
-                  }
-                ]
-              });
+            saveOrder(newOrder)
+                .then(orderResponse => {
+                    localStorage.removeItem('card_ids');
+                    setCartItems([]);
+
+                    confirmAlert({
+                        title: 'Checkout completed!',
+                        message: 'The desired cards were added to your deck successfully!',
+                        buttons: [
+                        {
+                            label: 'Go to the My Deck page',
+                            onClick: () => {
+                                window.location.href = '/my-deck'
+                            }
+                        },
+                        {
+                            label: 'Stay on this page.',
+                            onClick: () => {}
+                        }
+                        ]
+                    });
+                })
         })
        .catch(error => {
            console.log('Error(/api/users/update/userID): ', error);

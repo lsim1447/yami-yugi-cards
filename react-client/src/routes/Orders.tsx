@@ -13,7 +13,7 @@ const CustomRow = styled(Row) `
 `;
 
 const CustomLeftCol = styled(Col) `
-    background: url(/images/world-image.jpg) top left;
+    background: url(/images/world-image.jpg) top left fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -25,7 +25,7 @@ const CustomLeftCol = styled(Col) `
 `;
 
 const CustomRightCol = styled(Col) `
-    background: url(/images/world-image.jpg) top right;
+    background: url(/images/world-image.jpg) top right fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

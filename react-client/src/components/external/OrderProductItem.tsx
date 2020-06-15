@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import { ICardDetails, DEFAULT_CARD_VALUE } from '../models/Cards';

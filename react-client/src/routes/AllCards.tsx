@@ -18,7 +18,7 @@ function AllCards() {
     return (
         <div>
             <TitleWrapper> 
-                Select any kind of card
+                Make your deck insuperable
             </TitleWrapper>
             <CustomFlipPagination
                 backgroundColor={"white"}

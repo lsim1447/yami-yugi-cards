@@ -22,6 +22,7 @@ const ProfileWrapper = styled.div `
     font-family: "poppins", sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
+    padding-bottom: 50px;
     padding-top: 50px;
 
     @media(max-width: 467px) {

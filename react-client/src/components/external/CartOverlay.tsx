@@ -126,6 +126,7 @@ const CartOverlay = () => {
                             <Col sm={7}>
                                 <p><strong> Name: </strong> {cartItem.name} </p>
                                 <p><strong> Type: </strong>{cartItem.type} </p>
+                                <p><strong> Race: </strong>{cartItem.race ? cartItem.race : 'N/A'}</p>
                                 <p><strong> Archetype: </strong>{cartItem.archetype ? cartItem.archetype : 'N/A'}</p>
                                 <p><strong> Price: </strong>{cartItem.card_prices[0].amazon_price}$</p>
                                  

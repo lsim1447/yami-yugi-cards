@@ -284,14 +284,11 @@ function SimpleProductPage(props: any) {
 
             <SPPImageWrapper />
 
-            <RecommandationWrapper>
-                
-            </RecommandationWrapper>
+            <RecommandationWrapper />
                
-
             <AliceCarousel 
                 autoPlay={true}
-                autoPlayInterval={1500}
+                autoPlayInterval={700}
                 fadeOutAnimation={true}
                 mouseTrackingEnabled={true}
                 playButtonEnabled={true}

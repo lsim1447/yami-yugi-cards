@@ -64,19 +64,11 @@ function NavigationBar(props: any) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            
-          </Nav>
+          <Nav className="mr-auto"></Nav>
           <Nav>
             <Nav.Link href="/all-cards"> Cards </Nav.Link>
             <Nav.Link eventKey={2} href="/categories"> Categories </Nav.Link>
             <Nav.Link eventKey={3} href="/my-deck"> My Deck </Nav.Link>
-            <Nav>
-              <AutoComplete 
-                  items={cards} 
-                  placeholder={"Search"}
-              />
-            </Nav>
             <NavDropdown style={{paddingLeft: "12px"}} title="My Account" id="basic-nav-dropdown">
               <CustomNavigationDropDownItem>
                 <i

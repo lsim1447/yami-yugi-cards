@@ -297,7 +297,7 @@ function SimpleProductPage(props: any) {
                 {
                     similarCards.map(similarCard => {
                         return (
-                            <a href={`/card/${similarCard._id}`}>
+                            <a key={similarCard._id} href={`/card/${similarCard._id}`}>
                                 <img
                                     src={similarCard.card_images[0].image_url}
                                     onDragStart={handleOnDragStart} 

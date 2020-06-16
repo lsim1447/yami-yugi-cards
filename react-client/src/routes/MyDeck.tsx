@@ -114,7 +114,8 @@ function MyDeck() {
                                 {
                                     SIDE_BAR_OPTIONS_API.map(item => {
                                         return (
-                                            <SideBarListItem 
+                                            <SideBarListItem
+                                                key={item.eventKey + Math.random()}
                                                 onClick={() => filterCardsByType(item.type)}
                                             >
                                                 {item.type} ({getNrOfCardsByType(item.type)})
@@ -135,7 +136,7 @@ function MyDeck() {
                                         isAddToBagButtonDisabled={true}
                                         isFullDescriptionVisible={false}
                                         card={card}
-                                        key={card.id}
+                                        key={card.id + Math.random()}
                                     />
                                 );
                             })

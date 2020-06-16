@@ -310,36 +310,36 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
                 <Col style={{borderLeft: "1px solid #D3D3D3"}}>
                     <Row>
                         <Col>
-                            <p>
+                            <div>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 (5 stars) <ProgressBar style={{marginTop: "8px", marginBottom: "22px"}} now={getPercentage(5)} label={`${getPercentage(5)}%`} />
-                            </p>
-                            <p>
+                            </div>
+                            <div>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 (4 stars) <ProgressBar style={{marginBottom: "20px"}} now={getPercentage(4)} label={`${getPercentage(4)}%`} />
-                            </p>
-                            <p>
+                            </div>
+                            <div>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 (3 stars) <ProgressBar style={{marginBottom: "20px"}} now={getPercentage(3)} label={`${getPercentage(3)}%`} />
-                            </p>
-                            <p>
+                            </div>
+                            <div>
                                 <i className="fa fa-star"></i>
                                 <i className="fa fa-star"></i>
                                 (2 stars) <ProgressBar style={{marginBottom: "20px"}} now={getPercentage(2)} label={`${getPercentage(2)}%`} />
-                            </p>
-                            <p>
+                            </div>
+                            <div>
                                 <i className="fa fa-star"></i>
                                 (1 stars) <ProgressBar style={{marginBottom: "20px"}} now={getPercentage(1)} label={`${getPercentage(1)}%`} />
-                            </p>
+                            </div>
                         </Col>
                     </Row>
                 </Col>
@@ -347,11 +347,11 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
             {
                 comments.map((comment: IComment, index: number) => {
                     return (
-                        <CommentItem>
+                        <CommentItem key={comment._id}>
                             <Col>
                                 <CommentTitle>{comment.title}</CommentTitle>
                                 {
-                                    [...Array(comment.stars)].map((element) => <i className="fa fa-star"></i>)
+                                    [...Array(comment.stars)].map((element: number) => <i key={comment.date + Math.random()} className="fa fa-star"></i>)
                                 }
                                 <CommentDate>{comment.date}</CommentDate>
                                 <CommentUsername>{comment.username}</CommentUsername>

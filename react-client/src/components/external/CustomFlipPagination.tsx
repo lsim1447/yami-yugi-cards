@@ -159,7 +159,7 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
                             <FlipCard 
                                 isFullDescriptionVisible={false}
                                 card={card}
-                                key={card.id}
+                                key={card.id + Math.random()}
                             />
                         );
                 })

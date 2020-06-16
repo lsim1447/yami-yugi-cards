@@ -17,7 +17,7 @@ const HeaderWrapper = styled.p `
 `;
 
 const CenterWrapper = styled.p `
-    padding-top: 16px;
+    padding-top: 8px;
     text-align: center;
 `;
 

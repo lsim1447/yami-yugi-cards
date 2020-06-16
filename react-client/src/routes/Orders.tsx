@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import {
-    getOrdersByUserId
-} from '../repositories/OrderRepository';
+import { getOrdersByUserId } from '../repositories/OrderRepository';
 import { IOrder } from '../components/models/Order';
 import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
 import OrderItem from '../components/external/OrderItem';
@@ -78,7 +76,6 @@ const TitleText = styled.p `
 function Orders() {
     const [orders, setOrders] = useState<IOrder[]>([]);
     const { user } = useContext(UserContext);
-    
 
     useEffect(() => {
         if (user && user._id) {
@@ -102,12 +99,12 @@ function Orders() {
                     orders.map((order: IOrder, index: number) => {
                         return (
                             <OrderItem 
+                                key={order._id}
                                 order={order}
                             />
                         )
                     })
                 }
-
                 {
                     (!orders.length) ?
                         <Jumbotron fluid>

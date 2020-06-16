@@ -7,13 +7,30 @@ import { ICardDetails } from '../models/Cards';
 import { IOrder } from '../models/Order';
 import styled from 'styled-components';
 
-const TotalPrice = styled.p `
-    font-size: 28px;
+const Date = styled.span `
+    float: left;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+    padding: 24px 0px 0px 0px;
+`;
+
+const TotalPrice = styled.span `
+    float: right;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 0;
-    padding: 24px 48px 0px 48px;
-    text-align: right;
-    width: 100%;
+    padding: 24px 24px 0px 0px;
+`;
+
+const Title = styled.p `
+    margin-bottom: 0;
+    text-align: center;
+`;
+
+const OrderIdWrapper = styled.p `
+    font-size: 14px;
+    text-align: center;
 `;
 
 type OrderModalProps = {
@@ -44,7 +61,8 @@ function OrderModal({ order, show, setShow }: OrderModalProps) {
         >
             <Modal.Header closeButton>
             <Modal.Title style={{fontSize: "40px", paddingTop: "24px", width: "100%"}} id="example-modal-sizes-title-lg">
-                <p style={{textAlign: "center"}}> Order Details </p>
+                <Title> Order Details </Title>
+                <OrderIdWrapper> ({order._id}) </OrderIdWrapper>
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -52,12 +70,16 @@ function OrderModal({ order, show, setShow }: OrderModalProps) {
                     products.map((product: ICardDetails) => {
                         return (
                             <OrderProductItem
+                                key={product._id}
                                 productItem={product}
                             />
                         )
                     })
                 }
-                <TotalPrice>TOTAL PRICE: {order.totalPrice}$ </TotalPrice>
+                <div>
+                    <Date>Created on: {order.date}</Date>
+                    <TotalPrice>TOTAL PRICE: {order.totalPrice}$ </TotalPrice>
+                </div>
             </Modal.Body>
         </Modal>
     );

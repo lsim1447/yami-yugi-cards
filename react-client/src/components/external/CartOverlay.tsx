@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button, Col, Image, Row } from 'react-bootstrap';
 import  { CardContext }  from "../../contexts/CardContext";
 import  { CheckoutContext }  from "../../contexts/CheckoutContext";
-import { ICardDetails } from '../../components/models/Cards';
+import { ICardDetails } from '../../models/Cards';
 
 const CustomRow = styled(Row) `
     border-top: 1px solid #D3D3D3;

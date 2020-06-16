@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import styled from 'styled-components';
 import AnimateHeight from 'react-animate-height';
-import { ICardDetails, DEFAULT_CARD_VALUE } from '../models/Cards';
+import { ICardDetails, DEFAULT_CARD_VALUE } from '../../models/Cards';
 import SimpleFlipCard  from '../external/SimpleFlipCard';
 
 const AutoCompleteTextContainer = styled.div `

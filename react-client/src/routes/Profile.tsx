@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from "../contexts/UserContext";
-import { IComment, IVote } from '../components/models/Comment';
-import { ICardDetails } from '../components/models/Cards';
+import { IComment, IVote } from '../models/Comment';
+import { ICardDetails } from '../models/Cards';
 import { getCommentsByUserEmail } from '../repositories/CommentRepository';
 import { findAllCardsByIds } from '../repositories/CardRepository';
 import {
@@ -10,7 +10,7 @@ import {
 } from '../repositories/UserRepository';
 import styled from 'styled-components';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
-import { IUser } from '../components/models/User';
+import { IUser } from '../models/User';
 
 
 const ProfileWrapper = styled.div `

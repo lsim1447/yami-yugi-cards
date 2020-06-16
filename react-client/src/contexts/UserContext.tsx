@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DEFAULT_USER_VALUE } from '../components/models/User';
+import { DEFAULT_USER_VALUE } from '../models/User';
 import {
     getUserById
 } from '../repositories/UserRepository';

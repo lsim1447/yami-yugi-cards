@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Button, Col, Form, Modal } from 'react-bootstrap';
-import { ICardDetails } from '../models/Cards';
+import { ICardDetails } from '../../models/Cards';
 import  { UserContext }  from "../../contexts/UserContext";
-import { IComment, DEFAULT_COMMENT_VALUE } from '../models/Comment';
+import { IComment, DEFAULT_COMMENT_VALUE } from '../../models/Comment';
 import {
   saveComment,
   updateComment

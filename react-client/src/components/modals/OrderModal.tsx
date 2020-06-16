@@ -3,8 +3,8 @@ import { UserContext } from '../../contexts/UserContext';
 import { findAllCardsByIds } from '../../repositories/CardRepository';
 import { Modal } from 'react-bootstrap';
 import OrderProductItem from '../external/OrderProductItem';
-import { ICardDetails } from '../models/Cards';
-import { IOrder } from '../models/Order';
+import { ICardDetails } from '../../models/Cards';
+import { IOrder } from '../../models/Order';
 import styled from 'styled-components';
 
 const Date = styled.span `

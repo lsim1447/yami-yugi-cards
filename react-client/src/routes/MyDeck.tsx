@@ -2,9 +2,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from "../contexts/UserContext";
 import {  CardDeck, Col, Row } from 'react-bootstrap';
 import '../special-styles/sidebar-left.css'
-import { ICardDetails } from '../components/models/Cards';
+import { ICardDetails } from '../models/Cards';
 import SimpleFlipCard from '../components/external/SimpleFlipCard';
-import { getInitialCardList } from '../components/models/Cards';
+import { getInitialCardList } from '../models/Cards';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
 import { SIDE_BAR_OPTIONS_API } from '../constants';
@@ -89,7 +89,7 @@ function MyDeck() {
         return (
             <BackgroundContainer theme={
                 {
-                    backgroundImage: "images/my-deck-background.jpg"
+                    backgroundImage: "/images/my-deck-background.jpg"
                 }
             }>
                 <Row>

@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Alert, Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
-import { ICardDetails } from '../models/Cards';
-import { IComment, IVote } from '../models/Comment';
+import { ICardDetails } from '../../models/Cards';
+import { IComment, IVote } from '../../models/Comment';
 import RatingModal from '../modals/RatingModal';
 import {
     deleteCommentById,

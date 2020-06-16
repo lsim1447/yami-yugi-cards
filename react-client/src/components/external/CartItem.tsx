@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { CardContext } from "../../contexts/CardContext";
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import { ICardDetails, DEFAULT_CARD_VALUE } from '../models/Cards';
+import { ICardDetails, DEFAULT_CARD_VALUE } from '../../models/Cards';
 import CardModal from './../modals/CardModal';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { CardDeck } from 'react-bootstrap';
-import { ICardDetails } from '../components/models/Cards';
+import { ICardDetails } from '../models/Cards';
 import FlipCard from '../components/external/FlipCard';
 
 function Test() {

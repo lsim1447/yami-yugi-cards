@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { getOrdersByUserId } from '../repositories/OrderRepository';
-import { IOrder } from '../components/models/Order';
+import { IOrder } from '../models/Order';
 import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
 import OrderItem from '../components/external/OrderItem';
 import styled from 'styled-components';

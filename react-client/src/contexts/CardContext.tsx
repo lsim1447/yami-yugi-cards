@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
     ICardDetails,
     getInitialCardList
-} from '../components/models/Cards';
+} from '../models/Cards';
 import {
     getAllCards,
     getCardById

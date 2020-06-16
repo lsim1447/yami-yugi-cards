@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IUser } from '../components/models/User';
+import { IUser } from '../models/User';
 
 export const getAllUsers = () => {
     return axios.get(`/api/users`)

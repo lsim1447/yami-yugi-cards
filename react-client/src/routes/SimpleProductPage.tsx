@@ -6,12 +6,12 @@ import  { CardContext }  from "../contexts/CardContext";
 import { CheckoutContext } from "../contexts/CheckoutContext";
 import  { UserContext }  from "../contexts/UserContext";
 import { Breadcrumb, Button, Card, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
-import { ICardDetails } from '../components/models/Cards';
+import { ICardDetails } from '../models/Cards';
 import { getCardById } from '../repositories/CardRepository';
 import Actors from '../components/external/Actors';
 import RatingsAndReviews from '../components/external/RatingsAndReviews';
-import { DEFAULT_CARD_VALUE} from '../components/models/Cards';
-import { getInitialCardList } from '../components/models/Cards';
+import { DEFAULT_CARD_VALUE} from '../models/Cards';
+import { getInitialCardList } from '../models/Cards';
 import {
     ADD_TO_BAG,
     ALREADY_ADDED_TO_YOUR_BAG,

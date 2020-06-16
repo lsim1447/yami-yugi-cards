@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IComment } from '../components/models/Comment';
+import { IComment } from '../models/Comment';
 
 export const getAllComments = () => {
     return axios.get(`/api/comments`)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../models/Cards';
+import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../models/Cards';
 import CardModal from '../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../internal/FlipComponents';
 import { getCardById } from '../../repositories/CardRepository';

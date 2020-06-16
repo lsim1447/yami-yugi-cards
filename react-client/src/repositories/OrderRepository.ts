@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IOrder } from '../components/models/Order';
+import { IOrder } from '../models/Order';
 
 export const getAllOrders = () => {
     return axios.get(`/api/orders`)

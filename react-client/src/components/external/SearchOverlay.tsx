@@ -36,23 +36,25 @@ const OverlayWrapper = styled.div `
 `;
 
 const CloseIcon = styled.i `
-    color: black;
+    color: white;
     font-size: 28px;
     margin-bottom: 12px;
+    top: 30px;
 `;
 
 const NameInput = styled.input `
-    background-color: #FFFFFF;
+    background-color: #000000;
+    color: white;
     font-size: 28px;
     font-weight: 800;
     padding-bottom: 12px;
     padding-top: 24px;
-    margin-bottom: 24px;
     text-align: center;
     width: 100%;
 `;
 
 const SearchItemWrapper = styled(Row) `
+    background-color: black;
     border-top: 1px solid #D3D3D3;
     padding-top: 18px;
     padding-bottom: 18px;

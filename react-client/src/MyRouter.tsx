@@ -12,6 +12,7 @@ import Profile from './routes/Profile';
 import ReadMore from './routes/ReadMore';
 import SignIn from './routes/SignIn';
 import SimpleProductPage from './routes/SimpleProductPage';
+import Test from './routes/Test';
 
 class MyRouter extends Component {
     render(){
@@ -28,6 +29,7 @@ class MyRouter extends Component {
                     <Route exact path="/read-more" component={ReadMore} />
                     <Route exact path="/signin" component={SignIn} />
                     <Route exact path="/card/:id" component={SimpleProductPage} />
+                    <Route exact path="/test" component={Test} />
                     <Route component={PageNotFound} />
                 </Switch>
             </Router>

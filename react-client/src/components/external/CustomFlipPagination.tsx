@@ -47,7 +47,6 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
 
     // Update Cards
     useEffect(() => {
-        console.log('selectedType = ', selectedType);
         if (!selectedType || selectedType === 'All') {
             findCardsPaginated(currentPage, cardsPerPage)
                 .then(newCards => {

@@ -1,19 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import  { CardContext }  from "./../contexts/CardContext";
 import  { CheckoutContext }  from "./../contexts/CheckoutContext";
 import AutoComplete from './../components/internal/AutoComplete';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
 import CartOverlay from '../components/external/CartOverlay';
+import SearchOverlay from '../components/external/SearchOverlay';
 import {
   isUserSignedIn,
   userSignOut
 } from '../services/UserService';
+import { SearchContext } from '../contexts/SearchContext';
 import { UserContext } from '../contexts/UserContext';
 
 const NavBarImage = styled.img `
     max-width: 55px;
-    max-height: 55px;
+    max-height: 55px; 
     margin-right: 20px;
     position: relative;
     top: -4px;
@@ -49,6 +51,7 @@ function NavigationBar(props: any) {
   const { cartItems } = useContext(CardContext);
   const { user } = useContext(UserContext);
   const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
+  const { showSearchOverlay, setShowSearchOverlay } = useContext(SearchContext);
   const [ isUserLoggedIn ] = useState(isUserSignedIn);
 
   const signOut = () => {
@@ -98,7 +101,12 @@ function NavigationBar(props: any) {
                   </div>
               }
             </NavDropdown>
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => setShowCartOverlay(true)}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => setShowSearchOverlay(true)}>
+              <ShoppingCartWrapper>
+                <i className="fa fa-search"></i>
+              </ShoppingCartWrapper>
+            </Nav.Link>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={6} onClick={() => setShowCartOverlay(true)}>
               <ShoppingCartWrapper>
                 <i className="fa fa-shopping-cart"></i>
                 <sup style={{fontSize: "14px"}}> {cartItems.length} </sup>
@@ -107,8 +115,10 @@ function NavigationBar(props: any) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      { showCartOverlay ? <CartOverlay /> : null}
       
+      { showCartOverlay ? <CartOverlay /> : null}
+      { showSearchOverlay ? <SearchOverlay /> : null}
+
       { props.children }
     </div>
   );

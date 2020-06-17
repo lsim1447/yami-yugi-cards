@@ -4,20 +4,22 @@ import NavigationBar from './nav/NavigationBar';
 import MyRouter from './MyRouter';
 import { CardProvider } from './contexts/CardContext';
 import { CheckoutProvider } from './contexts/CheckoutContext';
+import { SearchProvider } from './contexts/SearchContext';
 import { UserProvider } from './contexts/UserContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-
 
 function App() {
   return (
     <ThemeProvider>
       <UserProvider>
         <CardProvider>
-          <CheckoutProvider>
-            <NavigationBar />
-            <MyRouter />
-            <Footer />
-          </CheckoutProvider>
+          <SearchProvider>
+            <CheckoutProvider>
+              <NavigationBar />
+              <MyRouter />
+              <Footer />
+            </CheckoutProvider>
+          </SearchProvider>
         </CardProvider>
       </UserProvider>
     </ThemeProvider>

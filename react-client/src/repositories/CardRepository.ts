@@ -24,6 +24,13 @@ export const findAllCardsByTypeAndRace = (type: string, race: string, limit: num
     }).then(response => response.data.slice(0, limit));
 }
 
+export const findCardsByPartialName = (name: string, limit: number) => {
+    return axios.post(`/api/cards/findByPartialName`, {
+        "name": name,
+        "limit": limit
+    }).then(response => response.data.slice(0, limit));
+}
+
 export const findCardsPaginated = (page: number, limit: number) => {
     return axios.post(`/api/cards/paginate`, {
         "page": page,

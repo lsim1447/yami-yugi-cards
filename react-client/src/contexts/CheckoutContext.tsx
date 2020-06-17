@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const initialState = {
-    showCartOverlay: true,
+    showCartOverlay: false,
     setShowCartOverlay: (a: any) => {},
 }
 

@@ -21,7 +21,7 @@ router.route('/add').post((request, response) => {
     const name = request.body.name;
     const race = request.body.race;
     const type = request.body.type;
-    
+
     const newCard = new Card({
         archetype,
         atk,
@@ -37,7 +37,7 @@ router.route('/add').post((request, response) => {
         race,
         type
     });
-    
+
     newCard.save()
         .then(() => response.json('Card has been created successfully!'))
         .catch((error) => response.status(400).json('Error: ' + error));
@@ -57,15 +57,15 @@ router.route('/:id').delete((request, response) => {
 
 router.route('/findAllByIds').post((request, response) => {
     const ids = request.body.ids;
-    
+
     Card.find()
         .where('_id')
         .in(ids)
         .exec((error, cards) => {
             if (error) {
                 response.send('Error: ' + error);
-            }    
-            
+            }
+
             response.json(cards);
         });
 });
@@ -97,12 +97,26 @@ router.route('/update/:id').post((request, response) => {
 router.route('/findByType').post((request, response) => {
     const cardType = request.body.type;
     const limit = request.body.limit;
-    
-    Card.find({type: cardType}, function(error, cards) {
+
+    Card.find({ type: cardType }, function(error, cards) {
         if (error) {
             response.send('Error: ' + error);
-        }    
-        
+        }
+
+        response.json(cards);
+    }, { limit: limit });
+});
+
+router.route('/findByPartialName').post((request, response) => {
+    const name = request.body.name;
+    const limit = request.body.limit;
+    const regex = new RegExp(name, 'ig');
+
+    Card.find({ name: regex }, function(error, cards) {
+        if (error) {
+            response.send('Error: ' + error);
+        }
+
         response.json(cards);
     }, { limit: limit });
 });
@@ -110,12 +124,12 @@ router.route('/findByType').post((request, response) => {
 router.route('/findByRace').post((request, response) => {
     const cardRace = request.body.type;
     const limit = request.body.limit;
-    
-    Card.find({race: cardRace}, function(error, cards) {
+
+    Card.find({ race: cardRace }, function(error, cards) {
         if (error) {
             response.send('Error: ' + error);
-        }    
-        
+        }
+
         response.json(cards);
     }, { limit: limit });
 });
@@ -124,12 +138,12 @@ router.route('/findByTypeAndRace').post((request, response) => {
     const cardType = request.body.type;
     const cardRace = request.body.race;
     const limit = request.body.limit;
-    
-    Card.find({type: cardType, race: cardRace}, function(error, cards) {
+
+    Card.find({ type: cardType, race: cardRace }, function(error, cards) {
         if (error) {
             response.send('Error: ' + error);
-        }    
-        
+        }
+
         response.json(cards);
     }, { limit: limit });
 });
@@ -139,10 +153,10 @@ router.route('/paginate/').post((request, response) => {
     const limit = request.body.limit;
 
     Card.find({}, null, {
-        skip: (page * limit), 
-        limit: limit
-    }).then(cards => response.json(cards))
-      .catch(error => response.status(400).json('Error: ' + error));
+            skip: (page * limit),
+            limit: limit
+        }).then(cards => response.json(cards))
+        .catch(error => response.status(400).json('Error: ' + error));
 });
 
 router.route('/paginate/findByType').post((request, response) => {
@@ -150,11 +164,11 @@ router.route('/paginate/findByType').post((request, response) => {
     const limit = request.body.limit;
     const cardType = request.body.type;
 
-    Card.find({type: cardType}, null, {
-        skip: (page * limit), 
-        limit: limit
-    }).then(cards => response.json(cards))
-      .catch(error => response.status(400).json('Error: ' + error));
+    Card.find({ type: cardType }, null, {
+            skip: (page * limit),
+            limit: limit
+        }).then(cards => response.json(cards))
+        .catch(error => response.status(400).json('Error: ' + error));
 });
 
 module.exports = router;

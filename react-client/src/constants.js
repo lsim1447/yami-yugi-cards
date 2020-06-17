@@ -10,8 +10,11 @@ export const ALREADY_ADDED_TO_YOUR_BAG = 'ALREADY ADDED TO YOUR BAG';
 
 export const ALREADY_ADDED_TO_YOUR_DECK = 'ALREADY ADDED TO YOUR DECK';
 
-export const SIDE_BAR_OPTIONS_API = [
-    {
+export const WAIT_INTERVAL = 1000;
+
+export const ENTER_KEY = 13;
+
+export const SIDE_BAR_OPTIONS_API = [{
         eventKey: "all_card",
         type: "All"
     },

@@ -33,6 +33,11 @@ const OverlayWrapper = styled.div `
     &::-webkit-scrollbar {
         display: none;
     }
+
+    @media (max-width: 700px) {
+        min-width: 100%
+        width: 100%;
+    }
 `;
 
 const CloseIcon = styled.i `
@@ -64,12 +69,22 @@ const SearchItemImage = styled(Image) `
     height: 200px;
     width: 180px;
     padding-left: 12px;
+    
+    @media (max-width: 700px) {
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 const SearchItemField = styled.p `
     color: red;
     font-size: 18px;
     font-weight: 800;
+
+    @media (max-width: 700px) {
+        text-align: center;
+        width: 100%;
+    }
 `;
 
 const SearchOverlay = () => {

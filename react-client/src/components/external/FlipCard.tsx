@@ -60,7 +60,7 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
                     <Card.Text> {getText(cardDetails.desc, 150, isFullDescriptionVisible)} </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <PriceContainer className="text-muted"> Price on Amazon: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $ </PriceContainer>
+                    <PriceContainer className="text-muted"> Price: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $ </PriceContainer>
                 </Card.Footer>
                 
             </Card>

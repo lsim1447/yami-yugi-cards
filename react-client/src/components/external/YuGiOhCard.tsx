@@ -56,7 +56,7 @@ const YuGiOhCard = ({ id, card } : CardProps) => {
         </ClickOntheSpp>
         <Card.Footer>
           <PriceContainer>
-            Price on Amazon: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $
+            Price: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $
           </PriceContainer>
         </Card.Footer>
       </Card>

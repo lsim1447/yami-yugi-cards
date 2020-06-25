@@ -130,7 +130,7 @@ const SearchOverlay = () => {
             
             <NameInput 
                 type="text"
-                placeholder="Search"
+                placeholder="Search by Name"
                 ref={searchRef}
                 value={productName} 
                 onChange={(e) => changeProductName(e.target.value)}

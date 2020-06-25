@@ -1,5 +1,3 @@
-export const MAX_NUMBER_OF_CARDS_IN_ONE_ROW = 5;
-
 export const MAX_NUMBER_OF_SIMILAR_CARDS = 20;
 
 export const ADD_TO_BAG = 'ADD TO BAG';

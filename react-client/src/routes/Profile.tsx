@@ -12,7 +12,6 @@ import styled from 'styled-components';
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
 import { IUser } from '../models/User';
 
-
 const ProfileWrapper = styled.div `
     background: url(/images/ProfileBackground.jpg) fixed;
     -webkit-background-size: cover;

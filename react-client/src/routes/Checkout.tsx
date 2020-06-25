@@ -8,7 +8,6 @@ import { ICardDetails } from '../models/Cards';
 import { IUser } from '../models/User';
 import { IOrder, DEFAULT_ORDER_VALUE } from '../models/Order';
 import { updateUserById } from '../repositories/UserRepository';
-import { isUserSignedIn } from '../services/UserService';
 import { saveOrder } from '../repositories/OrderRepository';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -114,72 +113,68 @@ const TotalPrice = styled.div `
 `;
 
 function Checkout() {
-  const { cartItems, setCartItems } = useContext(CardContext);
-  const { user } = useContext(UserContext);
+    const { cartItems, setCartItems } = useContext(CardContext);
+    const { user } = useContext(UserContext);
 
-  const getTotalPrice = () => {
-    if (cartItems && cartItems.length) {
-        return cartItems.reduce((accumulator: number, currentCard: ICardDetails) => {
-            const price: number = Number((currentCard && currentCard.card_prices && currentCard.card_prices[0]) ? currentCard.card_prices[0].amazon_price : 0);
-            const newAccumulator: number = Number((accumulator + price).toFixed(2));
+    const getTotalPrice = () => {
+        if (cartItems && cartItems.length) {
+            return cartItems.reduce((accumulator: number, currentCard: ICardDetails) => {
+                const price: number = Number((currentCard && currentCard.card_prices && currentCard.card_prices[0]) ? currentCard.card_prices[0].amazon_price : 0);
+                const newAccumulator: number = Number((accumulator + price).toFixed(2));
 
-            return newAccumulator ? newAccumulator : accumulator;
-        }, 0);
-    } else {
-        return 0;
+                return newAccumulator ? newAccumulator : accumulator;
+            }, 0);
+        } else {
+            return 0;
+        }
     }
-  }
 
-  const checkoutCartItems = () => {
-    const NEW_DECK_ITEMS = user.deck.concat(cartItems.map(item => item._id));
-    const ALL_CARDS_PRICE = cartItems.reduce((accumulator, cartItem) => {
-        return accumulator + Number(cartItem.card_prices[0].amazon_price);
-    }, 0);
-    const newUser: IUser = Object.create(user);
-    newUser.accountBalance = user.accountBalance - ALL_CARDS_PRICE;
-    newUser.deck = NEW_DECK_ITEMS;
+    const checkoutCartItems = () => {
+        const NEW_DECK_ITEMS = user.deck.concat(cartItems.map(item => item._id));
+        const ALL_CARDS_PRICE = cartItems.reduce((accumulator, cartItem) => {
+            return accumulator + Number(cartItem.card_prices[0].amazon_price);
+        }, 0);
+        const newUser: IUser = Object.create(user);
 
-    updateUserById(newUser)
-        .then(userResponse => {
-            const newOrder: IOrder = DEFAULT_ORDER_VALUE;
-            
-            newOrder.products = cartItems.map(item => item._id);
-            newOrder.userId = user._id;
-            newOrder.totalPrice = getTotalPrice();
+        newUser.accountBalance = user.accountBalance - ALL_CARDS_PRICE;
+        newUser.deck = NEW_DECK_ITEMS;
 
-            saveOrder(newOrder)
-                .then(orderResponse => {
-                    localStorage.removeItem('card_ids');
-                    setCartItems([]);
+        updateUserById(newUser)
+            .then(userResponse => {
+                const newOrder: IOrder = DEFAULT_ORDER_VALUE;
+                
+                newOrder.products = cartItems.map(item => item._id);
+                newOrder.userId = user._id;
+                newOrder.totalPrice = getTotalPrice();
 
-                    confirmAlert({
-                        title: 'Checkout completed!',
-                        message: 'The desired cards were added to your deck successfully!',
-                        buttons: [
-                        {
-                            label: 'Go to the My Deck page',
-                            onClick: () => {
-                                window.location.href = '/my-deck'
+                saveOrder(newOrder)
+                    .then(orderResponse => {
+                        localStorage.removeItem('card_ids');
+                        setCartItems([]);
+
+                        confirmAlert({
+                            title: 'Checkout completed!',
+                            message: 'The desired cards were added to your deck successfully!',
+                            buttons: [
+                            {
+                                label: 'Go to the My Deck page',
+                                onClick: () => {
+                                    window.location.href = '/my-deck'
+                                }
+                            },
+                            {
+                                label: 'Stay on this page.',
+                                onClick: () => {}
                             }
-                        },
-                        {
-                            label: 'Stay on this page.',
-                            onClick: () => {}
-                        }
-                        ]
-                    });
-                })
-        })
-       .catch(error => {
-           console.log('Error(/api/users/update/userID): ', error);
-       })   
-  }
+                            ]
+                        });
+                    })
+            })
+            .catch(error => {
+                console.log('Error(/api/users/update/userID): ', error);
+            })   
+    }
 
-  if (!isUserSignedIn()) {
-    window.location.href='/signin';
-    
-    return null;
-  } else {
     return (
         <Row>
             <LeftCol sm={3}/>
@@ -214,14 +209,13 @@ function Checkout() {
                         onClick={() => checkoutCartItems()}
                         variant="dark"
                     >
-                         SUBMIT YOUR ORDER
+                            SUBMIT YOUR ORDER
                     </CheckoutButton>
                 </CheckoutFooterWrapper>
             </CenterCol>
             <RightCol sm={3}/>
         </Row>
-      );
-  }
+    );
 }
 
 export default Checkout;

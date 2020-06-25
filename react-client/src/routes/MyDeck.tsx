@@ -16,7 +16,6 @@ import {
 } from '../repositories/CardRepository';
 import {
     getSignedUserId,
-    isUserSignedIn
 } from '../services/UserService';
 
 function MyDeck() {
@@ -81,114 +80,108 @@ function MyDeck() {
         }
     }, []);
 
-    if (!isUserSignedIn()) {
-        window.location.href='/signin';
+    return (
+        <BackgroundContainer theme={
+            {
+                backgroundImage: "/images/my-deck-background.jpg"
+            }
+        }>
+            <Row>
+                <Col sm={3}>
+                    <div>
+                        <i className="fa fa-bars toggle_menu"></i>
+                        <div className="sidebar_menu">
+                            <i className="fa fa-times"></i>
+                            <CenterWrapper>
+                                <BoxedItem>
+                                    Check your 
+                                    <LogoBold>
+                                        Deck
+                                    </LogoBold>
+                                </BoxedItem>
+                                <LogoTitle>
+                                    Be a Professional Duel Master
+                                </LogoTitle>
+                            </CenterWrapper>
 
-        return null;
-    } else {
-        return (
-            <BackgroundContainer theme={
-                {
-                    backgroundImage: "/images/my-deck-background.jpg"
-                }
-            }>
-                <Row>
-                    <Col sm={3}>
-                        <div>
-                            <i className="fa fa-bars toggle_menu"></i>
-                            <div className="sidebar_menu">
-                                <i className="fa fa-times"></i>
-                                <CenterWrapper>
-                                    <BoxedItem>
-                                        Check your 
-                                        <LogoBold>
-                                            Deck
-                                        </LogoBold>
-                                    </BoxedItem>
-                                    <LogoTitle>
-                                        Be a Professional Duel Master
-                                    </LogoTitle>
-                                </CenterWrapper>
-    
-                                <SideBarListContainer>
-                                {
-                                    SIDE_BAR_OPTIONS_API.map(item => {
-                                        return (
-                                            <SideBarListItem
-                                                key={item.eventKey + Math.random()}
-                                                onClick={() => filterCardsByType(item.type)}
-                                            >
-                                                {item.type} ({getNrOfCardsByType(item.type)})
-                                            </SideBarListItem>
-                                        )
-                                    })
-                                }
-                                </SideBarListContainer>
-                            </div>
+                            <SideBarListContainer>
+                            {
+                                SIDE_BAR_OPTIONS_API.map(item => {
+                                    return (
+                                        <SideBarListItem
+                                            key={item.eventKey + Math.random()}
+                                            onClick={() => filterCardsByType(item.type)}
+                                        >
+                                            {item.type} ({getNrOfCardsByType(item.type)})
+                                        </SideBarListItem>
+                                    )
+                                })
+                            }
+                            </SideBarListContainer>
                         </div>
-                    </Col>
-                    <Col sm={7}>
-                        <CardDeck>
-                        {
-                            cards.map((card: ICardDetails) => {
-                                return (
-                                    <SimpleFlipCard 
-                                        isAddToBagButtonDisabled={true}
-                                        isFullDescriptionVisible={false}
-                                        card={card}
-                                        key={card.id + Math.random()}
-                                    />
-                                );
-                            })
-                        }
-                        </CardDeck>
-                    </Col>
-                    <Col sm={2}>
-                        <SideBarMenuContainer>
-                            <div className="sidebar_menu_right">
-                                <SideBarListContainer>
-                                    <SideBarListItem style={{fontSize: "22px"}}>
-                                        Name:  <a href={"/profile"}> {user.username} </a>
-                                    </SideBarListItem>
-                                </SideBarListContainer>
-                                <SideBarListContainer>
-                                    <SideBarListItem>
-                                        Your deck's value: {getDeckValue()} $
-                                    </SideBarListItem>
-                                </SideBarListContainer>
-                                <SideBarListContainer>
-                                    <SideBarListItem onClick={() => setCards(allCardsInYourDeck)}>
-                                        Cards: { allCardsInYourDeck.length }
-                                    </SideBarListItem>
-                                </SideBarListContainer>
-                                <SideBarListContainer>
-                                    <SideBarListItem onClick={() => filterCardsByType('Monster')}>
-                                        Monster cards: { getNrOfCardsByType('Monster') }
-                                    </SideBarListItem>
-                                </SideBarListContainer>
-                                <SideBarListContainer>
-                                    <SideBarListItem onClick={() => filterCardsByType('Monster', true)}>
-                                        Special cards: { allCardsInYourDeck.length - getNrOfCardsByType('Monster') }
-                                    </SideBarListItem>
-                                </SideBarListContainer>
-                                <CenterWrapper>
-                                    <BoxedItem>
-                                        Name your 
-                                        <LogoBold>
-                                            Beast
-                                        </LogoBold>
-                                    </BoxedItem>
-                                    <LogoTitle>
-                                        Let's Be Professional. Never Give Up!
-                                    </LogoTitle>
-                                </CenterWrapper>
-                            </div>
-                        </SideBarMenuContainer>
-                    </Col>
-                </Row>
-            </BackgroundContainer>
-        );
-    }
+                    </div>
+                </Col>
+                <Col sm={7}>
+                    <CardDeck>
+                    {
+                        cards.map((card: ICardDetails) => {
+                            return (
+                                <SimpleFlipCard 
+                                    isAddToBagButtonDisabled={true}
+                                    isFullDescriptionVisible={false}
+                                    card={card}
+                                    key={card.id + Math.random()}
+                                />
+                            );
+                        })
+                    }
+                    </CardDeck>
+                </Col>
+                <Col sm={2}>
+                    <SideBarMenuContainer>
+                        <div className="sidebar_menu_right">
+                            <SideBarListContainer>
+                                <SideBarListItem style={{fontSize: "22px"}}>
+                                    Name:  <a href={"/profile"}> {user.username} </a>
+                                </SideBarListItem>
+                            </SideBarListContainer>
+                            <SideBarListContainer>
+                                <SideBarListItem>
+                                    Your deck's value: {getDeckValue()} $
+                                </SideBarListItem>
+                            </SideBarListContainer>
+                            <SideBarListContainer>
+                                <SideBarListItem onClick={() => setCards(allCardsInYourDeck)}>
+                                    Cards: { allCardsInYourDeck.length }
+                                </SideBarListItem>
+                            </SideBarListContainer>
+                            <SideBarListContainer>
+                                <SideBarListItem onClick={() => filterCardsByType('Monster')}>
+                                    Monster cards: { getNrOfCardsByType('Monster') }
+                                </SideBarListItem>
+                            </SideBarListContainer>
+                            <SideBarListContainer>
+                                <SideBarListItem onClick={() => filterCardsByType('Monster', true)}>
+                                    Special cards: { allCardsInYourDeck.length - getNrOfCardsByType('Monster') }
+                                </SideBarListItem>
+                            </SideBarListContainer>
+                            <CenterWrapper>
+                                <BoxedItem>
+                                    Name your 
+                                    <LogoBold>
+                                        Beast
+                                    </LogoBold>
+                                </BoxedItem>
+                                <LogoTitle>
+                                    Let's Be Professional. Never Give Up!
+                                </LogoTitle>
+                            </CenterWrapper>
+                        </div>
+                    </SideBarMenuContainer>
+                </Col>
+            </Row>
+        </BackgroundContainer>
+    );
     
 }
 

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect
+} from 'react-router-dom';
+
+import { isUserSignedIn } from './services/UserService';
 
 import AllCards from './routes/AllCards';
 import Categories from './routes/Categories';
@@ -14,27 +21,46 @@ import SignIn from './routes/SignIn';
 import SimpleProductPage from './routes/SimpleProductPage';
 import Test from './routes/Test';
 
-class MyRouter extends Component {
-    render(){
-        return (
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/all-cards" component={AllCards} />
-                    <Route exact path="/categories" component={Categories} />
-                    <Route exact path="/checkout" component={Checkout} />
-                    <Route exact path="/my-deck" component={MyDeck} />
-                    <Route exact path="/orders" component={Orders} />
-                    <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/read-more" component={ReadMore} />
-                    <Route exact path="/signin" component={SignIn} />
-                    <Route exact path="/card/:id" component={SimpleProductPage} />
-                    <Route exact path="/test" component={Test} />
-                    <Route component={PageNotFound} />
-                </Switch>
-            </Router>
-        );
-    }
+
+const isAuthenticated = () => {
+  return isUserSignedIn();
 }
 
-export default MyRouter;
+function PrivateRoute({ component: Component, ...rest }: any) {
+    return (
+        <Route
+            {...rest}
+            render={props =>
+                isAuthenticated() ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/signin",
+                            state: {from: props.location}
+                        }}
+                    />
+                )
+            }
+        />
+    );
+}
+
+export default () => (
+    <Router>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/all-cards" component={AllCards} />
+            <Route exact path="/categories" component={Categories} />
+            <PrivateRoute exact path="/checkout" component={Checkout} />
+            <PrivateRoute exact path="/my-deck" component={MyDeck} />
+            <PrivateRoute exact path="/orders" component={Orders} />
+            <PrivateRoute exact path="/profile" component={Profile} />
+            <Route exact path="/read-more" component={ReadMore} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/card/:id" component={SimpleProductPage} />
+            <Route exact path="/test" component={Test} />
+            <Route component={PageNotFound} />
+        </Switch>
+    </Router>
+);

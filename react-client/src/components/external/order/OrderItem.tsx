@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
+import { Container, Jumbotron } from 'react-bootstrap';
 import styled from 'styled-components';
-import OrderModal from '../modals/OrderModal';
-import { IOrder } from '../../models/Order';
+import OrderModal from '../../modals/OrderModal';
+import { IOrder } from '../../../models/Order';
 
 const ShowDetailsButton = styled.button `
     background-color: white;

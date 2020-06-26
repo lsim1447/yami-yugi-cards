@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CardDeck, Pagination } from 'react-bootstrap';
 import styled from 'styled-components';
 import { ICardDetails, getInitialCardList } from '../../models/Cards';
-import FlipCard from './FlipCard';
+import FlipCard from './card/FlipCard';
 import {
     findCardsPaginated,
     findCardsByTypePaginated

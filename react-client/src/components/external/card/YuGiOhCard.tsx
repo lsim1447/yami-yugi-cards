@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../models/Cards';
+import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
 import styled from 'styled-components';
-import { getCardById } from '../../repositories/CardRepository';
+import { getCardById } from '../../../repositories/CardRepository';
 
 const PriceContainer = styled.p `
   padding-top: 12px;

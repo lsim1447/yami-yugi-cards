@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import styled from 'styled-components';
+import loadableVisibility from "react-loadable-visibility/loadable-components";
+import RatingsAndReviewsLoading from '../components/external/loading/RatingsAndReviewsLoading';
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import  { CardContext }  from "../contexts/CardContext";
@@ -8,8 +9,7 @@ import  { UserContext }  from "../contexts/UserContext";
 import { Breadcrumb, Button, Card, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
 import { ICardDetails } from '../models/Cards';
 import { getCardById } from '../repositories/CardRepository';
-import Actors from '../components/external/Actors';
-import RatingsAndReviews from '../components/external/RatingsAndReviews';
+import Actors from '../components/external/sections/Actors';
 import { DEFAULT_CARD_VALUE} from '../models/Cards';
 import { getInitialCardList } from '../models/Cards';
 import {
@@ -19,7 +19,12 @@ import {
     MAX_NUMBER_OF_SIMILAR_CARDS
 } from '../constants';
 import { findAllCardsByTypeAndRace } from '../repositories/CardRepository';
-import GifGrid from '../components/external/GifGrid';
+import GifGrid from '../components/external/sections/GifGrid';
+import styled from 'styled-components';
+
+const RatingsAndReviews = loadableVisibility(() => import('../components/external/RatingsAndReviews'), {
+    fallback: <RatingsAndReviewsLoading />
+});
 
 const SPPWrapper = styled.div `
     min-height: 500px;
@@ -308,11 +313,13 @@ function SimpleProductPage(props: any) {
                     })
                 }
             </AliceCarousel>
+            
             <GifGrid 
                 gif1_url="/gifs/its-time-to-duel.gif"
                 gif2_url="/gifs/call-farao.gif"
             />
             <Actors />
+
             <RatingsAndReviews cardDetails={cardDetails}/>
         </SPPWrapper>
     );

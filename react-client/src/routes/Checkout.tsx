@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { UserContext } from "../contexts/UserContext";
 import { Button, Col, Row } from 'react-bootstrap';
-import styled from 'styled-components';
-import CartItem from '../components/external/CartItem';
+import CartItem from '../components/external/cart/CartItem';
 import { ICardDetails } from '../models/Cards';
 import { IUser } from '../models/User';
 import { IOrder, DEFAULT_ORDER_VALUE } from '../models/Order';
 import { updateUserById } from '../repositories/UserRepository';
 import { saveOrder } from '../repositories/OrderRepository';
+import styled from 'styled-components';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 

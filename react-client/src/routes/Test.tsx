@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CardContext } from "../contexts/CardContext";
 import { CardDeck } from 'react-bootstrap';
 import { ICardDetails } from '../models/Cards';
-import FlipCard from '../components/external/FlipCard';
+import FlipCard from '../components/external/card/FlipCard';
 
 function Test() {
     const { allCards, setAllCards } = useContext(CardContext);

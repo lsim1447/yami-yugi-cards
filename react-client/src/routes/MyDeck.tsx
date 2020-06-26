@@ -3,7 +3,7 @@ import { UserContext } from "../contexts/UserContext";
 import {  CardDeck, Col, Row } from 'react-bootstrap';
 import '../special-styles/sidebar-left.css'
 import { ICardDetails } from '../models/Cards';
-import SimpleFlipCard from '../components/external/SimpleFlipCard';
+import SimpleFlipCard from '../components/external/card/SimpleFlipCard';
 import { getInitialCardList } from '../models/Cards';
 import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
 import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';

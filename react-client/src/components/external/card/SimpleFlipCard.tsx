@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../models/Cards';
-import CardModal from '../modals/CardModal';
-import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../internal/FlipComponents';
-import { getCardById } from '../../repositories/CardRepository';
+import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
+import CardModal from '../../modals/CardModal';
+import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../../internal/FlipComponents';
+import { getCardById } from '../../../repositories/CardRepository';
 
 const SimpleCardContainer = styled.div `
     @media (max-width: 420px) {

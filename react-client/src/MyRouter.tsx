@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import loadableVisibility from "react-loadable-visibility/loadable-components";
 import {
     BrowserRouter as Router,
     Route,
@@ -8,19 +9,67 @@ import {
 
 import { isUserSignedIn } from './services/UserService';
 
-import AllCards from './routes/AllCards';
-import Categories from './routes/Categories';
-import Checkout from './routes/Checkout';
-import Home from './routes/Home';
-import MyDeck from './routes/MyDeck';
-import Orders from './routes/Orders';
-import PageNotFound from './routes/PageNotFound';
-import Profile from './routes/Profile';
-import ReadMore from './routes/ReadMore';
-import SignIn from './routes/SignIn';
-import SimpleProductPage from './routes/SimpleProductPage';
-import Test from './routes/Test';
+function LoadingComponent(props: any) {
+    return (
+        <div>
+            Loading ...
+        </div>
+    )
+}
 
+const Home = loadableVisibility(() => import('./routes/Home'), {
+    fallback: <LoadingComponent />
+});
+
+const ReadMore = loadableVisibility(() => import('./routes/ReadMore'), {
+    fallback: <LoadingComponent />
+});
+
+const AllCards = loadableVisibility(() => import('./routes/AllCards'), {
+    fallback: <LoadingComponent />
+});
+
+const Categories = loadableVisibility(() => import('./routes/Categories'), {
+    fallback: <LoadingComponent />
+});
+
+/**
+ * Private Routes BEGIN
+ */
+const MyDeck = loadableVisibility(() => import('./routes/MyDeck'), {
+    fallback: <LoadingComponent />
+});
+
+const Checkout = loadableVisibility(() => import('./routes/Checkout'), {
+    fallback: <LoadingComponent />
+});
+
+const Profile = loadableVisibility(() => import('./routes/Profile'), {
+    fallback: <LoadingComponent />
+});
+
+const Orders = loadableVisibility(() => import('./routes/Orders'), {
+    fallback: <LoadingComponent />
+});
+/**
+ * Private Routes BEGIN
+ */
+
+const SimpleProductPage = loadableVisibility(() => import('./routes/SimpleProductPage'), {
+    fallback: <LoadingComponent />
+});
+
+const SignIn = loadableVisibility(() => import('./routes/SignIn'), {
+    fallback: <LoadingComponent />
+});
+
+const Test = loadableVisibility(() => import('./routes/Test'), {
+    fallback: <LoadingComponent />
+});
+
+const PageNotFound = loadableVisibility(() => import('./routes/PageNotFound'), {
+    fallback: <LoadingComponent />
+});
 
 const isAuthenticated = () => {
   return isUserSignedIn();
@@ -50,15 +99,15 @@ export default () => (
     <Router>
         <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/read-more" component={ReadMore} />
             <Route exact path="/all-cards" component={AllCards} />
+            <Route exact path="/card/:id" component={SimpleProductPage} />
             <Route exact path="/categories" component={Categories} />
             <PrivateRoute exact path="/checkout" component={Checkout} />
             <PrivateRoute exact path="/my-deck" component={MyDeck} />
-            <PrivateRoute exact path="/orders" component={Orders} />
             <PrivateRoute exact path="/profile" component={Profile} />
-            <Route exact path="/read-more" component={ReadMore} />
+            <PrivateRoute exact path="/orders" component={Orders} />
             <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/card/:id" component={SimpleProductPage} />
             <Route exact path="/test" component={Test} />
             <Route component={PageNotFound} />
         </Switch>

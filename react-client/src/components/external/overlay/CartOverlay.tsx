@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Button, Col, Image, Row } from 'react-bootstrap';
-import  { CardContext }  from "../../contexts/CardContext";
-import  { CheckoutContext }  from "../../contexts/CheckoutContext";
-import { ICardDetails } from '../../models/Cards';
+import  { CardContext }  from "../../../contexts/CardContext";
+import  { CheckoutContext }  from "../../../contexts/CheckoutContext";
+import { ICardDetails } from '../../../models/Cards';
 
 const CustomRow = styled(Row) `
     border-top: 1px solid #D3D3D3;
@@ -45,9 +45,12 @@ const CheckoutButton = styled(Button) `
 `;
 
 const CloseIcon = styled.i `
-    color: black;
+    color: black !important;
+    float: right;
     font-size: 36px;
     margin-bottom: 12px;
+    padding: 8px;
+    right: 8px !important;
 `;
 
 const CartItemImage = styled(Image) `

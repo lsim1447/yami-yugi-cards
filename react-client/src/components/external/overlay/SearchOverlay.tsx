@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Button, Col, Image, Row } from 'react-bootstrap';
-import  { SearchContext }  from "../../contexts/SearchContext";
-import { ICardDetails } from '../../models/Cards';
-import { findCardsByPartialName } from '../../repositories/CardRepository';
+import  { SearchContext }  from "../../../contexts/SearchContext";
+import { ICardDetails } from '../../../models/Cards';
+import { findCardsByPartialName } from '../../../repositories/CardRepository';
 import {
     WAIT_INTERVAL,
     ENTER_KEY
-} from './../../constants';
+} from './../../../constants';
 
 const OverlayWrapper = styled.div `
     background: url(https://cdn3.iconfinder.com/data/icons/basic-interface/100/search-512.png) center bottom;
@@ -42,9 +42,11 @@ const OverlayWrapper = styled.div `
 
 const CloseIcon = styled.i `
     color: white;
+    float: right;
     font-size: 28px;
-    margin-bottom: 12px;
-    top: 30px;
+    position: absolute;
+    right: 18px;
+    top: 18px;
 `;
 
 const NameInput = styled.input `

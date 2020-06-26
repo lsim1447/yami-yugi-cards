@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import { getOrdersByUserId } from '../repositories/OrderRepository';
 import { IOrder } from '../models/Order';
 import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
-import OrderItem from '../components/external/OrderItem';
+import OrderItem from '../components/external/order/OrderItem';
 import styled from 'styled-components';
 
 const CustomRow = styled(Row) `

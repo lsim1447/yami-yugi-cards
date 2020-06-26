@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { findAllCardsByIds } from '../../repositories/CardRepository';
 import { Modal } from 'react-bootstrap';
-import OrderProductItem from '../external/OrderProductItem';
+import OrderProductItem from '../external/order/OrderProductItem';
 import { ICardDetails } from '../../models/Cards';
 import { IOrder } from '../../models/Order';
 import styled from 'styled-components';

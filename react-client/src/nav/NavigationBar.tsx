@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import  { CardContext }  from "./../contexts/CardContext";
 import  { CheckoutContext }  from "./../contexts/CheckoutContext";
-import AutoComplete from './../components/internal/AutoComplete';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
-import CartOverlay from '../components/external/CartOverlay';
-import SearchOverlay from '../components/external/SearchOverlay';
+import CartOverlay from '../components/external/overlay/CartOverlay';
+import SearchOverlay from '../components/external/overlay/SearchOverlay';
 import {
   isUserSignedIn,
   userSignOut
@@ -47,7 +46,6 @@ const UserName = styled.span `
 `;
 
 function NavigationBar(props: any) {
-  const { cards } = useContext(CardContext);
   const { cartItems } = useContext(CardContext);
   const { user } = useContext(UserContext);
   const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);

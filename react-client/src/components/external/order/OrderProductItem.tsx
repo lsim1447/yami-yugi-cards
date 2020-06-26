@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import { ICardDetails, DEFAULT_CARD_VALUE } from '../../models/Cards';
+import { ICardDetails, DEFAULT_CARD_VALUE } from '../../../models/Cards';
 
 const CartItemWrapper = styled.div `
     border-bottom: 1px solid #D3D3D3;

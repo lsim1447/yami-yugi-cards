@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Breadcrumb, Col, Row } from 'react-bootstrap';
 import { SIDE_BAR_OPTIONS_API } from '../../constants';
 import { BackgroundContainer, CenterWrapper } from '../../components/internal/CommonContainers';
-import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
+import { CloseIcon, SandwichIcon, SideBarMenuLeft, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
 import CustomFlipPagination from '../../components/external/CustomFlipPagination';
 import styled from 'styled-components';
+import '../../special-styles/sidebar-left.css';
 
 const CustomLeftCol = styled(Col) `
   .sidebar_menu {
@@ -26,8 +27,13 @@ const CustomBreadcrumb = styled(Breadcrumb) `
 `;
 
 function Categories() {
-  const [selectedType, setSelectedType] = useState('All');
+  const [selectedType, setSelectedType] = useState<string>('All');
+  const [isLeftSideBarVisible, setIsLeftSideBarVisible] = useState<boolean>(true);
   
+  const toggleSidebar = (show: boolean) => {
+    setIsLeftSideBarVisible(show);
+  }
+
   return (
     <BackgroundContainer theme={
       {
@@ -37,9 +43,9 @@ function Categories() {
       <Row>
         <CustomLeftCol sm={3}>
           <div>
-            <i className="fa fa-bars toggle_menu"></i>
-            <div className="sidebar_menu">
-                <i className="fa fa-times"></i>
+            <SandwichIcon className={"fa fa-bars toggle_menu" + (isLeftSideBarVisible ? "" : " opacity_one")} onClick={() => toggleSidebar(true)}></SandwichIcon>
+            <SideBarMenuLeft className={"sidebar_menu" + (isLeftSideBarVisible ? "" : " hide_menu")}>
+                <CloseIcon className="fa fa-times" onClick={() => toggleSidebar(false)}></CloseIcon>
                 <CenterWrapper>
                     <BoxedItem>
                         Filter the cards by
@@ -66,7 +72,7 @@ function Categories() {
                     })
                 }
                 </SideBarListContainer>
-            </div>
+            </SideBarMenuLeft>
           </div>
         </CustomLeftCol>
         <Col sm={9}>

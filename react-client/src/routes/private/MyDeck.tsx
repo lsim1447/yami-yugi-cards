@@ -6,7 +6,7 @@ import { ICardDetails } from '../../models/Cards';
 import SimpleFlipCard from '../../components/external/card/SimpleFlipCard';
 import { getInitialCardList } from '../../models/Cards';
 import { BackgroundContainer, CenterWrapper } from '../../components/internal/CommonContainers';
-import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
+import { CloseIcon, SandwichIcon, SideBarMenuContainer, SideBarMenuLeft, SideBarMenuRight, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
 import { SIDE_BAR_OPTIONS_API } from '../../constants';
 import { getUserById } from '../../repositories/UserRepository';
 import { findAllCardsByIds } from '../../repositories/CardRepository';
@@ -17,6 +17,7 @@ function MyDeck() {
     const [nrOfCardsToShow] = useState(20);
     const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
+    const [isLeftSideBarVisible, setIsLeftSideBarVisible] = useState<boolean>(true);
     const { user } = useContext(UserContext);
 
     const getDeckValue = () => {
@@ -49,6 +50,10 @@ function MyDeck() {
                     allCardsInYourDeck.filter(card => card.type?.includes(type));
             setCards(filteredCards); 
         }
+    }
+
+    const toggleSidebar = (show: boolean) => {
+        setIsLeftSideBarVisible(show);
     }
 
     useEffect(() => {
@@ -84,9 +89,9 @@ function MyDeck() {
             <Row>
                 <Col sm={3}>
                     <div>
-                        <i className="fa fa-bars toggle_menu"></i>
-                        <div className="sidebar_menu">
-                            <i className="fa fa-times"></i>
+                        <SandwichIcon className={"fa fa-bars toggle_menu"  + (isLeftSideBarVisible ? "" : " opacity_one")} onClick={() => toggleSidebar(true)}></SandwichIcon>
+                        <SideBarMenuLeft className={"sidebar_menu" + (isLeftSideBarVisible ? "" : " hide_menu")}>
+                            <CloseIcon className="fa fa-times" onClick={() => toggleSidebar(false)}></CloseIcon>
                             <CenterWrapper>
                                 <BoxedItem>
                                     Check your 
@@ -113,7 +118,7 @@ function MyDeck() {
                                 })
                             }
                             </SideBarListContainer>
-                        </div>
+                        </SideBarMenuLeft>
                     </div>
                 </Col>
                 <Col sm={7}>
@@ -134,7 +139,7 @@ function MyDeck() {
                 </Col>
                 <Col sm={2}>
                     <SideBarMenuContainer>
-                        <div className="sidebar_menu_right">
+                        <SideBarMenuRight className="sidebar_menu_right">
                             <SideBarListContainer>
                                 <SideBarListItem style={{fontSize: "22px"}}>
                                     Name:  <a href={"/profile"}> {user.username} </a>
@@ -171,7 +176,7 @@ function MyDeck() {
                                     Let's Be Professional. Never Give Up!
                                 </LogoTitle>
                             </CenterWrapper>
-                        </div>
+                        </SideBarMenuRight>
                     </SideBarMenuContainer>
                 </Col>
             </Row>

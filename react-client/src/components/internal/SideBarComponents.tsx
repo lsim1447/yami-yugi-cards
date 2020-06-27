@@ -74,16 +74,15 @@ export const SideBarListContainer = styled.ul `
 `;
 
 export const SideBarListItem = styled.li `
-  font-weight: 600;
-  font-family: 'Open Sans';
-  color: white;
-  padding: 12px 0px;
-  box-sizing: border-box; 
-  font-size: 14px;
-  color: #D8D8D8;
   border-bottom: solid 1px #D8D8D8;
-  transition: all 0.3s ease-in-out;
+  box-sizing: border-box; 
+  color: #D8D8D8;
   cursor: pointer;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 0px;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     color: red;
@@ -115,4 +114,69 @@ export const LogoTitle = styled.h2 `
   font-size: 16px;
   text-align: center;
   padding: 5px 0;
+`;
+
+export const SandwichIcon = styled.i `
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 2em; 
+  opacity: 0;
+  padding: 15px 20px 15px 15px;
+  position: fixed;
+
+  &:hover {
+    background-color: #FE4365;
+    transition: all 0.9s ease-in-out;
+  }
+`;
+
+export const CloseIcon = styled.i `
+    color: white;
+    cursor: pointer;
+    opacity: 0.7;
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    transition: all 0.8s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+`;
+
+export const SideBarMenuLeft = styled.div `
+    background-color: rgba(17, 17, 17, 0.9);
+    margin-left: 0px;
+    min-width: 25%;
+    -ms-overflow-style: none;
+    max-height: 92vh;
+    opacity: 0.9;
+    overflow-y: scroll;
+    position: fixed;
+    transition: all 0.5s ease-in-out;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (max-width: 576px) {
+        position: relative !important;
+        width: 100%;
+    }
+`;
+
+export const SideBarMenuRight = styled.div `
+    background-color: rgba(17, 17, 17, 0.9);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: flex-end;
+    margin-left: 0px;
+    opacity: 0.9;
+    overflow: hidden;
+    padding-bottom: 100px;
+    position: relative;
+    transition: all 1.5s ease-in-out;
+    width: 100%;
 `;

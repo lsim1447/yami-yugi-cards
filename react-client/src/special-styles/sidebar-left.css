@@ -1,95 +1,9 @@
-.fa-times {
-	right: 25px;
-	top: 10px;
-	opacity: 0.7;
-	cursor: pointer;
-	position: absolute;
-	color: white;
-	transition: all 0.8s ease-in-out;
-}
-
-.fa-times:hover {
-	opacity: 1;
-}
-
-.sidebar_menu {
-	background-color: rgba(17,17,17,0.9);
-	overflow-y: scroll;
-	margin-left: 0px;
-	min-width: 25%;
-	-ms-overflow-style: none;
-	max-height: 92vh;
-	position: fixed;
-	opacity: 0.9;
-	transition: all 0.5s ease-in-out;
-}
-
-@media screen and (max-width: 576px) {
-	.sidebar_menu {
-	  position: relative !important;
-	  width: 100%;
-	}
-}
-
-.sidebar_menu_right {
-	display: flex;
-	justify-content: flex-end;
-	flex-direction: column;
-	background-color: rgba(17,17,17,0.9);
-	height: 100vh;
-	margin-left: 0px;
-	opacity: 0.9;
-	overflow: hidden;
-	padding-bottom: 100px;
-	position: relative;
-	transition: all 1.5s ease-in-out;
-	width: 100%;
-}
-
-.sidebar_menu::-webkit-scrollbar {
-    display: none;
-}
-
 .hide_menu {
-	margin-left: -100%;
-	transition: all 1.5s ease-in-out;
-}
-
-.toggle_menu {
-	position: fixed;
-	padding: 15px 20px 15px 15px;
-	color: white;
-	cursor: pointer;
-	background-color: transparent;
-	opacity: 0;
-	z-index: 10000;
-	font-size: 2em; 
-	transition: all 1.5s ease-in-out;
+    margin-left: -100%;
+    transition: all 1.5s ease-in-out;
 }
 
 .opacity_one {
-	opacity: 1;
-	transition: all 0.9s ease-in-out;
-}
-
-.toggle_menu:hover {
-	background-color: #FE4365;
-	transition: all 0.9s ease-in-out;
-}
-
-.menu_close {
-	color: #D8D8D8;
-	position: absolute;
-	right: 8px;
-	opacity: 0.7;
-	top: 6px;
-	font-size: 1.1em;
-	transition: all 0.9s ease-in-out;
-	cursor: pointer;
-}
-
-.menu_close:hover {
-	color: #FE4365;
-	opacity: 1;
-	transition: all 0.9s ease-in-out;
+    opacity: 1;
+    transition: all 0.9s ease-in-out;
 }

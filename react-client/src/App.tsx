@@ -7,20 +7,16 @@ import { SearchProvider } from './contexts/SearchContext';
 import { UserProvider } from './contexts/UserContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 
-import NavigationBarLoadingComponent from './components/external/loading/NavigationBarLoadingComponent';
-import RouterLoadingComponent from './components/external/loading/RouterLoadingComponent';
-import FooterLoadingComponent from './components/external/loading/FooterLoadingComponent';
-
 const NavigationBar = loadableVisibility(() => import('./components/navigation/NavigationBar'), {
-  fallback: <NavigationBarLoadingComponent />
+  fallback: undefined
 });
 
 const MyRouter = loadableVisibility(() => import('./MyRouter'), {
-  fallback: <RouterLoadingComponent />
+  fallback: undefined
 });
 
 const Footer = loadableVisibility(() => import('./components/navigation/Footer'), {
-  fallback: <FooterLoadingComponent />
+  fallback: undefined
 });
 
 function App() {

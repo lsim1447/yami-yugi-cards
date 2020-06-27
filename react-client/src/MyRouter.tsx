@@ -6,69 +6,61 @@ import {
     Switch,
     Redirect
 } from 'react-router-dom';
-
+import RouterLoadingComponent from './components/external/loading/RouterLoadingComponent';
 import { isUserSignedIn } from './services/UserService';
 
-function LoadingComponent(props: any) {
-    return (
-        <div>
-            Loading ...
-        </div>
-    )
-}
-
-const Home = loadableVisibility(() => import('./routes/Home'), {
-    fallback: <LoadingComponent />
+const Home = loadableVisibility(() => import('./routes/public/Home'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const ReadMore = loadableVisibility(() => import('./routes/ReadMore'), {
-    fallback: <LoadingComponent />
+const ReadMore = loadableVisibility(() => import('./routes/public/ReadMore'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const AllCards = loadableVisibility(() => import('./routes/AllCards'), {
-    fallback: <LoadingComponent />
+const AllCards = loadableVisibility(() => import('./routes/public/AllCards'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const Categories = loadableVisibility(() => import('./routes/Categories'), {
-    fallback: <LoadingComponent />
+const Categories = loadableVisibility(() => import('./routes/public/Categories'), {
+    fallback: <RouterLoadingComponent />
 });
 
 /**
  * Private Routes BEGIN
  */
-const MyDeck = loadableVisibility(() => import('./routes/MyDeck'), {
-    fallback: <LoadingComponent />
+const MyDeck = loadableVisibility(() => import('./routes/private/MyDeck'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const Checkout = loadableVisibility(() => import('./routes/Checkout'), {
-    fallback: <LoadingComponent />
+const Checkout = loadableVisibility(() => import('./routes/private/Checkout'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const Profile = loadableVisibility(() => import('./routes/Profile'), {
-    fallback: <LoadingComponent />
+const Profile = loadableVisibility(() => import('./routes/private/Profile'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const Orders = loadableVisibility(() => import('./routes/Orders'), {
-    fallback: <LoadingComponent />
+const Orders = loadableVisibility(() => import('./routes/private/Orders'), {
+    fallback: <RouterLoadingComponent />
 });
 /**
  * Private Routes BEGIN
  */
 
-const SimpleProductPage = loadableVisibility(() => import('./routes/SimpleProductPage'), {
-    fallback: <LoadingComponent />
+const SimpleProductPage = loadableVisibility(() => import('./routes/public/SimpleProductPage'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const SignIn = loadableVisibility(() => import('./routes/SignIn'), {
-    fallback: <LoadingComponent />
+const SignIn = loadableVisibility(() => import('./routes/public/SignIn'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const Test = loadableVisibility(() => import('./routes/Test'), {
-    fallback: <LoadingComponent />
+const Test = loadableVisibility(() => import('./routes/public/Test'), {
+    fallback: <RouterLoadingComponent />
 });
 
-const PageNotFound = loadableVisibility(() => import('./routes/PageNotFound'), {
-    fallback: <LoadingComponent />
+const PageNotFound = loadableVisibility(() => import('./routes/public/PageNotFound'), {
+    fallback: <RouterLoadingComponent />
 });
 
 const isAuthenticated = () => {

@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from "../contexts/UserContext";
-import { IComment, IVote } from '../models/Comment';
-import { ICardDetails } from '../models/Cards';
-import { getCommentsByUserEmail } from '../repositories/CommentRepository';
-import { findAllCardsByIds } from '../repositories/CardRepository';
+import { Alert, Col, Form, Row } from 'react-bootstrap';
+import { UserContext } from "../../contexts/UserContext";
+import { IComment, IVote } from '../../models/Comment';
+import { ICardDetails } from '../../models/Cards';
+import { getCommentsByUserEmail } from '../../repositories/CommentRepository';
+import { findAllCardsByIds } from '../../repositories/CardRepository';
 import {
     getUserByEmailAndPassword,
     updateUserById
-} from '../repositories/UserRepository';
+} from '../../repositories/UserRepository';
+import { IUser } from '../../models/User';
 import styled from 'styled-components';
-import { Alert, Button, Col, Form, Row } from 'react-bootstrap';
-import { IUser } from '../models/User';
 
 const ProfileWrapper = styled.div `
     background: url(/images/ProfileBackground.jpg) fixed;

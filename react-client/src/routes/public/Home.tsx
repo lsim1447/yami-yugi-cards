@@ -1,34 +1,34 @@
 import React from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
 import { Button, Container, Jumbotron } from 'react-bootstrap';
-import DefaultLoadingComponent from '../components/external/loading/DefaultLoadingComponent';
+import DefaultLoadingComponent from '../../components/external/loading/DefaultLoadingComponent';
 import styled from 'styled-components';
 
-const ExodiaTheForbiddenOne = loadableVisibility(() => import('../components/external/sections/ExodiaTheForbiddenOne'), {
+const ExodiaTheForbiddenOne = loadableVisibility(() => import('../../components/external/sections/ExodiaTheForbiddenOne'), {
   fallback: <DefaultLoadingComponent />
 });
 
-const Actors = loadableVisibility(() => import('../components/external/sections/Actors'), {
+const Actors = loadableVisibility(() => import('../../components/external/sections/Actors'), {
   fallback: <DefaultLoadingComponent />
 });
 
-const Kaiba_vs_Yugi = loadableVisibility(() => import('../components/external/sections/Kaiba_vs_Yugi'), {
+const Kaiba_vs_Yugi = loadableVisibility(() => import('../../components/external/sections/Kaiba_vs_Yugi'), {
   fallback: <DefaultLoadingComponent />
 });
 
-const TheSacredBeasts = loadableVisibility(() => import('../components/external/sections/TheSacredBeasts'), {
+const TheSacredBeasts = loadableVisibility(() => import('../../components/external/sections/TheSacredBeasts'), {
   fallback: <DefaultLoadingComponent />
 });
 
-const SealOfOrichalcos = loadableVisibility(() => import('../components/external/sections/SealOfOrichalcos'), {
+const SealOfOrichalcos = loadableVisibility(() => import('../../components/external/sections/SealOfOrichalcos'), {
   fallback: <DefaultLoadingComponent />
 });
 
-const GifGrid = loadableVisibility(() => import('../components/external/sections/GifGrid'), {
+const GifGrid = loadableVisibility(() => import('../../components/external/sections/GifGrid'), {
   fallback: <DefaultLoadingComponent />
 });
 
-const Advertisement = loadableVisibility(() => import('../components/external/sections/Advertisement'), {
+const Advertisement = loadableVisibility(() => import('../../components/external/sections/Advertisement'), {
   fallback: <DefaultLoadingComponent />
 });
 

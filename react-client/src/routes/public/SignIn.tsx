@@ -1,17 +1,15 @@
 import React, { useContext, useState } from 'react';
 import {Col, Row } from 'react-bootstrap';
-import { UserContext } from "../contexts/UserContext";
-import { FacebookButton } from '../components/internal/Buttons';
-import { DEFAULT_USER_VALUE, IUser } from '../models/User';
+import { UserContext } from "../../contexts/UserContext";
+import { FacebookButton } from '../../components/internal/Buttons';
+import { DEFAULT_USER_VALUE, IUser } from '../../models/User';
 import {
     getUserByEmailAndPassword,
     saveUser,
-} from '../repositories/UserRepository';
-import {
-    setSignedUserId
-} from '../services/UserService';
+} from '../../repositories/UserRepository';
+import { setSignedUserId } from '../../services/UserService';
 import styled from 'styled-components';
-import '../special-styles/signin.css';
+import '../../special-styles/signin.css';
 
 const SignInWrapper = styled(Row) `
     min-height: 80vh;

@@ -1,22 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { UserContext } from "../contexts/UserContext";
 import {  CardDeck, Col, Row } from 'react-bootstrap';
-import '../special-styles/sidebar-left.css'
-import { ICardDetails } from '../models/Cards';
-import SimpleFlipCard from '../components/external/card/SimpleFlipCard';
-import { getInitialCardList } from '../models/Cards';
-import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
-import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
-import { SIDE_BAR_OPTIONS_API } from '../constants';
-import {
-    getUserById,
-} from '../repositories/UserRepository';
-import {
-    findAllCardsByIds,
-} from '../repositories/CardRepository';
-import {
-    getSignedUserId,
-} from '../services/UserService';
+import { UserContext } from "../../contexts/UserContext";
+
+import { ICardDetails } from '../../models/Cards';
+import SimpleFlipCard from '../../components/external/card/SimpleFlipCard';
+import { getInitialCardList } from '../../models/Cards';
+import { BackgroundContainer, CenterWrapper } from '../../components/internal/CommonContainers';
+import { SideBarMenuContainer, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
+import { SIDE_BAR_OPTIONS_API } from '../../constants';
+import { getUserById } from '../../repositories/UserRepository';
+import { findAllCardsByIds } from '../../repositories/CardRepository';
+import { getSignedUserId } from '../../services/UserService';
+import '../../special-styles/sidebar-left.css'
 
 function MyDeck() {
     const [nrOfCardsToShow] = useState(20);

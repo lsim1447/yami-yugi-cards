@@ -1,28 +1,28 @@
 import React, { useContext, useState, useEffect } from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
-import RatingsAndReviewsLoading from '../components/external/loading/RatingsAndReviewsLoading';
-import AliceCarousel from 'react-alice-carousel'
-import 'react-alice-carousel/lib/alice-carousel.css'
-import  { CardContext }  from "../contexts/CardContext";
-import { CheckoutContext } from "../contexts/CheckoutContext";
-import  { UserContext }  from "../contexts/UserContext";
 import { Breadcrumb, Button, Card, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
-import { ICardDetails } from '../models/Cards';
-import { getCardById } from '../repositories/CardRepository';
-import Actors from '../components/external/sections/Actors';
-import { DEFAULT_CARD_VALUE} from '../models/Cards';
-import { getInitialCardList } from '../models/Cards';
+import AliceCarousel from 'react-alice-carousel'
+import { CardContext }  from "../../contexts/CardContext";
+import { CheckoutContext } from "../../contexts/CheckoutContext";
+import { UserContext }  from "../../contexts/UserContext";
+import { ICardDetails } from '../../models/Cards';
+import RatingsAndReviewsLoading from '../../components/external/loading/RatingsAndReviewsLoading';
+import { getCardById } from '../../repositories/CardRepository';
+import Actors from '../../components/external/sections/Actors';
+import { DEFAULT_CARD_VALUE} from '../../models/Cards';
+import { getInitialCardList } from '../../models/Cards';
 import {
     ADD_TO_BAG,
     ALREADY_ADDED_TO_YOUR_BAG,
     ALREADY_ADDED_TO_YOUR_DECK,
     MAX_NUMBER_OF_SIMILAR_CARDS
-} from '../constants';
-import { findAllCardsByTypeAndRace } from '../repositories/CardRepository';
-import GifGrid from '../components/external/sections/GifGrid';
+} from '../../constants';
+import { findAllCardsByTypeAndRace } from '../../repositories/CardRepository';
+import GifGrid from '../../components/external/sections/GifGrid';
 import styled from 'styled-components';
+import 'react-alice-carousel/lib/alice-carousel.css'
 
-const RatingsAndReviews = loadableVisibility(() => import('../components/external/RatingsAndReviews'), {
+const RatingsAndReviews = loadableVisibility(() => import('../../components/external/RatingsAndReviews'), {
     fallback: <RatingsAndReviewsLoading />
 });
 

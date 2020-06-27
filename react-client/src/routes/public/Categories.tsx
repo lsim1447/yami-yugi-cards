@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Breadcrumb, Col, Row } from 'react-bootstrap';
-import { SIDE_BAR_OPTIONS_API } from '../constants';
-import { BackgroundContainer, CenterWrapper } from '../components/internal/CommonContainers';
-import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../components/internal/SideBarComponents';
-import CustomFlipPagination from '../components/external/CustomFlipPagination';
+import { SIDE_BAR_OPTIONS_API } from '../../constants';
+import { BackgroundContainer, CenterWrapper } from '../../components/internal/CommonContainers';
+import { SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
+import CustomFlipPagination from '../../components/external/CustomFlipPagination';
 import styled from 'styled-components';
 
 const CustomLeftCol = styled(Col) `

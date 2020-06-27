@@ -10,7 +10,7 @@ const LoadingWrapper = styled.div `
     text-align: center;
 `;
 
-const LoadingGif = styled.div `
+const SpinnerWrapper = styled.div `
     position:absolute;
     left:50%;
     top:50%;
@@ -22,14 +22,12 @@ const CustomSpinner = styled(Spinner) `
     width: 50px;
 `;
 
-function RouterLoadingComponent(props: any) {
-    return (
-        <LoadingWrapper>
-            <LoadingGif>
-                <CustomSpinner animation="border" />
-            </LoadingGif>
-        </LoadingWrapper>
-    )
-}
+const RouterLoadingComponent = () => (
+    <LoadingWrapper>
+        <SpinnerWrapper>
+            <CustomSpinner animation="border" />
+        </SpinnerWrapper>
+    </LoadingWrapper>
+);
 
 export default RouterLoadingComponent;

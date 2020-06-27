@@ -43,8 +43,8 @@ function Categories() {
       <Row>
         <CustomLeftCol sm={3}>
           <div>
-            <SandwichIcon className={"fa fa-bars toggle_menu" + (isLeftSideBarVisible ? "" : " opacity_one")} onClick={() => toggleSidebar(true)}></SandwichIcon>
-            <SideBarMenuLeft className={"sidebar_menu" + (isLeftSideBarVisible ? "" : " hide_menu")}>
+            <SandwichIcon className={"fa fa-bars" + (isLeftSideBarVisible ? "" : " opacity_one")} onClick={() => toggleSidebar(true)}></SandwichIcon>
+            <SideBarMenuLeft className={(isLeftSideBarVisible ? "" : " hide_menu")}>
                 <CloseIcon className="fa fa-times" onClick={() => toggleSidebar(false)}></CloseIcon>
                 <CenterWrapper>
                     <BoxedItem>

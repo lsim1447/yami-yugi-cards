@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {  CardDeck, Col, Row } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
-
 import { ICardDetails } from '../../models/Cards';
 import SimpleFlipCard from '../../components/external/card/SimpleFlipCard';
 import { getInitialCardList } from '../../models/Cards';
@@ -89,8 +88,8 @@ function MyDeck() {
             <Row>
                 <Col sm={3}>
                     <div>
-                        <SandwichIcon className={"fa fa-bars toggle_menu"  + (isLeftSideBarVisible ? "" : " opacity_one")} onClick={() => toggleSidebar(true)}></SandwichIcon>
-                        <SideBarMenuLeft className={"sidebar_menu" + (isLeftSideBarVisible ? "" : " hide_menu")}>
+                        <SandwichIcon className={"fa fa-bars"  + (isLeftSideBarVisible ? "" : " opacity_one")} onClick={() => toggleSidebar(true)}></SandwichIcon>
+                        <SideBarMenuLeft className={(isLeftSideBarVisible ? "" : " hide_menu")}>
                             <CloseIcon className="fa fa-times" onClick={() => toggleSidebar(false)}></CloseIcon>
                             <CenterWrapper>
                                 <BoxedItem>
@@ -139,7 +138,7 @@ function MyDeck() {
                 </Col>
                 <Col sm={2}>
                     <SideBarMenuContainer>
-                        <SideBarMenuRight className="sidebar_menu_right">
+                        <SideBarMenuRight>
                             <SideBarListContainer>
                                 <SideBarListItem style={{fontSize: "22px"}}>
                                     Name:  <a href={"/profile"}> {user.username} </a>

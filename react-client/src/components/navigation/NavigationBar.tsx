@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react';
-import  { CardContext }  from "./../contexts/CardContext";
-import  { CheckoutContext }  from "./../contexts/CheckoutContext";
+import  { CardContext }  from "../../contexts/CardContext";
+import  { CheckoutContext }  from "../../contexts/CheckoutContext";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
-import CartOverlay from '../components/external/overlay/CartOverlay';
-import SearchOverlay from '../components/external/overlay/SearchOverlay';
+import CartOverlay from '../external/overlay/CartOverlay';
+import SearchOverlay from '../external/overlay/SearchOverlay';
 import {
   isUserSignedIn,
   userSignOut
-} from '../services/UserService';
-import { SearchContext } from '../contexts/SearchContext';
-import { UserContext } from '../contexts/UserContext';
+} from '../../services/UserService';
+import { SearchContext } from '../../contexts/SearchContext';
+import { UserContext } from '../../contexts/UserContext';
 
 const NavBarImage = styled.img `
     max-width: 55px;

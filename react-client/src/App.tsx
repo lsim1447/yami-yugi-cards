@@ -11,7 +11,7 @@ import NavigationBarLoadingComponent from './components/external/loading/Navigat
 import RouterLoadingComponent from './components/external/loading/RouterLoadingComponent';
 import FooterLoadingComponent from './components/external/loading/FooterLoadingComponent';
 
-const NavigationBar = loadableVisibility(() => import('./nav/NavigationBar'), {
+const NavigationBar = loadableVisibility(() => import('./components/navigation/NavigationBar'), {
   fallback: <NavigationBarLoadingComponent />
 });
 
@@ -19,7 +19,7 @@ const MyRouter = loadableVisibility(() => import('./MyRouter'), {
   fallback: <RouterLoadingComponent />
 });
 
-const Footer = loadableVisibility(() => import('./nav/Footer'), {
+const Footer = loadableVisibility(() => import('./components/navigation/Footer'), {
   fallback: <FooterLoadingComponent />
 });
 

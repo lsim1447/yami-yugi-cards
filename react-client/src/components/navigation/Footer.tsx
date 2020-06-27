@@ -8,7 +8,7 @@ import {
     FooterCompanyName,
     FooterAboutCompany,
     FooterIcons
-} from "./../components/internal/FooterComponents";
+} from "../internal/FooterComponents";
 
 function Footer() {
 

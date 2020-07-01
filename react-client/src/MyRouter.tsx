@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
 import {
     BrowserRouter as Router,

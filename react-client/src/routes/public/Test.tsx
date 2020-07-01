@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import { CardContext } from "../../contexts/CardContext";
 import { ICardDetails } from '../../models/Cards';

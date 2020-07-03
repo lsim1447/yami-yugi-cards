@@ -108,6 +108,19 @@ const SettingsOverlay = () => {
     if (!isUserSignedIn()) {
         return (
             <SettingsOverlayWrapper theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
+                <LinkWrapper theme={activeTheme}>
+                    <SettingsRow onClick={() => toggleDarkMode()}>
+                        <Col sm={2}>
+                            <i style={{fontSize: "28px"}} className="fa fa-moon-o" aria-hidden="true"></i>
+                        </Col>
+                        <Col sm={7}>
+                            <SettingsText> Dark mode</SettingsText>
+                        </Col>
+                        <Col sm={1}>
+                            <Switch onChange={() => toggleDarkMode()} checked={isDarkModeVisible} />
+                        </Col>
+                    </SettingsRow>
+                </LinkWrapper>
                 <LinkWrapper href={"/signin"} theme={activeTheme}>
                     <SettingsRow>
                         <Col sm={2}>

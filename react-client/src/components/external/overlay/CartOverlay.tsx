@@ -5,6 +5,7 @@ import { CheckoutButton } from '../../internal/ButtonComponents';
 import { CloseIcon } from '../../internal/IconComponents';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext }  from "../../../contexts/CheckoutContext";
+import { ThemeContext }  from "../../../contexts/ThemeContext";
 import { ICardDetails } from '../../../models/Cards';
 
 const CustomRow = styled(Row) `
@@ -14,15 +15,16 @@ const CustomRow = styled(Row) `
 `;
 
 const OverlayWrapper = styled.div `
-    background-color: white;
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
     height: 100vh;
-    overflow-y: scroll;
+    max-width: 500px;
     -ms-overflow-style: none;
+    overflow-y: scroll;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 50000;
-    max-width: 500px;
     width: 100%;
 
     &::-webkit-slider-thumb {
@@ -35,10 +37,17 @@ const OverlayWrapper = styled.div `
     }
 `;
 
+OverlayWrapper.defaultProps = {
+    theme: {
+        backgroundColor: "inherit",
+        color: "inherit"
+    }
+}
+
 const CartItemImage = styled(Image) `
     height: 200px;
     width: 180px;
-    padding-left: 12px;
+    margin-left: 12px;
 `;
 
 const OverlayTitle = styled.p `
@@ -47,6 +56,7 @@ const OverlayTitle = styled.p `
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    color: #000000;
     font-size: 36px;
     font-weight: 800;
     padding-bottom: 12px;
@@ -69,6 +79,7 @@ const TotalPriceWrapper = styled.div `
 const CartOverlay = () => {
     const { cartItems } = useContext(CardContext);
     const { setShowCartOverlay } = useContext(CheckoutContext);
+    const { activeTheme } = useContext(ThemeContext);
 
     const getTotalPrice = () => {
         const totalPrice = cartItems.reduce((accumulator, cartItem) => {
@@ -80,7 +91,7 @@ const CartOverlay = () => {
     }
 
     return (
-        <OverlayWrapper>
+        <OverlayWrapper theme={activeTheme}>
             <CloseIcon 
                 className="fa fa-times"
                 onClick={() => setShowCartOverlay(false)}

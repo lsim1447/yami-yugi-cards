@@ -1,30 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import { isDarkModeActive } from '../services/DarkModeService';
 
-const initialTheme = {
-    backgroundColor: 'white',
-    setBackgroundColor: (color: any) => {},
-    color: 'white',
-    setColor: (color: any) => {},
+type CustomTheme = {
+    backgroundColor: string,
+    color: string,
+    itemBackgroundColor: string,
 }
 
-export const ThemeContext = React.createContext(initialTheme);
+const lightTheme: CustomTheme = {
+    backgroundColor: '#FFFFFF',
+    color: '#000000',
+    itemBackgroundColor: '#e9ecef',
+}
+
+const darkTheme: CustomTheme = {
+    backgroundColor: '#000000',
+    color: '#FAEFEC',
+    itemBackgroundColor: '#272423',
+}
+
+const initialThemeContext = {
+    activeTheme: lightTheme,
+    setActiveTheme: (a: any) => {}
+}
+
+export const ThemeContext = React.createContext(initialThemeContext);
 
 export const ThemeContextConsumer = ThemeContext.Consumer;
 
 export const ThemeProvider = (props: any) => {
-    const [backgroundColor, setBackgroundColor] = useState('white');
-    const [color, setColor] = useState('black');
+    const [activeTheme, setActiveTheme] = useState<CustomTheme>(lightTheme);
 
     useEffect(() => {
-        
+        if (isDarkModeActive()) {
+            setActiveTheme(darkTheme);
+        } else {
+            setActiveTheme(lightTheme);
+        }
     }, []);
 
     return (
         <ThemeContext.Provider value={{
-            backgroundColor: backgroundColor,
-            setBackgroundColor: setBackgroundColor,
-            color: color,
-            setColor: setColor,
+            activeTheme: activeTheme,
+            setActiveTheme: setActiveTheme,
          }}>
             { props.children }
         </ThemeContext.Provider>

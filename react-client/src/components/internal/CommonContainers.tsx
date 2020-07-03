@@ -11,10 +11,22 @@ export const BackgroundContainer = styled.div `
 
 BackgroundContainer.defaultProps = {
     theme: {
-        backgroundImage: ""
+        backgroundImage: ''
     }
 }
 
 export const CenterWrapper = styled.div `
     text-align: center;
 `;
+
+export const SimpleContainer = styled.div `
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''}
+`;
+
+SimpleContainer.defaultProps = {
+    theme: {
+        backgroundColor: '',
+        color: ''
+    }
+}

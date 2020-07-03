@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { IComment, IVote } from '../../models/Comment';
 import { ICardDetails } from '../../models/Cards';
 import {
-    getCurrentMode,
+    isDarkModeActive,
     toggleMode
 } from '../../services/DarkModeService';
 import { getCommentsByUserEmail } from '../../repositories/CommentRepository';
@@ -728,7 +728,7 @@ function Profile() {
                                                 id="custom-switch"
                                                 label=""
                                                 onClick={() => toggleMode()}
-                                                defaultChecked={getCurrentMode()}
+                                                defaultChecked={isDarkModeActive()}
                                             />
                                         </Form>
                                 </DarkModeWrapper>

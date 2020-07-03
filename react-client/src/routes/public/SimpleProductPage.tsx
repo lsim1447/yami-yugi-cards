@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
 import { Card, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import AliceCarousel from 'react-alice-carousel'
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { ICardDetails } from '../../models/Cards';
 import ProductDetails from '../../components/external/spp/ProductDetails';
 import RatingsAndReviewsLoading from '../../components/external/loading/RatingsAndReviewsLoading';
+import { SimpleContainer } from '../../components/internal/CommonContainers';
+import { CustomJumbotron } from '../../components/internal/CustomComponents';
 import { getCardById } from '../../repositories/CardRepository';
 import Actors from '../../components/external/sections/Actors';
 import { DEFAULT_CARD_VALUE} from '../../models/Cards';
@@ -18,10 +21,6 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 const RatingsAndReviews = loadableVisibility(() => import('../../components/external/RatingsAndReviews'), {
     fallback: <RatingsAndReviewsLoading />
 });
-
-const SPPWrapper = styled.div `
-    min-height: 500px;
-`;
 
 const CustomRow = styled(Row) `
     padding: 36px;
@@ -68,6 +67,7 @@ const AliceCarouselImg = styled.img `
 function SimpleProductPage(props: any) {
     const [cardDetails, setCardDetails] = useState(DEFAULT_CARD_VALUE);
     const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
+    const { activeTheme } = useContext(ThemeContext);
     const cardId = (props.match.params && props.match.params.id) ? props.match.params.id : '5ebc4aad221c162fa4dcae6d';
 
     const handleOnDragStart = (e: any) => e.preventDefault()
@@ -97,7 +97,7 @@ function SimpleProductPage(props: any) {
     }, [cardDetails]);
 
     return (
-        <SPPWrapper>
+        <SimpleContainer theme={activeTheme}>
             <CustomRow>
                 <CustomLeftCol sm={5}>
                     <SPPImage
@@ -112,11 +112,11 @@ function SimpleProductPage(props: any) {
                 </Col>
             </CustomRow>
 
-            <Jumbotron fluid>
+            <CustomJumbotron fluid theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                 <Container>
                     We're open and accepting orders! The health and well-being of our customers, employees and community is of the utmost importance to us. Due to modified operations put in place to help protect those working at the distribution centers, some orders may experience a processing delay up to 6 business days. We apologize for any inconvenience and appreciate your understanding. We are committed to delivering your orders as soon as possible!
                 </Container>
-            </Jumbotron>
+            </CustomJumbotron>
 
             <SPPImageWrapper />
 
@@ -153,7 +153,7 @@ function SimpleProductPage(props: any) {
             <Actors />
 
             <RatingsAndReviews cardDetails={cardDetails}/>
-        </SPPWrapper>
+        </SimpleContainer>
     );
 }
 

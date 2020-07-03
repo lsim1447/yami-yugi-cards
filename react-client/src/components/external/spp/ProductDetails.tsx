@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Breadcrumb, Button, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
+import { CustomBreadcrumb, CustomJumbotron } from '../../internal/CustomComponents';
 import { AddToBagButton } from '../../internal/ButtonComponents';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext } from "../../../contexts/CheckoutContext";
 import { UserContext }  from "../../../contexts/UserContext";
+import { ThemeContext }  from "../../../contexts/ThemeContext";
 import { ICardDetails } from '../../../models/Cards';
 import {
     ADD_TO_BAG,
@@ -45,6 +47,7 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
     const { cartItems, setCartItems } = useContext(CardContext);
     const { setShowCartOverlay } = useContext(CheckoutContext);
     const { user } = useContext(UserContext);
+    const { activeTheme } = useContext(ThemeContext);
 
     const addToCart = (product?: ICardDetails) => {
         let productIDs = localStorage.getItem('card_ids');
@@ -88,19 +91,19 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
 
     return (
         <div>
-            <Breadcrumb>
-                <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item href="/all-cards">
+            <CustomBreadcrumb theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
+                <CustomBreadcrumb.Item href="/">Home</CustomBreadcrumb.Item>
+                    <CustomBreadcrumb.Item href="/all-cards">
                         Cards
-                    </Breadcrumb.Item>
-                <Breadcrumb.Item active> {productDetails.name} </Breadcrumb.Item>
-            </Breadcrumb>
+                    </CustomBreadcrumb.Item>
+                <CustomBreadcrumb.Item active> {productDetails.name} </CustomBreadcrumb.Item>
+            </CustomBreadcrumb>
             <CardName> {productDetails.name} </CardName>
-            <Jumbotron fluid>
+            <CustomJumbotron fluid theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                 <Container>
                     {productDetails.desc}
                 </Container>
-            </Jumbotron>
+            </CustomJumbotron>
             <DetailsWrapper>
                 <Row style={{borderTop: "1px solid #D3D3D3", paddingTop: "12px"}}>
                     <Col>
@@ -142,6 +145,7 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
                                         type="switch"
                                         id="custom-switch"
                                         label=""
+                                        disabled
                                     />
                                 </Form>
                             </Col>

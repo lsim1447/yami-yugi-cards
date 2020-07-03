@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import CustomFlipPagination from '../../components/external/CustomFlipPagination';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ const TitleWrapper = styled.div `
 `;
 
 function AllCards() {
+    const { activeTheme } = useContext(ThemeContext);
 
     return (
         <div>
@@ -21,7 +23,7 @@ function AllCards() {
                 Make your deck insuperable
             </TitleWrapper>
             <CustomFlipPagination
-                backgroundColor={"white"}
+                backgroundColor={activeTheme.backgroundColor}
                 cardsPerPage={24}
                 pageBound={5}
             />

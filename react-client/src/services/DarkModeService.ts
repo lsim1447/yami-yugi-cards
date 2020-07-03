@@ -1,4 +1,4 @@
-export const getCurrentMode = () => {
+export const isDarkModeActive = () => {
     if (localStorage.getItem('isDarkModeOn') === 'YES') {
         return true;
     } else {

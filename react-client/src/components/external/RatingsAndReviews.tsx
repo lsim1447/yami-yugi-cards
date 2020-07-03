@@ -93,7 +93,6 @@ const WasThisHelpful = styled.div `
 
 const NoCommentsWrapper = styled(Row) `
     border-bottom: 1px solid #D3D3D3;
-    margin-bottom: 24px;
 `;
 
 const NoCommentsParagraph = styled.p `

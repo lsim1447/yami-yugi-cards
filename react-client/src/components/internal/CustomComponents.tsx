@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Col } from 'react-bootstrap';
+import { Breadcrumb, Col, Jumbotron } from 'react-bootstrap';
 
 const CustomCol = styled(Col) `
     border-left: 1px solid #D3D3D3;
@@ -56,5 +56,47 @@ export const CustomRightCol = styled(CustomCol) `
 CustomRightCol.defaultProps = {
     theme: {
         backgroundImage: ""
+    }
+}
+
+export const CustomJumbotron = styled(Jumbotron) `
+    background-color: ${props => 
+        (props && props.theme && props.theme.backgroundColor) ?
+            props.theme.backgroundColor :
+            ''
+    };
+    color: ${props => 
+        (props && props.theme && props.theme.color) ?
+            props.theme.color :
+            ''
+    }
+`;
+
+CustomJumbotron.defaultProps = {
+    theme: {
+        backgroundColor: "inherit",
+        color: "inherit"
+    }
+}
+
+export const CustomBreadcrumb = styled(Breadcrumb) `
+    ol {
+        background-color: ${props => 
+            (props && props.theme && props.theme.backgroundColor) ?
+                props.theme.backgroundColor :
+                ''
+        };
+    }
+    color: ${props => 
+        (props && props.theme && props.theme.color) ?
+            props.theme.color :
+            ''
+    }
+`;
+
+CustomBreadcrumb.defaultProps = {
+    theme: {
+        backgroundColor: "inherit",
+        color: "inherit"
     }
 }

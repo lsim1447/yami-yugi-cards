@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext} from 'react';
+import { ThemeContext } from '../../../contexts/ThemeContext';
+import { Container } from 'react-bootstrap';
+import { CustomJumbotron } from '../../internal/CustomComponents';
 import styled from 'styled-components';
-import { Container, Jumbotron } from 'react-bootstrap';
 
 const AdvertisementWrapper = styled.div `
+    background-color: transparent;
     width: 100%;
 `;
 
@@ -22,9 +25,11 @@ const DarkButton = styled.a `
 `;
 
 const Advertisement = () => {
+    const { activeTheme } = useContext(ThemeContext);
+
     return (
         <AdvertisementWrapper>
-            <Jumbotron fluid>
+            <CustomJumbotron fluid theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                 <Container>
                     <BoldParagraph>
                         Don't hesitate!
@@ -34,7 +39,7 @@ const Advertisement = () => {
                     </BoldParagraph>
                     <DarkButton href="/all-cards"> SHOP NOW </DarkButton>
                 </Container>
-            </Jumbotron>
+            </CustomJumbotron>
         </AdvertisementWrapper>
     );
 }

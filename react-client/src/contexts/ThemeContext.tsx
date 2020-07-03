@@ -10,7 +10,7 @@ type CustomTheme = {
 const lightTheme: CustomTheme = {
     backgroundColor: '#FFFFFF',
     color: '#000000',
-    itemBackgroundColor: '#e9ecef',
+    itemBackgroundColor: '#E9ECEF',
 }
 
 const darkTheme: CustomTheme = {

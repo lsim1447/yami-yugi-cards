@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
 import { Button, Container, Jumbotron } from 'react-bootstrap';
+import { SimpleContainer } from '../../components/internal/CommonContainers';
+import { CustomJumbotron } from '../../components/internal/CustomComponents';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import DefaultLoadingComponent from '../../components/external/loading/DefaultLoadingComponent';
 import styled from 'styled-components';
 
@@ -59,9 +62,11 @@ const YuGiOhAdvWrapper = styled.div `
 `;
 
 function Home() {
+  const { activeTheme } = useContext(ThemeContext);
+
   return (
-    <HomePageWrapper>
-      <Jumbotron>
+    <SimpleContainer theme={activeTheme}>
+      <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
         <Title>How To Play Yu-Gi-Oh!?</Title>
         <p>
           Yu-Gi-Oh! (or just YuGiOh) is a card game in which two players attempt to defeat each other by decreasing their opponent's Life Points (down to 0) 
@@ -70,11 +75,11 @@ function Home() {
             <ReadMoreButton variant="dark">Read More</ReadMoreButton>
           </a>
         </p>
-      </Jumbotron>
+      </CustomJumbotron>
 
       <YuGiOhAdvWrapper />
 
-      <Jumbotron fluid>
+      <CustomJumbotron fluid theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
         <Container>
           <Title>Take your Card</Title>
           <p>
@@ -82,7 +87,7 @@ function Home() {
             Buy and sell directly on a player-to-player basis - no risks with Trust service™. Guaranteed best prices for more than 10.000 YuGiOh! cards. 
           </p>
         </Container>
-      </Jumbotron>
+      </CustomJumbotron>
 
       <ExodiaTheForbiddenOne />
 
@@ -100,8 +105,7 @@ function Home() {
       <Actors />
 
       <Advertisement />
-
-    </HomePageWrapper>
+    </SimpleContainer>
   );
 }
 

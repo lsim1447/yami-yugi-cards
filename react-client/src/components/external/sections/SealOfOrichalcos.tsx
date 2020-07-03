@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import styled from 'styled-components';
-import { Container, Jumbotron } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { CustomJumbotron } from '../../internal/CustomComponents';
 import GifGrid from './GifGrid';
 
 const Title = styled.h1 `
@@ -9,13 +11,15 @@ const Title = styled.h1 `
 `;
 
 const SealOfOrichalcos = () => {
+    const { activeTheme } = useContext(ThemeContext);
+
     return (
         <div>
             <GifGrid 
                 gif1_url="/images/seal-of-orichalos.jpg"
                 gif2_url="/images/seal-of-orichalos-yugi.jpg"
             />
-            <Jumbotron fluid>
+            <CustomJumbotron fluid theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                 <Container>
                     <Title>
                         <a href="/card/5ebc4d96221c162fa4dcd2fe">
@@ -29,7 +33,7 @@ const SealOfOrichalcos = () => {
                         You cannot Special Summon monsters from the Extra Deck. You can only activate "The Seal of Orichalcos" once per Duel.
                     </p>
                 </Container>
-            </Jumbotron>
+            </CustomJumbotron>
         </div>
     );
 }

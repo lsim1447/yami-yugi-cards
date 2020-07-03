@@ -65,11 +65,14 @@ export const CustomJumbotron = styled(Jumbotron) `
             props.theme.backgroundColor :
             ''
     };
+    border-bottom: 1px solid #D3D3D3;
+    border-top: 1px solid #D3D3D3;
     color: ${props => 
         (props && props.theme && props.theme.color) ?
             props.theme.color :
             ''
-    }
+    };
+    margin-bottom: 0px;
 `;
 
 CustomJumbotron.defaultProps = {

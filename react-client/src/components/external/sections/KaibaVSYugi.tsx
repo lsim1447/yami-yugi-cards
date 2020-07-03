@@ -1,38 +1,7 @@
 import React from 'react';
-import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import { Container, Jumbotron, Row } from 'react-bootstrap';
+import { CustomLeftCol, CustomCenterCol, CustomRightCol } from '../../internal/CustomComponents';
 import styled from 'styled-components';
-
-const LeftCol = styled(Col) `
-    background: url(/images/home-page-video-left-col.jpg) top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    
-    @media (max-width: 992px) {
-        display: none;
-    }
-`;
-
-const CenterCol = styled(Col) `
-    @media (max-width: 992px) {
-        width: 100%;
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-`;
-
-const RightCol = styled(Col) `
-    background: url(/images/home-page-video-right-col.jpg) top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    
-    @media (max-width: 992px) {
-        display: none;
-    }
-`;
 
 const ExodiaVideoWrapper = styled(Row) `
     height: 100%;
@@ -51,10 +20,10 @@ const Title = styled.h1 `
     text-align: center;
 `;
 
-const Kaiba_vs_Yugi = () => (
+const KaibaVSYugi = () => (
         <ExodiaVideoWrapper>
-            <LeftCol sm={2}></LeftCol>
-            <CenterCol sm={8}>
+            <CustomLeftCol sm={2} theme={{backgroundImage: '/images/home-page-video-left-col.jpg'}} />
+            <CustomCenterCol sm={8}>
                 <Jumbotron fluid>
                     <Container>
                         <Title>Kaiba vs Yugi</Title>
@@ -70,9 +39,9 @@ const Kaiba_vs_Yugi = () => (
                     title='video'
                     src="https://www.youtube.com/embed/UtVHpY-oU4Y?autoplay=0&fs=1&iv_load_policy=3&showinfo=1&rel=0&cc_load_policy=1&start=&end=0&origin=https://youtubeembedcode.com">
                 </CustomIFrame>
-            </CenterCol>
-            <RightCol sm={2}></RightCol>
+            </CustomCenterCol>
+            <CustomRightCol sm={2} theme={{backgroundImage: '/images/home-page-video-right-col.jpg'}} />
         </ExodiaVideoWrapper>
 );
 
-export default Kaiba_vs_Yugi;
+export default KaibaVSYugi;

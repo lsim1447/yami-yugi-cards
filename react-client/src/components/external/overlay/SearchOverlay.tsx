@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Button, Col, Image, Row } from 'react-bootstrap';
+import { Col, Image, Row } from 'react-bootstrap';
+import { CloseIcon } from '../../internal/IconComponents';
 import  { SearchContext }  from "../../../contexts/SearchContext";
 import { ICardDetails } from '../../../models/Cards';
 import { findCardsByPartialName } from '../../../repositories/CardRepository';
@@ -38,15 +39,6 @@ const OverlayWrapper = styled.div `
         min-width: 100%
         width: 100%;
     }
-`;
-
-const CloseIcon = styled.i `
-    color: white;
-    float: right;
-    font-size: 28px;
-    position: absolute;
-    right: 18px;
-    top: 18px;
 `;
 
 const NameInput = styled.input `
@@ -128,6 +120,7 @@ const SearchOverlay = () => {
             <CloseIcon 
                 className="fa fa-times"
                 onClick={() => setShowSearchOverlay(false)}
+                theme={{color: "white", top: "24px"}}
             />
             
             <NameInput 
@@ -158,7 +151,6 @@ const SearchOverlay = () => {
                                 <SearchItemField><strong> Race: </strong>{product.race ? product.race : 'N/A'}</SearchItemField>
                                 <SearchItemField><strong> Archetype: </strong>{product.archetype ? product.archetype : 'N/A'}</SearchItemField>
                                 <SearchItemField><strong> Price: </strong>{product.card_prices[0].amazon_price}$</SearchItemField>
-                                 
                             </Col>
                         </SearchItemWrapper>
                     )

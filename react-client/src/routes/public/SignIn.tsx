@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import {Col, Row } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
-import { FacebookButton } from '../../components/internal/Buttons';
+import { FacebookButton } from '../../components/internal/ButtonComponents';
 import { DEFAULT_USER_VALUE, IUser } from '../../models/User';
 import {
     getUserByEmailAndPassword,

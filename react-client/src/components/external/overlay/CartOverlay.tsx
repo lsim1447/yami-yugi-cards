@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Button, Col, Image, Row } from 'react-bootstrap';
-import  { CardContext }  from "../../../contexts/CardContext";
-import  { CheckoutContext }  from "../../../contexts/CheckoutContext";
+import { Col, Image, Row } from 'react-bootstrap';
+import { CheckoutButton } from '../../internal/ButtonComponents';
+import { CloseIcon } from '../../internal/IconComponents';
+import { CardContext }  from "../../../contexts/CardContext";
+import { CheckoutContext }  from "../../../contexts/CheckoutContext";
 import { ICardDetails } from '../../../models/Cards';
 
 const CustomRow = styled(Row) `
@@ -31,26 +33,6 @@ const OverlayWrapper = styled.div `
     &::-webkit-scrollbar {
         display: none;
     }
-`;
-
-const CheckoutButton = styled(Button) `
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 36px;
-    padding-bottom: 12px;
-    padding-top: 12px;
-    width: 100%;
-`;
-
-const CloseIcon = styled.i `
-    color: black !important;
-    float: right;
-    font-size: 36px;
-    margin-bottom: 12px;
-    padding: 8px;
-    right: 8px !important;
 `;
 
 const CartItemImage = styled(Image) `
@@ -86,7 +68,7 @@ const TotalPriceWrapper = styled.div `
 
 const CartOverlay = () => {
     const { cartItems } = useContext(CardContext);
-    const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
+    const { setShowCartOverlay } = useContext(CheckoutContext);
 
     const getTotalPrice = () => {
         const totalPrice = cartItems.reduce((accumulator, cartItem) => {

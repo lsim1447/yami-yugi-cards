@@ -3,6 +3,10 @@ import { Alert, Col, Form, Row } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
 import { IComment, IVote } from '../../models/Comment';
 import { ICardDetails } from '../../models/Cards';
+import {
+    getCurrentMode,
+    toggleMode
+} from '../../services/DarkModeService';
 import { getCommentsByUserEmail } from '../../repositories/CommentRepository';
 import { findAllCardsByIds } from '../../repositories/CardRepository';
 import {
@@ -449,8 +453,22 @@ const SavePasswordTitle = styled.p `
     padding: 12px 18px 0px 18px;
 `;
 
+const DarkModeWrapper = styled.p`
+    border-left: 1px solid #D3D3D3;
+    float: right;
+    padding: 0px 24px;
+    margin: 12px 12px;
+    min-widht: 100%;
+    text-align: right;
+`;
+
+const DarkModeText = styled.span `
+    font-size: 24px;
+    font-weight: 600;
+`;
+
 function Profile() {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [comments, setComments] = useState<IComment[]>([]);
     const [cards, setCards] = useState<ICardDetails[]>([]);
     const [currentPassword, setCurrentPassword] = useState<string>('');
@@ -701,6 +719,19 @@ function Profile() {
                                     Basically, if your website collects personal data, you need a privacy policy that informs your users about this according to privacy laws in most jurisdictions, including the EU and the US.
                                     Almost all modern websites function with the use of cookies, so chances are high that your website is collecting personal data, for example for statistical, functional or marketing purposes.
                                 </p>
+                                <DarkModeWrapper>
+                                        <DarkModeText>Dark Mode</DarkModeText>
+                                        <Form>
+                                            <Form.Check 
+                                                style={{paddingTop: "8px", paddingRight: "40px"}}
+                                                type="switch"
+                                                id="custom-switch"
+                                                label=""
+                                                onClick={() => toggleMode()}
+                                                defaultChecked={getCurrentMode()}
+                                            />
+                                        </Form>
+                                </DarkModeWrapper>
                                 <SavePasswordTitle>Want to change you password?</SavePasswordTitle>
                                 <Form>
                                     <Form.Group controlId="currentPassword">

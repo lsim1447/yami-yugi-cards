@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Breadcrumb, Button, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
+import { AddToBagButton } from '../../internal/ButtonComponents';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext } from "../../../contexts/CheckoutContext";
 import { UserContext }  from "../../../contexts/UserContext";
@@ -35,25 +36,14 @@ const PriceText = styled(SimpleText) `
     font-weight: 700;
 `;
 
-const AddToBagButton = styled(Button) `
-    background-color: black;
-    color: white;
-    font-size: 24px;
-    font-weight: 600;
-    padding-bottom: 24px;
-    padding-top: 24px;
-    width: 100%;
-`;
-
-
 type ProductDetailsProps = {
     productDetails: ICardDetails
 }
 
 function ProductDetails({ productDetails } : ProductDetailsProps) {
-    const [addToBagButtonText, setAddToBagButtonText] = useState<string>('ADD TO BAG');
+    const [addToBagButtonText, setAddToBagButtonText] = useState<string>(ADD_TO_BAG);
     const { cartItems, setCartItems } = useContext(CardContext);
-    const { showCartOverlay, setShowCartOverlay } = useContext(CheckoutContext);
+    const { setShowCartOverlay } = useContext(CheckoutContext);
     const { user } = useContext(UserContext);
 
     const addToCart = (product?: ICardDetails) => {
@@ -159,7 +149,7 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
                         <SimpleText> Subscription orders ship free. </SimpleText>
                         <div> 
                             <SimpleText> Select Frequency </SimpleText>
-                            <Form style={{ display: "inline-block", paddingLeft: "8px", maxWidth: "90px", }}>
+                            <Form style={{ display: "inline-block", paddingLeft: "8px", maxWidth: "90px"}}>
                                 <Form.Group controlId="exampleForm.SelectCustomSizeSm">
                                     <Form.Control as="select" size="sm" custom>
                                         <option> Delivery in ONE day </option>

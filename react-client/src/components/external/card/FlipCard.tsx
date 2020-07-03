@@ -40,11 +40,7 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
     return (
         <>
             <Card style={{minWidth: "290px", marginBottom: "24px", backgroundColor: backgroundColor, color: color}} onClick={() => setModalShow(true)}>
-                <FlipCardContainer theme={
-                    {
-                        backgroundColor: "#eee9e5",
-                    }
-                }>
+                <FlipCardContainer theme={{backgroundColor: "#eee9e5"}}>
                     <FlipCardInner>
                         <FlipCardFront>
                             <Card.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(cardDetails.card_images && cardDetails.card_images.length) ? cardDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />

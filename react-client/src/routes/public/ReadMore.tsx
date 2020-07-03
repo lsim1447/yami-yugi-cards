@@ -2,30 +2,22 @@ import React from 'react';
 import { Alert, Breadcrumb, Col, Jumbotron, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const CustomCol = styled(Col) `
-    border-left: 1px solid #D3D3D3;
-    border-right: 1px solid #D3D3D3;
-    min-height: 100vh;
-`;
-
-const LeftCol = styled(CustomCol) `
-    background-color: transparent;
-
+const LeftCol = styled(Col) `
     @media (max-width: 992px) {
         display: none;
     }
 `;
 
-const CenterCol = styled(CustomCol) `
+const CenterCol = styled(Col) `
+    min-height: 100vh;
+    
     @media (max-width: 992px) {
         max-width: 100%;
         flex: 0 0 100%;
     }
 `;
 
-const RightCol = styled(CustomCol) `
-    background-color: transparent;
-
+const RightCol = styled(Col) `
     @media (max-width: 992px) {
         display: none;
     }

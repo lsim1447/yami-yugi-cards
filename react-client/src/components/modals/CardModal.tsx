@@ -22,17 +22,7 @@ type CartModalProps = {
 }
 
 function CardModal({card, onHide, show}: CartModalProps) {
-  const [isCardAlreadyAdded, setIsCardAlreadyAdded] = useState<boolean>(false);
   const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
-
-  useEffect(() => {
-    const cardIDs = localStorage.getItem('card_ids');
-    
-    if (cardIDs) {
-      const tmpIsAlreadyAdded = cardIDs.split('|').some(id => id === card?._id);
-      setIsCardAlreadyAdded(tmpIsAlreadyAdded);
-    }
-  }, []);
 
   useEffect(() => {
     if (show) {
@@ -77,7 +67,7 @@ function CardModal({card, onHide, show}: CartModalProps) {
                     
                     <Card.Footer>
                       <PriceContainer>
-                        Price on Amazon: {(c && c.card_prices && c.card_prices[0]) ? c.card_prices[0].amazon_price : ''} $
+                        Price: {(c && c.card_prices && c.card_prices[0]) ? c.card_prices[0].amazon_price : ''} $
                       </PriceContainer>
                     </Card.Footer>
                   </Carousel.Item>

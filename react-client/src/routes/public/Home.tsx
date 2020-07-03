@@ -12,7 +12,7 @@ const Actors = loadableVisibility(() => import('../../components/external/sectio
   fallback: <DefaultLoadingComponent />
 });
 
-const Kaiba_vs_Yugi = loadableVisibility(() => import('../../components/external/sections/Kaiba_vs_Yugi'), {
+const KaibaVSYugi = loadableVisibility(() => import('../../components/external/sections/KaibaVSYugi'), {
   fallback: <DefaultLoadingComponent />
 });
 
@@ -86,7 +86,7 @@ function Home() {
 
       <ExodiaTheForbiddenOne />
 
-      <Kaiba_vs_Yugi />
+      <KaibaVSYugi />
 
       <TheSacredBeasts />
 

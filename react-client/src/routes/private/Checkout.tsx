@@ -1,51 +1,18 @@
 import React, { useContext } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { CardContext } from "../../contexts/CardContext";
 import { UserContext } from "../../contexts/UserContext";
 import CartItem from '../../components/external/cart/CartItem';
+import { CustomLeftCol, CustomCenterCol, CustomRightCol } from '../../components/internal/CustomComponents';
+import { SubmitOrderButton } from '../../components/internal/ButtonComponents';
 import { ICardDetails } from '../../models/Cards';
 import { IUser } from '../../models/User';
 import { IOrder, DEFAULT_ORDER_VALUE } from '../../models/Order';
 import { updateUserById } from '../../repositories/UserRepository';
 import { saveOrder } from '../../repositories/OrderRepository';
-import styled from 'styled-components';
 import { confirmAlert } from 'react-confirm-alert';
+import styled from 'styled-components';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
-const CustomCol = styled(Col) `
-    border-left: 1px solid #D3D3D3;
-    border-right: 1px solid #D3D3D3;
-    min-height: 100vh;
-`;
-
-const LeftCol = styled(CustomCol) `
-    background: url(/images/checkout-left.jpg) top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    @media (max-width: 992px) {
-        display: none;
-    }
-`;
-
-const CenterCol = styled(CustomCol) `
-    @media (max-width: 992px) {
-        max-width: 100%;
-        flex: 0 0 100%;
-    }
-`;
-
-const RightCol = styled(CustomCol) `
-    background: url(/images/checkout-right.jpg) top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    @media (max-width: 992px) {
-        display: none;
-    }
-`;
 
 const BagWrapper = styled.div `
     font-size: 30px;
@@ -55,18 +22,7 @@ const BagWrapper = styled.div `
     width: 100%;
 `;
 
-const CheckoutButton = styled(Button)`
-    background-color: black;
-    float: right;
-    margin-bottom: 24px;
-    padding: 12px 60px;
-
-    @media (max-width: 992px) {
-        width: 100%;
-    }
-`;
-
-const CheckoutFooterWrapper = styled.div `
+const SubmitYourOrderWrapper = styled.div `
     border-top: 1px solid #D3D3D3;
     padding-top: 24px;
     width: 100%;
@@ -154,7 +110,7 @@ function Checkout() {
 
                         confirmAlert({
                             title: 'Checkout completed!',
-                            message: 'The desired cards were added to your deck successfully!',
+                            message: 'The desired cards were added to your DECK successfully!',
                             buttons: [
                             {
                                 label: 'Go to the My Deck page',
@@ -177,8 +133,8 @@ function Checkout() {
 
     return (
         <Row>
-            <LeftCol sm={3}/>
-            <CenterCol sm={6}>
+            <CustomLeftCol sm={3} theme={{backgroundImage: '/images/checkout-left.jpg'}}/>
+            <CustomCenterCol sm={6}>
                 <DescriptionWrapper>
                     Yu-Gi-Oh! is a Japanese manga series about gaming written and illustrated by Kazuki Takahashi.
                     It was serialized in Shueisha's Weekly Shōnen Jump magazine between September 30, 1996 and March 8, 2004.
@@ -203,17 +159,17 @@ function Checkout() {
                     })
                 }
                 <TotalPrice> TOTAL PRICE: {getTotalPrice()} $</TotalPrice>
-                <CheckoutFooterWrapper>
-                    <CheckoutButton
+                <SubmitYourOrderWrapper>
+                    <SubmitOrderButton
                         disabled={!cartItems.length}
                         onClick={() => checkoutCartItems()}
                         variant="dark"
                     >
                             SUBMIT YOUR ORDER
-                    </CheckoutButton>
-                </CheckoutFooterWrapper>
-            </CenterCol>
-            <RightCol sm={3}/>
+                    </SubmitOrderButton>
+                </SubmitYourOrderWrapper>
+            </CustomCenterCol>
+            <CustomRightCol sm={3} theme={{backgroundImage: '/images/checkout-right.jpg'}} />
         </Row>
     );
 }

@@ -4,6 +4,7 @@ import loadableVisibility from "react-loadable-visibility/loadable-components";
 import { CardProvider } from './contexts/CardContext';
 import { CheckoutProvider } from './contexts/CheckoutContext';
 import { SearchProvider } from './contexts/SearchContext';
+import { SettingsProvider } from './contexts/SettingsContext';
 import { UserProvider } from './contexts/UserContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -25,11 +26,13 @@ function App() {
       <UserProvider>
         <CardProvider>
           <SearchProvider>
-            <CheckoutProvider>
-              <NavigationBar />
-              <MyRouter />
-              <Footer />
-            </CheckoutProvider>
+            <SettingsProvider>
+              <CheckoutProvider>
+                <NavigationBar />
+                <MyRouter />
+                <Footer />
+              </CheckoutProvider>
+            </SettingsProvider>
           </SearchProvider>
         </CardProvider>
       </UserProvider>

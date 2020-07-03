@@ -12,4 +12,5 @@ export const setSignedUserId = (userId: string) => {
 
 export const userSignOut = () => {
     localStorage.removeItem('user_id');
+    window.location.href = '/signin';
 }

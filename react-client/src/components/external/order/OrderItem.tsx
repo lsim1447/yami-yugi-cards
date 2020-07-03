@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { Container, Jumbotron } from 'react-bootstrap';
-import styled from 'styled-components';
+import React, { useContext, useState } from 'react';
+import { ThemeContext } from '../../../contexts/ThemeContext';
+import { Container } from 'react-bootstrap';
+import { CustomJumbotron } from '../../internal/CustomComponents';
 import OrderModal from '../../modals/OrderModal';
 import { IOrder } from '../../../models/Order';
+import styled from 'styled-components';
 
 const ShowDetailsButton = styled.button `
     background-color: white;
@@ -35,9 +37,10 @@ export type OrderItemProps = {
 
 const OrderItem = ({ order } : OrderItemProps) => {
     const [show, setShow] = useState<boolean>(false);
-
+    const { activeTheme } = useContext(ThemeContext);
+    
     return (
-        <Jumbotron key={order._id} fluid>
+        <CustomJumbotron key={order._id} fluid theme={activeTheme}>
             <Container>
                 <h3>Order number: {order._id}</h3>
                 <ShowDetailsButton onClick={() => setShow(true)}>Show details</ShowDetailsButton>
@@ -54,7 +57,7 @@ const OrderItem = ({ order } : OrderItemProps) => {
                 show={show}
                 setShow={setShow}  
             />
-        </Jumbotron>
+        </CustomJumbotron>
     );
 }
 

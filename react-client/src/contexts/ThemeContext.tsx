@@ -21,7 +21,8 @@ const darkTheme: CustomTheme = {
 
 const initialThemeContext = {
     activeTheme: lightTheme,
-    setActiveTheme: (a: any) => {}
+    setActiveTheme: (a: any) => {},
+    setActiveThemeNow: (a: any) => {}
 }
 
 export const ThemeContext = React.createContext(initialThemeContext);
@@ -30,6 +31,14 @@ export const ThemeContextConsumer = ThemeContext.Consumer;
 
 export const ThemeProvider = (props: any) => {
     const [activeTheme, setActiveTheme] = useState<CustomTheme>(lightTheme);
+
+    const setActiveThemeNow = (isDarkTheme: boolean) => {
+        if (isDarkTheme) {
+            setActiveTheme(darkTheme);
+        } else {
+            setActiveTheme(lightTheme);
+        }
+    }
 
     useEffect(() => {
         if (isDarkModeActive()) {
@@ -43,6 +52,7 @@ export const ThemeProvider = (props: any) => {
         <ThemeContext.Provider value={{
             activeTheme: activeTheme,
             setActiveTheme: setActiveTheme,
+            setActiveThemeNow: setActiveThemeNow
          }}>
             { props.children }
         </ThemeContext.Provider>

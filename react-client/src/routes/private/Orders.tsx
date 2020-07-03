@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
 import { UserContext } from '../../contexts/UserContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { getOrdersByUserId } from '../../repositories/OrderRepository';
 import { IOrder } from '../../models/Order';
 import OrderItem from '../../components/external/order/OrderItem';
 import styled from 'styled-components';
 
 const CustomRow = styled(Row) `
-
+    background-color: black;
+    color: white;
 `;
 
 const CustomLeftCol = styled(Col) `
@@ -59,7 +61,8 @@ const CoverWrapper = styled.div `
 `;
 
 const TitleWrapper = styled.div `
-    background-color: #e9ecef;
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
     margin-bottom: 16px;
     padding: 24px;
     width: 100%;
@@ -76,6 +79,7 @@ const TitleText = styled.p `
 function Orders() {
     const [orders, setOrders] = useState<IOrder[]>([]);
     const { user } = useContext(UserContext);
+    const { activeTheme } = useContext(ThemeContext);
 
     useEffect(() => {
         if (user && user._id) {
@@ -89,10 +93,9 @@ function Orders() {
     return (
         <CustomRow>
             <CustomLeftCol sm={3}/>
-            
             <CustomCenterCol sm={6}>
                 <CoverWrapper />
-                <TitleWrapper>
+                <TitleWrapper theme={activeTheme}>
                     <TitleText>MY PREVIOUS ORDERS({orders.length})</TitleText>
                 </TitleWrapper>
                 {
@@ -115,7 +118,6 @@ function Orders() {
                         : null
                 }
             </CustomCenterCol>
-
             <CustomRightCol sm={3}/>
         </CustomRow>
     );

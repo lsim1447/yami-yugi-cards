@@ -21,7 +21,7 @@ export const CenterWrapper = styled.div `
 
 export const SimpleContainer = styled.div `
     background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
-    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''}
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
 `;
 
 SimpleContainer.defaultProps = {

@@ -35,6 +35,24 @@ function NavigationBar(props: any) {
   const { showSearchOverlay, setShowSearchOverlay } = useContext(SearchContext);
   const { showSettingsOverlay, setShowSettingsOverlay } = useContext(SettingsContext);
 
+  const toggleCartOverlay = () => {
+    setShowSettingsOverlay(false);
+    setShowCartOverlay(!showCartOverlay);
+    setShowSearchOverlay(false);
+  }
+
+  const toggleSettingsOverlay = () => {
+    setShowSettingsOverlay(!showSettingsOverlay);
+    setShowCartOverlay(false);
+    setShowSearchOverlay(false);
+  }
+
+  const toggleSearchOverlay = () => {
+    setShowSettingsOverlay(false);
+    setShowCartOverlay(false);
+    setShowSearchOverlay(!showSearchOverlay);
+  }
+
   return (
     <div>
       <Navbar fixed="top" style={{backgroundColor: "black"}} collapseOnSelect expand="lg"  variant="dark">
@@ -50,17 +68,17 @@ function NavigationBar(props: any) {
             <Nav.Link eventKey={2} href="/categories"> Categories </Nav.Link>
             <Nav.Link eventKey={3} href="/my-deck"> My Deck </Nav.Link>
     
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => setShowSettingsOverlay(!showSettingsOverlay)}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => toggleSettingsOverlay()}>
               <NavbarIconWrapper>
                 <i className="fa fa-gear"></i>
               </NavbarIconWrapper>
             </Nav.Link>
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={6} onClick={() => setShowSearchOverlay(!showSearchOverlay)}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={6} onClick={() => toggleSearchOverlay()}>
               <NavbarIconWrapper>
                 <i className="fa fa-search"></i>
               </NavbarIconWrapper>
             </Nav.Link>
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={7} onClick={() => setShowCartOverlay(!showCartOverlay)}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={7} onClick={() => toggleCartOverlay()}>
               <NavbarIconWrapper>
                 <i className="fa fa-shopping-cart"></i>
                 <sup style={{fontSize: "14px"}}> {cartItems.length} </sup>

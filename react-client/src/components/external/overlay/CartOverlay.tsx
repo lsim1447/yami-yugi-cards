@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { Col, Image, Row } from 'react-bootstrap';
-import { CheckoutButton } from '../../internal/ButtonComponents';
-import { CloseIcon } from '../../internal/IconComponents';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext }  from "../../../contexts/CheckoutContext";
 import { ThemeContext }  from "../../../contexts/ThemeContext";
+import { Col, Image, Row } from 'react-bootstrap';
+import { CustomCol5, CustomCol7 } from '../../internal/CustomComponents';
+import { CheckoutButton } from '../../internal/ButtonComponents';
+import { CloseIcon } from '../../internal/IconComponents';
 import { ICardDetails } from '../../../models/Cards';
+import styled from 'styled-components';
 
 const CustomRow = styled(Row) `
     border-top: 1px solid #D3D3D3;
@@ -91,7 +92,7 @@ const CartOverlay = () => {
     }
 
     return (
-        <OverlayWrapper theme={activeTheme}>
+        <OverlayWrapper theme={{ backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color }}>
             <CloseIcon 
                 className="fa fa-times"
                 onClick={() => setShowCartOverlay(false)}
@@ -110,7 +111,7 @@ const CartOverlay = () => {
                 cartItems.map((cartItem: ICardDetails) => {
                     return (
                         <CustomRow>
-                            <Col sm={5}>
+                            <CustomCol5 sm={5}>
                                 <a href={`/card/${cartItem._id}`}>
                                     <CartItemImage 
                                         thumbnail
@@ -118,15 +119,14 @@ const CartOverlay = () => {
                                         alt={cartItem.name}
                                     />
                                 </a>
-                            </Col>
-                            <Col sm={7}>
+                            </CustomCol5>
+                            <CustomCol7 sm={7}>
                                 <p><strong> Name: </strong> {cartItem.name} </p>
                                 <p><strong> Type: </strong>{cartItem.type} </p>
                                 <p><strong> Race: </strong>{cartItem.race ? cartItem.race : 'N/A'}</p>
                                 <p><strong> Archetype: </strong>{cartItem.archetype ? cartItem.archetype : 'N/A'}</p>
                                 <p><strong> Price: </strong>{cartItem.card_prices[0].amazon_price}$</p>
-                                 
-                            </Col>
+                            </CustomCol7>
                         </CustomRow>
                     )
                 })

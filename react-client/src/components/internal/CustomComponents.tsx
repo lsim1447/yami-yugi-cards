@@ -103,3 +103,91 @@ CustomBreadcrumb.defaultProps = {
         color: "inherit"
     }
 }
+
+export const CustomCol1 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 8.333333%;
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%;
+    }
+`;
+
+export const CustomCol2 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%;
+    }
+`;
+
+export const CustomCol3 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+`;
+
+export const CustomCol4 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 33.3333%;
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+`;
+
+export const CustomCol5 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 41.666667%;
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%;
+    }
+`;
+
+export const CustomCol6 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+`;
+
+export const CustomCol7 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+    }
+`;
+
+export const CustomCol8 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 66.666666%;
+        flex: 0 0 66.666666%;
+        max-width: 66.666666%;
+    }
+`;
+
+export const CustomCol9 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+`;
+
+export const CustomCol10 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 83.333333%;
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%;
+    }
+`;
+
+export const CustomCol11 = styled(Col) `
+    @media (max-width: 576px) {
+        -ms-flex: 0 0 91.666666%;
+        flex: 0 0 91.666666%;
+        max-width: 91.666666%;
+    }
+`;

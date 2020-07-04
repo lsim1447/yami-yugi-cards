@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Breadcrumb, Button, Col, Container, Form, Jumbotron, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import { CustomBreadcrumb, CustomJumbotron } from '../../internal/CustomComponents';
 import { AddToBagButton } from '../../internal/ButtonComponents';
 import { CardContext }  from "../../../contexts/CardContext";

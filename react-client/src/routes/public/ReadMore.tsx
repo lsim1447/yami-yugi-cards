@@ -1,5 +1,7 @@
-import React from 'react';
-import { Alert, Breadcrumb, Col, Jumbotron, Row } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { Alert, Col, Row } from 'react-bootstrap';
+import { CustomBreadcrumb, CustomJumbotron } from '../../components/internal/CustomComponents';
 import styled from 'styled-components';
 
 const LeftCol = styled(Col) `
@@ -32,15 +34,17 @@ const CustomRow = styled(Row) `
 `;
 
 function ReadMore() {
+    const { activeTheme } = useContext(ThemeContext);
+
     return (
         <CustomRow>
             <LeftCol sm={3}/>
             <CenterCol>
-                <Breadcrumb>
-                    <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item active> Read More </Breadcrumb.Item>
-                </Breadcrumb>
-                <Jumbotron>
+                <CustomBreadcrumb theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
+                    <CustomBreadcrumb.Item href="/">Home</CustomBreadcrumb.Item>
+                    <CustomBreadcrumb.Item active> Read More </CustomBreadcrumb.Item>
+                </CustomBreadcrumb>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <h1>Getting Started</h1>
                     <p>
                         Other than your decks (refer to the Decks section below), you're going to need a few extra items to assist in gameplay. These items include:
@@ -51,8 +55,8 @@ function ReadMore() {
                         <li>Counters - any small object that can be used as a marker to keep track of certain metrics that may affect some cards</li>
                         <li>Monster Tokens - (refer to Other Rules section below)</li>
                     </ul>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <h1>Decks</h1>
                     <p>
                         Each player must have three different types of YuGiOh decks to be eligible for gameplay:
@@ -75,8 +79,8 @@ function ReadMore() {
                     <p>
                         The Side Deck is another separate set of 0 to 15 cards (not counting towards your Main Deck) that allows you to customize and adapt your deck to your specific opponent and/or the situation of the battle. Players are given the opportunity to swap any card from the Side to Main Deck after each duel in the battle, as long as both deck counts remain the same after the swap.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <h1>Game Zones</h1>
                     <p>
                         Before playing YuGiOh, it is necessary to know where cards can and can't be placed in the battlefield. There are six different game zones in the field:
@@ -107,8 +111,8 @@ function ReadMore() {
                     <p>
                         The Extra Deck Zone is where players put their Extra Deck (face-down). This deck is only viewable by the player that owns it.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <h1>YuGiOh Cards</h1>
                     <h3>Monster Cards</h3>
                     <p>
@@ -167,38 +171,38 @@ function ReadMore() {
                     <p>
                         The effects of Normal Spells can only be used once, and once it is used it is sent to the graveyard. These cards are activated by making your opponent aware of its use and placing it face-up in the battlefield. The specific effect of the spell is described on the card.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                         The <strong>Ritual Spell Card</strong> is one of the cards necessary to perform a Ritual Summon. After it is used, it is sent to the Graveyard.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                         <strong>Continuous Spells </strong>  are cards that stay in the battlefield and have a lasting, continuous effect on the game. This effect can either be positive for the user or negative for the user's opponent. Watch out though, there are cards the opponent can use to destroy these Continuous Spells.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                         <strong>Equip Spell Cards</strong> are attached to a monster in the field and improve that monster's abilities. These spells are continuous in the field, but they can only be attached to one monster. When this monster is destroyed, flipped face-down, or removed from the field, the Equip Spell is also destroyed.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                         <strong>Field Spell Cards</strong> are special spells that are activated in the Field Card Zone, which is a special area in the battlefield where only Field Spells can be played. Only one Field Spell can be active from both players and if somebody chooses to activate a new Field Spell, the previous one is destroyed.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                         <strong>Quick-Play Spells </strong> are special spells that can be played during any phase of your turn as well as your opponents turn.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                     To activate a <strong>Normal Trap Card</strong>, it must first be set in the field. Normal Traps, like Normal Spells, are single-use and after the effect takes action the card is then sent to the Graveyard.
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <h1>Summoning Monsters</h1>
                     <p>
                         In order to use your monster cards, you need to summon them. Some summon actions are simple, but others take multiple steps and cards to complete. The different types of summons are as follows:
@@ -228,8 +232,8 @@ function ReadMore() {
                     <p>
                         Any monster that can't be Normal Summoned or set up for a Flip Summon has to be played to the field using a Special Summon. This includes Synchro, Fusion and Ritual Summons. When you perform a Special Summon, there is no restriction on the initial position of the monster in the battlefield. You may decide whether you want to face the monster up or down, and in the attack or defense position. Here are the step-by-step processes for each of the Special Summons:
                     </p>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <p>
                         Any monster that can't be Normal Summoned or set up for a Flip Summon has to be played to the field using a Special Summon. This includes Synchro, Fusion and Ritual Summons. When you perform a Special Summon, there is no restriction on the initial position of the monster in the battlefield. You may decide whether you want to face the monster up or down, and in the attack or defense position. Here are the step-by-step processes for each of the Special Summons:
                     </p>
@@ -245,12 +249,12 @@ function ReadMore() {
                     <Alert style={{marginTop: "12px", marginBottom: "12px"}} variant="warning">
                         Some cards have effects with the ability to Special Summon, but you cannot use this effect to summon Special Summon Monsters because they must be summoned properly using the respective process above.
                     </Alert>
-                </Jumbotron>
-                <Jumbotron>
+                </CustomJumbotron>
+                <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
                     <Alert style={{marginTop: "12px", marginBottom: "12px", fontSize: "48px"}} variant="warning">
                         Want to play???
                     </Alert>
-                </Jumbotron>
+                </CustomJumbotron>
             </CenterCol>
             <RightCol sm={3}/>
         </CustomRow>

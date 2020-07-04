@@ -72,7 +72,8 @@ export const CustomJumbotron = styled(Jumbotron) `
             props.theme.color :
             ''
     };
-    margin-bottom: 0px;
+    margin-bottom: 12px;
+    margin-top: 12px;
 `;
 
 CustomJumbotron.defaultProps = {

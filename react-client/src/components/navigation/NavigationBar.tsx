@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import  { CardContext }  from "../../contexts/CardContext";
 import  { CheckoutContext }  from "../../contexts/CheckoutContext";
 import  { SettingsContext }  from "../../contexts/SettingsContext";

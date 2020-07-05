@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Row } from 'react-bootstrap';
 import { CardContext } from "../../contexts/CardContext";
 import { UserContext } from "../../contexts/UserContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import CartItem from '../../components/external/cart/CartItem';
 import { CustomLeftCol, CustomCenterCol, CustomRightCol } from '../../components/internal/CustomComponents';
+import { SimpleContainer } from '../../components/internal/CommonContainers';
 import { SubmitOrderButton } from '../../components/internal/ButtonComponents';
 import { ICardDetails } from '../../models/Cards';
 import { IUser } from '../../models/User';
@@ -71,6 +73,7 @@ const TotalPrice = styled.div `
 function Checkout() {
     const { cartItems, setCartItems } = useContext(CardContext);
     const { user } = useContext(UserContext);
+    const { activeTheme } = useContext(ThemeContext);
 
     const getTotalPrice = () => {
         if (cartItems && cartItems.length) {
@@ -132,45 +135,47 @@ function Checkout() {
     }
 
     return (
-        <Row>
-            <CustomLeftCol sm={3} theme={{backgroundImage: '/images/checkout-left.jpg'}}/>
-            <CustomCenterCol sm={6}>
-                <DescriptionWrapper>
-                    Yu-Gi-Oh! is a Japanese manga series about gaming written and illustrated by Kazuki Takahashi.
-                    It was serialized in Shueisha's Weekly Shōnen Jump magazine between September 30, 1996 and March 8, 2004.
-                </DescriptionWrapper>
-                <TitleWrapper>
-                    COMPLETE YOUR CHECKOUT
-                </TitleWrapper>
-                <DescriptionWrapper>
-                    Congratulations! Your order qualifies for FREE Standard Shipping. No offer code needed.
-                </DescriptionWrapper>
-                <CoverWrapper />
-                <BagWrapper>
-                    My Bag ({cartItems.length} items)
-                </BagWrapper>
-                {
-                    cartItems.map((card: ICardDetails) => {
-                        return (
-                            <CartItem
-                                cartItem={card}
-                            />
-                        )
-                    })
-                }
-                <TotalPrice> TOTAL PRICE: {getTotalPrice()} $</TotalPrice>
-                <SubmitYourOrderWrapper>
-                    <SubmitOrderButton
-                        disabled={!cartItems.length}
-                        onClick={() => checkoutCartItems()}
-                        variant="dark"
-                    >
-                            SUBMIT YOUR ORDER
-                    </SubmitOrderButton>
-                </SubmitYourOrderWrapper>
-            </CustomCenterCol>
-            <CustomRightCol sm={3} theme={{backgroundImage: '/images/checkout-right.jpg'}} />
-        </Row>
+        <SimpleContainer theme={activeTheme}>
+            <Row>
+                <CustomLeftCol sm={3} theme={{backgroundImage: '/images/checkout-left.jpg'}}/>
+                <CustomCenterCol sm={6}>
+                    <DescriptionWrapper>
+                        Yu-Gi-Oh! is a Japanese manga series about gaming written and illustrated by Kazuki Takahashi.
+                        It was serialized in Shueisha's Weekly Shōnen Jump magazine between September 30, 1996 and March 8, 2004.
+                    </DescriptionWrapper>
+                    <TitleWrapper>
+                        COMPLETE YOUR CHECKOUT
+                    </TitleWrapper>
+                    <DescriptionWrapper>
+                        Congratulations! Your order qualifies for FREE Standard Shipping. No offer code needed.
+                    </DescriptionWrapper>
+                    <CoverWrapper />
+                    <BagWrapper>
+                        My Bag ({cartItems.length} items)
+                    </BagWrapper>
+                    {
+                        cartItems.map((card: ICardDetails) => {
+                            return (
+                                <CartItem
+                                    cartItem={card}
+                                />
+                            )
+                        })
+                    }
+                    <TotalPrice> TOTAL PRICE: {getTotalPrice()} $</TotalPrice>
+                    <SubmitYourOrderWrapper>
+                        <SubmitOrderButton
+                            disabled={!cartItems.length}
+                            onClick={() => checkoutCartItems()}
+                            variant="dark"
+                        >
+                                SUBMIT YOUR ORDER
+                        </SubmitOrderButton>
+                    </SubmitYourOrderWrapper>
+                </CustomCenterCol>
+                <CustomRightCol sm={3} theme={{backgroundImage: '/images/checkout-right.jpg'}} />
+            </Row>
+        </SimpleContainer>
     );
 }
 

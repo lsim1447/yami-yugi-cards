@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
 import { UserContext } from '../../contexts/UserContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
-import { getOrdersByUserId } from '../../repositories/OrderRepository';
-import { IOrder } from '../../models/Order';
+import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
 import OrderItem from '../../components/external/order/OrderItem';
+import { IOrder } from '../../models/Order';
+import { getOrdersByUserId } from '../../repositories/OrderRepository';
 import styled from 'styled-components';
 
 const CustomRow = styled(Row) `
@@ -77,9 +77,9 @@ const TitleText = styled.p `
 `;
 
 function Orders() {
-    const [orders, setOrders] = useState<IOrder[]>([]);
-    const { user } = useContext(UserContext);
     const { activeTheme } = useContext(ThemeContext);
+    const { user } = useContext(UserContext);
+    const [orders, setOrders] = useState<IOrder[]>([]);
 
     useEffect(() => {
         if (user && user._id) {

@@ -13,11 +13,11 @@ import { getSignedUserId } from '../../services/UserService';
 import '../../special-styles/sidebar-left.css'
 
 function MyDeck() {
+    const { user } = useContext(UserContext);
     const [nrOfCardsToShow] = useState(20);
     const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [isLeftSideBarVisible, setIsLeftSideBarVisible] = useState<boolean>(true);
-    const { user } = useContext(UserContext);
 
     const getDeckValue = () => {
         if (allCardsInYourDeck && allCardsInYourDeck.length) {

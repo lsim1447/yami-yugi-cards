@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import {Col, Row } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
+import {Col, Row } from 'react-bootstrap';
 import { FacebookButton } from '../../components/internal/ButtonComponents';
 import { DEFAULT_USER_VALUE, IUser } from '../../models/User';
 import {
@@ -17,7 +17,7 @@ const SignInWrapper = styled(Row) `
 `;
 
 const Container = styled(Col) `
-    background-color: #fff;
+    background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
                 0 10px 10px rgba(0,0,0,0.22);
@@ -37,7 +37,7 @@ const SignInButton = styled.div `
     border-radius: 20px;
     border: 1px solid #B42D00;
     background-color: #B42D00;
-    color: white;
+    color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
     padding: 12px 45px;
@@ -84,7 +84,7 @@ const Button = styled.button `
 `;
 
 const GhostButton = styled(Button) `
-	background-color: black;
+	background-color: #000000;
 	border-color: #FFFFFF;
 `;
 
@@ -120,7 +120,7 @@ const CustomForm = styled.form `
 `;
 
 const CustomInput = styled.input `
-    background-color: #eee;
+    background-color: #EEEEEE;
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
@@ -195,13 +195,13 @@ const CustomOverlayPanel = styled.div `
 
 const OverlayLeft = styled(CustomOverlayPanel) `
     background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/84dc13b7-a2e7-4b45-83ec-311e72e82900/dcx3lvi-7ef7d529-3a4f-4844-a3f7-1d85e83f6939.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvODRkYzEzYjctYTJlNy00YjQ1LTgzZWMtMzExZTcyZTgyOTAwXC9kY3gzbHZpLTdlZjdkNTI5LTNhNGYtNDg0NC1hM2Y3LTFkODVlODNmNjkzOS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.mhIbg2XlsWz5so2KXFGbwpgz_Yq24mAK8_XAf2zd2BU);
-    color: black;
+    color: #000000;
     transform: translateX(-20%);
 `;
 
 const OverlayRight = styled(CustomOverlayPanel) `
     background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/84dc13b7-a2e7-4b45-83ec-311e72e82900/dcx3lvi-7ef7d529-3a4f-4844-a3f7-1d85e83f6939.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvODRkYzEzYjctYTJlNy00YjQ1LTgzZWMtMzExZTcyZTgyOTAwXC9kY3gzbHZpLTdlZjdkNTI5LTNhNGYtNDg0NC1hM2Y3LTFkODVlODNmNjkzOS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.mhIbg2XlsWz5so2KXFGbwpgz_Yq24mAK8_XAf2zd2BU);
-    color: black;
+    color: #000000;
     right: 0;
 	transform: translateX(0);
 `;
@@ -213,7 +213,6 @@ function SignIn() {
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [userName, setUserName] = useState('');
-    
 
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');

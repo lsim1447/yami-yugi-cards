@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
+import { ThemeContext } from '../../contexts/ThemeContext';
 import { Card, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import AliceCarousel from 'react-alice-carousel'
-import { ThemeContext } from '../../contexts/ThemeContext';
-import { ICardDetails } from '../../models/Cards';
-import ProductDetails from '../../components/external/spp/ProductDetails';
-import RatingsAndReviewsLoading from '../../components/external/loading/RatingsAndReviewsLoading';
 import { SimpleContainer } from '../../components/internal/CommonContainers';
 import { CustomJumbotron } from '../../components/internal/CustomComponents';
-import { getCardById } from '../../repositories/CardRepository';
 import Actors from '../../components/external/sections/Actors';
-import { DEFAULT_CARD_VALUE} from '../../models/Cards';
-import { getInitialCardList } from '../../models/Cards';
-import { MAX_NUMBER_OF_SIMILAR_CARDS } from '../../constants';
-import { findAllCardsByTypeAndRace } from '../../repositories/CardRepository';
 import GifGrid from '../../components/external/sections/GifGrid';
+import ProductDetails from '../../components/external/spp/ProductDetails';
+import RatingsAndReviewsLoading from '../../components/external/loading/RatingsAndReviewsLoading';
+import { ICardDetails } from '../../models/Cards';
+import { DEFAULT_CARD_VALUE, getInitialCardList} from '../../models/Cards';
+import { MAX_NUMBER_OF_SIMILAR_CARDS } from '../../constants';
+import { getCardById } from '../../repositories/CardRepository';
+import { findAllCardsByTypeAndRace } from '../../repositories/CardRepository';
 import styled from 'styled-components';
 import 'react-alice-carousel/lib/alice-carousel.css'
 
@@ -65,12 +64,12 @@ const AliceCarouselImg = styled.img `
 `;
 
 function SimpleProductPage(props: any) {
+    const { activeTheme } = useContext(ThemeContext);
     const [cardDetails, setCardDetails] = useState(DEFAULT_CARD_VALUE);
     const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
-    const { activeTheme } = useContext(ThemeContext);
-    const cardId = (props.match.params && props.match.params.id) ? props.match.params.id : '5ebc4aad221c162fa4dcae6d';
 
-    const handleOnDragStart = (e: any) => e.preventDefault()
+    const cardId = (props.match.params && props.match.params.id) ? props.match.params.id : '5ebc4aad221c162fa4dcae6d';
+    const handleOnDragStart = (e: any) => e.preventDefault();
     const responsive = {
         0: { items: 1 },
         855: { items: 2 },

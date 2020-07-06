@@ -25,6 +25,7 @@ const OverlayWrapper = styled.div `
     position: fixed;
     right: 0;
     top: 0;
+    transition: all .6s ease-in-out;
     z-index: 50000;
     width: 100%;
 

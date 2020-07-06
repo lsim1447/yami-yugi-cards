@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Alert, Col, Form, Row } from 'react-bootstrap';
 import { UserContext } from "../../contexts/UserContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { Alert, Col, Form, Row } from 'react-bootstrap';
 import { IComment, IVote } from '../../models/Comment';
 import { ICardDetails } from '../../models/Cards';
 import { getCommentsByUserEmail } from '../../repositories/CommentRepository';
@@ -14,15 +15,18 @@ import styled from 'styled-components';
 
 const ProfileWrapper = styled.div `
     background: url(/images/ProfileBackground.jpg) fixed;
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     font-family: "poppins", sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
     padding-bottom: 50px;
     padding-top: 50px;
+    transition: all .6s ease-in-out;
 
     @media(max-width: 467px) {
         margin: 0;
@@ -31,11 +35,13 @@ const ProfileWrapper = styled.div `
 `;
 
 const ProfileHeader = styled.div `
-    background: #FFFFFF;
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
     box-shadow: 0px 3px 4px rgba(0, 0, 0, .2);
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     display: flex;
     height: 190px;
     position: relative;
+    transition: all .6s ease-in-out;
     width: 100%;
 
     @media (max-width: 900px) {
@@ -62,14 +68,11 @@ const ProfileImageContainer = styled.div `
     width: 340px;
 
     @media (max-width: 900px) {
-        float: left;
-        height: 200px;
         width: 100%;
     }
 `;
 
 const ProfileImage = styled.img `
-    background: #FFFFFF;
     border-radius: 50%;
     border: 4px solid #FFFFFF;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, .2);
@@ -82,7 +85,6 @@ const ProfileImage = styled.img `
 
     @media(max-width: 1100px) {
         height: 200px;
-        left: 50px;
         top: 50px;
         width: 200px;
     }
@@ -112,7 +114,6 @@ const ProfileNavInfo = styled.div `
 `;
 
 const Address = styled.div `
-    color: #777777;
     display: flex;
     font-weight: bold;
 
@@ -138,7 +139,6 @@ const ProfileOption = styled.div `
     right: 50px;
     top: 50%;
     transform: translateY(-50%);
-    transition: all .5s ease-in-out;
     width: 40px;
 
     &:hover {
@@ -148,7 +148,6 @@ const ProfileOption = styled.div `
 
     @media(max-width: 467px) {
         height: 30px;
-        position: absolute;
         right: 15px;
         top: 83%;
         width: 30px;
@@ -214,22 +213,22 @@ const MainBD = styled.div `
 `;
 
 const ProfileSide = styled.div `
-    background: #FFFFFF;
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
     box-shadow: 0px 3px 5px rgba(0, 0, 0, .2);
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     font-family: "Bree Serif", serif;
-    padding: 90px 30px 20px;
     margin-left: 10px;
     min-height: 80vh;
+    padding: 90px 30px 20px;
+    transition: all .6s ease-in-out;
     z-index: 99;
     width: 300px;
 
     p {
-        color: #333333;
         font-size: 14px;
         margin-bottom: 7px;
 
         i {
-            color: #E40046;
             margin-right: 10px;
         }
     }
@@ -266,8 +265,7 @@ const AccountBalance = styled.p `
 `;
 
 const CardsInDeckWrapper = styled.p `
-    color: #666666 !important;
-    font-family: "Segoe UI",Arial,sans-serif;
+    font-family: "Segoe UI", Arial,sans-serif;
     font-size: 16px !important;
     font-weight: 550;
     position: relative;
@@ -320,7 +318,6 @@ const UserRating = styled.div `
     display: flex;
 
     h3 {
-        color: #666666;
         font-size: 2.5rem;
         font-weight: 200;
         letter-spacing: 1px;
@@ -350,12 +347,16 @@ const Nav = styled.div `
     z-index: -1;
 
     ul {
-        background: #FFFFFF;
+        background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+        border-top: 1px solid #D3D3D3;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+        color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
         display: flex;
+        font-weight: 600;
         height: 40px;
         justify-content: center;
         list-style-type: none;
+        transition: all .6s ease-in-out;
         width: 100%;
 
         li {
@@ -374,12 +375,13 @@ const ProfileBody = styled.div `
 `;
 
 const Tab = styled.div `
-    background-color: #FFFFFF;
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     display: none;
     padding: 20px;
     width: 100%;
     text-align: center;
-    transition: all .9s ease-in-out;
+    transition: all .6s ease-in-out;
 `;
 
 const RightSide = styled.div `
@@ -450,6 +452,7 @@ const SavePasswordTitle = styled.p `
 `;
 
 function Profile() {
+    const { activeTheme } = useContext(ThemeContext);
     const { user } = useContext(UserContext);
     const [comments, setComments] = useState<IComment[]>([]);
     const [cards, setCards] = useState<ICardDetails[]>([]);
@@ -549,11 +552,12 @@ function Profile() {
     }, [user]);
     
     return (
-        <ProfileWrapper>
+        <ProfileWrapper theme={activeTheme}>
             <div className="container">
-                <ProfileHeader>
+                <ProfileHeader theme={activeTheme} style={{backgroundColor: activeTheme.itemBackgroundColor}}>
                     <ProfileImageContainer>
                         <ProfileImage
+                            theme={activeTheme}
                             alt=""
                             src="https://scontent.fsbz1-2.fna.fbcdn.net/v/t1.0-9/50301926_2008315502577520_6292845245826596864_o.jpg?_nc_cat=108&_nc_sid=09cbfe&_nc_ohc=W1h3tRUxJ_YAX-4NbZt&_nc_ht=scontent.fsbz1-2.fna&oh=f7dd068014a8c7f25ffad13c33e64997&oe=5F24D323"
                             width="200"
@@ -574,7 +578,7 @@ function Profile() {
                 </ProfileHeader>
                 <MainBD>
                     <LeftSide>
-                        <ProfileSide>
+                        <ProfileSide theme={activeTheme} style={{backgroundColor: activeTheme.itemBackgroundColor}}>
                             <AccountBalance>
                                 Account Balance: {user.accountBalance.toFixed(2)}
                             </AccountBalance>
@@ -627,7 +631,7 @@ function Profile() {
                         </ProfileSide>
                     </LeftSide>
                     <RightSide>
-                        <Nav className="nav">
+                        <Nav className="nav" theme={activeTheme}>
                             <ul style={{marginBottom: "0px"}}>
                                 <li onClick={() => changeTab(0)}> About </li>
                                 <li onClick={() => changeTab(1)}> Reviews </li>
@@ -635,7 +639,7 @@ function Profile() {
                             </ul>
                         </Nav>
                         <ProfileBody>
-                            <Tab className="tab">
+                            <Tab theme={activeTheme} className="tab">
                                 <h1> About the game</h1>
                                 <p>
                                     Yu-Gi-Oh![a] is a Japanese manga series about gaming written and illustrated by Kazuki Takahashi. It was serialized in Shueisha's Weekly Shōnen Jump magazine between September 30, 1996 and March 8, 2004. The plot follows the story of a boy named Yugi Mutou, who solves the ancient Millennium Puzzle. Yugi awakens a gambling alter-ego within his body that solves his conflicts using various games.
@@ -644,7 +648,7 @@ function Profile() {
                                     Yami no Gēmu, lit. "Games of Darkness") which reveal the true nature of someone's heart, the losers of these contests often being subjected to a dark punishment called a Penalty Game (罰ゲーム, Batsu Gēmu). Whether it be cards, dice, or role-playing board games, he will take on challenges from anyone, anywhere. As the series progresses, Yugi and his friends learn that this person inside of his puzzle is actually the spirit of a nameless Pharaoh from Ancient Egyptian times, who had lost his memories. As Yugi and his companions attempt to help the Pharaoh regain his memories, they find themselves going through many trials as they wager their lives facing off against gamers that wield the mysterious Millennium Items (千年アイテム, Sennen Aitemu) and the dark power of the Shadow Games.
                                 </p>
                             </Tab>
-                            <Tab className="tab">
+                            <Tab theme={activeTheme} className="tab">
                                 <h1> Your Reviews</h1>
                                 <ReviewsSection>
                                     {
@@ -693,7 +697,7 @@ function Profile() {
                                     }
                                 </ReviewsSection>
                             </Tab>
-                            <Tab className="tab">
+                            <Tab theme={activeTheme} className="tab">
                                 <h1> Account Settins </h1>
                                 <p>
                                     The <strong style={{fontSize: "16px"}}>privacy policy</strong> is one of the most essential legal requirements for websites.

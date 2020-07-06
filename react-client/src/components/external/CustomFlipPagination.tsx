@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { CardDeck, Pagination } from 'react-bootstrap';
-import styled from 'styled-components';
-import { ICardDetails, getInitialCardList } from '../../models/Cards';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { Pagination } from 'react-bootstrap';
 import FlipCard from './card/FlipCard';
+import { SimpleContainer} from '../../components/internal/CommonContainers';
+import { CustomCardDeck } from '../../components/internal/CustomComponents';
+import { ICardDetails, getInitialCardList } from '../../models/Cards';
+import { ALL_NUMBER_OF_CARDS } from '../../constants';
 import {
     findCardsPaginated,
     findCardsByTypePaginated
 } from '../../repositories/CardRepository';
-import { ALL_NUMBER_OF_CARDS } from '../../constants';
+import styled from 'styled-components';
 
 const PaginationWrapper = styled(Pagination) `
     background-image: url(/images/millennium_items_header.jpg);
@@ -21,13 +24,13 @@ const PaginationWrapper = styled(Pagination) `
 `;
 
 type CustomFlipPagination = {
-    backgroundColor: string,
     cardsPerPage: number,
     pageBound: number,
     selectedType?: string
 }
 
-const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selectedType}: CustomFlipPagination) => {
+const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFlipPagination) => {
+    const { activeTheme } = useContext(ThemeContext);
     const [currentPage, setCurrentPage] = useState(1);
     const [upperPageBound, setUpperPageBound] = useState(5);
     const [lowerPageBound, setLowerPageBound] = useState(0);
@@ -150,7 +153,7 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
     // Logic for displaying current cards
     const RenderCards = () => {        
         return (
-            <CardDeck style={{minHeight: "100vh", backgroundColor: backgroundColor}}>
+            <CustomCardDeck theme={activeTheme}>
             {
                 cards.map(
                     (card: ICardDetails) => {
@@ -163,7 +166,7 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
                         );
                 })
             }
-            </CardDeck>
+            </CustomCardDeck>
         )
     }
 
@@ -217,7 +220,7 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
     }
     
     return (
-        <div>
+        <SimpleContainer theme={activeTheme}>
             <PaginationWrapper className="pagination">
                 {renderPrevBtn}
                 {pageDecrementBtn}
@@ -233,7 +236,7 @@ const CustomFlipPagination = ({backgroundColor, cardsPerPage, pageBound, selecte
                 {pageIncrementBtn}
                 {renderNextBtn}
             </PaginationWrapper>
-        </div>
+        </SimpleContainer>
     );
 }
 

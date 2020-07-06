@@ -8,8 +8,8 @@ import OrderItem from '../../components/external/order/OrderItem';
 import styled from 'styled-components';
 
 const CustomRow = styled(Row) `
-    background-color: black;
-    color: white;
+    background-color: #000000;
+    color: #FFFFFF;
 `;
 
 const CustomLeftCol = styled(Col) `
@@ -61,8 +61,8 @@ const CoverWrapper = styled.div `
 `;
 
 const TitleWrapper = styled.div `
-    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
-    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     margin-bottom: 16px;
     padding: 24px;
     width: 100%;

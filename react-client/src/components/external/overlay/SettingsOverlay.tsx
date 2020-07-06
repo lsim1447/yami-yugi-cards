@@ -10,13 +10,14 @@ import Switch from "react-switch";
 import styled from 'styled-components';
 
 const SettingsOverlayWrapper = styled.div`
-    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
-    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     max-width: 400px;
     padding: 12px;
     position: fixed;
     right: 0;
     top: 7%;
+    transition: all .6s ease-in-out;
     z-index: 99999;
     width: 100%;
 
@@ -38,7 +39,7 @@ const SettingsOverlayWrapper = styled.div`
 
 const LinkWrapper = styled.a `
     &:hover {
-        color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
+        color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
         cursor: pointer;
         text-decoration: none;
     }
@@ -195,7 +196,7 @@ const SettingsOverlay = () => {
                             <SettingsText> Dark mode</SettingsText>
                         </CustomCol7>
                         <CustomCol1 sm={1}>
-                            <Switch onChange={() => toggleDarkMode()} checked={isDarkModeVisible} />
+                            <Switch onChange={() => {}} checked={isDarkModeVisible} />
                         </CustomCol1>
                     </SettingsRow>
                 </LinkWrapper>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Card } from 'react-bootstrap';
-import styled from 'styled-components';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import CardModal from '../../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../../internal/FlipComponents';
+import { CustomCard } from '../../internal/CustomComponents';
+import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
 import { getCardById } from '../../../repositories/CardRepository';
-import { ThemeContext } from '../../../contexts/ThemeContext';
+import styled from 'styled-components';
 
 const PriceContainer = styled.p `
     font-size: 16px;
@@ -15,10 +15,10 @@ const PriceContainer = styled.p `
 `;
 
 const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
+    const { activeTheme } = useContext(ThemeContext);
     const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
     const [cardDetails, setCardDetails] = useState(initialValue);
     const [modalShow, setModalShow] = useState(false);
-    const { activeTheme } = useContext(ThemeContext);
 
     const getText = (text: string, limit: number, isFullDescriptionVisible: boolean) => {
         if (isFullDescriptionVisible) return text;
@@ -39,27 +39,26 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
 
     return (
         <>
-            <Card style={{minWidth: "290px", marginBottom: "24px", backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}} onClick={() => setModalShow(true)}>
+            <CustomCard theme={activeTheme} style={{backgroundColor: activeTheme.itemBackgroundColor}} onClick={() => setModalShow(true)}>
                 <FlipCardContainer theme={{backgroundColor: activeTheme.backgroundColor}}>
                     <FlipCardInner>
                         <FlipCardFront>
-                            <Card.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(cardDetails.card_images && cardDetails.card_images.length) ? cardDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />
+                            <CustomCard.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(cardDetails.card_images && cardDetails.card_images.length) ? cardDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />
                         </FlipCardFront>
                         <FlipCardBack>
-                            <Card.Img className="lazyload" variant="top" data-src="/images/yugioh-card-back-side.jpg" />
+                            <CustomCard.Img className="lazyload" variant="top" data-src="/images/yugioh-card-back-side.jpg" />
                         </FlipCardBack>
                     </FlipCardInner>
                 </FlipCardContainer>
 
-                <Card.Body>
-                    <Card.Title> {getText(cardDetails.name, 150, isFullDescriptionVisible)} </Card.Title>
-                    <Card.Text> {getText(cardDetails.desc, 150, isFullDescriptionVisible)} </Card.Text>
-                </Card.Body>
-                <Card.Footer>
+                <CustomCard.Body>
+                    <CustomCard.Title> {getText(cardDetails.name, 150, isFullDescriptionVisible)} </CustomCard.Title>
+                    <CustomCard.Text>  {getText(cardDetails.desc, 150, isFullDescriptionVisible)} </CustomCard.Text>
+                </CustomCard.Body>
+                <CustomCard.Footer>
                     <PriceContainer> Price: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $ </PriceContainer>
-                </Card.Footer>
-                
-            </Card>
+                </CustomCard.Footer>
+            </CustomCard>
             <CardModal
                 card={card}
                 show={modalShow}

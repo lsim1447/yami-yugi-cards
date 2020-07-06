@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { Row } from 'react-bootstrap';
 import { CardContext } from "../../contexts/CardContext";
 import { UserContext } from "../../contexts/UserContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { Row } from 'react-bootstrap';
 import CartItem from '../../components/external/cart/CartItem';
 import { CustomLeftCol, CustomCenterCol, CustomRightCol } from '../../components/internal/CustomComponents';
 import { SimpleContainer } from '../../components/internal/CommonContainers';
@@ -71,9 +71,9 @@ const TotalPrice = styled.div `
 `;
 
 function Checkout() {
+    const { activeTheme } = useContext(ThemeContext);
     const { cartItems, setCartItems } = useContext(CardContext);
     const { user } = useContext(UserContext);
-    const { activeTheme } = useContext(ThemeContext);
 
     const getTotalPrice = () => {
         if (cartItems && cartItems.length) {

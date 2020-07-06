@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Breadcrumb, Col, Jumbotron } from 'react-bootstrap';
+import { Breadcrumb, Col, Card, CardDeck, Jumbotron } from 'react-bootstrap';
 
 const CustomCol = styled(Col) `
     border-left: 1px solid #D3D3D3;
@@ -63,47 +63,35 @@ export const CustomJumbotron = styled(Jumbotron) `
     background-color: ${props => 
         (props && props.theme && props.theme.backgroundColor) ?
             props.theme.backgroundColor :
-            ''
+            '#000000'
     };
     border-bottom: 1px solid #D3D3D3;
     border-top: 1px solid #D3D3D3;
     color: ${props => 
         (props && props.theme && props.theme.color) ?
             props.theme.color :
-            ''
+            '#FFFFFF'
     };
     margin-bottom: 12px;
     margin-top: 12px;
+    transition: all .6s ease-in-out;
 `;
-
-CustomJumbotron.defaultProps = {
-    theme: {
-        backgroundColor: "inherit",
-        color: "inherit"
-    }
-}
 
 export const CustomBreadcrumb = styled(Breadcrumb) `
     ol {
         background-color: ${props => 
             (props && props.theme && props.theme.backgroundColor) ?
                 props.theme.backgroundColor :
-                ''
+                'inherit'
         };
     }
     color: ${props => 
         (props && props.theme && props.theme.color) ?
             props.theme.color :
-            ''
-    }
+            'inherit'
+    };
+    transition: all .6s ease-in-out;
 `;
-
-CustomBreadcrumb.defaultProps = {
-    theme: {
-        backgroundColor: "inherit",
-        color: "inherit"
-    }
-}
 
 export const CustomCol1 = styled(Col) `
     @media (max-width: 576px) {
@@ -191,4 +179,19 @@ export const CustomCol11 = styled(Col) `
         flex: 0 0 91.666666%;
         max-width: 91.666666%;
     }
+`;
+
+export const CustomCard = styled(Card) `
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
+    margin-bottom: 24px !important;
+    min-width: 290px;
+    transition: all .6s ease-in-out;
+`;
+
+export const CustomCardDeck = styled(CardDeck) `
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
+    min-height: 100vh;
+    transition: all .6s ease-in-out;
 `;

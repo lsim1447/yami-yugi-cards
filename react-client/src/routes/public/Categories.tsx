@@ -81,7 +81,6 @@ function Categories() {
             <CustomBreadcrumb.Item active>{selectedType}</CustomBreadcrumb.Item>
           </CustomBreadcrumb>
           <CustomFlipPagination
-              backgroundColor={"transparent"}
               cardsPerPage={24}
               pageBound={5}
               selectedType={selectedType}

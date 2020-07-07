@@ -18,7 +18,7 @@ const lightTheme: CustomTheme = {
 const darkTheme: CustomTheme = {
     backgroundColor: '#000000',
     color: '#FAEFEC',
-    filter: 'brightness(.85) contrast(1.2)',
+    filter: 'brightness(.9) contrast(1.3)',
     itemBackgroundColor: '#272423',
 }
 

@@ -20,14 +20,8 @@ export const CenterWrapper = styled.div `
 `;
 
 export const SimpleContainer = styled.div `
-    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
-    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
     transition: all .6s ease-in-out;
 `;
-
-SimpleContainer.defaultProps = {
-    theme: {
-        backgroundColor: '',
-        color: ''
-    }
-}

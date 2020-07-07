@@ -4,11 +4,13 @@ import { isDarkModeActive } from '../services/DarkModeService';
 type CustomTheme = {
     backgroundColor: string,
     color: string,
+    filter: string,
     itemBackgroundColor: string,
 }
 
 const lightTheme: CustomTheme = {
     backgroundColor: '#FFFFFF',
+    filter: 'brightness(1.0) contrast(1.0)',
     color: '#000000',
     itemBackgroundColor: '#E9ECEF',
 }
@@ -16,6 +18,7 @@ const lightTheme: CustomTheme = {
 const darkTheme: CustomTheme = {
     backgroundColor: '#000000',
     color: '#FAEFEC',
+    filter: 'brightness(.85) contrast(1.2)',
     itemBackgroundColor: '#272423',
 }
 

@@ -17,6 +17,7 @@ export const CustomLeftCol = styled(CustomCol) `
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
 
     @media (max-width: 992px) {
         display: none;
@@ -47,6 +48,7 @@ export const CustomRightCol = styled(CustomCol) `
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
     
     @media (max-width: 992px) {
         display: none;
@@ -72,6 +74,7 @@ export const CustomJumbotron = styled(Jumbotron) `
             props.theme.color :
             '#FFFFFF'
     };
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
     margin-bottom: 12px;
     margin-top: 12px;
     transition: all .6s ease-in-out;
@@ -90,6 +93,7 @@ export const CustomBreadcrumb = styled(Breadcrumb) `
             props.theme.color :
             'inherit'
     };
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
     transition: all .6s ease-in-out;
 `;
 
@@ -184,6 +188,7 @@ export const CustomCol11 = styled(Col) `
 export const CustomCard = styled(Card) `
     background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
     color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
     margin-bottom: 24px !important;
     min-width: 290px;
     transition: all .6s ease-in-out;
@@ -192,6 +197,7 @@ export const CustomCard = styled(Card) `
 export const CustomCardDeck = styled(CardDeck) `
     background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
     color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
+    filter: ${props => (props && props.theme && props.theme.filter) ? props.theme.filter : 'brightness(1.0) contrast(1.0)'};
     min-height: 100vh;
     transition: all .6s ease-in-out;
 `;

@@ -8,12 +8,14 @@ import { SettingsProvider } from './contexts/SettingsContext';
 import { UserProvider } from './contexts/UserContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 
+import RouterLoadingComponent from './components/external/loading/RouterLoadingComponent';
+
 const NavigationBar = loadableVisibility(() => import('./components/navigation/NavigationBar'), {
   fallback: undefined
 });
 
 const MyRouter = loadableVisibility(() => import('./MyRouter'), {
-  fallback: undefined
+  fallback: <RouterLoadingComponent />
 });
 
 const Footer = loadableVisibility(() => import('./components/navigation/Footer'), {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const LoadingWrapper = styled.div `
     background-color: #F0F0F0;
-    min-height: 100vh;
+    min-height: 110vh;
     opacity: 0.4;
     position: relative;
     width: 100%;

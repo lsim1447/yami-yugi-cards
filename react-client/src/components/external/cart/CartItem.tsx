@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react';
+import loadable from '@loadable/component';
 import { CardContext } from "../../../contexts/CardContext";
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import { ICardDetails, DEFAULT_CARD_VALUE } from '../../../models/Cards';
-import CardModal from '../../modals/CardModal';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
+const CardModal = loadable(() => import('../../modals/CardModal'), {
+    fallback: undefined
+});
 
 const CartItemWrapper = styled.div `
     border-top: 1px solid #D3D3D3;
@@ -98,14 +102,16 @@ const CartItem = ({cartItem } : CartItemProps) => {
                     <HeaderWrapper> PRICE </HeaderWrapper>
                     <CenterWrapper> {cartItem.card_prices[0].amazon_price} $</CenterWrapper>
                 </Col>
-                
             </Row>
-
-            <CardModal
-                card={cartItem}
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
+            {
+                modalShow && (
+                    <CardModal
+                        card={cartItem}
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
+                )
+            }
         </CartItemWrapper>
     );
 }

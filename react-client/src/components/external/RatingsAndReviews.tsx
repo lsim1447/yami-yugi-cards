@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Alert, Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
+import loadable from '@loadable/component';
 import { UserContext } from "../../contexts/UserContext";
+import { Alert, Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
 import { ICardDetails } from '../../models/Cards';
 import { IComment, IVote } from '../../models/Comment';
-import RatingModal from '../modals/RatingModal';
 import {
     deleteCommentById,
     getCommentsByCardId,
@@ -12,7 +11,12 @@ import {
 } from '../../repositories/CommentRepository';
 import { isUserSignedIn } from '../../services/UserService';
 import { confirmAlert } from 'react-confirm-alert';
+import styled from 'styled-components';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
+const RatingModal = loadable(() => import('../modals/RatingModal'), {
+    fallback: undefined
+});
 
 const RatingWrapper = styled(Row) `
     border-top: 1px solid #D3D3D3;
@@ -407,15 +411,20 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
                     </NoCommentsWrapper>
 
             }
-            <RatingModal
-                cardDetails={cardDetails}
-                comments={comments}
-                commentToModify={commentToModify}
-                setCommentToModify={setCommentToModify}
-                setComments={setComments}
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
+            {
+                modalShow && (
+                    <RatingModal
+                        cardDetails={cardDetails}
+                        comments={comments}
+                        commentToModify={commentToModify}
+                        setCommentToModify={setCommentToModify}
+                        setComments={setComments}
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
+                )
+            }
+            
         </div>
     );
 }

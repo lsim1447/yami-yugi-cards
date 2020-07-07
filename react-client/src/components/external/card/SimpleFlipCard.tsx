@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import loadable from '@loadable/component';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
-import CardModal from '../../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../../internal/FlipComponents';
 import { getCardById } from '../../../repositories/CardRepository';
+
+const CardModal = loadable(() => import('../../modals/CardModal'), {
+    fallback: undefined
+});
 
 const SimpleCardContainer = styled.div `
     @media (max-width: 420px) {
@@ -15,7 +19,7 @@ const SimpleCardContainer = styled.div `
     }
 `;
 
-const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, isFullDescriptionVisible, card } : CardProps) => {
+const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, card } : CardProps) => {
     const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
     const [cardDetails, setCardDetails] = useState(initialValue);
     const [modalShow, setModalShow] = useState(false);
@@ -45,12 +49,16 @@ const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, isFullDescriptionVisible
                     </FlipCardInner>
                 </FlipCardContainer>
             </Card>
-            <CardModal
-                card={card}
-                isAddToBagButtonDisabled={isAddToBagButtonDisabled}
-                onHide={() => setModalShow(false)}
-                show={modalShow}
-            />
+            {
+                modalShow && (
+                    <CardModal
+                        card={card}
+                        isAddToBagButtonDisabled={isAddToBagButtonDisabled}
+                        onHide={() => setModalShow(false)}
+                        show={modalShow}
+                    />
+                )
+            }
         </SimpleCardContainer>
     );
 }

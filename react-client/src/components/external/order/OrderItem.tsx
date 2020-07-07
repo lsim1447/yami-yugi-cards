@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react';
+import loadable from '@loadable/component';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import { Container } from 'react-bootstrap';
 import { CustomJumbotron } from '../../internal/CustomComponents';
-import OrderModal from '../../modals/OrderModal';
 import { IOrder } from '../../../models/Order';
 import styled from 'styled-components';
+
+const OrderModal = loadable(() => import('../../modals/OrderModal'), {
+    fallback: undefined
+});
 
 const ShowDetailsButton = styled.button `
     background-color: white;
@@ -52,11 +56,15 @@ const OrderItem = ({ order } : OrderItemProps) => {
                     Total price: ${order.totalPrice}
                 </ResumeDetails>
             </Container>
-            <OrderModal
-                order={order}
-                show={show}
-                setShow={setShow}  
-            />
+            {
+                show && (
+                    <OrderModal
+                        order={order}
+                        show={show}
+                        setShow={setShow}  
+                    />
+                )
+            }
         </CustomJumbotron>
     );
 }

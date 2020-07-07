@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
+import loadable from '@loadable/component';
 import { ThemeContext } from '../../../contexts/ThemeContext';
-import CardModal from '../../modals/CardModal';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../../internal/FlipComponents';
 import { CustomCard } from '../../internal/CustomComponents';
 import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
 import { getCardById } from '../../../repositories/CardRepository';
 import styled from 'styled-components';
+
+const CardModal = loadable(() => import('../../modals/CardModal'), {
+    fallback: undefined
+});
 
 const PriceContainer = styled.p `
     font-size: 16px;
@@ -59,11 +63,14 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
                     <PriceContainer> Price: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $ </PriceContainer>
                 </CustomCard.Footer>
             </CustomCard>
-            <CardModal
-                card={card}
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
+            
+            {
+                modalShow && (<CardModal
+                    card={card}
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />)
+            }
         </>
     );
 }

@@ -20,8 +20,8 @@ const CustomLeftCol = styled(Col) `
 const CustomBreadcrumb = styled(Breadcrumb) `
   ol {
     margin-bottom: 0;
-    background-color: black;
-    color: white;
+    background-color: #000000;
+    color: #FFFFFF;
     font-size: 24px;
   }
 `;

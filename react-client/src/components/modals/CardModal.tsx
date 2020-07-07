@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Carousel, Modal, Tabs, Tab } from 'react-bootstrap';
-import styled from 'styled-components';
-import { ICardDetails } from '../../models/Cards';
 import YuGiOhCard from '../external/card/YuGiOhCard';
-import { MAX_NUMBER_OF_SIMILAR_CARDS } from '../../constants';
 import { getInitialCardList } from '../../models/Cards';
+import { ICardDetails } from '../../models/Cards';
+import { MAX_NUMBER_OF_SIMILAR_CARDS } from '../../constants';
 import { findAllCardsByTypeAndRace } from '../../repositories/CardRepository';
+import styled from 'styled-components';
 
 const PriceContainer = styled.p `
   padding-top: 12px;

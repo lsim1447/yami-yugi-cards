@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const initialState = {
     showSearchOverlay: false,
@@ -7,14 +7,8 @@ const initialState = {
 
 export const SearchContext = React.createContext(initialState);
 
-export const SearchContextConsumer = SearchContext.Consumer;
-
 export const SearchProvider = (props: any) => {
     const [showSearchOverlay, setShowSearchOverlay] = useState(false);
-
-    useEffect(() => {
-        
-    }, [showSearchOverlay]);
     
     return (
         <SearchContext.Provider value={{ 

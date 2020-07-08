@@ -44,7 +44,7 @@ const Orders = loadableVisibility(() => import('./routes/private/Orders'), {
     fallback: <RouterLoadingComponent />
 });
 /**
- * Private Routes BEGIN
+ * Private Routes END
  */
 
 const SimpleProductPage = loadableVisibility(() => import('./routes/public/SimpleProductPage'), {

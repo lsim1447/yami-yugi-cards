@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import styled from 'styled-components';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -13,6 +14,8 @@ const PageNotFoundWrapper = styled.div `
 `;
 
 function PageNotFound() {
+  const { hideAllOverlays } = useContext(HideOverlaysContext);
+
   useEffect(() => {
     setTimeout(() => {
       confirmAlert({
@@ -35,7 +38,7 @@ function PageNotFound() {
   }, []);
   
   return (
-    <PageNotFoundWrapper>
+    <PageNotFoundWrapper onClick={() => hideAllOverlays()}>
 
     </PageNotFoundWrapper>
   );

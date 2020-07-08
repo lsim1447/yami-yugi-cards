@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../../contexts/ThemeContext';
-import styled from 'styled-components';
 import { Container } from 'react-bootstrap';
 import { CustomJumbotron } from '../../internal/CustomComponents';
 import GifGrid from './GifGrid';
+import styled from 'styled-components';
 
 const Title = styled.h1 `
     font-size: 48px;

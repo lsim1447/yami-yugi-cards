@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { SearchContext }  from "../../../contexts/SearchContext";
 import { Col, Image, Row } from 'react-bootstrap';
 import { CloseIcon } from '../../internal/IconComponents';
-import  { SearchContext }  from "../../../contexts/SearchContext";
 import { ICardDetails } from '../../../models/Cards';
 import { findCardsByPartialName } from '../../../repositories/CardRepository';
 import {
     WAIT_INTERVAL,
     ENTER_KEY
 } from './../../../constants';
+import styled from 'styled-components';
 
 const OverlayWrapper = styled.div `
     background: url(https://cdn3.iconfinder.com/data/icons/basic-interface/100/search-512.png) center bottom;

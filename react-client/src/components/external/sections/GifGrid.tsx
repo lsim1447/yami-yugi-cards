@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Col, Image, Row } from 'react-bootstrap';
+import styled from 'styled-components';
 
 const CustomGIF = styled(Image) `
     height: 100%;

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import  { CardContext }  from "../../contexts/CardContext";
-import  { CheckoutContext }  from "../../contexts/CheckoutContext";
-import  { SettingsContext }  from "../../contexts/SettingsContext";
+import { CardContext }  from "../../contexts/CardContext";
+import { CheckoutContext }  from "../../contexts/CheckoutContext";
+import { SearchContext } from '../../contexts/SearchContext';
+import { SettingsContext }  from "../../contexts/SettingsContext";
 import { Navbar, Nav } from 'react-bootstrap';
 import styled from 'styled-components';
 import CartOverlay from '../external/overlay/CartOverlay';
 import SearchOverlay from '../external/overlay/SearchOverlay';
 import SettingsOverlay from '../external/overlay/SettingsOverlay';
-import { SearchContext } from '../../contexts/SearchContext';
 
 const NavBarImage = styled.img `
     max-width: 55px;

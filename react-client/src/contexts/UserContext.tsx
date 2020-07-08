@@ -15,8 +15,6 @@ const initialState = {
 
 export const UserContext = React.createContext(initialState);
 
-export const UserContextConsumer = UserContext.Consumer;
-
 export const UserProvider = (props: any) => {
     const USER_ID = getSignedUserId();
     const [user, setUser] = useState(DEFAULT_USER_VALUE);

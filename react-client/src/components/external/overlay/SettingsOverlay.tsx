@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
-import  { ThemeContext }  from "../../../contexts/ThemeContext";
-import  { SettingsContext }  from "../../../contexts/SettingsContext";
-import  { UserContext }  from "../../../contexts/UserContext";
+import React, { useContext, useState } from 'react';
+import { SettingsContext }  from "../../../contexts/SettingsContext";
+import { ThemeContext }  from "../../../contexts/ThemeContext";
+import { UserContext }  from "../../../contexts/UserContext";
 import { isDarkModeActive, toggleMode } from '../../../services/DarkModeService';
 import { isUserSignedIn, userSignOut } from "../../../services/UserService";
 import { Image, Row } from 'react-bootstrap';
@@ -120,10 +120,6 @@ const SettingsOverlay = () => {
     const signOut = () => {
         userSignOut();
     }
-
-    useEffect(() => {
-        
-    }, []);
 
     if (!isUserSignedIn()) {
         return (

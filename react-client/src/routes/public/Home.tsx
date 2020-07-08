@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
-import { Button, Container, Jumbotron } from 'react-bootstrap';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { Button, Container } from 'react-bootstrap';
 import { SimpleContainer } from '../../components/internal/CommonContainers';
 import { CustomJumbotron } from '../../components/internal/CustomComponents';
-import { ThemeContext } from '../../contexts/ThemeContext';
 import DefaultLoadingComponent from '../../components/external/loading/DefaultLoadingComponent';
 import styled from 'styled-components';
 
@@ -35,10 +36,6 @@ const Advertisement = loadableVisibility(() => import('../../components/external
   fallback: <DefaultLoadingComponent />
 });
 
-const HomePageWrapper = styled.div `
-  margin-top: 24px;
-`;
-
 const Title = styled.h1 `
   font-size: 48px;
   font-weight: 800;
@@ -63,9 +60,10 @@ const YuGiOhAdvWrapper = styled.div `
 
 function Home() {
   const { activeTheme } = useContext(ThemeContext);
+  const { hideAllOverlays } = useContext(HideOverlaysContext);
 
   return (
-    <SimpleContainer theme={activeTheme}>
+    <SimpleContainer theme={activeTheme} onClick={() => hideAllOverlays()}>
       <CustomJumbotron theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>
         <Title>How To Play Yu-Gi-Oh!?</Title>
         <p>

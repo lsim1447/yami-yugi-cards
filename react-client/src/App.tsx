@@ -1,13 +1,12 @@
 import React from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
-
 import { CardProvider } from './contexts/CardContext';
 import { CheckoutProvider } from './contexts/CheckoutContext';
+import { HideOverlaysProvider } from './contexts/HideOverlaysContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { UserProvider } from './contexts/UserContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-
 import RouterLoadingComponent from './components/external/loading/RouterLoadingComponent';
 
 const NavigationBar = loadableVisibility(() => import('./components/navigation/NavigationBar'), {
@@ -30,9 +29,11 @@ function App() {
           <SearchProvider>
             <SettingsProvider>
               <CheckoutProvider>
-                <NavigationBar />
-                <MyRouter />
-                <Footer />
+                <HideOverlaysProvider>
+                  <NavigationBar />
+                  <MyRouter />
+                  <Footer />
+                </HideOverlaysProvider>
               </CheckoutProvider>
             </SettingsProvider>
           </SearchProvider>

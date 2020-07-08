@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {  CardDeck, Col, Row } from 'react-bootstrap';
+import { CardDeck, Col, Row } from 'react-bootstrap';
+import { HideOverlaysContext } from "../../contexts/HideOverlaysContext";
 import { UserContext } from "../../contexts/UserContext";
 import { ICardDetails } from '../../models/Cards';
 import SimpleFlipCard from '../../components/external/card/SimpleFlipCard';
@@ -14,6 +15,7 @@ import '../../special-styles/sidebar-left.css'
 
 function MyDeck() {
     const { user } = useContext(UserContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
     const [nrOfCardsToShow] = useState(20);
     const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
     const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
@@ -80,11 +82,7 @@ function MyDeck() {
     }, []);
 
     return (
-        <BackgroundContainer theme={
-            {
-                backgroundImage: "/images/my-deck-background.jpg"
-            }
-        }>
+        <BackgroundContainer theme={{backgroundImage: "/images/my-deck-background.jpg"}} onClick={() => hideAllOverlays()}>
             <Row>
                 <Col sm={3}>
                     <div>

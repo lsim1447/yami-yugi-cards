@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext }  from "../../../contexts/CheckoutContext";
 import { ThemeContext }  from "../../../contexts/ThemeContext";
-import { Col, Image, Row } from 'react-bootstrap';
+import { Image, Row } from 'react-bootstrap';
 import { CustomCol5, CustomCol7 } from '../../internal/CustomComponents';
 import { CheckoutButton } from '../../internal/ButtonComponents';
 import { CloseIcon } from '../../internal/IconComponents';

@@ -30,8 +30,6 @@ const initialThemeContext = {
 
 export const ThemeContext = React.createContext(initialThemeContext);
 
-export const ThemeContextConsumer = ThemeContext.Consumer;
-
 export const ThemeProvider = (props: any) => {
     const [activeTheme, setActiveTheme] = useState<CustomTheme>(lightTheme);
 

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { Alert, Col, Row } from 'react-bootstrap';
 import { CustomBreadcrumb, CustomJumbotron } from '../../components/internal/CustomComponents';
@@ -35,9 +36,10 @@ const CustomRow = styled(Row) `
 
 function ReadMore() {
     const { activeTheme } = useContext(ThemeContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
 
     return (
-        <CustomRow>
+        <CustomRow onClick={() => hideAllOverlays()}>
             <LeftCol sm={3}/>
             <CenterCol>
                 <CustomBreadcrumb theme={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}}>

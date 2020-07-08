@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { SimpleContainer } from '../../components/internal/CommonContainers';
 import CustomFlipPagination from '../../components/external/CustomFlipPagination';
@@ -15,9 +16,10 @@ const TitleWrapper = styled.div `
 
 function AllCards() {
     const { activeTheme } = useContext(ThemeContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
 
     return (
-        <SimpleContainer theme={activeTheme}>
+        <SimpleContainer theme={activeTheme} onClick={() => hideAllOverlays()}>
             <TitleWrapper> 
                 Make your deck insuperable
             </TitleWrapper>

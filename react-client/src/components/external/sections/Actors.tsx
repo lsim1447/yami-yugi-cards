@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Image, Row } from 'react-bootstrap';
+import styled from 'styled-components';
 
 const ActorsWrapper = styled(Row) `
     border-top: 1px solid #D3D3D3;

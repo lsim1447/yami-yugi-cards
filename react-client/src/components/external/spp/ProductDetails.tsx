@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { CustomBreadcrumb, CustomJumbotron } from '../../internal/CustomComponents';
-import { AddToBagButton } from '../../internal/ButtonComponents';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext } from "../../../contexts/CheckoutContext";
 import { UserContext }  from "../../../contexts/UserContext";
 import { ThemeContext }  from "../../../contexts/ThemeContext";
+import { Col, Container, Form, Row } from 'react-bootstrap';
+import { CustomBreadcrumb, CustomJumbotron } from '../../internal/CustomComponents';
+import { AddToBagButton } from '../../internal/ButtonComponents';
 import { ICardDetails } from '../../../models/Cards';
 import {
     ADD_TO_BAG,
@@ -43,12 +43,12 @@ type ProductDetailsProps = {
 }
 
 function ProductDetails({ productDetails } : ProductDetailsProps) {
-    const [addToBagButtonText, setAddToBagButtonText] = useState<string>(ADD_TO_BAG);
+    const { activeTheme } = useContext(ThemeContext);
     const { cartItems, setCartItems } = useContext(CardContext);
     const { setShowCartOverlay } = useContext(CheckoutContext);
     const { user } = useContext(UserContext);
-    const { activeTheme } = useContext(ThemeContext);
-
+    const [addToBagButtonText, setAddToBagButtonText] = useState<string>(ADD_TO_BAG);
+    
     const addToCart = (product?: ICardDetails) => {
         let productIDs = localStorage.getItem('card_ids');
         const product_id = product ? product._id : '';

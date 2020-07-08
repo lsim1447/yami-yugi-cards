@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import { Breadcrumb, Col, Row } from 'react-bootstrap';
 import { SIDE_BAR_OPTIONS_API } from '../../constants';
 import { BackgroundContainer, CenterWrapper } from '../../components/internal/CommonContainers';
@@ -27,6 +28,7 @@ const CustomBreadcrumb = styled(Breadcrumb) `
 `;
 
 function Categories() {
+  const { hideAllOverlays } = useContext(HideOverlaysContext);
   const [selectedType, setSelectedType] = useState<string>('All');
   const [isLeftSideBarVisible, setIsLeftSideBarVisible] = useState<boolean>(true);
   
@@ -35,11 +37,7 @@ function Categories() {
   }
 
   return (
-    <BackgroundContainer theme={
-      {
-        backgroundImage: "/images/blue-ice-white-dragon.jpg"
-      }
-    }>
+    <BackgroundContainer theme={{backgroundImage: "/images/blue-ice-white-dragon.jpg"}} onClick={() => hideAllOverlays()}>
       <Row>
         <CustomLeftCol sm={3}>
           <div>

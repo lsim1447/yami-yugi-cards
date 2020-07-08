@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CardContext } from "../../contexts/CardContext";
 import { UserContext } from "../../contexts/UserContext";
+import { HideOverlaysContext } from "../../contexts/HideOverlaysContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { Row } from 'react-bootstrap';
 import CartItem from '../../components/external/cart/CartItem';
@@ -73,6 +74,7 @@ const TotalPrice = styled.div `
 function Checkout() {
     const { activeTheme } = useContext(ThemeContext);
     const { cartItems, setCartItems } = useContext(CardContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { user } = useContext(UserContext);
 
     const getTotalPrice = () => {
@@ -135,7 +137,7 @@ function Checkout() {
     }
 
     return (
-        <SimpleContainer theme={activeTheme}>
+        <SimpleContainer theme={activeTheme} onClick={() => hideAllOverlays()}>
             <Row>
                 <CustomLeftCol sm={3} theme={{backgroundImage: '/images/checkout-left.jpg'}}/>
                 <CustomCenterCol sm={6}>

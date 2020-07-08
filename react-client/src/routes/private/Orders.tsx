@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { HideOverlaysContext } from '../../contexts/HideOverlaysContext';
 import { UserContext } from '../../contexts/UserContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { Container ,Col, Jumbotron, Row } from 'react-bootstrap';
@@ -78,6 +79,7 @@ const TitleText = styled.p `
 
 function Orders() {
     const { activeTheme } = useContext(ThemeContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { user } = useContext(UserContext);
     const [orders, setOrders] = useState<IOrder[]>([]);
 
@@ -91,7 +93,7 @@ function Orders() {
     }, [user]);
 
     return (
-        <CustomRow>
+        <CustomRow onClick={() => hideAllOverlays()}>
             <CustomLeftCol sm={3}/>
             <CustomCenterCol sm={6}>
                 <CoverWrapper />

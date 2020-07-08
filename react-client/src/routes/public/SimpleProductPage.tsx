@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import loadableVisibility from "react-loadable-visibility/loadable-components";
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { Card, Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import AliceCarousel from 'react-alice-carousel'
@@ -65,6 +66,7 @@ const AliceCarouselImg = styled.img `
 
 function SimpleProductPage(props: any) {
     const { activeTheme } = useContext(ThemeContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
     const [cardDetails, setCardDetails] = useState(DEFAULT_CARD_VALUE);
     const [similarCards, setSimilarCards] = useState<ICardDetails[]>(getInitialCardList(MAX_NUMBER_OF_SIMILAR_CARDS));
 
@@ -96,7 +98,7 @@ function SimpleProductPage(props: any) {
     }, [cardDetails]);
 
     return (
-        <SimpleContainer theme={activeTheme}>
+        <SimpleContainer theme={activeTheme} onClick={() => hideAllOverlays()}>
             <CustomRow>
                 <CustomLeftCol sm={5}>
                     <SPPImage

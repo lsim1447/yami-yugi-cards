@@ -40,8 +40,8 @@ export type OrderItemProps = {
 }
 
 const OrderItem = ({ order } : OrderItemProps) => {
-    const [show, setShow] = useState<boolean>(false);
     const { activeTheme } = useContext(ThemeContext);
+    const [show, setShow] = useState<boolean>(false);
     
     return (
         <CustomJumbotron key={order._id} fluid theme={activeTheme}>

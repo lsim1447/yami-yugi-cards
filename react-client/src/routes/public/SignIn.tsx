@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import { UserContext } from "../../contexts/UserContext";
 import {Col, Row } from 'react-bootstrap';
 import { FacebookButton } from '../../components/internal/ButtonComponents';
@@ -207,6 +208,7 @@ const OverlayRight = styled(CustomOverlayPanel) `
 `;
 
 function SignIn() {
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { setUser } = useContext(UserContext);
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
@@ -276,7 +278,7 @@ function SignIn() {
     }
 
     return (
-        <SignInWrapper>
+        <SignInWrapper onClick={() => hideAllOverlays()}>
             <Container className="container" id="container">
                 <SignUpFormContainer className="sign-up-container">
                     <CustomForm action="#">

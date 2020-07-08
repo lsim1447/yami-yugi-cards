@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Container, Row } from 'react-bootstrap';
 import { ThemeContext } from '../../../contexts/ThemeContext';
+import { Container, Row } from 'react-bootstrap';
 import { CustomJumbotron, CustomLeftCol, CustomCenterCol, CustomRightCol } from '../../internal/CustomComponents';
 import styled from 'styled-components';
 

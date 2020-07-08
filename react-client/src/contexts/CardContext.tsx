@@ -18,7 +18,6 @@ const initialState = {
 }
 
 export const CardContext = React.createContext(initialState);
-export const CardContextConsumer = CardContext.Consumer;
 
 export const CardProvider = (props: any) => {
     const [cards, setCards] = useState<ICardDetails[]>([]);

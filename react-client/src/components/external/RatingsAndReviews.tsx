@@ -131,10 +131,10 @@ type RatingsAndReviewsProps = {
 }
 
 const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
-    const [modalShow, setModalShow] = useState(false);
-    let [comments, setComments] = useState<IComment[]>([]);
-    const [commentToModify, setCommentToModify] = useState<IComment>();
     const { user } = useContext(UserContext);
+    const [modalShow, setModalShow] = useState(false);
+    const [commentToModify, setCommentToModify] = useState<IComment>();
+    let [comments, setComments] = useState<IComment[]>([]);
 
     const checkBoxValueChange = (comment: IComment, type: string) => {
         if (isUserSignedIn()) {

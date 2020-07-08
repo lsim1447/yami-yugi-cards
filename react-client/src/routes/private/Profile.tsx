@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { HideOverlaysContext }  from "../../contexts/HideOverlaysContext";
 import { UserContext } from "../../contexts/UserContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { Alert, Col, Form, Row } from 'react-bootstrap';
@@ -453,6 +454,7 @@ const SavePasswordTitle = styled.p `
 
 function Profile() {
     const { activeTheme } = useContext(ThemeContext);
+    const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { user } = useContext(UserContext);
     const [comments, setComments] = useState<IComment[]>([]);
     const [cards, setCards] = useState<ICardDetails[]>([]);
@@ -552,7 +554,7 @@ function Profile() {
     }, [user]);
     
     return (
-        <ProfileWrapper theme={activeTheme}>
+        <ProfileWrapper theme={activeTheme} onClick={() => hideAllOverlays()}>
             <div className="container">
                 <ProfileHeader theme={activeTheme} style={{backgroundColor: activeTheme.itemBackgroundColor}}>
                     <ProfileImageContainer>

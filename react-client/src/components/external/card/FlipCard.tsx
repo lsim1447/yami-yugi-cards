@@ -43,7 +43,7 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
 
     return (
         <>
-            <CustomCard theme={activeTheme} style={{backgroundColor: activeTheme.itemBackgroundColor}} onClick={() => setModalShow(true)}>
+            <CustomCard style={{backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color}} onClick={() => setModalShow(true)}>
                 <FlipCardContainer theme={{backgroundColor: activeTheme.backgroundColor}}>
                     <FlipCardInner>
                         <FlipCardFront>

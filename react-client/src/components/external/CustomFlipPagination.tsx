@@ -153,7 +153,7 @@ const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFli
     // Logic for displaying current cards
     const RenderCards = () => {        
         return (
-            <CustomCardDeck theme={activeTheme}>
+            <CustomCardDeck theme={{backgroundColor: activeTheme.backgroundColor, color: activeTheme.color}}>
             {
                 cards.map(
                     (card: ICardDetails) => {

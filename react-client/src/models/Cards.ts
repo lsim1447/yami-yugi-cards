@@ -35,6 +35,7 @@ export interface ICardDetails
     level?: number,
     name: string,
     race: string,
+    quantity?: number,
     type: string
 }
 

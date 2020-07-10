@@ -65,8 +65,28 @@ const TotalPriceWrapper = styled.div `
 `;
 
 const ButtonsWrapper = styled(Row) `
+    border-bottom: 1px solid #D3D3D3;
     padding: 12px;
 `;
+
+const CartItemNameElement = styled.p `
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+`;
+
+const CartItemArchetypeElement = styled.p `
+    font-size: 16px;
+    padding-bottom: 8px;
+    padding-top: 16px;
+    text-align: center;
+`;
+
+const CartItemRowWrapper = styled(Row) `
+    font-size: 16px;
+    padding-top: 16px;
+`;
+
 
 const CartOverlay = () => {
     const { activeTheme } = useContext(ThemeContext);
@@ -84,7 +104,8 @@ const CartOverlay = () => {
 
     return (
         <OverlayWrapper theme={{ backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color }}>
-            <CloseIcon 
+            <CloseIcon
+                theme={activeTheme}
                 className="fa fa-times"
                 onClick={() => setShowCartOverlay(false)}
             />
@@ -125,11 +146,27 @@ const CartOverlay = () => {
                                 </a>
                             </CustomCol5>
                             <CustomCol7 sm={7}>
-                                <p><strong> Name: </strong> {cartItem.name} </p>
-                                <p><strong> Type: </strong>{cartItem.type} </p>
-                                <p><strong> Race: </strong>{cartItem.race ? cartItem.race : 'N/A'}</p>
-                                <p><strong> Archetype: </strong>{cartItem.archetype ? cartItem.archetype : 'N/A'}</p>
-                                <p><strong> Price: </strong>{cartItem.card_prices[0].amazon_price}$</p>
+                                <CartItemNameElement> {cartItem.name} </CartItemNameElement>
+                                <CartItemRowWrapper>
+                                    <Col>
+                                        {cartItem.type ? cartItem.type : 'N/A'}
+                                    </Col>
+                                    <Col>
+                                        {cartItem.race ? cartItem.race : 'N/A'}
+                                    </Col>
+                                </CartItemRowWrapper>
+                                <CartItemArchetypeElement>
+                                    <strong> Archetype: &nbsp;&nbsp;</strong>
+                                    {cartItem.archetype ? cartItem.archetype : 'N/A'}
+                                </CartItemArchetypeElement>
+                                <Row>
+                                    <Col>
+                                        Quantity: &nbsp; {cartItem.quantity ? cartItem.quantity : '1'}
+                                    </Col>
+                                    <Col>
+                                        <strong> {cartItem.card_prices[0].amazon_price}$ </strong>
+                                    </Col>
+                                </Row>
                             </CustomCol7>
                         </CustomRow>
                     )
@@ -139,7 +176,6 @@ const CartOverlay = () => {
                 TOTAL PRICE: {getTotalPrice()}$
             </TotalPriceWrapper>
         </OverlayWrapper>
-
     );
 }
 

@@ -75,13 +75,6 @@ const CartItemNameElement = styled.p `
     text-align: center;
 `;
 
-const CartItemArchetypeElement = styled.p `
-    font-size: 16px;
-    padding-bottom: 8px;
-    padding-top: 16px;
-    text-align: center;
-`;
-
 const CartItemRowWrapper = styled(Row) `
     font-size: 16px;
     padding-top: 16px;
@@ -155,18 +148,15 @@ const CartOverlay = () => {
                                         {cartItem.race ? cartItem.race : 'N/A'}
                                     </Col>
                                 </CartItemRowWrapper>
-                                <CartItemArchetypeElement>
-                                    <strong> Archetype: &nbsp;&nbsp;</strong>
-                                    {cartItem.archetype ? cartItem.archetype : 'N/A'}
-                                </CartItemArchetypeElement>
-                                <Row>
+                                
+                                <CartItemRowWrapper>
                                     <Col>
-                                        Quantity: &nbsp; {cartItem.quantity ? cartItem.quantity : '1'}
+                                        {cartItem.archetype ? cartItem.archetype : 'N/A'}
                                     </Col>
                                     <Col>
                                         <strong> {cartItem.card_prices[0].amazon_price}$ </strong>
                                     </Col>
-                                </Row>
+                                </CartItemRowWrapper>
                             </CustomCol7>
                         </CustomRow>
                     )

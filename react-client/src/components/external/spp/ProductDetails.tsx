@@ -64,8 +64,10 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
             }
         }
 
-        setShowCartOverlay(true);
         setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_BAG);
+        setTimeout(() => {
+            setShowCartOverlay(true);
+        }, 300);
     }
 
     const updateAddToBagButtonText = () => {

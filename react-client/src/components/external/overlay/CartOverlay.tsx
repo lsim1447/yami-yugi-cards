@@ -16,8 +16,8 @@ const CustomRow = styled(Row) `
 `;
 
 const OverlayWrapper = styled.div `
-    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : ''};
-    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : ''};
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     height: 100vh;
     max-width: 500px;
     -ms-overflow-style: none;
@@ -38,13 +38,6 @@ const OverlayWrapper = styled.div `
         display: none;
     }
 `;
-
-OverlayWrapper.defaultProps = {
-    theme: {
-        backgroundColor: "inherit",
-        color: "inherit"
-    }
-}
 
 const CartItemImage = styled(Image) `
     height: 200px;
@@ -79,9 +72,9 @@ const TotalPriceWrapper = styled.div `
 `;
 
 const CartOverlay = () => {
+    const { activeTheme } = useContext(ThemeContext);
     const { cartItems } = useContext(CardContext);
     const { setShowCartOverlay } = useContext(CheckoutContext);
-    const { activeTheme } = useContext(ThemeContext);
 
     const getTotalPrice = () => {
         const totalPrice = cartItems.reduce((accumulator, cartItem) => {

@@ -38,6 +38,7 @@ const SettingsOverlayWrapper = styled.div`
 `;
 
 const LinkWrapper = styled.a `
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
     &:hover {
         color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
         cursor: pointer;

@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { CardContext }  from "../../../contexts/CardContext";
 import { CheckoutContext }  from "../../../contexts/CheckoutContext";
 import { ThemeContext }  from "../../../contexts/ThemeContext";
-import { Image, Row } from 'react-bootstrap';
+import { Col, Image, Row } from 'react-bootstrap';
 import { CustomCol5, CustomCol7 } from '../../internal/CustomComponents';
-import { CheckoutButton } from '../../internal/ButtonComponents';
+import { CheckoutButton, EditButton } from '../../internal/ButtonComponents';
 import { CloseIcon } from '../../internal/IconComponents';
 import { ICardDetails } from '../../../models/Cards';
 import styled from 'styled-components';
@@ -46,17 +46,10 @@ const CartItemImage = styled(Image) `
 `;
 
 const OverlayTitle = styled.p `
-    background-image: url(/images/shopping-cart.jpg);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: #000000;
-    font-size: 36px;
-    font-weight: 800;
-    padding-bottom: 12px;
+    font-size: 32px;
+    font-weight: 700;
+    padding-bottom: 0px;
     padding-top: 12px;
-    margin-bottom: 24px;
     text-align: center;
 `;
 
@@ -69,6 +62,10 @@ const TotalPriceWrapper = styled.div `
     padding-top: 18px;
     text-align: center;
     width: 100%;
+`;
+
+const ButtonsWrapper = styled(Row) `
+    padding: 12px;
 `;
 
 const CartOverlay = () => {
@@ -92,15 +89,28 @@ const CartOverlay = () => {
                 onClick={() => setShowCartOverlay(false)}
             />
             <OverlayTitle>
-                <p> My Bag({cartItems.length})</p>
+                My Bag({cartItems.length})
             </OverlayTitle>
-            <CheckoutButton
-                disabled={!cartItems.length}
-                href="/checkout"
-                onClick={() => setShowCartOverlay(false)}
-            >
-                    CHECKOUT
-            </CheckoutButton>
+            <ButtonsWrapper>
+                <Col>
+                    <EditButton
+                        disabled={!cartItems.length}
+                        href="/checkout"
+                        onClick={() => setShowCartOverlay(false)}
+                    >
+                            EDIT
+                    </EditButton>
+                </Col>
+                <Col>
+                    <CheckoutButton
+                        disabled={!cartItems.length}
+                        href="/checkout"
+                        onClick={() => setShowCartOverlay(false)}
+                    >
+                            CHECKOUT
+                    </CheckoutButton>
+                </Col>
+            </ButtonsWrapper>
             {
                 cartItems.map((cartItem: ICardDetails) => {
                     return (

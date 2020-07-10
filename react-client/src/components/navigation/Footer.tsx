@@ -18,11 +18,11 @@ function Footer() {
             <img src="/milleniumIcon.png" alt="" />
             <h3>About the <span>Yami Yu-gi-oh Cards</span></h3>
             <FooterLink>
-                <a href="/"> Home |</a>
-                <a href="/profile"> Profile |</a>
-                <a href="/all-cards"> All Cards |</a>
-                <a href="/categories"> Categries |</a>
-                <a href="/my-deck"> My Deck |</a>
+                <a href="/"> Home | &nbsp;</a>
+                <a href="/profile"> Profile | &nbsp;</a>
+                <a href="/all-cards"> All Cards | &nbsp;</a>
+                <a href="/categories"> Categries | &nbsp;</a>
+                <a href="/my-deck"> My Deck | &nbsp;</a>
                 <a href="/checkout"> Checkout </a>
             </FooterLink>
             <FooterCompanyName>© 2020 Yami Yu-gi-oh Cards, Lázár Szilárd</FooterCompanyName>

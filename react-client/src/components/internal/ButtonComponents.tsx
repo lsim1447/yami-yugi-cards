@@ -33,17 +33,6 @@ export const SubmitOrderButton = styled(Button)`
     }
 `;
 
-export const CheckoutButton = styled(Button) `
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 36px;
-    padding-bottom: 12px;
-    padding-top: 12px;
-    width: 100%;
-`;
-
 export const AddToBagButton = styled(Button) `
     background-color: black;
     color: white;
@@ -53,3 +42,27 @@ export const AddToBagButton = styled(Button) `
     padding-top: 24px;
     width: 100%;
 `;
+
+export const CheckoutButton = styled(Button) `
+    background-color: #000000;
+    border: none;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    width: 100%;
+`;
+
+export const EditButton = styled(Button) `
+    background-color: #FFFFFF;
+    border: 1px solid #D3D3D3;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    width: 100%;
+`;
+
+

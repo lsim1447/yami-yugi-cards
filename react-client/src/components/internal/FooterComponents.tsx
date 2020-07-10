@@ -143,6 +143,9 @@ export const FooterLink = styled.p `
         display:inline-block;
         line-height: 1.8;
         text-decoration: none;
+        &:hover {
+            color: red;
+        }
     }
 `;
 

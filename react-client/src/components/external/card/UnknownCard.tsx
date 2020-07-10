@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 const UnknownCard = () => 
     <Card>
-        <Card.Img className="lazyload" variant="top" data-src="https://cdn11.bigcommerce.com/s-ebhaloj/images/stencil/1280x1280/products/6750/12455/KOIYGSLEEVE__99423.1567709419.jpg?c=2&imbypass=on" />
+        <Card.Img className="lazyload" variant="top" data-src="/images/yugioh-card-back-side.jpg" />
         <Card.Body>
             <Card.Title> No title </Card.Title>
             <Card.Text> No description </Card.Text>

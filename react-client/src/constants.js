@@ -1,8 +1,8 @@
-export const MAX_NUMBER_OF_SIMILAR_CARDS = 20;
+export const MAX_NUMBER_OF_SIMILAR_PRODUCTS = 20;
 
 export const ADD_TO_BAG = 'ADD TO BAG';
 
-export const ALL_NUMBER_OF_CARDS = 10300;
+export const ALL_NUMBER_OF_PRODUCTS = 10300;
 
 export const ALREADY_ADDED_TO_YOUR_BAG = 'ALREADY ADDED TO YOUR BAG';
 

@@ -8,7 +8,7 @@ const initialState = {
 export const CheckoutContext = React.createContext(initialState);
 
 export const CheckoutProvider = (props: any) => {
-    const [showCartOverlay, setShowCartOverlay] = useState(false);
+    const [ showCartOverlay, setShowCartOverlay ] = useState(false);
     
     return (
         <CheckoutContext.Provider value={{ 

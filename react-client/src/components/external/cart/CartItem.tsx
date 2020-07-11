@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import loadable from '@loadable/component';
 import { CardContext } from "../../../contexts/CardContext";
 import { Col, Row } from 'react-bootstrap';
+import { DEFAULT_PRODUCT_VALUE, IProductDetails } from '../../../models/Product';
+import { setCartItemIDs } from '../../../services/CartService';
 import styled from 'styled-components';
-import { ICardDetails, DEFAULT_CARD_VALUE } from '../../../models/Cards';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -39,12 +40,12 @@ const CloseIcon = styled.i `
 `
 
 export type CartItemProps = {
-    cartItem: ICardDetails
+    cartItem: IProductDetails
 }
 
 const CartItem = ({cartItem } : CartItemProps) => {
     const { cartItems, setCartItems } = useContext(CardContext);
-    const [modalShow, setModalShow] = useState(false);
+    const [ modalShow, setModalShow ] = useState(false);
 
     const removeCartItem = () => {
         confirmAlert({
@@ -54,9 +55,9 @@ const CartItem = ({cartItem } : CartItemProps) => {
               {
                 label: 'Yes, I want to remove this.',
                 onClick: () => {
-                    const newCartItems = cartItems.filter(c => c.name !== cartItem.name);
-                    const cardIDs = newCartItems.map(card => card._id).join('|');
-                    localStorage.setItem('card_ids', cardIDs);
+                    const newCartItems: IProductDetails[] = cartItems.filter((product: IProductDetails) => product.name !== cartItem.name);
+                    const productIDs: string = newCartItems.map(product => product._id).join('|');
+                    setCartItemIDs(productIDs);
                     setCartItems([...newCartItems]);
                 }
               },
@@ -74,16 +75,14 @@ const CartItem = ({cartItem } : CartItemProps) => {
     return (
         <CartItemWrapper>
             <Row>
-                <CloseIcon
-                    onClick={() => removeCartItem()}
-                >
+                <CloseIcon onClick={() => removeCartItem()}>
                     &times;
                 </CloseIcon>
                 <Col sm={3}>
                     <img
                         width="100%"
                         onClick={() => setModalShow(true)}
-                        src={(cartItem.card_images && cartItem.card_images.length) ? cartItem.card_images[0].image_url : DEFAULT_CARD_VALUE.card_images[0].image_url} 
+                        src={(cartItem.card_images && cartItem.card_images.length) ? cartItem.card_images[0].image_url : DEFAULT_PRODUCT_VALUE.card_images[0].image_url} 
                         alt=""
                     />
                 </Col>
@@ -106,7 +105,7 @@ const CartItem = ({cartItem } : CartItemProps) => {
             {
                 modalShow && (
                     <CardModal
-                        card={cartItem}
+                        product={cartItem}
                         show={modalShow}
                         onHide={() => setModalShow(false)}
                     />

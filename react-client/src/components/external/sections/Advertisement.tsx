@@ -16,8 +16,8 @@ const BoldParagraph = styled.p `
 `;
 
 const DarkButton = styled.a `
-    background-color: black;
-    color: white;
+    background-color: #000000;
+    color: #FFFFFF;
     font-weight: 600;
     margin-top: 24px;
     padding: 24px 60px;

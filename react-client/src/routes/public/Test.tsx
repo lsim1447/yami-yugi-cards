@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import { CardContext } from "../../contexts/CardContext";
-import { ICardDetails } from '../../models/Cards';
+import { IProductDetails } from '../../models/Product';
 import FlipCard from '../../components/external/card/FlipCard';
 
 function Test() {
@@ -11,12 +11,12 @@ function Test() {
         <CardDeck style={{minHeight: "100vh"}}>
         {
             allCards.map(
-                (card: ICardDetails) => {
+                (product: IProductDetails) => {
                     return (
                         <FlipCard 
                             isFullDescriptionVisible={false}
-                            card={card}
-                            key={card.id}
+                            product={product}
+                            key={product.id}
                         />
                     );
             })

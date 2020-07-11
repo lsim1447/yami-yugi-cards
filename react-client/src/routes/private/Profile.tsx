@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { Alert, Col, Form, Row } from 'react-bootstrap';
 import { IComment, IVote } from '../../models/Comment';
-import { ICardDetails } from '../../models/Cards';
+import { IProductDetails } from '../../models/Product';
 import { getCommentsByUserEmail } from '../../repositories/CommentRepository';
 import { findAllCardsByIds } from '../../repositories/CardRepository';
 import {
@@ -456,14 +456,14 @@ function Profile() {
     const { activeTheme } = useContext(ThemeContext);
     const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { user } = useContext(UserContext);
-    const [comments, setComments] = useState<IComment[]>([]);
-    const [cards, setCards] = useState<ICardDetails[]>([]);
-    const [currentPassword, setCurrentPassword] = useState<string>('');
-    const [newPassword, setNewPassword] = useState<string>('');
-    const [newPasswordRepeat, setNewPasswordRepeat] = useState<string>('');
-    const [isSomethingWrong, setIsSomethingWrong] = useState<boolean>(false);
-    const [isPasswordChangingWentWell, setIsPasswordChangingWentWell] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string>('');
+    const [ comments, setComments ] = useState<IComment[]>([]);
+    const [ products, setProducts ] = useState<IProductDetails[]>([]);
+    const [ currentPassword, setCurrentPassword ] = useState<string>('');
+    const [ newPassword, setNewPassword ] = useState<string>('');
+    const [ newPasswordRepeat, setNewPasswordRepeat ] = useState<string>('');
+    const [ isSomethingWrong, setIsSomethingWrong ] = useState<boolean>(false);
+    const [ isPasswordChangingWentWell, setIsPasswordChangingWentWell ] = useState<boolean>(false);
+    const [ errorMessage, setErrorMessage ] = useState<string>('');
 
     const changeTab = (panelIndex: number) => {
         const tab: NodeListOf<Element> = document.querySelectorAll('.tab');
@@ -488,7 +488,6 @@ function Profile() {
 
     const getPercentageOfTheHelpfulComments = () => {
         const allNumberOfVotesOnUserComments = comments.reduce((acc: number, comment: IComment) => acc + comment.votes.length, 0);
-
         const allNumberOfHelpfulVotes = comments.reduce((acc: number, comment: IComment) => {
             const helpfulVotes = comment.votes.filter((vote: IVote) => vote.isHelpful).length;
 
@@ -520,7 +519,6 @@ function Profile() {
                         
                         updateUserById(newUser)
                             .then(response => {
-                                console.log(response);
                                 setCurrentPassword('');
                                 setNewPassword('');
                                 setNewPasswordRepeat('');
@@ -543,12 +541,11 @@ function Profile() {
         getCommentsByUserEmail(user.email)
             .then(userComments => {
                 setComments(userComments);
-                
-                const cardIDs: string[] = userComments.map((comment: IComment) => comment.cardId);
+                const productIDs: string[] = userComments.map((comment: IComment) => comment.cardId);
 
-                findAllCardsByIds(cardIDs)
-                    .then(cards => {
-                        setCards(cards);
+                findAllCardsByIds(productIDs)
+                    .then(products => {
+                        setProducts(products);
                     })
             })
     }, [user]);
@@ -656,11 +653,11 @@ function Profile() {
                                     {
                                         comments.map((comment: IComment, index: number) => {
                                             return (
-                                                <ReviewItem key={comment._id} href={`/card/${cards[index]?._id}`}>
+                                                <ReviewItem key={comment._id} href={`/card/${products[index]?._id}`}>
                                                     <Col sm={4}>
-                                                        <ReviewCardName> {cards[index]?.name} </ReviewCardName>
-                                                        <a href={`/card/${cards[index]?._id}`}>
-                                                            <ReviewCardImage src={cards[index]?.card_images[0].image_url} alt="" />
+                                                        <ReviewCardName> {products[index]?.name} </ReviewCardName>
+                                                        <a href={`/card/${products[index]?._id}`}>
+                                                            <ReviewCardImage src={products[index]?.card_images[0].image_url} alt="" />
                                                         </a>
                                                     </Col>
                                                     <ReviewCol sm={4}>

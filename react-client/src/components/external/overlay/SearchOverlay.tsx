@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SearchContext }  from "../../../contexts/SearchContext";
 import { Col, Image, Row } from 'react-bootstrap';
 import { CloseIcon } from '../../internal/IconComponents';
-import { ICardDetails } from '../../../models/Cards';
+import { IProductDetails } from '../../../models/Product';
 import { findCardsByPartialName } from '../../../repositories/CardRepository';
 import {
     WAIT_INTERVAL,
@@ -83,9 +83,9 @@ const SearchItemField = styled.p `
 
 const SearchOverlay = () => {
     const { setShowSearchOverlay } = useContext(SearchContext);
-    const [productName, setProductName] = useState<string>('');
-    const [products, setProducts] = useState<ICardDetails[]>([]);
-    const [timer, setTimer] = useState<any>(null);
+    const [ productName, setProductName ] = useState<string>('');
+    const [ products, setProducts ] = useState<IProductDetails[]>([]);
+    const [ timer, setTimer ] = useState<any>(null);
     const searchRef = useRef(null);
 
     const triggerChange = () => {
@@ -133,7 +133,7 @@ const SearchOverlay = () => {
             />
             
             {
-                products.map((product: ICardDetails, index: number) => {
+                products.map((product: IProductDetails, index: number) => {
                     return (
                         <SearchItemWrapper key={product._id}>
                             <Col sm={5}>

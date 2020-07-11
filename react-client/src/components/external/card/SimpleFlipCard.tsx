@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { Card } from 'react-bootstrap';
-import styled from 'styled-components';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../../internal/FlipComponents';
+import { DEFAULT_PRODUCT_VALUE, IProductDetails, ProductProps } from '../../../models/Product';
 import { getCardById } from '../../../repositories/CardRepository';
+import styled from 'styled-components';
 
 const CardModal = loadable(() => import('../../modals/CardModal'), {
     fallback: undefined
@@ -19,19 +19,19 @@ const SimpleCardContainer = styled.div `
     }
 `;
 
-const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, card } : CardProps) => {
-    const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
-    const [cardDetails, setCardDetails] = useState(initialValue);
-    const [modalShow, setModalShow] = useState(false);
+const SimpleFlipCard = ({ id, product } : ProductProps) => {
+    const initialValue: IProductDetails = DEFAULT_PRODUCT_VALUE;
+    const [ productDetails, setProductDetails ] = useState(initialValue);
+    const [ modalShow, setModalShow ] = useState(false);
 
     useEffect(() => {
         if (id) {
             getCardById(id)
-                .then(desiredCard => {
-                    setCardDetails(desiredCard);
+                .then(desiredProduct => {
+                    setProductDetails(desiredProduct);
                 })
-        } else if (card) {
-            setCardDetails(card);
+        } else if (product) {
+            setProductDetails(product);
         }
     }, []);
     
@@ -41,7 +41,7 @@ const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, card } : CardProps) => {
                 <FlipCardContainer>
                     <FlipCardInner>
                         <FlipCardFront>
-                            <Card.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(cardDetails.card_images && cardDetails.card_images.length) ? cardDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />
+                            <Card.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(productDetails.card_images && productDetails.card_images.length) ? productDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />
                         </FlipCardFront>
                         <FlipCardBack>
                             <Card.Img className="lazyload" variant="top" data-src="/images/yugioh-card-back-side.jpg" />
@@ -52,8 +52,7 @@ const SimpleFlipCard = ({ id, isAddToBagButtonDisabled, card } : CardProps) => {
             {
                 modalShow && (
                     <CardModal
-                        card={card}
-                        isAddToBagButtonDisabled={isAddToBagButtonDisabled}
+                        product={product}
                         onHide={() => setModalShow(false)}
                         show={modalShow}
                     />

@@ -210,12 +210,11 @@ const OverlayRight = styled(CustomOverlayPanel) `
 function SignIn() {
     const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { setUser } = useContext(UserContext);
-    const [address, setAddress] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [userName, setUserName] = useState('');
-
+    const [ address, setAddress ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ phoneNumber, setPhoneNumber ] = useState('');
+    const [ userName, setUserName ] = useState('');
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
 

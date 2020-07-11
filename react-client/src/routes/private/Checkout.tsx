@@ -8,11 +8,12 @@ import CartItem from '../../components/external/cart/CartItem';
 import { CustomLeftCol, CustomCenterCol, CustomRightCol } from '../../components/internal/CustomComponents';
 import { SimpleContainer } from '../../components/internal/CommonContainers';
 import { SubmitOrderButton } from '../../components/internal/ButtonComponents';
-import { ICardDetails } from '../../models/Cards';
+import { IProductDetails } from '../../models/Product';
 import { IUser } from '../../models/User';
 import { IOrder, DEFAULT_ORDER_VALUE } from '../../models/Order';
 import { updateUserById } from '../../repositories/UserRepository';
 import { saveOrder } from '../../repositories/OrderRepository';
+import { emptyBag } from '../../services/CartService';
 import { confirmAlert } from 'react-confirm-alert';
 import styled from 'styled-components';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -79,10 +80,9 @@ function Checkout() {
 
     const getTotalPrice = () => {
         if (cartItems && cartItems.length) {
-            return cartItems.reduce((accumulator: number, currentCard: ICardDetails) => {
-                const price: number = Number((currentCard && currentCard.card_prices && currentCard.card_prices[0]) ? currentCard.card_prices[0].amazon_price : 0);
+            return cartItems.reduce((accumulator: number, currentProduct: IProductDetails) => {
+                const price: number = Number((currentProduct && currentProduct.card_prices && currentProduct.card_prices[0]) ? currentProduct.card_prices[0].amazon_price : 0);
                 const newAccumulator: number = Number((accumulator + price).toFixed(2));
-
                 return newAccumulator ? newAccumulator : accumulator;
             }, 0);
         } else {
@@ -91,26 +91,26 @@ function Checkout() {
     }
 
     const checkoutCartItems = () => {
-        const NEW_DECK_ITEMS = user.deck.concat(cartItems.map(item => item._id));
-        const ALL_CARDS_PRICE = cartItems.reduce((accumulator, cartItem) => {
+        const NEW_DECK_ITEMS: string[] = user.deck.concat(cartItems.map((cartItem: IProductDetails) => cartItem._id));
+        const BAGs_VALUE = cartItems.reduce((accumulator: number, cartItem: IProductDetails) => {
             return accumulator + Number(cartItem.card_prices[0].amazon_price);
         }, 0);
         const newUser: IUser = Object.create(user);
 
-        newUser.accountBalance = user.accountBalance - ALL_CARDS_PRICE;
+        newUser.accountBalance = user.accountBalance - BAGs_VALUE;
         newUser.deck = NEW_DECK_ITEMS;
 
         updateUserById(newUser)
             .then(userResponse => {
                 const newOrder: IOrder = DEFAULT_ORDER_VALUE;
                 
-                newOrder.products = cartItems.map(item => item._id);
+                newOrder.products = cartItems.map((cartItem: IProductDetails) => cartItem._id);
                 newOrder.userId = user._id;
                 newOrder.totalPrice = getTotalPrice();
 
                 saveOrder(newOrder)
                     .then(orderResponse => {
-                        localStorage.removeItem('card_ids');
+                        emptyBag();
                         setCartItems([]);
 
                         confirmAlert({
@@ -156,10 +156,10 @@ function Checkout() {
                         My Bag ({cartItems.length} items)
                     </BagWrapper>
                     {
-                        cartItems.map((card: ICardDetails) => {
+                        cartItems.map((cartItem: IProductDetails) => {
                             return (
                                 <CartItem
-                                    cartItem={card}
+                                    cartItem={cartItem}
                                 />
                             )
                         })

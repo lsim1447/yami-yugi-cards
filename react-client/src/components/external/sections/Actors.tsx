@@ -7,8 +7,7 @@ const ActorsWrapper = styled(Row) `
     border-bottom: 1px solid #D3D3D3;
     margin-top: 36px;
     max-height: 265px;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow: hidden;
     padding-top: 36px;
     padding-bottom: 36px;
 `;

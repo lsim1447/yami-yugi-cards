@@ -6,7 +6,7 @@ import { Col, Image, Row } from 'react-bootstrap';
 import { CustomCol5, CustomCol7 } from '../../internal/CustomComponents';
 import { CheckoutButton, EditButton } from '../../internal/ButtonComponents';
 import { CloseIcon } from '../../internal/IconComponents';
-import { ICardDetails } from '../../../models/Cards';
+import { IProductDetails } from '../../../models/Product';
 import styled from 'styled-components';
 
 const PageWrapper = styled.div `
@@ -55,12 +55,6 @@ const OverlayWrapper = styled.div `
     }
 `;
 
-const CartItemImage = styled(Image) `
-    height: 200px;
-    width: 180px;
-    margin-left: 12px;
-`;
-
 const OverlayTitle = styled.p `
     font-size: 32px;
     font-weight: 700;
@@ -69,20 +63,15 @@ const OverlayTitle = styled.p `
     text-align: center;
 `;
 
-const TotalPriceWrapper = styled.div `
-    border-bottom: 2px solid #D3D3D3;
-    border-top: 2px solid #D3D3D3;
-    font-size: 24px;
-    font-weight: 800;
-    padding-bottom: 18px;
-    padding-top: 18px;
-    text-align: center;
-    width: 100%;
-`;
-
 const ButtonsWrapper = styled(Row) `
     border-bottom: 1px solid #D3D3D3;
     padding: 12px;
+`;
+
+const CartItemImage = styled(Image) `
+    height: 200px;
+    width: 180px;
+    margin-left: 12px;
 `;
 
 const CartItemNameElement = styled.p `
@@ -94,6 +83,17 @@ const CartItemNameElement = styled.p `
 const CartItemRowWrapper = styled(Row) `
     font-size: 16px;
     padding-top: 16px;
+`;
+
+const TotalPriceWrapper = styled.div `
+    border-bottom: 2px solid #D3D3D3;
+    border-top: 2px solid #D3D3D3;
+    font-size: 24px;
+    font-weight: 800;
+    padding-bottom: 18px;
+    padding-top: 18px;
+    text-align: center;
+    width: 100%;
 `;
 
 const CartOverlay = () => {
@@ -120,7 +120,7 @@ const CartOverlay = () => {
                     onClick={() => setShowCartOverlay(false)}
                 />
                 <OverlayTitle>
-                    My Bag({cartItems.length})
+                    My Bag ({cartItems.length})
                 </OverlayTitle>
                 <ButtonsWrapper>
                     <Col style={{paddingRight: "6px"}}>
@@ -143,7 +143,7 @@ const CartOverlay = () => {
                     </Col>
                 </ButtonsWrapper>
                 {
-                    cartItems.map((cartItem: ICardDetails) => {
+                    cartItems.map((cartItem: IProductDetails) => {
                         return (
                             <CustomRow>
                                 <CustomCol5 sm={5}>

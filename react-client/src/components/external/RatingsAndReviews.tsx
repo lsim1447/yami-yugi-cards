@@ -2,7 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { UserContext } from "../../contexts/UserContext";
 import { Alert, Col, Form, ProgressBar, Row, Button } from 'react-bootstrap';
-import { ICardDetails } from '../../models/Cards';
+import { EditIcon } from '../internal/IconComponents';
+import { IProductDetails } from '../../models/Product';
 import { IComment, IVote } from '../../models/Comment';
 import {
     deleteCommentById,
@@ -119,22 +120,15 @@ const BeTheFirst = styled.span `
     }
 `;
 
-const EditIcon = styled.i `
-    font-size: 24px;
-    position: absolute;
-    top: 0;
-    right: 0;
-`;
-
 type RatingsAndReviewsProps = {
-    cardDetails: ICardDetails
+    product: IProductDetails
 }
 
-const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
+const RatingsAndReviews = ({product} : RatingsAndReviewsProps) => {
     const { user } = useContext(UserContext);
-    const [modalShow, setModalShow] = useState(false);
-    const [commentToModify, setCommentToModify] = useState<IComment>();
-    let [comments, setComments] = useState<IComment[]>([]);
+    const [ modalShow, setModalShow ] = useState(false);
+    const [ commentToModify, setCommentToModify ] = useState<IComment>();
+    let [ comments, setComments ] = useState<IComment[]>([]);
 
     const checkBoxValueChange = (comment: IComment, type: string) => {
         if (isUserSignedIn()) {
@@ -253,9 +247,7 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
               },
               {
                 label: "No, I don't want to remove it.",
-                onClick: () => {
-                    
-                }
+                onClick: () => {}
               }
             ]
           });
@@ -268,13 +260,13 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
     }
 
     useEffect(() => {
-        if (cardDetails && cardDetails._id) {
-            getCommentsByCardId(cardDetails._id)
+        if (product && product._id) {
+            getCommentsByCardId(product._id)
                 .then(comments => {
                     setComments(comments);
                 })
         }
-    }, [cardDetails]);
+    }, [product]);
 
     return (
         <div>
@@ -409,12 +401,11 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
                             <ArrowTopLeft src="/images/diag-arrow-left.png" />
                         </NoCommentsParagraph>
                     </NoCommentsWrapper>
-
             }
             {
                 modalShow && (
                     <RatingModal
-                        cardDetails={cardDetails}
+                        product={product}
                         comments={comments}
                         commentToModify={commentToModify}
                         setCommentToModify={setCommentToModify}
@@ -424,7 +415,6 @@ const RatingsAndReviews = ({cardDetails} : RatingsAndReviewsProps) => {
                     />
                 )
             }
-            
         </div>
     );
 }

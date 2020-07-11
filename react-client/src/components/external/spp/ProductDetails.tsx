@@ -6,12 +6,16 @@ import { ThemeContext }  from "../../../contexts/ThemeContext";
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { CustomBreadcrumb, CustomJumbotron } from '../../internal/CustomComponents';
 import { AddToBagButton } from '../../internal/ButtonComponents';
-import { ICardDetails } from '../../../models/Cards';
+import { IProductDetails } from '../../../models/Product';
 import {
     ADD_TO_BAG,
     ALREADY_ADDED_TO_YOUR_BAG,
     ALREADY_ADDED_TO_YOUR_DECK,
 } from '../../../constants';
+import {
+    getCartItemIDs,
+    setCartItemIDs
+} from '../../../services/CartService';
 import styled from 'styled-components';
 
 const DetailsWrapper = styled.div `
@@ -39,7 +43,7 @@ const PriceText = styled(SimpleText) `
 `;
 
 type ProductDetailsProps = {
-    productDetails: ICardDetails
+    productDetails: IProductDetails
 }
 
 function ProductDetails({ productDetails } : ProductDetailsProps) {
@@ -47,18 +51,18 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
     const { cartItems, setCartItems } = useContext(CardContext);
     const { setShowCartOverlay } = useContext(CheckoutContext);
     const { user } = useContext(UserContext);
-    const [addToBagButtonText, setAddToBagButtonText] = useState<string>(ADD_TO_BAG);
+    const [ addToBagButtonText, setAddToBagButtonText ] = useState<string>(ADD_TO_BAG);
     
-    const addToCart = (product?: ICardDetails) => {
-        let productIDs = localStorage.getItem('card_ids');
+    const addToCart = (product?: IProductDetails) => {
+        let productIDs = getCartItemIDs();
         const product_id = product ? product._id : '';
     
         if (productIDs) {
             productIDs = productIDs + '|' + product_id;
-            localStorage.setItem('card_ids', productIDs);
+            setCartItemIDs(productIDs);
             setCartItems([...cartItems, product]);
         } else {
-            localStorage.setItem('card_ids', product_id);
+            setCartItemIDs(product_id);
             if (product) {
                 setCartItems([...cartItems, product]);
             }
@@ -71,14 +75,14 @@ function ProductDetails({ productDetails } : ProductDetailsProps) {
     }
 
     const updateAddToBagButtonText = () => {
-        let productIDs = localStorage.getItem('card_ids')?.split('|');
-        const isCardAlreadyAddedToBag = (productIDs && productIDs.length) ? productIDs.some(id => id === productDetails._id) : false;
-        const isCardAlreadyAddedToYourDeck = user.deck.some(id => id && id === productDetails._id);
+        let productIDs = getCartItemIDs()?.split('|');
+        const isProductAlreadyAddedToBag = (productIDs && productIDs.length) ? productIDs.some(id => id === productDetails._id) : false;
+        const isProductAlreadyAddedToYourDeck = user.deck.some(id => id && id === productDetails._id);
         
-        if (isCardAlreadyAddedToBag) {
+        if (isProductAlreadyAddedToBag) {
             setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_BAG);
             return true;
-        } else if (isCardAlreadyAddedToYourDeck){
+        } else if (isProductAlreadyAddedToYourDeck){
             setAddToBagButtonText(ALREADY_ADDED_TO_YOUR_DECK);
             return true;
         } else {

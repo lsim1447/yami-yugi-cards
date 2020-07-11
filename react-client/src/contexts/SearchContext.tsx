@@ -8,7 +8,7 @@ const initialState = {
 export const SearchContext = React.createContext(initialState);
 
 export const SearchProvider = (props: any) => {
-    const [showSearchOverlay, setShowSearchOverlay] = useState(false);
+    const [ showSearchOverlay, setShowSearchOverlay ] = useState(false);
     
     return (
         <SearchContext.Provider value={{ 

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext }  from "../../contexts/UserContext";
 import { Button, Col, Form, Modal } from 'react-bootstrap';
-import { ICardDetails } from '../../models/Cards';
+import { IProductDetails } from '../../models/Product';
 import { IComment, DEFAULT_COMMENT_VALUE } from '../../models/Comment';
 import {
   saveComment,
@@ -10,7 +10,7 @@ import {
 import moment from 'moment';
 
 type RatingModalProps = {
-  cardDetails?: ICardDetails,
+  product?: IProductDetails,
   comments: IComment[],
   commentToModify?: IComment,
   setCommentToModify?: any,
@@ -21,7 +21,7 @@ type RatingModalProps = {
 
 function RatingModal(props: RatingModalProps) {
   const {
-    cardDetails,
+    product,
     commentToModify,
     setCommentToModify,
     setComments,
@@ -31,17 +31,17 @@ function RatingModal(props: RatingModalProps) {
   let { comments } = props;
   
   const { user } = useContext(UserContext);
-  const [email, setEmail] = useState(user.email);
-  const [stars, setStars] = useState('5');
-  const [title, setTitle] = useState('');
-  const [userName, setUserName] = useState(user.username);
-  const [commentMsg, setCommentMsg] = useState('');
+  const [ email, setEmail ] = useState(user.email);
+  const [ stars, setStars ] = useState('5');
+  const [ title, setTitle ] = useState('');
+  const [ userName, setUserName ] = useState(user.username);
+  const [ commentMsg, setCommentMsg ] = useState('');
 
   const sendComment = () => {
     const newComment: IComment = DEFAULT_COMMENT_VALUE;
 
     newComment._id = commentToModify ? commentToModify._id : '';
-    newComment.cardId = (cardDetails && cardDetails._id) ? cardDetails._id : '5ebc4b9b221c162fa4dcaeb3';
+    newComment.cardId = (product && product._id) ? product._id : '5ebc4b9b221c162fa4dcaeb3';
     newComment.date = moment(new Date()).format('MMMM Do YYYY, h:mm:ss a');
     newComment.email = email;
     newComment.message = commentMsg;
@@ -98,7 +98,7 @@ function RatingModal(props: RatingModalProps) {
   return (
     <Modal animation={true} show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title> About the {cardDetails ? cardDetails.name : ''} </Modal.Title>
+        <Modal.Title> About the {product ? product.name : ''} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -150,7 +150,6 @@ function RatingModal(props: RatingModalProps) {
             </Form.Group>
           </Form.Row>
           
-
           <Form.Group controlId="formReviewMessage">
             <Form.Label>Message</Form.Label>
             <Form.Control

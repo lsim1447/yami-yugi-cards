@@ -19,3 +19,18 @@ export const CloseIcon = styled.i `
             '0px'
     };
 `;
+
+export const EditIcon = styled.i `
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+`;
+
+export const SizeableIcon = styled.i `
+    font-size: ${props => 
+        (props && props.theme && props.theme.fontSize) ? 
+            props.theme.fontSize :
+            '26px'
+    };
+`;

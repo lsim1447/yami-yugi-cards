@@ -43,6 +43,15 @@ export const AddToBagButton = styled(Button) `
     width: 100%;
 `;
 
+export const CloseButton = styled.button `
+    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
+    border: 1px solid #D3D3D3;
+    border-radius: 5%;
+    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
+    font-size: 16px;
+    padding: 6px 16px;
+`;
+
 export const CheckoutButton = styled(Button) `
     background-color: #000000;
     border: none;

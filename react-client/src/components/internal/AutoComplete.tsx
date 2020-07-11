@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardDeck } from 'react-bootstrap';
 import SimpleFlipCard  from '../external/card/SimpleFlipCard';
 import AnimateHeight from 'react-animate-height';
-import { ICardDetails, DEFAULT_CARD_VALUE } from '../../models/Cards';
+import { DEFAULT_PRODUCT_VALUE, IProductDetails } from '../../models/Product';
 import styled from 'styled-components';
 
 const AutoCompleteTextContainer = styled.div `
@@ -62,10 +62,10 @@ const AutoCompleteLi = styled.li `
 `;
 
 function AutoComplete(props: any) {
-    const [mySuggestions, setMySuggestions] = useState<any>([]);
-    const [cardText, setCardText] = useState('');
-    const [myHeight, setMyHeight] = useState<any>('');
-    const [selectedCard, setSelectedCard] = useState(DEFAULT_CARD_VALUE);
+    const [ mySuggestions, setMySuggestions ] = useState<any>([]);
+    const [ cardText, setCardText ] = useState('');
+    const [ myHeight, setMyHeight ] = useState<any>('');
+    const [ selectedProduct, setSelectedProduct ] = useState(DEFAULT_PRODUCT_VALUE);
     const MAX_NR_OF_MATCHES_TO_SHOW = 2;
 
     const _handleEnterPress = (error: any) => {
@@ -81,8 +81,8 @@ function AutoComplete(props: any) {
 
         if (value.length > 0){
             const regex = new RegExp(`${value}`, 'g');
-            newSuggestions = items.filter((card: ICardDetails) => {
-                const name = card.name;
+            newSuggestions = items.filter((product: IProductDetails) => {
+                const name = product.name;
                 return regex.test(name);
             })
 
@@ -102,13 +102,13 @@ function AutoComplete(props: any) {
             return null;
         }
 
-        return mySuggestions.slice(0, MAX_NR_OF_MATCHES_TO_SHOW).map((card: ICardDetails) => {
+        return mySuggestions.slice(0, MAX_NR_OF_MATCHES_TO_SHOW).map((product: IProductDetails) => {
             return (
-                <AutoCompleteLi key={card.id} onClick={() => suggestionSelected(card)}> 
+                <AutoCompleteLi key={product.id} onClick={() => suggestionSelected(product)}> 
                     <SimpleFlipCard
                         isFullDescriptionVisible={false}
-                        card={card}
-                        key={card.id} 
+                        product={product}
+                        key={product.id} 
                     />
                 </AutoCompleteLi>
             )
@@ -116,11 +116,11 @@ function AutoComplete(props: any) {
         
     }
 
-    const suggestionSelected = (card: ICardDetails) => {
+    const suggestionSelected = (product: IProductDetails) => {
         //setMySuggestions([]);
         setMyHeight('');
-        setSelectedCard(card);
-        setCardText(card.name)
+        setSelectedProduct(product);
+        setCardText(product.name)
     }
 
     return(

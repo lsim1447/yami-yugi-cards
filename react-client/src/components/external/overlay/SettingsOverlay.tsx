@@ -6,6 +6,8 @@ import { isDarkModeActive, toggleMode } from '../../../services/DarkModeService'
 import { isUserSignedIn, userSignOut } from "../../../services/UserService";
 import { Image, Row } from 'react-bootstrap';
 import { CustomCol1, CustomCol2, CustomCol3, CustomCol4, CustomCol5, CustomCol6, CustomCol7, CustomCol10 } from '../../internal/CustomComponents';
+import { CloseButton } from '../../internal/ButtonComponents';
+import { SizeableIcon } from '../../internal/IconComponents';
 import Switch from "react-switch";
 import styled from 'styled-components';
 
@@ -97,20 +99,11 @@ const CloseWrapper = styled.div `
     }
 `;
 
-const CloseButton = styled.button `
-    background-color: ${props => (props && props.theme && props.theme.backgroundColor) ? props.theme.backgroundColor : '#FFFFFF'};
-    border: 1px solid #D3D3D3;
-    border-radius: 5%;
-    color: ${props => (props && props.theme && props.theme.color) ? props.theme.color : '#000000'};
-    font-size: 16px;
-    padding: 6px 16px;
-`;
-
 const SettingsOverlay = () => {
     const { activeTheme, setActiveThemeNow } = useContext(ThemeContext);
     const { setShowSettingsOverlay } = useContext(SettingsContext);
     const { user } = useContext(UserContext);
-    const [isDarkModeVisible, setDarkMode] = useState<boolean>(isDarkModeActive());
+    const [ isDarkModeVisible, setDarkMode ] = useState<boolean>(isDarkModeActive());
 
     const toggleDarkMode = () => {
         setDarkMode(!isDarkModeVisible);
@@ -128,7 +121,7 @@ const SettingsOverlay = () => {
                 <LinkWrapper theme={activeTheme}>
                     <SettingsRow onClick={() => toggleDarkMode()}>
                         <CustomCol2 sm={2}>
-                            <i style={{fontSize: "28px"}} className="fa fa-moon-o" aria-hidden="true"></i>
+                            <SizeableIcon className="fa fa-moon-o" aria-hidden="true" />
                         </CustomCol2>
                         <CustomCol7 sm={7}>
                             <SettingsText> Dark mode</SettingsText>
@@ -141,7 +134,7 @@ const SettingsOverlay = () => {
                 <LinkWrapper href={"/signin"} theme={activeTheme}>
                     <SettingsRow>
                         <CustomCol2 sm={2}>
-                            <i style={{fontSize: "28px"}} className="fa fa-sign-in" aria-hidden="true"></i>
+                            <SizeableIcon className="fa fa-sign-in" aria-hidden="true" />
                         </CustomCol2>
                         <CustomCol10 sm={10}>
                             <SettingsText> Sign In </SettingsText>
@@ -176,7 +169,7 @@ const SettingsOverlay = () => {
                 <LinkWrapper href={"/feedback"} theme={activeTheme}>
                     <SettingsRow>
                         <CustomCol2 sm={2}>
-                            <i style={{fontSize: "28px"}} className="fa fa-comments" aria-hidden="true"></i>
+                            <SizeableIcon className="fa fa-comments" aria-hidden="true" />
                         </CustomCol2>
                         <CustomCol10 sm={10}>
                             <SettingsText> Give feedback</SettingsText>
@@ -187,7 +180,7 @@ const SettingsOverlay = () => {
                 <LinkWrapper theme={activeTheme}>
                     <SettingsRow onClick={() => toggleDarkMode()}>
                         <CustomCol2 sm={2}>
-                            <i style={{fontSize: "28px"}} className="fa fa-moon-o" aria-hidden="true"></i>
+                            <SizeableIcon className="fa fa-moon-o" aria-hidden="true" />
                         </CustomCol2>
                         <CustomCol7 sm={7}>
                             <SettingsText> Dark mode</SettingsText>
@@ -200,25 +193,23 @@ const SettingsOverlay = () => {
                 <LinkWrapper href={"/orders"} theme={activeTheme}>
                     <SettingsRow>
                         <CustomCol2 sm={2}>
-                            <i style={{fontSize: "28px"}} className="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <SizeableIcon className="fa fa-shopping-cart" aria-hidden="true" />
                         </CustomCol2>
                         <CustomCol6 sm={6}>
                             <SettingsText> Orders </SettingsText>
                         </CustomCol6>
                     </SettingsRow>
                 </LinkWrapper>
-                
                 <LinkWrapper onClick={() => signOut()} theme={activeTheme}>
                     <SettingsRow>
                         <CustomCol2 sm={2}>
-                            <i style={{fontSize: "28px"}} className="fa fa-sign-out" aria-hidden="true"></i>
+                            <SizeableIcon className="fa fa-sign-out" aria-hidden="true" />
                         </CustomCol2>
                         <CustomCol10 sm={10}>
                             <SettingsText> Sign out</SettingsText>
                         </CustomCol10>
                     </SettingsRow>
                 </LinkWrapper>
-
                 <CloseWrapper>
                     <CloseButton theme={activeTheme} onClick={() => setShowSettingsOverlay(false)}>Close Settings</CloseButton>
                 </CloseWrapper>

@@ -8,7 +8,7 @@ const initialState = {
 export const SettingsContext = React.createContext(initialState);
 
 export const SettingsProvider = (props: any) => {
-    const [showSettingsOverlay, setShowSettingsOverlay] = useState(false);
+    const [ showSettingsOverlay, setShowSettingsOverlay ] = useState(false);
     
     return (
         <SettingsContext.Provider value={{ 

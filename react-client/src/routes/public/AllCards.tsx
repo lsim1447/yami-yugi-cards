@@ -24,7 +24,7 @@ function AllCards() {
                 Make your deck insuperable
             </TitleWrapper>
             <CustomFlipPagination
-                cardsPerPage={24}
+                productsPerPage={24}
                 pageBound={5}
             />
         </SimpleContainer>

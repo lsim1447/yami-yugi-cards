@@ -2,9 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CardDeck, Col, Row } from 'react-bootstrap';
 import { HideOverlaysContext } from "../../contexts/HideOverlaysContext";
 import { UserContext } from "../../contexts/UserContext";
-import { ICardDetails } from '../../models/Cards';
+import { getInitialProductList, IProductDetails } from '../../models/Product';
 import SimpleFlipCard from '../../components/external/card/SimpleFlipCard';
-import { getInitialCardList } from '../../models/Cards';
 import { BackgroundContainer, CenterWrapper } from '../../components/internal/CommonContainers';
 import { CloseIcon, SandwichIcon, SideBarMenuContainer, SideBarMenuLeft, SideBarMenuRight, SideBarListContainer, SideBarListItem, BoxedItem, LogoBold, LogoTitle } from '../../components/internal/SideBarComponents';
 import { SIDE_BAR_OPTIONS_API } from '../../constants';
@@ -16,15 +15,15 @@ import '../../special-styles/sidebar-left.css'
 function MyDeck() {
     const { user } = useContext(UserContext);
     const { hideAllOverlays } = useContext(HideOverlaysContext);
-    const [nrOfCardsToShow] = useState(20);
-    const [allCardsInYourDeck, setAllCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
-    const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(nrOfCardsToShow));
-    const [isLeftSideBarVisible, setIsLeftSideBarVisible] = useState<boolean>(true);
+    const [ nrOfProductsToShow ] = useState(20);
+    const [ allProductsInYourDeck, setAllProducts ] = useState<IProductDetails[]>(getInitialProductList(nrOfProductsToShow));
+    const [ products, setProducts ] = useState<IProductDetails[]>(getInitialProductList(nrOfProductsToShow));
+    const [ isLeftSideBarVisible, setIsLeftSideBarVisible ] = useState<boolean>(true);
 
     const getDeckValue = () => {
-        if (allCardsInYourDeck && allCardsInYourDeck.length) {
-            return allCardsInYourDeck.reduce((accumulator: number, currentCard: ICardDetails) => {
-                const price: number = Number((currentCard && currentCard.card_prices && currentCard.card_prices[0]) ? currentCard.card_prices[0].amazon_price : 0);
+        if (allProductsInYourDeck && allProductsInYourDeck.length) {
+            return allProductsInYourDeck.reduce((accumulator: number, currentProduct: IProductDetails) => {
+                const price: number = Number((currentProduct && currentProduct.card_prices && currentProduct.card_prices[0]) ? currentProduct.card_prices[0].amazon_price : 0);
                 const newAccumulator: number = Number((accumulator + price).toFixed(2));
 
                 return newAccumulator ? newAccumulator : accumulator;
@@ -34,22 +33,21 @@ function MyDeck() {
         }
     }
 
-    const getNrOfCardsByType = (type: string) => {
-        if (!cards) return 0;
-        if (type === "All") return allCardsInYourDeck.length;
-        
-        return allCardsInYourDeck.filter((card: ICardDetails) => card.type?.includes(type)).length;
+    const getNrOfProductsByType = (type: string) => {
+        if (!products) return 0;
+        if (type === "All") return allProductsInYourDeck.length;
+        return allProductsInYourDeck.filter((product: IProductDetails) => product.type?.includes(type)).length;
     }
 
-    const filterCardsByType = (type: string, deny?: boolean) => {
+    const filterProductsByType = (type: string, deny?: boolean) => {
         if (type === "All") {
-            setCards(allCardsInYourDeck);
+            setProducts(allProductsInYourDeck);
         } else {
-            const filteredCards: ICardDetails[] = 
+            const filteredProducts: IProductDetails[] = 
                 deny ?
-                    allCardsInYourDeck.filter(card => !card.type?.includes(type)) :
-                    allCardsInYourDeck.filter(card => card.type?.includes(type));
-            setCards(filteredCards); 
+                    allProductsInYourDeck.filter(product => !product.type?.includes(type)) :
+                    allProductsInYourDeck.filter(product => product.type?.includes(type));
+            setProducts(filteredProducts); 
         }
     }
 
@@ -66,16 +64,16 @@ function MyDeck() {
                     const IDS = (currentUser && currentUser.deck) ? currentUser.deck : [];
 
                     if (IDS) {
-                        findAllCardsByIds(IDS).then(currentUserCards => {
-                            setCards([]);
-                            setCards(currentUserCards);
-                            setAllCards([]);
-                            setAllCards(currentUserCards);
+                        findAllCardsByIds(IDS).then(userProducts => {
+                            setProducts([]);
+                            setProducts(userProducts);
+                            setAllProducts([]);
+                            setAllProducts(userProducts);
                         }).catch(error => {
                             console.log('Error(/api/cards/findAllByIds): ', error);
                         })
                     } else {
-                        setCards([]);
+                        setProducts([]);
                     }
                 })
         }
@@ -107,9 +105,9 @@ function MyDeck() {
                                     return (
                                         <SideBarListItem
                                             key={item.eventKey + Math.random()}
-                                            onClick={() => filterCardsByType(item.type)}
+                                            onClick={() => filterProductsByType(item.type)}
                                         >
-                                            {item.type} ({getNrOfCardsByType(item.type)})
+                                            {item.type} ({getNrOfProductsByType(item.type)})
                                         </SideBarListItem>
                                     )
                                 })
@@ -121,13 +119,12 @@ function MyDeck() {
                 <Col sm={7}>
                     <CardDeck>
                     {
-                        cards.map((card: ICardDetails) => {
+                        products.map((product: IProductDetails) => {
                             return (
                                 <SimpleFlipCard 
-                                    isAddToBagButtonDisabled={true}
                                     isFullDescriptionVisible={false}
-                                    card={card}
-                                    key={card.id + Math.random()}
+                                    product={product}
+                                    key={product.id + Math.random()}
                                 />
                             );
                         })
@@ -148,18 +145,18 @@ function MyDeck() {
                                 </SideBarListItem>
                             </SideBarListContainer>
                             <SideBarListContainer>
-                                <SideBarListItem onClick={() => setCards(allCardsInYourDeck)}>
-                                    Cards: { allCardsInYourDeck.length }
+                                <SideBarListItem onClick={() => setProducts(allProductsInYourDeck)}>
+                                    Cards: { allProductsInYourDeck.length }
                                 </SideBarListItem>
                             </SideBarListContainer>
                             <SideBarListContainer>
-                                <SideBarListItem onClick={() => filterCardsByType('Monster')}>
-                                    Monster cards: { getNrOfCardsByType('Monster') }
+                                <SideBarListItem onClick={() => filterProductsByType('Monster')}>
+                                    Monster cards: { getNrOfProductsByType('Monster') }
                                 </SideBarListItem>
                             </SideBarListContainer>
                             <SideBarListContainer>
-                                <SideBarListItem onClick={() => filterCardsByType('Monster', true)}>
-                                    Special cards: { allCardsInYourDeck.length - getNrOfCardsByType('Monster') }
+                                <SideBarListItem onClick={() => filterProductsByType('Monster', true)}>
+                                    Special cards: { allProductsInYourDeck.length - getNrOfProductsByType('Monster') }
                                 </SideBarListItem>
                             </SideBarListContainer>
                             <CenterWrapper>

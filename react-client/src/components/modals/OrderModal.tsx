@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { Modal } from 'react-bootstrap';
 import OrderProductItem from '../external/order/OrderProductItem';
-import { ICardDetails } from '../../models/Cards';
+import { IProductDetails } from '../../models/Product';
 import { IOrder } from '../../models/Order';
 import { findAllCardsByIds } from '../../repositories/CardRepository';
 import styled from 'styled-components';
@@ -41,13 +41,13 @@ type OrderModalProps = {
 
 function OrderModal({ order, show, setShow }: OrderModalProps) {
     const { user } = useContext(UserContext);
-    const [products, setProducts] = useState<ICardDetails[]>([]);
+    const [ products, setProducts ] = useState<IProductDetails[]>([]);
 
     useEffect(() => {
         if (user && user._id) {
             findAllCardsByIds(order.products)
-                .then(cards => {
-                    setProducts(cards);
+                .then(products => {
+                    setProducts(products);
                 })
         }
     }, [user]);
@@ -67,7 +67,7 @@ function OrderModal({ order, show, setShow }: OrderModalProps) {
             </Modal.Header>
             <Modal.Body>
                 {
-                    products.map((product: ICardDetails) => {
+                    products.map((product: IProductDetails) => {
                         return (
                             <OrderProductItem
                                 key={product._id}

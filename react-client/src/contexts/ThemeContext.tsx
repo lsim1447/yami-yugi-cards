@@ -31,7 +31,7 @@ const initialThemeContext = {
 export const ThemeContext = React.createContext(initialThemeContext);
 
 export const ThemeProvider = (props: any) => {
-    const [activeTheme, setActiveTheme] = useState<CustomTheme>(lightTheme);
+    const [ activeTheme, setActiveTheme ] = useState<CustomTheme>(lightTheme);
 
     const setActiveThemeNow = (isDarkTheme: boolean) => {
         if (isDarkTheme) {

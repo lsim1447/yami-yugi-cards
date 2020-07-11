@@ -11,21 +11,21 @@ const OrderModal = loadable(() => import('../../modals/OrderModal'), {
 });
 
 const ShowDetailsButton = styled.button `
-    background-color: white;
+    background-color: #FFFFFF;
     border-radius: 3%;
-    color: black;
+    color: #000000;
     float: right;
     font-weight: 600;
     padding: 8px 48px;
 
     &:hover {
-        background-color: black;
-        color: white;
+        background-color: #000000;
+        color: #FFFFFF;
     }
 `;
 
 const ImportantDetails = styled.p `
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000000;
     padding-bottom: 36px;
 `;
 
@@ -41,14 +41,14 @@ export type OrderItemProps = {
 
 const OrderItem = ({ order } : OrderItemProps) => {
     const { activeTheme } = useContext(ThemeContext);
-    const [show, setShow] = useState<boolean>(false);
+    const [ show, setShow ] = useState<boolean>(false);
     
     return (
         <CustomJumbotron key={order._id} fluid theme={activeTheme}>
             <Container>
-                <h3>Order number: {order._id}</h3>
-                <ShowDetailsButton onClick={() => setShow(true)}>Show details</ShowDetailsButton>
-                <p>Number of products: <span style={{fontSize: "16px", fontWeight: 600}}> {order.products.length} </span>  </p>
+                <h3> Order number: {order._id}</h3>
+                <ShowDetailsButton onClick={() => setShow(true)}> Show details </ShowDetailsButton>
+                <p> Number of products: <span style={{fontSize: "16px", fontWeight: 600}}> {order.products.length} </span></p>
                 <ImportantDetails>
                     The order was created on: {order.date}
                 </ImportantDetails>

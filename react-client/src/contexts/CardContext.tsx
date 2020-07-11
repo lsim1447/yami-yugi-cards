@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { 
-    ICardDetails,
-    getInitialCardList
-} from '../models/Cards';
+    IProductDetails,
+    getInitialProductList
+} from '../models/Product';
 import {
     getAllCards,
     getCardById
 } from '../repositories/CardRepository';
+import { getCartItemIDs } from '../services/CartService';
 
 const initialState = {
-    cards: getInitialCardList(20),
+    cards: getInitialProductList(20),
     setCards: (a: any) => {},
-    allCards: getInitialCardList(20), 
+    allCards: getInitialProductList(20), 
     setAllCards: (a: any) => {},
-    cartItems: getInitialCardList(0),
+    cartItems: getInitialProductList(0),
     setCartItems: (a: any) => {},
 }
 
 export const CardContext = React.createContext(initialState);
 
 export const CardProvider = (props: any) => {
-    const [cards, setCards] = useState<ICardDetails[]>([]);
-    const [cartItems, setCartItems] = useState<ICardDetails[]>([]);
-    const [all_cards, setAllCards] = useState<ICardDetails[]>([]);
+    const [ cards, setCards ] = useState<IProductDetails[]>([]);
+    const [ cartItems, setCartItems ] = useState<IProductDetails[]>([]);
+    const [ all_cards, setAllCards ] = useState<IProductDetails[]>([]);
 
     useEffect(() => {
-        let id_string = localStorage.getItem('card_ids');
+        let id_string = getCartItemIDs();
     
         if (id_string) {
             let cardIDs =  id_string ? id_string.split('|') : [];

@@ -38,9 +38,7 @@ function PageNotFound() {
   }, []);
   
   return (
-    <PageNotFoundWrapper onClick={() => hideAllOverlays()}>
-
-    </PageNotFoundWrapper>
+    <PageNotFoundWrapper onClick={() => hideAllOverlays()} />
   );
 }
 

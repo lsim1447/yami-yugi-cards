@@ -81,7 +81,7 @@ function Orders() {
     const { activeTheme } = useContext(ThemeContext);
     const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { user } = useContext(UserContext);
-    const [orders, setOrders] = useState<IOrder[]>([]);
+    const [ orders, setOrders ] = useState<IOrder[]>([]);
 
     useEffect(() => {
         if (user && user._id) {

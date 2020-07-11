@@ -29,8 +29,8 @@ const CustomBreadcrumb = styled(Breadcrumb) `
 
 function Categories() {
   const { hideAllOverlays } = useContext(HideOverlaysContext);
-  const [selectedType, setSelectedType] = useState<string>('All');
-  const [isLeftSideBarVisible, setIsLeftSideBarVisible] = useState<boolean>(true);
+  const [ selectedType, setSelectedType ] = useState<string>('All');
+  const [ isLeftSideBarVisible, setIsLeftSideBarVisible ] = useState<boolean>(true);
   
   const toggleSidebar = (show: boolean) => {
     setIsLeftSideBarVisible(show);
@@ -79,7 +79,7 @@ function Categories() {
             <CustomBreadcrumb.Item active>{selectedType}</CustomBreadcrumb.Item>
           </CustomBreadcrumb>
           <CustomFlipPagination
-              cardsPerPage={24}
+              productsPerPage={24}
               pageBound={5}
               selectedType={selectedType}
           />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
+import { ProductProps, DEFAULT_PRODUCT_VALUE, IProductDetails } from '../../../models/Product';
 import styled from 'styled-components';
 import { getCardById } from '../../../repositories/CardRepository';
 
@@ -18,34 +18,34 @@ const ClickOntheSpp = styled.div `
   width: 100%;
 `;
 
-const YuGiOhCard = ({ id, card } : CardProps) => {
-  const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
-  const [cardDetails, setCardDetails] = useState(initialValue);
+const YuGiOhCard = ({ id, product } : ProductProps) => {
+  const initialValue: IProductDetails = DEFAULT_PRODUCT_VALUE;
+  const [ productDetails, setProductDetails ] = useState(initialValue);
 
   const navigateToSPP = () => {
-    console.log('you clicked me', card);
+    console.log('you clicked me', product);
   }
 
   useEffect(() => {
     if (id) {
-        getCardById(id)
-          .then(desiredCard => {
-              setCardDetails(desiredCard);
-          })
-    } else if (card) {
-        setCardDetails(card);
+      getCardById(id)
+        .then(desiredProduct => {
+          setProductDetails(desiredProduct);
+        })
+    } else if (product) {
+      setProductDetails(product);
     }
   }, []);
 
   return (
       <Card>
-        <a href={`/card/${card?._id}`}>
+        <a href={`/card/${product?._id}`}>
           <Card.Img 
             className="lazyload"
             style={{maxHeight: "600px"}}
             variant="top"
             src={initialValue.card_images[0].image_url}
-            data-src={(cardDetails.card_images && cardDetails.card_images.length) ? cardDetails.card_images[0].image_url : initialValue.card_images[0].image_url}
+            data-src={(productDetails.card_images && productDetails.card_images.length) ? productDetails.card_images[0].image_url : initialValue.card_images[0].image_url}
             onClick={() => navigateToSPP()}
           />
         </a>
@@ -56,7 +56,7 @@ const YuGiOhCard = ({ id, card } : CardProps) => {
         </ClickOntheSpp>
         <Card.Footer>
           <PriceContainer>
-            Price: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $
+            Price: {(productDetails.card_prices && productDetails.card_prices.length) ? productDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $
           </PriceContainer>
         </Card.Footer>
       </Card>

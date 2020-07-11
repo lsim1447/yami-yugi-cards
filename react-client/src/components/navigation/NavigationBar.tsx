@@ -64,21 +64,20 @@ function NavigationBar(props: any) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link href="/all-cards"> Cards </Nav.Link>
+            <Nav.Link eventKey={1} href="/all-cards"> Cards </Nav.Link>
             <Nav.Link eventKey={2} href="/categories"> Categories </Nav.Link>
             <Nav.Link eventKey={3} href="/my-deck"> My Deck </Nav.Link>
-    
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => toggleSettingsOverlay()}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={4} onClick={() => toggleSettingsOverlay()}>
               <NavbarIconWrapper>
                 <i className="fa fa-gear"></i>
               </NavbarIconWrapper>
             </Nav.Link>
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={6} onClick={() => toggleSearchOverlay()}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={5} onClick={() => toggleSearchOverlay()}>
               <NavbarIconWrapper>
                 <i className="fa fa-search"></i>
               </NavbarIconWrapper>
             </Nav.Link>
-            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={7} onClick={() => toggleCartOverlay()}>
+            <Nav.Link style={{position: "relative", top: "-5px", left: "-8px"}} eventKey={6} onClick={() => toggleCartOverlay()}>
               <NavbarIconWrapper>
                 <i className="fa fa-shopping-cart"></i>
                 <sup style={{fontSize: "14px"}}> {cartItems.length} </sup>

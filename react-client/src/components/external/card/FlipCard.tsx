@@ -3,7 +3,7 @@ import loadable from '@loadable/component';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import { FlipCardInner, FlipCardContainer, FlipCardFront, FlipCardBack } from '../../internal/FlipComponents';
 import { CustomCard } from '../../internal/CustomComponents';
-import { CardProps, DEFAULT_CARD_VALUE, ICardDetails } from '../../../models/Cards';
+import { ProductProps, DEFAULT_PRODUCT_VALUE, IProductDetails } from '../../../models/Product';
 import { getCardById } from '../../../repositories/CardRepository';
 import styled from 'styled-components';
 
@@ -18,11 +18,11 @@ const PriceContainer = styled.p `
     text-align: center;
 `;
 
-const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
+const FlipCard = ({ id, isFullDescriptionVisible, product } : ProductProps) => {
     const { activeTheme } = useContext(ThemeContext);
-    const initialValue: ICardDetails = DEFAULT_CARD_VALUE;
-    const [cardDetails, setCardDetails] = useState(initialValue);
-    const [modalShow, setModalShow] = useState(false);
+    const initialValue: IProductDetails = DEFAULT_PRODUCT_VALUE;
+    const [ productDetails, setProductDetails ] = useState(initialValue);
+    const [ modalShow, setModalShow ] = useState(false);
 
     const getText = (text: string, limit: number, isFullDescriptionVisible: boolean) => {
         if (isFullDescriptionVisible) return text;
@@ -32,11 +32,11 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
     useEffect(() => {
         if (id) {
             getCardById(id)
-                .then(desiredCard => {
-                    setCardDetails(desiredCard);
+                .then(desiredProduct => {
+                    setProductDetails(desiredProduct);
                 })
-        } else if (card) {
-            setCardDetails(card);
+        } else if (product) {
+            setProductDetails(product);
         }
     }, []);
     
@@ -47,7 +47,7 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
                 <FlipCardContainer theme={{backgroundColor: activeTheme.backgroundColor}}>
                     <FlipCardInner>
                         <FlipCardFront>
-                            <CustomCard.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(cardDetails.card_images && cardDetails.card_images.length) ? cardDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />
+                            <CustomCard.Img className="lazyload" variant="top" src={initialValue.card_images[0].image_url} data-src={(productDetails.card_images && productDetails.card_images.length) ? productDetails.card_images[0].image_url : initialValue.card_images[0].image_url} />
                         </FlipCardFront>
                         <FlipCardBack>
                             <CustomCard.Img className="lazyload" variant="top" data-src="/images/yugioh-card-back-side.jpg" />
@@ -56,17 +56,17 @@ const FlipCard = ({ id, isFullDescriptionVisible, card } : CardProps) => {
                 </FlipCardContainer>
 
                 <CustomCard.Body>
-                    <CustomCard.Title> {getText(cardDetails.name, 150, isFullDescriptionVisible)} </CustomCard.Title>
-                    <CustomCard.Text>  {getText(cardDetails.desc, 150, isFullDescriptionVisible)} </CustomCard.Text>
+                    <CustomCard.Title> {getText(productDetails.name, 150, isFullDescriptionVisible)} </CustomCard.Title>
+                    <CustomCard.Text>  {getText(productDetails.desc, 150, isFullDescriptionVisible)} </CustomCard.Text>
                 </CustomCard.Body>
                 <CustomCard.Footer>
-                    <PriceContainer> Price: {(cardDetails.card_prices && cardDetails.card_prices.length) ? cardDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $ </PriceContainer>
+                    <PriceContainer> Price: {(productDetails.card_prices && productDetails.card_prices.length) ? productDetails.card_prices[0].amazon_price : initialValue.card_prices[0].amazon_price} $ </PriceContainer>
                 </CustomCard.Footer>
             </CustomCard>
             
             {
                 modalShow && (<CardModal
-                    card={card}
+                    product={product}
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                 />)

@@ -4,8 +4,8 @@ import { Pagination } from 'react-bootstrap';
 import FlipCard from './card/FlipCard';
 import { SimpleContainer} from '../../components/internal/CommonContainers';
 import { CustomCardDeck } from '../../components/internal/CustomComponents';
-import { ICardDetails, getInitialCardList } from '../../models/Cards';
-import { ALL_NUMBER_OF_CARDS } from '../../constants';
+import { IProductDetails, getInitialProductList } from '../../models/Product';
+import { ALL_NUMBER_OF_PRODUCTS } from '../../constants';
 import {
     findCardsPaginated,
     findCardsByTypePaginated
@@ -24,25 +24,25 @@ const PaginationWrapper = styled(Pagination) `
 `;
 
 type CustomFlipPagination = {
-    cardsPerPage: number,
+    productsPerPage: number,
     pageBound: number,
     selectedType?: string
 }
 
-const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFlipPagination) => {
+const CustomFlipPagination = ({productsPerPage, pageBound, selectedType}: CustomFlipPagination) => {
     const { activeTheme } = useContext(ThemeContext);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [upperPageBound, setUpperPageBound] = useState(5);
-    const [lowerPageBound, setLowerPageBound] = useState(0);
-    const [isPrevBtnActive, setIsPrevBtnActive] = useState('disabled');
-    const [isNextBtnActive, setIsNextBtnActive] = useState('');
-    const [pageNumbers, setPageNumbers] = useState<number[]>([]);
-    const [cards, setCards] = useState<ICardDetails[]>(getInitialCardList(cardsPerPage));
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const [ upperPageBound, setUpperPageBound ] = useState(5);
+    const [ lowerPageBound, setLowerPageBound ] = useState(0);
+    const [ isPrevBtnActive, setIsPrevBtnActive ] = useState('disabled');
+    const [ isNextBtnActive, setIsNextBtnActive ] = useState('');
+    const [ pageNumbers, setPageNumbers ] = useState<number[]>([]);
+    const [ cards, setCards ] = useState<IProductDetails[]>(getInitialProductList(productsPerPage));
 
     // Update Page Counter
     useEffect(() => {
         const tmpNumbers: number[] = [];
-        for (let i = 1; i <= Math.ceil(ALL_NUMBER_OF_CARDS / cardsPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(ALL_NUMBER_OF_PRODUCTS / productsPerPage); i++) {
             tmpNumbers.push(i);
         }
         setPageNumbers(tmpNumbers);
@@ -51,13 +51,13 @@ const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFli
     // Update Cards
     useEffect(() => {
         if (!selectedType || selectedType === 'All') {
-            findCardsPaginated(currentPage, cardsPerPage)
+            findCardsPaginated(currentPage, productsPerPage)
                 .then(newCards => {
                     setCards([]);
                     setCards(newCards)
                 });
         } else {
-            findCardsByTypePaginated(selectedType, currentPage, cardsPerPage)
+            findCardsByTypePaginated(selectedType, currentPage, productsPerPage)
                 .then(newCards => {
                     setCards([]);
                     setCards(newCards)
@@ -70,13 +70,13 @@ const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFli
         setCurrentPage(1);
 
         if (!selectedType || selectedType === 'All') {
-            findCardsPaginated(currentPage, cardsPerPage)
+            findCardsPaginated(currentPage, productsPerPage)
                 .then(newCards => {
                     setCards([]);
                     setCards(newCards)
                 });
         } else {
-            findCardsByTypePaginated(selectedType, currentPage, cardsPerPage)
+            findCardsByTypePaginated(selectedType, currentPage, productsPerPage)
                 .then(newCards => {
                     setCards([]);
                     setCards(newCards)
@@ -156,12 +156,12 @@ const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFli
             <CustomCardDeck theme={{backgroundColor: activeTheme.backgroundColor, color: activeTheme.color}}>
             {
                 cards.map(
-                    (card: ICardDetails) => {
+                    (product: IProductDetails) => {
                         return (
                             <FlipCard 
                                 isFullDescriptionVisible={false}
-                                card={card}
-                                key={card.id + Math.random()}
+                                product={product}
+                                key={product.id + Math.random()}
                             />
                         );
                 })

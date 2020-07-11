@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import { ICardDetails, DEFAULT_CARD_VALUE } from '../../../models/Cards';
+import { DEFAULT_PRODUCT_VALUE, IProductDetails } from '../../../models/Product';
 
 const CartItemWrapper = styled.div `
     border-bottom: 1px solid #D3D3D3;
@@ -22,7 +22,7 @@ const CenterWrapper = styled.p `
 `;
 
 export type OrderProductItemProps = {
-    productItem: ICardDetails
+    productItem: IProductDetails
 }
 
 const OrderProductItem = ({ productItem } : OrderProductItemProps) => {
@@ -33,7 +33,7 @@ const OrderProductItem = ({ productItem } : OrderProductItemProps) => {
                     <a href={`/card/${productItem._id}`}>
                         <img
                             width="100%"
-                            src={(productItem.card_images && productItem.card_images.length) ? productItem.card_images[0].image_url : DEFAULT_CARD_VALUE.card_images[0].image_url} 
+                            src={(productItem.card_images && productItem.card_images.length) ? productItem.card_images[0].image_url : DEFAULT_PRODUCT_VALUE.card_images[0].image_url} 
                             alt=""
                         />
                     </a>

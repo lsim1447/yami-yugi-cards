@@ -1,10 +1,10 @@
-export interface ICardImages
+export interface IProductImages
 {
     image_url?: string,
     image_url_small?: string
 }
 
-export interface ICardPrices
+export interface IProductPrices
 {
     amazon_price: string,
     cardmarket_price?: string,
@@ -12,7 +12,7 @@ export interface ICardPrices
     tcgplayer_price?: string
 }
 
-export interface ICardSets
+export interface IProductSets
 {
     set_code?: string,
     set_name?: string,
@@ -20,15 +20,15 @@ export interface ICardSets
     set_rarity?: string
 }
 
-export interface ICardDetails
+export interface IProductDetails
 {
     _id: string,
     archetype?: string,
     atk?: number, 
     attribute?: string,
-    card_images: ICardImages[],
-    card_prices: ICardPrices[],
-    card_sets?: ICardSets[],
+    card_images: IProductImages[],
+    card_prices: IProductPrices[],
+    card_sets?: IProductSets[],
     def?: number,
     desc: string,
     id: number,
@@ -39,14 +39,13 @@ export interface ICardDetails
     type: string
 }
 
-export type CardProps = {
+export type ProductProps = {
     id?: string;
-    isAddToBagButtonDisabled?: boolean,
     isFullDescriptionVisible: boolean,
-    card?: ICardDetails
+    product?: IProductDetails
 }
 
-export const DEFAULT_CARD_VALUE: ICardDetails = {
+export const DEFAULT_PRODUCT_VALUE: IProductDetails = {
     _id: '',
     archetype: '',
     atk: 0, 
@@ -63,10 +62,10 @@ export const DEFAULT_CARD_VALUE: ICardDetails = {
     type: ''
 }
 
-export const getInitialCardList = (nrOfCardsToShow: number) => {
-    const initialCards: ICardDetails[] = [];
+export const getInitialProductList = (nrOfCardsToShow: number) => {
+    const initialCards: IProductDetails[] = [];
     for (let index = 0; index < nrOfCardsToShow; index++) {
-        initialCards.push(DEFAULT_CARD_VALUE);
+        initialCards.push(DEFAULT_PRODUCT_VALUE);
     }
     
     return initialCards;

@@ -9,6 +9,22 @@ import { CloseIcon } from '../../internal/IconComponents';
 import { ICardDetails } from '../../../models/Cards';
 import styled from 'styled-components';
 
+const PageWrapper = styled.div `
+    width: 100%;
+`;
+
+const PageLeftSide = styled.div `
+    background-color: black;
+    float: left;
+    min-height: 100vh;
+    opacity: 0.8;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 50000;
+`;
+
 const CustomRow = styled(Row) `
     border-top: 1px solid #D3D3D3;
     padding-top: 18px;
@@ -80,7 +96,6 @@ const CartItemRowWrapper = styled(Row) `
     padding-top: 16px;
 `;
 
-
 const CartOverlay = () => {
     const { activeTheme } = useContext(ThemeContext);
     const { cartItems } = useContext(CardContext);
@@ -96,76 +111,79 @@ const CartOverlay = () => {
     }
 
     return (
-        <OverlayWrapper theme={{ backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color }}>
-            <CloseIcon
-                theme={activeTheme}
-                className="fa fa-times"
-                onClick={() => setShowCartOverlay(false)}
-            />
-            <OverlayTitle>
-                My Bag({cartItems.length})
-            </OverlayTitle>
-            <ButtonsWrapper>
-                <Col>
-                    <EditButton
-                        disabled={!cartItems.length}
-                        href="/checkout"
-                        onClick={() => setShowCartOverlay(false)}
-                    >
-                            EDIT
-                    </EditButton>
-                </Col>
-                <Col>
-                    <CheckoutButton
-                        disabled={!cartItems.length}
-                        href="/checkout"
-                        onClick={() => setShowCartOverlay(false)}
-                    >
-                            CHECKOUT
-                    </CheckoutButton>
-                </Col>
-            </ButtonsWrapper>
-            {
-                cartItems.map((cartItem: ICardDetails) => {
-                    return (
-                        <CustomRow>
-                            <CustomCol5 sm={5}>
-                                <a href={`/card/${cartItem._id}`}>
-                                    <CartItemImage 
-                                        thumbnail
-                                        src={cartItem.card_images[0].image_url}
-                                        alt={cartItem.name}
-                                    />
-                                </a>
-                            </CustomCol5>
-                            <CustomCol7 sm={7}>
-                                <CartItemNameElement> {cartItem.name} </CartItemNameElement>
-                                <CartItemRowWrapper>
-                                    <Col>
-                                        {cartItem.type ? cartItem.type : 'N/A'}
-                                    </Col>
-                                    <Col>
-                                        {cartItem.race ? cartItem.race : 'N/A'}
-                                    </Col>
-                                </CartItemRowWrapper>
-                                
-                                <CartItemRowWrapper>
-                                    <Col>
-                                        {cartItem.archetype ? cartItem.archetype : 'N/A'}
-                                    </Col>
-                                    <Col>
-                                        <strong> {cartItem.card_prices[0].amazon_price}$ </strong>
-                                    </Col>
-                                </CartItemRowWrapper>
-                            </CustomCol7>
-                        </CustomRow>
-                    )
-                })
-            }
-            <TotalPriceWrapper>
-                TOTAL PRICE: {getTotalPrice()}$
-            </TotalPriceWrapper>
-        </OverlayWrapper>
+        <PageWrapper>
+            <PageLeftSide onClick={() => setShowCartOverlay(false)}/>
+            <OverlayWrapper theme={{ backgroundColor: activeTheme.itemBackgroundColor, color: activeTheme.color }}>
+                <CloseIcon
+                    theme={activeTheme}
+                    className="fa fa-times"
+                    onClick={() => setShowCartOverlay(false)}
+                />
+                <OverlayTitle>
+                    My Bag({cartItems.length})
+                </OverlayTitle>
+                <ButtonsWrapper>
+                    <Col style={{paddingRight: "6px"}}>
+                        <EditButton
+                            disabled={!cartItems.length}
+                            href="/checkout"
+                            onClick={() => setShowCartOverlay(false)}
+                        >
+                                EDIT
+                        </EditButton>
+                    </Col>
+                    <Col style={{paddingLeft: "6px"}}>
+                        <CheckoutButton
+                            disabled={!cartItems.length}
+                            href="/checkout"
+                            onClick={() => setShowCartOverlay(false)}
+                        >
+                                CHECKOUT
+                        </CheckoutButton>
+                    </Col>
+                </ButtonsWrapper>
+                {
+                    cartItems.map((cartItem: ICardDetails) => {
+                        return (
+                            <CustomRow>
+                                <CustomCol5 sm={5}>
+                                    <a href={`/card/${cartItem._id}`}>
+                                        <CartItemImage 
+                                            thumbnail
+                                            src={cartItem.card_images[0].image_url}
+                                            alt={cartItem.name}
+                                        />
+                                    </a>
+                                </CustomCol5>
+                                <CustomCol7 sm={7}>
+                                    <CartItemNameElement> {cartItem.name} </CartItemNameElement>
+                                    <CartItemRowWrapper>
+                                        <Col>
+                                            {cartItem.type ? cartItem.type : 'N/A'}
+                                        </Col>
+                                        <Col>
+                                            {cartItem.race ? cartItem.race : 'N/A'}
+                                        </Col>
+                                    </CartItemRowWrapper>
+                                    
+                                    <CartItemRowWrapper>
+                                        <Col>
+                                            {cartItem.archetype ? cartItem.archetype : 'N/A'}
+                                        </Col>
+                                        <Col>
+                                            <strong> {cartItem.card_prices[0].amazon_price}$ </strong>
+                                        </Col>
+                                    </CartItemRowWrapper>
+                                </CustomCol7>
+                            </CustomRow>
+                        )
+                    })
+                }
+                <TotalPriceWrapper>
+                    TOTAL PRICE: {getTotalPrice()}$
+                </TotalPriceWrapper>
+            </OverlayWrapper>
+        </PageWrapper>
     );
 }
 

@@ -165,7 +165,14 @@ const CartOverlay = () => {
                                             {cartItem.race ? cartItem.race : 'N/A'}
                                         </Col>
                                     </CartItemRowWrapper>
-                                    
+                                    <CartItemRowWrapper>
+                                        <Col>
+                                            ATK: {cartItem.atk ? cartItem.atk : 'N/A'}
+                                        </Col>
+                                        <Col>
+                                            DEF: {cartItem.def ? cartItem.def : 'N/A'}
+                                        </Col>
+                                    </CartItemRowWrapper>
                                     <CartItemRowWrapper>
                                         <Col>
                                             {cartItem.archetype ? cartItem.archetype : 'N/A'}

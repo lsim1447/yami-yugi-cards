@@ -120,7 +120,7 @@ const SearchOverlay = () => {
             <CloseIcon 
                 className="fa fa-times"
                 onClick={() => setShowSearchOverlay(false)}
-                theme={{color: "white", top: "16px"}}
+                theme={{color: "#FFFFFF", top: "16px"}}
             />
             
             <NameInput 

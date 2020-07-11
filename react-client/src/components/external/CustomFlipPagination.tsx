@@ -175,17 +175,17 @@ const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFli
         return pageNumbers.map(number => {
             if (number === 1 && currentPage === 1){
                 return(
-                    <Pagination.Item key={number} className='active'> <a href='#' onClick={(event) => handleClick(event)}>{number}</a></Pagination.Item>
+                    <Pagination.Item key={number} className='active'> <a style={{color: "#000000"}} href='#' onClick={(event) => handleClick(event)}>{number}</a></Pagination.Item>
                 )
             }
             else if ((number < upperPageBound + 1) && number > lowerPageBound) {
                 if (number === currentPage) {
                     return (
-                        <Pagination.Item key={number} className='active' id={`${number}`}> <a href='#' id={`${number}`} onClick={(event) => handleClick(event)}>{number}</a></Pagination.Item>
+                        <Pagination.Item key={number} className='active' id={`${number}`}> <a style={{color: "#000000"}} href='#' id={`${number}`} onClick={(event) => handleClick(event)}>{number}</a></Pagination.Item>
                     )
                 } else {
                     return (
-                        <Pagination.Item key={number} id={`${number}`}> <a href='#' id={`${number}`} onClick={(event) => handleClick(event)}>{number}</a></Pagination.Item>
+                        <Pagination.Item key={number} id={`${number}`}> <a style={{color: "#000000"}} href='#' id={`${number}`} onClick={(event) => handleClick(event)}>{number}</a></Pagination.Item>
                     )
                 }
                 
@@ -197,26 +197,26 @@ const CustomFlipPagination = ({cardsPerPage, pageBound, selectedType}: CustomFli
     
     let pageIncrementBtn = null;
     if (pageNumbers.length > upperPageBound){
-        pageIncrementBtn = <Pagination.Item className=''><a href='#' onClick={() => btnIncrementClick()}> &hellip; </a></Pagination.Item>
+        pageIncrementBtn = <Pagination.Item className=''><a style={{color: "#000000"}} href='#' onClick={() => btnIncrementClick()}> &hellip; </a></Pagination.Item>
     }
 
     let pageDecrementBtn = null;
     if (lowerPageBound >= 1) {
-        pageDecrementBtn = <Pagination.Item className=''><a href='#' onClick={() => btnDecrementClick()}> &hellip; </a></Pagination.Item>
+        pageDecrementBtn = <Pagination.Item className=''><a style={{color: "#000000"}} href='#' onClick={() => btnDecrementClick()}> &hellip; </a></Pagination.Item>
     }
 
     let renderPrevBtn = null;
     if (isPrevBtnActive === 'disabled') {
-        renderPrevBtn = <Pagination.Item className={isPrevBtnActive}><span id="btnPrev"> Prev </span></Pagination.Item>
+        renderPrevBtn = <Pagination.Item className={isPrevBtnActive}><span style={{color: "#000000"}} id="btnPrev"> Prev </span></Pagination.Item>
     } else {
-        renderPrevBtn = <Pagination.Item className={isPrevBtnActive}><a href='#' id="btnPrev" onClick={() => btnPrevClick()}> Prev </a></Pagination.Item>
+        renderPrevBtn = <Pagination.Item className={isPrevBtnActive}><a style={{color: "#000000"}} href='#' id="btnPrev" onClick={() => btnPrevClick()}> Prev </a></Pagination.Item>
     }
 
     let renderNextBtn = null;
     if (isNextBtnActive === 'disabled') {
-        renderNextBtn = <Pagination.Item className={isNextBtnActive}><span id="btnNext"> Next </span></Pagination.Item>
+        renderNextBtn = <Pagination.Item className={isNextBtnActive}><span style={{color: "#000000"}} id="btnNext"> Next </span></Pagination.Item>
     } else{
-        renderNextBtn = <Pagination.Item className={isNextBtnActive}><a href='#' id="btnNext" onClick={() => btnNextClick()}> Next </a></Pagination.Item>
+        renderNextBtn = <Pagination.Item className={isNextBtnActive}><a style={{color: "#000000"}} href='#' id="btnNext" onClick={() => btnNextClick()}> Next </a></Pagination.Item>
     }
     
     return (

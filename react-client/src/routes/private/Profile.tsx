@@ -6,7 +6,7 @@ import { Alert, Col, Form, Row } from 'react-bootstrap';
 import { IComment, IVote } from '../../models/Comment';
 import { IProductDetails } from '../../models/Product';
 import { getCommentsByUserEmail } from '../../repositories/CommentRepository';
-import { findAllCardsByIds } from '../../repositories/CardRepository';
+import { findAllCardsByIds, getCardById } from '../../repositories/CardRepository';
 import {
     getUserByEmailAndPassword,
     updateUserById
@@ -452,12 +452,24 @@ const SavePasswordTitle = styled.p `
     padding: 12px 18px 0px 18px;
 `;
 
+interface IReviewCommentItem {
+    productId: string,
+    productImageUrl?: string,
+    productName: string,
+    date: string,
+    dislikes: number,
+    likes: number,
+    message: string,
+    stars: number,
+    title: string,
+}
+
 function Profile() {
     const { activeTheme } = useContext(ThemeContext);
     const { hideAllOverlays } = useContext(HideOverlaysContext);
     const { user } = useContext(UserContext);
     const [ comments, setComments ] = useState<IComment[]>([]);
-    const [ products, setProducts ] = useState<IProductDetails[]>([]);
+    const [ commentItems, setCommentItems] = useState<IReviewCommentItem[]>([]);
     const [ currentPassword, setCurrentPassword ] = useState<string>('');
     const [ newPassword, setNewPassword ] = useState<string>('');
     const [ newPasswordRepeat, setNewPasswordRepeat ] = useState<string>('');
@@ -541,12 +553,27 @@ function Profile() {
         getCommentsByUserEmail(user.email)
             .then(userComments => {
                 setComments(userComments);
-                const productIDs: string[] = userComments.map((comment: IComment) => comment.cardId);
 
-                findAllCardsByIds(productIDs)
-                    .then(products => {
-                        setProducts(products);
-                    })
+                const tempCommentItems = userComments.map(async (comment: IComment) => {
+                    const product: IProductDetails = await getCardById(comment.cardId).then(data => { return data; });
+                    const item: IReviewCommentItem = {
+                        productId: product ? product._id : '',
+                        productName: product ? product.name : 'Product Not Found',
+                        productImageUrl: (product && product.card_images && product.card_images[0]) ? product.card_images[0].image_url : '/images/yugioh-card-back-side.jpg',
+                        date: comment.date,
+                        dislikes: comment.votes.filter((vote: IVote) => !vote.isHelpful).length,
+                        likes: comment.votes.filter((vote: IVote) => vote.isHelpful).length,
+                        message: comment.message,
+                        stars: comment.stars,
+                        title: comment.title,
+                    }
+
+                    return item;
+                });
+
+                Promise.all(tempCommentItems).then((items: any[]) => {
+                    setCommentItems(items);
+                });
             })
     }, [user]);
     
@@ -651,13 +678,13 @@ function Profile() {
                                 <h1> Your Reviews</h1>
                                 <ReviewsSection>
                                     {
-                                        comments.map((comment: IComment, index: number) => {
+                                        commentItems.map((comment: IReviewCommentItem, index: number) => {
                                             return (
-                                                <ReviewItem key={comment._id} href={`/card/${products[index]?._id}`}>
+                                                <ReviewItem key={comment.date} href={`/card/${comment.productId}`}>
                                                     <Col sm={4}>
-                                                        <ReviewCardName> {products[index]?.name} </ReviewCardName>
-                                                        <a href={`/card/${products[index]?._id}`}>
-                                                            <ReviewCardImage src={products[index]?.card_images[0].image_url} alt="" />
+                                                        <ReviewCardName> {comment.productName} </ReviewCardName>
+                                                        <a href={`/card/${comment.productId}`}>
+                                                            <ReviewCardImage src={comment.productImageUrl} alt="" />
                                                         </a>
                                                     </Col>
                                                     <ReviewCol sm={4}>
@@ -675,12 +702,12 @@ function Profile() {
                                                             <ReviewLikeWrapper>
                                                                 <i className="fa fa-thumbs-up" aria-hidden="true">
                                                                     <sub>
-                                                                        {comment.votes.filter((vote: IVote) => vote.isHelpful).length}
+                                                                        {comment.likes}
                                                                     </sub>
                                                                 </i>
                                                                 <i className="fa fa-thumbs-down" aria-hidden="true">
                                                                     <sub>
-                                                                        {comment.votes.filter((vote: IVote) => !vote.isHelpful).length}
+                                                                        {comment.dislikes}
                                                                     </sub>
                                                                 </i>
                                                             </ReviewLikeWrapper>
